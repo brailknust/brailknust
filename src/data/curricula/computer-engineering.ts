@@ -18,4 +18,20 @@ export const computerEngineeringCurricula: CurriculumTemplate[] = [
       { name: "Environmental Studies", code: "CE 155", creditHours: 2 },
     ],
   },
+  {
+    college: "College of Engineering",
+    department: "Department of Computer Engineering",
+    program: "Computer Engineering",
+    level: "LEVEL_100",
+    semester: "Second Semester",
+    source: "User-provided KNUST Computer Engineering first year second semester course list.",
+    courses: [
+      { name: "Calculus With Analysis", code: "MATH 152", creditHours: 4 },
+      { name: "Electrical Machines", code: "EE 172", creditHours: 3 },
+      { name: "Basic Electronics", code: "COE 152", creditHours: 3 },
+      { name: "Introduction to Information Technology", code: "COE 158", creditHours: 2 },
+      { name: "Electrical Engineering Drawing", code: "EE 156", creditHours: 2 },
+      { name: "Communication Skills II", code: "ENGL 158", creditHours: 2 },
+    ],
+  },
 ];

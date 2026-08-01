@@ -5,6 +5,7 @@ import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+import { findCurriculumTemplate } from "@/data/curricula";
 import { requireAppUser } from "@/features/auth/queries";
 import {
   createCourseSchema,
@@ -87,6 +88,63 @@ export async function createSemester(formData: FormData) {
       cwa: semester.cwa,
     },
   });
+
+  const curriculum = appUser.college && appUser.programme && appUser.department
+    ? findCurriculumTemplate({
+        college: appUser.college,
+        programme: appUser.programme,
+        department: appUser.department,
+        level: parsed.level,
+        semester: parsed.name,
+      })
+    : undefined;
+
+  if (curriculum) {
+    const exclusions = await prisma.programmeCourseExclusion.findMany({
+      where: {
+        programme: curriculum.program,
+        level: curriculum.level,
+        semester: curriculum.semester,
+      },
+      select: { courseCode: true },
+    });
+    const excludedCourseCodes = new Set(exclusions.map((item) => item.courseCode));
+
+    for (const course of curriculum.courses.filter((item) => !excludedCourseCodes.has(item.code))) {
+      const savedCourse = await prisma.course.upsert({
+        where: { code: course.code },
+        create: {
+          code: course.code,
+          name: course.name,
+          creditHours: course.creditHours,
+          department: curriculum.department,
+          level: curriculum.level,
+        },
+        update: {
+          name: course.name,
+          creditHours: course.creditHours,
+          department: curriculum.department,
+          level: curriculum.level,
+        },
+      });
+
+      await prisma.enrollment.upsert({
+        where: {
+          userId_courseId_semesterId: {
+            userId: appUser.id,
+            courseId: savedCourse.id,
+            semesterId: semester.id,
+          },
+        },
+        create: {
+          userId: appUser.id,
+          courseId: savedCourse.id,
+          semesterId: semester.id,
+        },
+        update: {},
+      });
+    }
+  }
 
   if (parsed.isActive) {
     await prisma.user.update({
