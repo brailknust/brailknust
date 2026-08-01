@@ -2,12 +2,12 @@ import { NextResponse } from "next/server";
 
 import { findCurriculumTemplate } from "@/data/curricula";
 import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
-import { extractTextFromImage } from "@/features/planner/timetable-ocr";
+import { extractTimetableFromImage } from "@/features/planner/timetable-ocr";
 import { parseTimetableText } from "@/features/planner/timetable-parser";
 import { prisma } from "@/server/db";
 
 export const runtime = "nodejs";
-export const maxDuration = 60;
+export const maxDuration = 180;
 
 const maxImageSize = 6 * 1024 * 1024;
 
@@ -47,8 +47,20 @@ export async function POST(request: Request) {
   }
 
   try {
-    const rawText = await extractTextFromImage(image);
-    const parsedRows = parseTimetableText(rawText);
+    let ocr = await extractTimetableFromImage(image);
+    let rawText = ocr.text;
+    let parsedRows = parseTimetableText(rawText);
+    const minimumFastRows = Number(process.env.TIMETABLE_OCR_MIN_ROWS ?? "8");
+
+    if (
+      ocr.model === "PP-OCRv6_tiny" &&
+      parsedRows.length < minimumFastRows &&
+      process.env.TIMETABLE_OCR_MEDIUM_RETRY !== "false"
+    ) {
+      ocr = await extractTimetableFromImage(image, { modelTier: "medium" });
+      rawText = ocr.text;
+      parsedRows = parseTimetableText(rawText);
+    }
     const academicContext = appUser.activeSemesterId
       ? await prisma.semester.findFirst({
           where: { id: appUser.activeSemesterId, ownerId: appUser.id },
@@ -112,7 +124,10 @@ export async function POST(request: Request) {
       source: {
         fileName: image.name,
         fileSize: image.size,
-        mode: "tesseract-ocr",
+        mode: ocr.mode,
+        model: ocr.model,
+        detections: ocr.detections,
+        averageConfidence: ocr.averageConfidence,
         matchedCourseNames,
       },
       message:

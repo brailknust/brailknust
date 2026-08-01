@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] as const;
+const timetableExtractionTimeoutMs = 190_000;
 
 export type TimetableRow = {
   id: string;
@@ -121,10 +122,10 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
     const formData = new FormData();
     formData.append("image", timetableImage);
     setIsExtracting(true);
-    setStatusMessage("Reading timetable image. This can take up to 45 seconds for large photos.");
+    setStatusMessage("Reading timetable image. Most images finish in about 15 seconds; unclear images may take longer.");
 
     const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), 60_000);
+    const timeout = window.setTimeout(() => controller.abort(), timetableExtractionTimeoutMs);
 
     try {
       const response = await fetch("/api/timetable/extract", {

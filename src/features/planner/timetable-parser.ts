@@ -86,7 +86,7 @@ function parseTimeRange(line: string) {
   const endHour = Number(endTime.slice(0, 2));
   const hasPeriod = /am|pm/i.test(match[1]) || /am|pm/i.test(match[2]);
 
-  if (!hasPeriod && endHour <= startHour && endHour < 12) {
+  if (!hasPeriod && endHour < startHour && endHour < 12) {
     endTime = `${(endHour + 12).toString().padStart(2, "0")}${endTime.slice(2)}`;
   }
 
@@ -112,7 +112,7 @@ function parseTimeRanges(line: string) {
     const endHour = Number(endTime.slice(0, 2));
     const hasPeriod = /am|pm/i.test(match[1]) || /am|pm/i.test(match[2]);
 
-    if (!hasPeriod && endHour <= startHour && endHour < 12) {
+    if (!hasPeriod && endHour < startHour && endHour < 12) {
       endTime = `${(endHour + 12).toString().padStart(2, "0")}${endTime.slice(2)}`;
     }
 
