@@ -1,0 +1,449 @@
+{
+  "generatedAt": "2026-07-30T04:46:30.827Z",
+  "source": "C:\\Users\\jpaap\\OneDrive\\Desktop\\CoE\\CoE 1\\First Semester",
+  "mode": "DRY_RUN",
+  "rules": {
+    "maxFileSizeMB": 50,
+    "skippedExtensions": [
+      ".ppt",
+      ".pptm"
+    ],
+    "appliedElectricityMapping": "EE 151 -> COE 181",
+    "folderPrefixesIgnored": true,
+    "supportsGeneralAndMultipleTopics": true
+  },
+  "courses": [
+    {
+      "code": "ENGL 157",
+      "name": "Communication Skills",
+      "sourceFolder": "2 Communication Skills ENGL 157",
+      "files": [
+        {
+          "name": "COMM SKILLS PASSCO.pdf",
+          "extension": ".pdf",
+          "sizeMB": 25.9,
+          "sha256": "ddfbf8758f979b8c9e6e56b4572f5a98753e266c7a80d8cef956bed9270c3275",
+          "status": "READY",
+          "materialType": "PAST_QUESTION",
+          "extractedCharacters": 14131,
+          "proposedTopics": [
+            "General resources",
+            "Past Questions",
+            "Sentence Structure",
+            "Word Classes",
+            "Academic Writing"
+          ]
+        },
+        {
+          "name": "ENGL 157 ( COMMUNICATION SKILLS COMBINED)  BÝ ABC.pdf",
+          "extension": ".pdf",
+          "sizeMB": 7.2,
+          "sha256": "03ebf192cbe6edbebe58cb50db069a58fe6968314286a2f596c0b57ace4137e3",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 105873,
+          "proposedTopics": [
+            "General resources",
+            "Sentence Structure",
+            "Word Classes",
+            "Academic Writing"
+          ]
+        },
+        {
+          "name": "Errors in Sentences.ppt",
+          "extension": ".ppt",
+          "sizeMB": 0.35,
+          "sha256": "15cae248387f333ca4478e2f80ff9e1577370f4d0198c9f11596ab1dda739503",
+          "status": "SKIPPED",
+          "warning": "Legacy .ppt is intentionally skipped."
+        },
+        {
+          "name": "Lecture 2 Communication Skills.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.46,
+          "sha256": "a74a04c85c312e5d9968d85afad717d93faa51d133aff162e47f36acbaf388bd",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 10186,
+          "proposedTopics": [
+            "Sentence Structure",
+            "Word Classes"
+          ]
+        },
+        {
+          "name": "Lecture 3 Communication Skills.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.67,
+          "sha256": "68c3e34c75a156718b76f6f0c233e763a327f87ef21c7ce2442ba20fdf763d29",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 19934,
+          "proposedTopics": [
+            "Sentence Structure",
+            "Word Classes"
+          ]
+        },
+        {
+          "name": "Lecture 5 Communication Skills.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.38,
+          "sha256": "75752e4b091f906b1ef117344391ae6b11a13453d792332163594c39296f214b",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 5429,
+          "proposedTopics": [
+            "Sentence Structure",
+            "Word Classes"
+          ]
+        },
+        {
+          "name": "Lecture 6 Communication Skills.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.53,
+          "sha256": "10da2dec4dd3be86aa31469b3726968b0aa9fc5afe5e85ce986e8d2be20194d5",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 19957,
+          "proposedTopics": [
+            "Sentence Structure",
+            "Academic Writing"
+          ]
+        },
+        {
+          "name": "Sentences.ppt",
+          "extension": ".ppt",
+          "sizeMB": 0.34,
+          "sha256": "e424f67c1f23a1229a74c908bd3b8b892f833051cf1d7621e673d0582d534cdb",
+          "status": "SKIPPED",
+          "warning": "Legacy .ppt is intentionally skipped."
+        },
+        {
+          "name": "Word Classes.pptx",
+          "extension": ".pptx",
+          "sizeMB": 0.27,
+          "sha256": "f80931a72bdb11e3caf5e04971b7202c19ee8cf362409ccb9c2a24db0a08623a",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 20006,
+          "proposedTopics": [
+            "Sentence Structure",
+            "Word Classes"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 153",
+      "name": "Engineering Technology",
+      "sourceFolder": "2 Engineering Technology COE 153",
+      "files": [
+        {
+          "name": "Computer Hardware Assembling.pptx",
+          "extension": ".pptx",
+          "sizeMB": 17.86,
+          "sha256": "9574ddd74b3e09b76ee95922026387cdc9b7277aafeb360fbbae91211a967f88",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 97,
+          "proposedTopics": [
+            "Computer Hardware Assembly"
+          ]
+        },
+        {
+          "name": "Electical Wiring.docx",
+          "extension": ".docx",
+          "sizeMB": 0.01,
+          "sha256": "8949ccd30c60051d884ae0ca686a2ec9acd2ed4f3c8784cad9b8df20b3d7f671",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 676,
+          "proposedTopics": [
+            "Electrical Wiring",
+            "Power Cables"
+          ]
+        },
+        {
+          "name": "Power Cables.pptx",
+          "extension": ".pptx",
+          "sizeMB": 1.34,
+          "sha256": "d57a476ad1fba3e3555b1797b3b00be62531aa02acb7ec43b1b4676e0603fdf0",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 2181,
+          "proposedTopics": [
+            "Electrical Wiring",
+            "Power Cables"
+          ]
+        },
+        {
+          "name": "Web Dev.pdf",
+          "extension": ".pdf",
+          "sizeMB": 18.78,
+          "sha256": "b6b9c984dcf66e64f82b91db7a7e5ed10fb7c86066000c902102d0db2f354b8d",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 478281,
+          "proposedTopics": [
+            "Computer Hardware Assembly",
+            "Electrical Wiring",
+            "Web Development"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "CE 155",
+      "name": "Environmental Studies",
+      "sourceFolder": "2 Environmental Studies CE 155",
+      "files": [
+        {
+          "name": "Environmental Studies Passco.pdf",
+          "extension": ".pdf",
+          "sizeMB": 11.1,
+          "sha256": "9f8b83b2c7d0465b08cc0c99dc3d4ea18e7ffcad488c2aa95bb209e93500f9e4",
+          "status": "READY",
+          "materialType": "PAST_QUESTION",
+          "extractedCharacters": 1243,
+          "proposedTopics": [
+            "General resources",
+            "Past Questions",
+            "Environmental Systems"
+          ]
+        },
+        {
+          "name": "Environmental Studies Slides.pdf",
+          "extension": ".pdf",
+          "sizeMB": 5.58,
+          "sha256": "fb7f5765322ffa5be9f8840bcbe9ee96455a6d5f36cc0766e337ce4e6f1d1a99",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 142847,
+          "proposedTopics": [
+            "General resources",
+            "Environmental Systems",
+            "Pollution and Waste",
+            "Sustainability"
+          ]
+        },
+        {
+          "name": "Exam Practice.docx",
+          "extension": ".docx",
+          "sizeMB": 0.02,
+          "sha256": "f857290a33a414b4e3946f764bfafd8104091d651db44424fdfde0b288e2f612",
+          "status": "READY",
+          "materialType": "PAST_QUESTION",
+          "extractedCharacters": 8398,
+          "proposedTopics": [
+            "General resources",
+            "Past Questions",
+            "Environmental Systems",
+            "Pollution and Waste"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "ME 159",
+      "name": "Technical Drawing",
+      "sourceFolder": "2 Technical Drawing ME 159",
+      "files": [
+        {
+          "name": "Geometric Construction.pptx",
+          "extension": ".pptx",
+          "sizeMB": 1.78,
+          "sha256": "b06cd6c87c9d1e2361a6e3bd6e5897999dcad3cb8530aab93bd763c374545a7e",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 12268,
+          "proposedTopics": [
+            "Geometric Construction",
+            "Orthographic Projection",
+            "Engineering Drawing"
+          ]
+        },
+        {
+          "name": "ME 159 Technical Drawing Teach.pptm",
+          "extension": ".pptm",
+          "sizeMB": 4,
+          "sha256": "7b77db899af4ac056046333d696dfd6e6ee5afa814a1a323fcf35a252fa02412",
+          "status": "SKIPPED",
+          "warning": "Legacy .pptm is intentionally skipped."
+        },
+        {
+          "name": "Orthographic Projection.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.6,
+          "sha256": "aa2a49b3d746a8d1b3fd4cbdab6b9cb14b86da5670bb3992550798b4dce1546d",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 6484,
+          "proposedTopics": [
+            "Orthographic Projection"
+          ]
+        },
+        {
+          "name": "TD PASSCO.pdf",
+          "extension": ".pdf",
+          "sizeMB": 21.53,
+          "sha256": "00df022aa7efb45b4ac5ee4560c171f9f04da72d5730b9eb669138e674c68484",
+          "status": "READY",
+          "materialType": "PAST_QUESTION",
+          "extractedCharacters": 2340,
+          "proposedTopics": [
+            "General resources",
+            "Past Questions",
+            "Engineering Drawing"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 181",
+      "name": "Applied Electricity",
+      "sourceFolder": "3 Applied Electricity EE 151",
+      "note": "Folder code EE 151 mapped to canonical COE 181.",
+      "files": [
+        {
+          "name": "Applied Electricity Textbook.pdf",
+          "extension": ".pdf",
+          "sizeMB": 30.1,
+          "sha256": "ad0902aec8535426fe51d316ddabdcd91182889df2ef9f6c12a5962293ba172f",
+          "status": "READY",
+          "materialType": "OTHER",
+          "extractedCharacters": 158,
+          "warning": "Very little text was extracted; review before import.",
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Applied Passco.pdf",
+          "extension": ".pdf",
+          "sizeMB": 23.56,
+          "sha256": "c7bb921c45e05a0faf3fbd120f56d1a7d9fb204cf14203de97a646c14cdbf582",
+          "status": "READY",
+          "materialType": "PAST_QUESTION",
+          "extractedCharacters": 17533,
+          "proposedTopics": [
+            "General resources",
+            "Past Questions",
+            "DC Circuit Analysis",
+            "AC Fundamentals",
+            "Electrical Machines",
+            "Electrical Measurements"
+          ]
+        },
+        {
+          "name": "Applied Slides.pptx",
+          "extension": ".pptx",
+          "sizeMB": 7.27,
+          "sha256": "eb4239436dab6099f1e6a91d9d939dba4bb329f85634657a86f7d1d66fb4c366",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 52420,
+          "proposedTopics": [
+            "General resources",
+            "DC Circuit Analysis",
+            "AC Fundamentals",
+            "Electrical Machines",
+            "Electrical Measurements"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "ME 161",
+      "name": "Basic Mechanics",
+      "sourceFolder": "3 Basic Mechanics ME 161",
+      "files": [
+        {
+          "name": "Basic Mech Passco.pdf",
+          "extension": ".pdf",
+          "sizeMB": 12.11,
+          "sha256": "ddcebde1409becb7e6b85eef51de5e4bb965fc537c0d9cfd60420d0255a10ad8",
+          "status": "READY",
+          "materialType": "PAST_QUESTION",
+          "extractedCharacters": 3011,
+          "proposedTopics": [
+            "General resources",
+            "Past Questions",
+            "Forces and Equilibrium"
+          ]
+        },
+        {
+          "name": "Basic Mech Slides.pdf",
+          "extension": ".pdf",
+          "sizeMB": 5.59,
+          "sha256": "946b171a6147d996f040f31b3547d82edd61c35a28122fadaa83617cdda31971",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 71756,
+          "proposedTopics": [
+            "General resources",
+            "Forces and Equilibrium",
+            "Motion and Kinematics",
+            "Work, Energy and Power"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "MATH 151",
+      "name": "Algebra",
+      "sourceFolder": "4 Algebra Math 151",
+      "files": [
+        {
+          "name": "Algebra Passco.pdf",
+          "extension": ".pdf",
+          "sizeMB": 21.89,
+          "sha256": "2d8767bcc93fc885a61d455edffa42e94019dbd2c73bbfd233c0a144c3231d67",
+          "status": "READY",
+          "materialType": "PAST_QUESTION",
+          "extractedCharacters": 1813,
+          "proposedTopics": [
+            "General resources",
+            "Past Questions"
+          ]
+        },
+        {
+          "name": "Algebra Textbook.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.39,
+          "sha256": "7847fe138c87432f0ff31795c7434f6e032023d29b6f37bbc300f3f151fd543d",
+          "status": "READY",
+          "materialType": "OTHER",
+          "extractedCharacters": 135177,
+          "proposedTopics": [
+            "General resources",
+            "Complex Numbers",
+            "Functions and Graphs",
+            "Equations and Inequalities"
+          ]
+        },
+        {
+          "name": "COMPLEX NUMBERS.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.8,
+          "sha256": "6ee198256fea8d2d6d341238bf6c8a3aa3ee69f30a86757dcc3b838b81084061",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 19993,
+          "proposedTopics": [
+            "Complex Numbers",
+            "Functions and Graphs",
+            "Equations and Inequalities"
+          ]
+        }
+      ]
+    }
+  ],
+  "unmatchedFolders": [],
+  "duplicateGroups": [],
+  "summary": {
+    "discovered": 28,
+    "ready": 25,
+    "skipped": 3,
+    "warnings": 4,
+    "readySizeMB": 216.72
+  }
+}

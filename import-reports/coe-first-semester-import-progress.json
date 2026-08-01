@@ -1,0 +1,488 @@
+{
+  "manifest": "C:\\Users\\jpaap\\OneDrive\\Desktop\\brailknust\\import-reports\\coe-first-semester-import-manifest.json",
+  "startedAt": "2026-07-30T05:02:52.555Z",
+  "updatedAt": "2026-07-30T05:03:06.840Z",
+  "completedAt": "2026-07-30T05:03:06.840Z",
+  "results": [
+    {
+      "sourceRelativePath": "2 Communication Skills ENGL 157\\COMM SKILLS PASSCO.pdf",
+      "courseCode": "ENGL 157",
+      "courseName": "Communication Skills",
+      "title": "COMM SKILLS PASSCO",
+      "materialType": "PAST_QUESTION",
+      "topics": [
+        "General resources",
+        "Past Questions",
+        "Sentence Structure",
+        "Word Classes",
+        "Academic Writing"
+      ],
+      "sizeMB": 25.9,
+      "sha256": "ddfbf8758f979b8c9e6e56b4572f5a98753e266c7a80d8cef956bed9270c3275",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "775e6df8-7119-48c2-916e-15ed0948da4f",
+      "startedAt": "2026-07-30T05:02:54.605Z",
+      "finishedAt": "2026-07-30T05:02:55.157Z"
+    },
+    {
+      "sourceRelativePath": "2 Communication Skills ENGL 157\\ENGL 157 ( COMMUNICATION SKILLS COMBINED)  BÝ ABC.pdf",
+      "courseCode": "ENGL 157",
+      "courseName": "Communication Skills",
+      "title": "ENGL 157 ( COMMUNICATION SKILLS COMBINED)  BÝ ABC",
+      "materialType": "NOTE",
+      "topics": [
+        "General resources",
+        "Sentence Structure",
+        "Word Classes",
+        "Academic Writing"
+      ],
+      "sizeMB": 7.2,
+      "sha256": "03ebf192cbe6edbebe58cb50db069a58fe6968314286a2f596c0b57ace4137e3",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "a057ca74-4f03-4a2a-95f9-dd5a6de85402",
+      "startedAt": "2026-07-30T05:02:55.159Z",
+      "finishedAt": "2026-07-30T05:02:55.435Z"
+    },
+    {
+      "sourceRelativePath": "2 Communication Skills ENGL 157\\Lecture 2 Communication Skills.pdf",
+      "courseCode": "ENGL 157",
+      "courseName": "Communication Skills",
+      "title": "Lecture 2 Communication Skills",
+      "materialType": "SLIDE",
+      "topics": [
+        "Sentence Structure",
+        "Word Classes"
+      ],
+      "sizeMB": 0.46,
+      "sha256": "a74a04c85c312e5d9968d85afad717d93faa51d133aff162e47f36acbaf388bd",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "b8febae4-9b41-41cf-880a-0dd8ab52cb93",
+      "startedAt": "2026-07-30T05:02:55.436Z",
+      "finishedAt": "2026-07-30T05:02:55.710Z"
+    },
+    {
+      "sourceRelativePath": "2 Communication Skills ENGL 157\\Lecture 3 Communication Skills.pdf",
+      "courseCode": "ENGL 157",
+      "courseName": "Communication Skills",
+      "title": "Lecture 3 Communication Skills",
+      "materialType": "SLIDE",
+      "topics": [
+        "Sentence Structure",
+        "Word Classes"
+      ],
+      "sizeMB": 0.67,
+      "sha256": "68c3e34c75a156718b76f6f0c233e763a327f87ef21c7ce2442ba20fdf763d29",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "aa51c38e-da21-46ef-9e74-179287f06d7e",
+      "startedAt": "2026-07-30T05:02:55.711Z",
+      "finishedAt": "2026-07-30T05:02:55.970Z"
+    },
+    {
+      "sourceRelativePath": "2 Communication Skills ENGL 157\\Lecture 5 Communication Skills.pdf",
+      "courseCode": "ENGL 157",
+      "courseName": "Communication Skills",
+      "title": "Lecture 5 Communication Skills",
+      "materialType": "SLIDE",
+      "topics": [
+        "Sentence Structure",
+        "Word Classes"
+      ],
+      "sizeMB": 0.38,
+      "sha256": "75752e4b091f906b1ef117344391ae6b11a13453d792332163594c39296f214b",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "7823ae9e-acc9-430c-9702-4907f8ba66a0",
+      "startedAt": "2026-07-30T05:02:55.972Z",
+      "finishedAt": "2026-07-30T05:02:56.266Z"
+    },
+    {
+      "sourceRelativePath": "2 Communication Skills ENGL 157\\Lecture 6 Communication Skills.pdf",
+      "courseCode": "ENGL 157",
+      "courseName": "Communication Skills",
+      "title": "Lecture 6 Communication Skills",
+      "materialType": "SLIDE",
+      "topics": [
+        "Sentence Structure",
+        "Academic Writing"
+      ],
+      "sizeMB": 0.53,
+      "sha256": "10da2dec4dd3be86aa31469b3726968b0aa9fc5afe5e85ce986e8d2be20194d5",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "3937477b-e10b-4641-beaa-aee9c59f3c48",
+      "startedAt": "2026-07-30T05:02:56.267Z",
+      "finishedAt": "2026-07-30T05:02:56.595Z"
+    },
+    {
+      "sourceRelativePath": "2 Communication Skills ENGL 157\\Word Classes.pptx",
+      "courseCode": "ENGL 157",
+      "courseName": "Communication Skills",
+      "title": "Word Classes",
+      "materialType": "SLIDE",
+      "topics": [
+        "Sentence Structure",
+        "Word Classes"
+      ],
+      "sizeMB": 0.27,
+      "sha256": "f80931a72bdb11e3caf5e04971b7202c19ee8cf362409ccb9c2a24db0a08623a",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "f2c8a29c-4505-4ce6-9607-b4a1c4471e42",
+      "startedAt": "2026-07-30T05:02:56.596Z",
+      "finishedAt": "2026-07-30T05:02:56.876Z"
+    },
+    {
+      "sourceRelativePath": "2 Engineering Technology COE 153\\Computer Hardware Assembling.pptx",
+      "courseCode": "COE 153",
+      "courseName": "Engineering Technology",
+      "title": "Computer Hardware Assembling",
+      "materialType": "SLIDE",
+      "topics": [
+        "Computer Hardware Assembly"
+      ],
+      "sizeMB": 17.86,
+      "sha256": "9574ddd74b3e09b76ee95922026387cdc9b7277aafeb360fbbae91211a967f88",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "d958dae6-7915-407b-ae44-9d1980bc8e46",
+      "startedAt": "2026-07-30T05:02:56.878Z",
+      "finishedAt": "2026-07-30T05:02:57.156Z"
+    },
+    {
+      "sourceRelativePath": "2 Engineering Technology COE 153\\Electical Wiring.docx",
+      "courseCode": "COE 153",
+      "courseName": "Engineering Technology",
+      "title": "Electical Wiring",
+      "materialType": "NOTE",
+      "topics": [
+        "Electrical Wiring"
+      ],
+      "sizeMB": 0.01,
+      "sha256": "8949ccd30c60051d884ae0ca686a2ec9acd2ed4f3c8784cad9b8df20b3d7f671",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "37f83f7d-3a5d-4644-9765-187cfe421a15",
+      "startedAt": "2026-07-30T05:02:57.157Z",
+      "finishedAt": "2026-07-30T05:02:57.450Z"
+    },
+    {
+      "sourceRelativePath": "2 Engineering Technology COE 153\\Power Cables.pptx",
+      "courseCode": "COE 153",
+      "courseName": "Engineering Technology",
+      "title": "Power Cables",
+      "materialType": "SLIDE",
+      "topics": [
+        "Power Cables"
+      ],
+      "sizeMB": 1.34,
+      "sha256": "d57a476ad1fba3e3555b1797b3b00be62531aa02acb7ec43b1b4676e0603fdf0",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "c1252f47-6451-4f2f-8b26-91348f5a7301",
+      "startedAt": "2026-07-30T05:02:57.451Z",
+      "finishedAt": "2026-07-30T05:02:57.810Z"
+    },
+    {
+      "sourceRelativePath": "2 Engineering Technology COE 153\\Web Dev.pdf",
+      "courseCode": "COE 153",
+      "courseName": "Engineering Technology",
+      "title": "Web Dev",
+      "materialType": "NOTE",
+      "topics": [
+        "Web Development"
+      ],
+      "sizeMB": 18.78,
+      "sha256": "b6b9c984dcf66e64f82b91db7a7e5ed10fb7c86066000c902102d0db2f354b8d",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "4624c9d3-8846-4c13-b026-c6a4ae96682e",
+      "startedAt": "2026-07-30T05:02:57.811Z",
+      "finishedAt": "2026-07-30T05:02:58.113Z"
+    },
+    {
+      "sourceRelativePath": "2 Environmental Studies CE 155\\Environmental Studies Passco.pdf",
+      "courseCode": "CE 155",
+      "courseName": "Environmental Studies",
+      "title": "Environmental Studies Passco",
+      "materialType": "PAST_QUESTION",
+      "topics": [
+        "General resources",
+        "Past Questions",
+        "Environmental Systems"
+      ],
+      "sizeMB": 11.1,
+      "sha256": "9f8b83b2c7d0465b08cc0c99dc3d4ea18e7ffcad488c2aa95bb209e93500f9e4",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "31a9e0c3-cfa6-44c9-bc3a-d4a932952547",
+      "startedAt": "2026-07-30T05:02:58.114Z",
+      "finishedAt": "2026-07-30T05:02:58.408Z"
+    },
+    {
+      "sourceRelativePath": "2 Environmental Studies CE 155\\Environmental Studies Slides.pdf",
+      "courseCode": "CE 155",
+      "courseName": "Environmental Studies",
+      "title": "Environmental Studies Slides",
+      "materialType": "SLIDE",
+      "topics": [
+        "General resources",
+        "Environmental Systems",
+        "Pollution and Waste",
+        "Sustainability"
+      ],
+      "sizeMB": 5.58,
+      "sha256": "fb7f5765322ffa5be9f8840bcbe9ee96455a6d5f36cc0766e337ce4e6f1d1a99",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "b9e9a9c8-1dc2-4f3b-9c36-d07de9765db2",
+      "startedAt": "2026-07-30T05:02:58.410Z",
+      "finishedAt": "2026-07-30T05:02:58.732Z"
+    },
+    {
+      "sourceRelativePath": "2 Environmental Studies CE 155\\Exam Practice.docx",
+      "courseCode": "CE 155",
+      "courseName": "Environmental Studies",
+      "title": "Exam Practice",
+      "materialType": "PAST_QUESTION",
+      "topics": [
+        "General resources",
+        "Past Questions",
+        "Environmental Systems",
+        "Pollution and Waste"
+      ],
+      "sizeMB": 0.02,
+      "sha256": "f857290a33a414b4e3946f764bfafd8104091d651db44424fdfde0b288e2f612",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "dfcb97c4-a7bf-4ed9-8757-d55567d53b07",
+      "startedAt": "2026-07-30T05:02:58.733Z",
+      "finishedAt": "2026-07-30T05:02:59.036Z"
+    },
+    {
+      "sourceRelativePath": "2 Technical Drawing ME 159\\Geometric Construction.pptx",
+      "courseCode": "ME 159",
+      "courseName": "Technical Drawing",
+      "title": "Geometric Construction",
+      "materialType": "SLIDE",
+      "topics": [
+        "Geometric Construction"
+      ],
+      "sizeMB": 1.78,
+      "sha256": "b06cd6c87c9d1e2361a6e3bd6e5897999dcad3cb8530aab93bd763c374545a7e",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "d95413c9-0f1e-4f9b-abae-e98ebc68a629",
+      "startedAt": "2026-07-30T05:02:59.037Z",
+      "finishedAt": "2026-07-30T05:02:59.337Z"
+    },
+    {
+      "sourceRelativePath": "2 Technical Drawing ME 159\\Orthographic Projection.pdf",
+      "courseCode": "ME 159",
+      "courseName": "Technical Drawing",
+      "title": "Orthographic Projection",
+      "materialType": "NOTE",
+      "topics": [
+        "Orthographic Projection"
+      ],
+      "sizeMB": 1.6,
+      "sha256": "aa2a49b3d746a8d1b3fd4cbdab6b9cb14b86da5670bb3992550798b4dce1546d",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "29f459bd-a1db-41b2-9f6e-928e8291c4fe",
+      "startedAt": "2026-07-30T05:02:59.338Z",
+      "finishedAt": "2026-07-30T05:02:59.635Z"
+    },
+    {
+      "sourceRelativePath": "2 Technical Drawing ME 159\\TD PASSCO.pdf",
+      "courseCode": "ME 159",
+      "courseName": "Technical Drawing",
+      "title": "TD PASSCO",
+      "materialType": "PAST_QUESTION",
+      "topics": [
+        "General resources",
+        "Past Questions",
+        "Engineering Drawing"
+      ],
+      "sizeMB": 21.53,
+      "sha256": "00df022aa7efb45b4ac5ee4560c171f9f04da72d5730b9eb669138e674c68484",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "213fa2b7-3553-4201-9d18-25c3301728fe",
+      "startedAt": "2026-07-30T05:02:59.636Z",
+      "finishedAt": "2026-07-30T05:02:59.884Z"
+    },
+    {
+      "sourceRelativePath": "3 Applied Electricity EE 151\\Applied Passco.pdf",
+      "courseCode": "COE 181",
+      "courseName": "Applied Electricity",
+      "title": "Applied Passco",
+      "materialType": "PAST_QUESTION",
+      "topics": [
+        "General resources",
+        "Past Questions",
+        "DC Circuit Analysis",
+        "AC Fundamentals",
+        "Electrical Machines",
+        "Electrical Measurements"
+      ],
+      "sizeMB": 23.56,
+      "sha256": "c7bb921c45e05a0faf3fbd120f56d1a7d9fb204cf14203de97a646c14cdbf582",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "acc4a865-a231-4918-a39d-02d7b046eee4",
+      "startedAt": "2026-07-30T05:02:59.885Z",
+      "finishedAt": "2026-07-30T05:03:00.143Z"
+    },
+    {
+      "sourceRelativePath": "3 Applied Electricity EE 151\\Applied Slides.pptx",
+      "courseCode": "COE 181",
+      "courseName": "Applied Electricity",
+      "title": "Applied Slides",
+      "materialType": "SLIDE",
+      "topics": [
+        "General resources",
+        "DC Circuit Analysis",
+        "AC Fundamentals",
+        "Electrical Machines",
+        "Electrical Measurements"
+      ],
+      "sizeMB": 7.27,
+      "sha256": "eb4239436dab6099f1e6a91d9d939dba4bb329f85634657a86f7d1d66fb4c366",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "e409d8af-439b-44a6-9342-409a586ad7dc",
+      "startedAt": "2026-07-30T05:03:00.144Z",
+      "finishedAt": "2026-07-30T05:03:00.410Z"
+    },
+    {
+      "sourceRelativePath": "3 Basic Mechanics ME 161\\Basic Mech Passco.pdf",
+      "courseCode": "ME 161",
+      "courseName": "Basic Mechanics",
+      "title": "Basic Mech Passco",
+      "materialType": "PAST_QUESTION",
+      "topics": [
+        "General resources",
+        "Past Questions",
+        "Forces and Equilibrium"
+      ],
+      "sizeMB": 12.11,
+      "sha256": "ddcebde1409becb7e6b85eef51de5e4bb965fc537c0d9cfd60420d0255a10ad8",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "727f8dec-452e-417c-b24a-02b8d6773ebe",
+      "startedAt": "2026-07-30T05:03:00.411Z",
+      "finishedAt": "2026-07-30T05:03:00.691Z"
+    },
+    {
+      "sourceRelativePath": "3 Basic Mechanics ME 161\\Basic Mech Slides.pdf",
+      "courseCode": "ME 161",
+      "courseName": "Basic Mechanics",
+      "title": "Basic Mech Slides",
+      "materialType": "SLIDE",
+      "topics": [
+        "General resources",
+        "Forces and Equilibrium",
+        "Motion and Kinematics",
+        "Work, Energy and Power"
+      ],
+      "sizeMB": 5.59,
+      "sha256": "946b171a6147d996f040f31b3547d82edd61c35a28122fadaa83617cdda31971",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "d4220d0c-a0a9-439f-82d6-31cb504dedb0",
+      "startedAt": "2026-07-30T05:03:00.692Z",
+      "finishedAt": "2026-07-30T05:03:00.999Z"
+    },
+    {
+      "sourceRelativePath": "4 Algebra Math 151\\Algebra Passco.pdf",
+      "courseCode": "MATH 151",
+      "courseName": "Algebra",
+      "title": "Algebra Passco",
+      "materialType": "PAST_QUESTION",
+      "topics": [
+        "General resources",
+        "Past Questions"
+      ],
+      "sizeMB": 21.89,
+      "sha256": "2d8767bcc93fc885a61d455edffa42e94019dbd2c73bbfd233c0a144c3231d67",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "e2ed3c7d-8b85-4923-b403-64ae48e902ea",
+      "startedAt": "2026-07-30T05:03:01.000Z",
+      "finishedAt": "2026-07-30T05:03:01.277Z"
+    },
+    {
+      "sourceRelativePath": "4 Algebra Math 151\\Algebra Textbook.pdf",
+      "courseCode": "MATH 151",
+      "courseName": "Algebra",
+      "title": "Algebra Textbook",
+      "materialType": "OTHER",
+      "topics": [
+        "General resources",
+        "Complex Numbers",
+        "Functions and Graphs",
+        "Equations and Inequalities"
+      ],
+      "sizeMB": 0.39,
+      "sha256": "7847fe138c87432f0ff31795c7434f6e032023d29b6f37bbc300f3f151fd543d",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "SKIPPED_EXISTING",
+      "materialId": "e197cef8-bb47-486c-8777-cad9b6e0a1a2",
+      "startedAt": "2026-07-30T05:03:01.278Z",
+      "finishedAt": "2026-07-30T05:03:01.606Z"
+    },
+    {
+      "sourceRelativePath": "4 Algebra Math 151\\COMPLEX NUMBERS.pdf",
+      "courseCode": "MATH 151",
+      "courseName": "Algebra",
+      "title": "COMPLEX NUMBERS",
+      "materialType": "NOTE",
+      "topics": [
+        "Complex Numbers"
+      ],
+      "sizeMB": 0.8,
+      "sha256": "6ee198256fea8d2d6d341238bf6c8a3aa3ee69f30a86757dcc3b838b81084061",
+      "status": "APPROVED",
+      "reason": null,
+      "outcome": "IMPORTED",
+      "materialId": "10bdb698-8720-4007-967c-c9691aed4e78",
+      "chunkCount": 13,
+      "extractedCharacters": 19993,
+      "startedAt": "2026-07-30T05:03:01.607Z",
+      "finishedAt": "2026-07-30T05:03:06.839Z"
+    }
+  ],
+  "summary": {
+    "approved": 24,
+    "imported": 1,
+    "skippedExisting": 23,
+    "failed": 0
+  }
+}

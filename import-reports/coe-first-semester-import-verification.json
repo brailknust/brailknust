@@ -1,0 +1,95 @@
+{
+  "verifiedAt": "2026-07-30T05:03:29.157Z",
+  "expectedApprovedFiles": 24,
+  "publishedFiles": 24,
+  "missingHashes": [],
+  "materialsWithoutStorage": [],
+  "materialsWithoutChunks": [],
+  "materialsWithoutTopics": [],
+  "courses": [
+    {
+      "code": "CE 155",
+      "topics": [
+        "General resources",
+        "Past Questions",
+        "Environmental Systems",
+        "Pollution and Waste",
+        "Sustainability"
+      ],
+      "importedMaterials": 3,
+      "searchableChunks": 108
+    },
+    {
+      "code": "COE 153",
+      "topics": [
+        "Power Cables",
+        "Computer Hardware Assembly",
+        "Electrical Wiring",
+        "Web Development"
+      ],
+      "importedMaterials": 4,
+      "searchableChunks": 342
+    },
+    {
+      "code": "COE 181",
+      "topics": [
+        "General resources",
+        "Past Questions",
+        "DC Circuit Analysis",
+        "AC Fundamentals",
+        "Electrical Machines",
+        "Electrical Measurements"
+      ],
+      "importedMaterials": 2,
+      "searchableChunks": 43
+    },
+    {
+      "code": "ENGL 157",
+      "topics": [
+        "General resources",
+        "Past Questions",
+        "Sentence Structure",
+        "Word Classes",
+        "Academic Writing"
+      ],
+      "importedMaterials": 7,
+      "searchableChunks": 139
+    },
+    {
+      "code": "MATH 151",
+      "topics": [
+        "General resources",
+        "Past Questions",
+        "Complex Numbers",
+        "Functions and Graphs",
+        "Equations and Inequalities"
+      ],
+      "importedMaterials": 3,
+      "searchableChunks": 111
+    },
+    {
+      "code": "ME 159",
+      "topics": [
+        "Geometric Construction",
+        "Orthographic Projection",
+        "General resources",
+        "Past Questions",
+        "Engineering Drawing"
+      ],
+      "importedMaterials": 3,
+      "searchableChunks": 16
+    },
+    {
+      "code": "ME 161",
+      "topics": [
+        "General resources",
+        "Past Questions",
+        "Forces and Equilibrium",
+        "Motion and Kinematics",
+        "Work, Energy and Power"
+      ],
+      "importedMaterials": 2,
+      "searchableChunks": 53
+    }
+  ]
+}
