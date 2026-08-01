@@ -7,6 +7,15 @@ export type AiProviderMessage = {
   content: string;
 };
 
+type AiResponseFormat = "json_object" | {
+  type: "json_schema";
+  json_schema: {
+    name: string;
+    strict: true;
+    schema: Record<string, unknown>;
+  };
+};
+
 export const aiModel = serverEnv.AI_MODEL ?? "openai/gpt-oss-20b";
 export const dailyMessageLimit = serverEnv.AI_DAILY_MESSAGE_LIMIT ?? 20;
 
@@ -88,6 +97,8 @@ export async function createChatCompletion(
   options?: {
     maxCompletionTokens?: number;
     temperature?: number;
+    responseFormat?: AiResponseFormat;
+    reasoningEffort?: "low" | "medium" | "high";
     signal?: AbortSignal;
   },
 ) {
@@ -106,6 +117,10 @@ export async function createChatCompletion(
       messages,
       temperature: options?.temperature ?? 0,
       max_completion_tokens: options?.maxCompletionTokens ?? 180,
+      response_format: typeof options?.responseFormat === "string"
+        ? { type: options.responseFormat }
+        : options?.responseFormat,
+      reasoning_effort: options?.reasoningEffort,
       stream: false,
     }),
     signal: options?.signal,
