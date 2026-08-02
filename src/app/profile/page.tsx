@@ -25,16 +25,16 @@ export default async function ProfilePage() {
   return (
     <AppShell title="Profile" eyebrow="Account">
       <section className="grid gap-4 md:grid-cols-3">
-        <article className="rounded-lg border border-border bg-foreground p-5 text-background">
-          <UserRound className="h-5 w-5 text-background/75" />
-          <p className="mt-6 text-sm font-semibold uppercase tracking-[0.14em] text-background/60">
+        <article className="rounded-2xl border border-border bg-[var(--accent-strong)] p-5 text-white">
+          <UserRound className="h-5 w-5 text-white/75" />
+          <p className="mt-6 text-sm font-semibold uppercase tracking-[0.14em] text-white/60">
             Student
           </p>
           <h2 className="mt-2 text-2xl font-semibold">{appUser.fullName}</h2>
-          <p className="mt-1 text-sm text-background/70">{appUser.studentId ?? "Student ID not set"}</p>
+          <p className="mt-1 text-sm text-white/70">{appUser.studentId ?? "Student ID not set"}</p>
         </article>
 
-        <article className="rounded-lg border border-border bg-background p-5">
+        <article className="rounded-2xl border border-border bg-white p-5">
           <Mail className="h-5 w-5 text-accent" />
           <p className="mt-6 text-sm font-semibold uppercase tracking-[0.14em] text-muted">
             Account email
@@ -45,7 +45,7 @@ export default async function ProfilePage() {
           <p className="mt-1 text-sm text-muted">Managed by Supabase Auth</p>
         </article>
 
-        <article className="rounded-lg border border-border bg-background p-5">
+        <article className="rounded-2xl border border-border bg-white p-5">
           <School className="h-5 w-5 text-accent" />
           <p className="mt-6 text-sm font-semibold uppercase tracking-[0.14em] text-muted">
             Active semester
@@ -60,7 +60,7 @@ export default async function ProfilePage() {
       </section>
 
       <section className="mt-6 grid gap-6 lg:grid-cols-[0.7fr_1.3fr]">
-        <aside className="rounded-lg border border-border bg-background p-5">
+        <aside className="rounded-2xl border border-border bg-white p-5">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted">
             Academic record
           </p>
@@ -92,7 +92,7 @@ export default async function ProfilePage() {
           </div>
         </aside>
 
-        <section className="rounded-lg border border-border bg-background p-5">
+        <section className="rounded-2xl border border-border bg-white p-5">
           <div className="mb-5">
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted">
               Edit profile

@@ -33,27 +33,27 @@ function overlaps(start: string, end: string, block: UnavailableBlock) {
 
 export function UnavailableTimesGrid({ blocks }: { blocks: UnavailableBlock[] }) {
   return (
-    <section className="rounded-lg border border-border bg-background p-5">
+    <section className="rounded-2xl border border-border bg-white p-5">
       <h2 className="text-lg font-semibold">Weekly unavailable times</h2>
       <p className="mt-2 text-sm leading-6 text-muted">
         Click a free block to mark it busy. Click it again to make it available. Saved classes
         are shown separately and cannot be changed here.
       </p>
 
-      <div className="mt-5 overflow-x-auto rounded-lg border border-border bg-surface p-2">
+      <div className="mt-5 overflow-x-auto rounded-2xl border border-border bg-surface p-2">
         <div className="grid min-w-[840px] grid-cols-[90px_repeat(7,minmax(0,1fr))] gap-px bg-border">
-          <div className="bg-background px-3 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+          <div className="bg-white px-3 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-muted">
             Time
           </div>
           {weekDays.map((day) => (
-            <div key={day} className="bg-background px-3 py-3 text-center text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+            <div key={day} className="bg-white px-3 py-3 text-center text-xs font-semibold uppercase tracking-[0.12em] text-muted">
               {day}
             </div>
           ))}
 
           {slots.map((slot) => (
             <Fragment key={slot.startTime}>
-              <div className="bg-background px-3 py-3 text-sm font-medium">
+              <div className="bg-white px-3 py-3 text-sm font-medium">
                 {slot.label}
               </div>
               {weekDays.map((day, dayOfWeek) => {
@@ -84,12 +84,12 @@ export function UnavailableTimesGrid({ blocks }: { blocks: UnavailableBlock[] })
                       className={
                         "min-h-14 w-full px-2 py-3 text-left text-xs font-semibold transition " +
                         (classBlock
-                          ? "cursor-not-allowed bg-foreground/15 text-foreground"
+                          ? "cursor-not-allowed bg-[var(--accent-strong)]/15 text-foreground"
                           : isUnavailable
                             ? "bg-accent text-white hover:opacity-90"
                             : disabled
                               ? "cursor-not-allowed bg-border text-muted"
-                              : "bg-background text-muted hover:bg-foreground hover:text-background")
+                              : "bg-white text-muted hover:bg-[var(--accent-strong)] hover:text-white")
                       }
                     >
                       {classBlock ? "Class" : isUnavailable ? "Busy" : disabled ? "Busy" : "Free"}

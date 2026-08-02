@@ -15,7 +15,7 @@ const levels = [
 
 const cwaOptions = Array.from({ length: 101 }, (_, value) => value);
 const fieldClassName =
-  "h-11 rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/15 disabled:cursor-not-allowed disabled:bg-surface disabled:text-muted";
+  "h-11 rounded-xl border border-border bg-white px-3 text-sm text-foreground outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/15 disabled:cursor-not-allowed disabled:bg-surface disabled:text-muted";
 const labelClassName = "grid gap-2 text-sm font-semibold text-foreground";
 
 type ProfileSemester = {
@@ -63,7 +63,7 @@ export function ProfileForm({ action, hierarchy, semesters, defaults }: ProfileF
 
   return (
     <form action={action} className="grid gap-5">
-      <div className="rounded-lg border border-border bg-surface/70 p-4">
+      <div className="rounded-2xl border border-border bg-surface/70 p-4">
         <h2 className="text-base font-semibold">Personal details</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <label className={labelClassName}>
@@ -89,7 +89,7 @@ export function ProfileForm({ action, hierarchy, semesters, defaults }: ProfileF
         </div>
       </div>
 
-      <div className="rounded-lg border border-border bg-surface/70 p-4">
+      <div className="rounded-2xl border border-border bg-surface/70 p-4">
         <h2 className="text-base font-semibold">Academic placement</h2>
         <div className="mt-4 grid gap-4">
           <label className={labelClassName}>
@@ -134,7 +134,7 @@ export function ProfileForm({ action, hierarchy, semesters, defaults }: ProfileF
         </div>
       </div>
 
-      <div className="rounded-lg border border-border bg-surface/70 p-4">
+      <div className="rounded-2xl border border-border bg-surface/70 p-4">
         <h2 className="text-base font-semibold">Active semester</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-3">
           <label className={labelClassName}>
@@ -176,7 +176,7 @@ export function ProfileForm({ action, hierarchy, semesters, defaults }: ProfileF
 
       <button
         type="submit"
-        className="inline-flex h-12 items-center justify-center rounded-md bg-foreground px-5 text-sm font-semibold text-background transition hover:opacity-90"
+        className="inline-flex h-12 items-center justify-center rounded-xl bg-[var(--accent-strong)] px-5 text-sm font-semibold text-white transition hover:opacity-90"
       >
         Save profile
       </button>

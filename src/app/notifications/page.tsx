@@ -33,16 +33,16 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
 
   return (
     <AppShell title="Notifications" eyebrow="Reminders">
-      <section className="rounded-lg bg-foreground p-5 text-background">
+      <section className="rounded-2xl bg-[var(--accent-strong)] p-5 text-white">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm text-background/65">Notification center</p>
+            <p className="text-sm text-white/65">Notification center</p>
             <h2 className="mt-2 text-2xl font-semibold">{data.unreadCount} unread</h2>
-            <p className="mt-2 text-sm text-background/70">Deadlines, study sessions, groups, goals, and peer answers</p>
+            <p className="mt-2 text-sm text-white/70">Deadlines, study sessions, groups, goals, and peer answers</p>
           </div>
           {data.unreadCount ? (
             <form action={markAllNotificationsRead}>
-              <button className="inline-flex h-10 items-center gap-2 rounded-md bg-background px-4 text-sm font-semibold text-foreground">
+              <button className="inline-flex h-10 items-center gap-2 rounded-xl bg-white px-4 text-sm font-semibold text-foreground">
                 <CheckCheck className="h-4 w-4" /> Mark all read
               </button>
             </form>
@@ -59,9 +59,9 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
 
           <div className="mt-5 grid gap-3">
             {data.notifications.length ? data.notifications.map((notification) => (
-              <article key={notification.id} className={`rounded-lg border p-4 ${notification.isRead ? "border-border bg-background" : "border-accent/50 bg-surface"}`}>
+              <article key={notification.id} className={`rounded-2xl border p-4 ${notification.isRead ? "border-border bg-white" : "border-accent/50 bg-surface"}`}>
                 <div className="flex items-start gap-3">
-                  <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-md ${notification.isRead ? "bg-surface text-muted" : "bg-accent text-white"}`}>
+                  <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${notification.isRead ? "bg-surface text-muted" : "bg-accent text-white"}`}>
                     <Bell className="h-4 w-4" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -74,14 +74,14 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
                     </div>
                     <div className="mt-4 flex flex-wrap items-center gap-2">
                       {notification.actionUrl ? (
-                        <Link href={"/notifications/" + notification.id + "/open"} className="inline-flex h-9 items-center gap-2 rounded-md bg-foreground px-3 text-sm font-semibold text-background">
+                        <Link href={"/notifications/" + notification.id + "/open"} className="inline-flex h-9 items-center gap-2 rounded-xl bg-[var(--accent-strong)] px-3 text-sm font-semibold text-white">
                           Open <ExternalLink className="h-3.5 w-3.5" />
                         </Link>
                       ) : null}
                       <form action={updateNotificationReadState}>
                         <input type="hidden" name="id" value={notification.id} />
                         <input type="hidden" name="isRead" value={notification.isRead ? "false" : "true"} />
-                        <button className="h-9 rounded-md border border-border px-3 text-sm font-semibold text-muted hover:text-foreground">
+                        <button className="h-9 rounded-xl border border-border px-3 text-sm font-semibold text-muted hover:text-foreground">
                           Mark {notification.isRead ? "unread" : "read"}
                         </button>
                       </form>
@@ -89,7 +89,7 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
                         <input type="hidden" name="id" value={notification.id} />
                         <ConfirmSubmitButton
                           message="Delete this notification permanently?"
-                          className="grid h-9 w-9 place-items-center rounded-md border border-red-300 text-red-600"
+                          className="grid h-9 w-9 place-items-center rounded-xl border border-red-300 text-red-600"
                           aria-label="Delete notification"
                           title="Delete notification"
                         >
@@ -101,7 +101,7 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
                 </div>
               </article>
             )) : (
-              <div className="rounded-lg border border-dashed border-border p-8 text-center">
+              <div className="rounded-2xl border border-dashed border-border p-8 text-center">
                 <CheckCheck className="mx-auto h-6 w-6 text-accent" />
                 <p className="mt-3 font-semibold">{unreadOnly ? "No unread notifications" : "No notifications yet"}</p>
               </div>
@@ -109,7 +109,7 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
           </div>
         </section>
 
-        <section className="self-start rounded-lg border border-border bg-background p-5">
+        <section className="self-start rounded-2xl border border-border bg-white p-5">
           <div className="flex items-center gap-3">
             <Clock3 className="h-5 w-5 text-accent" />
             <h2 className="text-lg font-semibold">Reminder preferences</h2>
@@ -122,14 +122,14 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
               ["goalDeadlines", "Goal deadlines", preferences?.goalDeadlines ?? true],
               ["qaAnswers", "Q&A answers", preferences?.qaAnswers ?? true],
             ].map(([name, label, checked]) => (
-              <label key={String(name)} className="flex items-center justify-between gap-4 rounded-md border border-border bg-surface px-4 py-3 text-sm font-medium">
+              <label key={String(name)} className="flex items-center justify-between gap-4 rounded-xl border border-border bg-surface px-4 py-3 text-sm font-medium">
                 {label}
                 <input name={String(name)} type="checkbox" defaultChecked={Boolean(checked)} className="h-4 w-4 accent-[var(--accent)]" />
               </label>
             ))}
             <label className="grid gap-2 text-sm font-medium">
               Study session alert
-              <select name="studySessionReminderMinutes" defaultValue={preferences?.studySessionReminderMinutes ?? 15} className="h-11 rounded-md border border-border bg-background px-3 text-sm">
+              <select name="studySessionReminderMinutes" defaultValue={preferences?.studySessionReminderMinutes ?? 15} className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
                 <option value="5">5 minutes before</option>
                 <option value="10">10 minutes before</option>
                 <option value="15">15 minutes before</option>
@@ -140,7 +140,7 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
             <BrowserAlertSettings />
             <label className="grid gap-2 text-sm font-medium">
               Deadline reminder window
-              <select name="reminderHours" defaultValue={preferences?.reminderHours ?? 24} className="h-11 rounded-md border border-border bg-background px-3 text-sm">
+              <select name="reminderHours" defaultValue={preferences?.reminderHours ?? 24} className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
                 <option value="1">1 hour before</option>
                 <option value="6">6 hours before</option>
                 <option value="12">12 hours before</option>
@@ -150,7 +150,7 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
                 <option value="168">1 week before</option>
               </select>
             </label>
-            <button className="h-11 rounded-md bg-foreground px-4 text-sm font-semibold text-background">Save preferences</button>
+            <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Save preferences</button>
           </form>
         </section>
       </div>

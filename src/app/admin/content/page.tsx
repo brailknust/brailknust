@@ -19,15 +19,15 @@ export default async function AdminContentPage() {
 
   return (
     <AppShell title="Platform course library" eyebrow="Administration">
-      <section className="mb-6 rounded-lg bg-foreground p-5 text-background">
+      <section className="mb-6 rounded-2xl bg-[var(--accent-strong)] p-5 text-white">
         <ShieldCheck className="h-6 w-6" />
         <h2 className="mt-4 text-2xl font-semibold">Shared academic content</h2>
-        <p className="mt-2 text-sm text-background/70">
+        <p className="mt-2 text-sm text-white/70">
           Build each official course outline, then publish materials beneath the relevant topic.
         </p>
       </section>
 
-      <section className="rounded-lg border border-border bg-background p-5">
+      <section className="rounded-2xl border border-border bg-white p-5">
         <div className="flex items-start gap-3">
           <BookOpen className="mt-0.5 h-5 w-5 text-accent" />
           <div>
@@ -40,7 +40,7 @@ export default async function AdminContentPage() {
             <Link
               key={course.id}
               href={`/admin/content/${course.id}/topics`}
-              className="flex items-center justify-between gap-3 rounded-lg border border-border bg-surface p-4 transition-colors hover:border-foreground"
+              className="flex items-center justify-between gap-3 rounded-2xl border border-border bg-surface p-4 transition-colors hover:border-foreground"
             >
               <span className="min-w-0">
                 <span className="block text-xs font-semibold uppercase tracking-wide text-accent">{course.code}</span>

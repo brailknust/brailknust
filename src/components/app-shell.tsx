@@ -1,6 +1,7 @@
-import { BookOpen, LogOut } from "lucide-react";
+import { Bell, BookOpen, LogOut } from "lucide-react";
 import Link from "next/link";
 
+import { AppTopNavigation } from "@/components/app-top-navigation";
 import { NavDrawer } from "@/components/nav-drawer";
 import { NotificationPoller } from "@/components/notification-poller";
 import { signOut } from "@/features/auth/actions";
@@ -14,7 +15,7 @@ type AppShellProps = {
 
 export async function AppShell({ children, title, eyebrow }: AppShellProps) {
   const { appUser } = await requireAppUser();
-  const topNavItems = [
+  const primaryItems = [
     { label: "Dashboard", href: "/dashboard" },
     { label: "Academics", href: "/academics" },
     { label: "Planner", href: "/planner" },
@@ -22,8 +23,7 @@ export async function AppShell({ children, title, eyebrow }: AppShellProps) {
     { label: "Practice", href: "/practice" },
     { label: "Peers", href: "/peers" },
   ];
-
-  const drawerNavItems = [
+  const secondaryItems = [
     ...(appUser.role === "ADMIN"
       ? [
           { label: "Admin content", href: "/admin/content" },
@@ -41,65 +41,53 @@ export async function AppShell({ children, title, eyebrow }: AppShellProps) {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-border bg-surface">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-5 sm:px-8 lg:px-10">
-          <div className="flex items-center gap-4">
-            <NavDrawer items={drawerNavItems} />
-
-            <div className="flex items-center gap-3">
-              <div className="grid h-10 w-10 place-items-center rounded-lg bg-foreground text-background">
+      <header className="sticky top-0 z-40 border-b border-border bg-white">
+        <div className="mx-auto flex h-[4.875rem] w-full max-w-[90rem] items-center justify-between gap-5 px-5 sm:px-8 lg:px-10">
+          <div className="flex min-w-0 items-center gap-3">
+            <NavDrawer items={secondaryItems} />
+            <Link href="/dashboard" className="flex min-w-0 items-center gap-3">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[var(--accent-strong)] text-white">
                 <BookOpen className="h-5 w-5" />
-              </div>
-              <div>
-                <p className="font-semibold">BRAIL KNUST</p>
-                <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted">
+              </span>
+              <span className="min-w-0">
+                <span className="block truncate text-sm font-semibold tracking-[-0.02em]">BRAIL KNUST</span>
+                <span className="block truncate text-[10px] font-semibold uppercase tracking-[0.16em] text-muted">
                   {eyebrow ?? "Student workspace"}
-                </p>
-              </div>
-            </div>
+                </span>
+              </span>
+            </Link>
           </div>
 
-          <nav className="hidden items-center gap-3 lg:flex">
-            {topNavItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="rounded-md border border-border bg-background px-3 py-2 text-sm font-semibold text-muted transition hover:border-foreground hover:text-foreground"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          <AppTopNavigation items={primaryItems} />
 
-          <form action={signOut}>
-            <button
-              type="submit"
-              className="inline-flex h-10 items-center gap-2 rounded-md border border-border px-4 text-sm font-semibold text-muted transition hover:border-foreground hover:text-foreground"
-            >
-              <LogOut className="h-4 w-4" />
-              Sign out
-            </button>
-          </form>
+          <div className="flex items-center gap-2">
+            <Link href="/notifications" aria-label="Notifications" className="relative grid h-10 w-10 place-items-center rounded-xl border border-border bg-white text-muted hover:border-accent hover:text-accent">
+              <Bell className="h-4 w-4" />
+            </Link>
+            <form action={signOut}>
+              <button type="submit" className="inline-flex h-10 items-center gap-2 rounded-xl border border-border bg-white px-3 text-sm font-medium text-muted hover:border-accent hover:text-accent">
+                <LogOut className="h-4 w-4" />
+                <span className="hidden sm:inline">Sign out</span>
+              </button>
+            </form>
+          </div>
         </div>
-        <nav className="mx-auto flex w-full max-w-7xl gap-2 overflow-x-auto px-6 pb-5 sm:px-8 lg:hidden">
-          {topNavItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-md border border-border bg-background px-3 py-2 text-sm font-semibold text-muted transition hover:border-foreground hover:text-foreground"
-            >
+
+        <nav className="mx-auto flex w-full max-w-[90rem] gap-2 overflow-x-auto px-5 pb-3 lg:hidden" aria-label="Mobile primary navigation">
+          {primaryItems.map((item) => (
+            <Link key={item.href} href={item.href} className="shrink-0 rounded-lg border border-border bg-white px-3 py-2 text-xs font-medium text-muted hover:border-accent hover:text-accent">
               {item.label}
             </Link>
           ))}
         </nav>
       </header>
 
-      <section className="mx-auto w-full max-w-7xl px-6 py-10 sm:px-8 lg:px-10">
-        <div className="mb-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted">
-            {eyebrow ?? "Phase 1"}
-          </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-normal">{title}</h1>
+      <section className="mx-auto w-full max-w-[90rem] px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
+        <div className="mb-7 flex flex-col gap-4 border-b border-border pb-6 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">{eyebrow ?? "Student workspace"}</p>
+            <h1 className="mt-2 text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">{title}</h1>
+          </div>
         </div>
         {children}
       </section>

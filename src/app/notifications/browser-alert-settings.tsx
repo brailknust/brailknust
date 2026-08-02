@@ -51,13 +51,13 @@ export function BrowserAlertSettings() {
         : "Enable a desktop alert in addition to the in-app reminder.";
 
   return (
-    <div className="rounded-md border border-border bg-surface p-4">
+    <div className="rounded-xl border border-border bg-surface p-4">
       <div className="flex items-start justify-between gap-4">
         <div><p className="text-sm font-semibold">Browser alerts</p><p className="mt-1 text-xs leading-5 text-muted">{detail}</p></div>
         {status === "enabled" ? <BellRing className="h-5 w-5 shrink-0 text-accent" /> : <BellOff className="h-5 w-5 shrink-0 text-muted" />}
       </div>
       {!unavailable && status !== "loading" ? (
-        <button type="button" onClick={status === "enabled" ? disableAlerts : enableAlerts} className="mt-3 h-9 rounded-md border border-border bg-background px-3 text-sm font-semibold text-foreground">
+        <button type="button" onClick={status === "enabled" ? disableAlerts : enableAlerts} className="mt-3 h-9 rounded-xl border border-border bg-white px-3 text-sm font-semibold text-foreground">
           {status === "enabled" ? "Turn off" : "Enable alerts"}
         </button>
       ) : null}

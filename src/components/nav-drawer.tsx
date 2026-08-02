@@ -2,7 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 type NavDrawerProps = {
   items: {
@@ -14,19 +14,21 @@ type NavDrawerProps = {
 
 export function NavDrawer({ items }: NavDrawerProps) {
   const [open, setOpen] = useState(false);
-  const drawerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const html = document.documentElement;
-
-    if (open) {
-      html.classList.add("sidebar-open");
-    } else {
-      html.classList.remove("sidebar-open");
+    if (!open) {
+      return;
     }
+
+    const html = document.documentElement;
+    const previousOverflow = html.style.overflow;
+
+    html.classList.add("sidebar-open");
+    html.style.overflow = "hidden";
 
     return () => {
       html.classList.remove("sidebar-open");
+      html.style.overflow = previousOverflow;
     };
   }, [open]);
 
@@ -35,25 +37,15 @@ export function NavDrawer({ items }: NavDrawerProps) {
       return;
     }
 
-    function handlePointerDown(event: PointerEvent) {
-      if (drawerRef.current?.contains(event.target as Node)) {
-        return;
-      }
-
-      setOpen(false);
-    }
-
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setOpen(false);
       }
     }
 
-    document.addEventListener("pointerdown", handlePointerDown);
     document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener("pointerdown", handlePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [open]);
@@ -66,28 +58,37 @@ export function NavDrawer({ items }: NavDrawerProps) {
           aria-expanded={open}
           aria-label="Open navigation menu"
           onClick={() => setOpen(true)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background text-muted shadow-sm transition hover:border-foreground hover:text-foreground"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-white text-muted shadow-sm hover:border-accent hover:text-accent"
         >
           <Menu className="h-5 w-5" />
         </button>
       ) : null}
 
       {open ? (
-        <div
-          ref={drawerRef}
-          className="fixed inset-y-0 left-0 z-50 w-72 border-r border-border bg-surface p-5 shadow-xl"
-        >
+        <>
+          <button
+            type="button"
+            aria-label="Close navigation menu"
+            onClick={() => setOpen(false)}
+            className="fixed inset-0 z-50 cursor-default bg-[#07160d]/35 backdrop-blur-[2px]"
+          />
+          <aside
+            role="dialog"
+            aria-modal="true"
+            aria-label="Workspace navigation"
+            className="fixed inset-y-0 left-0 z-[60] w-[min(19rem,88vw)] overflow-y-auto border-r border-emerald-950/20 bg-[var(--accent-strong)] p-5 text-white shadow-[24px_0_60px_rgba(2,34,16,0.28)]"
+          >
           <div className="mb-6 flex items-center justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted">
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-white">
                 More Pages
               </p>
-              <p className="mt-1 text-xs text-muted">Opened from hamburger</p>
+              <p className="mt-1 text-xs text-emerald-100/60">Workspace navigation</p>
             </div>
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background text-muted shadow-sm transition hover:border-foreground hover:text-foreground"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white hover:bg-white/15"
               aria-label="Close menu"
             >
               <X className="h-5 w-5" />
@@ -99,7 +100,7 @@ export function NavDrawer({ items }: NavDrawerProps) {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-between gap-3 rounded-md border border-border bg-background px-4 py-3 text-sm font-semibold text-muted transition hover:border-foreground hover:text-foreground"
+                className="flex items-center justify-between gap-3 rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm font-medium text-emerald-50/85 hover:bg-white hover:text-[var(--accent-strong)]"
               >
                 <span>{item.label}</span>
                 {item.badge ? (
@@ -110,7 +111,8 @@ export function NavDrawer({ items }: NavDrawerProps) {
               </Link>
             ))}
           </nav>
-        </div>
+          </aside>
+        </>
       ) : null}
     </div>
   );

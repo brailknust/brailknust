@@ -13,7 +13,7 @@ export default async function PracticePage() {
   if (!semesterId) {
     return (
       <AppShell title="Diagnostic practice" eyebrow="Learning">
-        <p className="rounded-lg border border-border p-5 text-sm text-muted">Set an active semester before generating practice.</p>
+        <p className="rounded-2xl border border-border p-5 text-sm text-muted">Set an active semester before generating practice.</p>
       </AppShell>
     );
   }
@@ -62,10 +62,10 @@ export default async function PracticePage() {
 
   return (
     <AppShell title="Diagnostic practice" eyebrow="Learning">
-      <section className="rounded-lg bg-foreground p-5 text-background">
+      <section className="rounded-2xl bg-[var(--accent-strong)] p-5 text-white">
         <BrainCircuit className="h-6 w-6" />
         <h2 className="mt-4 text-2xl font-semibold">Find what needs more work</h2>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-background/70">
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-white/70">
           Take material-grounded topic quizzes. Results update mastery and identify weak areas after enough evidence is collected.
         </p>
       </section>
@@ -92,11 +92,11 @@ export default async function PracticePage() {
           }))}
         />
 
-        <section className="rounded-lg border border-border bg-background p-5">
+        <section className="rounded-2xl border border-border bg-white p-5">
           <h2 className="text-lg font-semibold">Topic mastery</h2>
           <div className="mt-4 grid gap-3">
             {masteries.length ? masteries.map((mastery) => (
-              <div key={mastery.id} className="rounded-md border border-border bg-surface p-4">
+              <div key={mastery.id} className="rounded-xl border border-border bg-surface p-4">
                 <div className="flex items-center justify-between gap-3">
                   <div>
                     <p className="font-semibold">{mastery.platformTopic?.title ?? mastery.topic?.title ?? "Topic"}</p>
@@ -104,7 +104,7 @@ export default async function PracticePage() {
                   </div>
                   <span className="text-lg font-semibold">{mastery.masteryScore.toString()}%</span>
                 </div>
-                <div className="mt-3 h-2 overflow-hidden rounded-full bg-background">
+                <div className="mt-3 h-2 overflow-hidden rounded-full bg-white">
                   <div className="h-full bg-accent" style={{ width: `${Math.min(Number(mastery.masteryScore), 100)}%` }} />
                 </div>
               </div>
@@ -113,11 +113,11 @@ export default async function PracticePage() {
         </section>
       </div>
 
-      <section className="mt-6 rounded-lg border border-border bg-background p-5">
+      <section className="mt-6 rounded-2xl border border-border bg-white p-5">
         <h2 className="text-lg font-semibold">Recent diagnostics</h2>
         <div className="mt-4 grid gap-3 md:grid-cols-2">
           {quizzes.length ? quizzes.map((quiz) => (
-            <Link key={quiz.id} href={`/practice/${quiz.id}`} className="flex items-center justify-between gap-4 rounded-md border border-border bg-surface p-4 hover:border-foreground">
+            <Link key={quiz.id} href={`/practice/${quiz.id}`} className="flex items-center justify-between gap-4 rounded-xl border border-border bg-surface p-4 hover:border-foreground">
               <div>
                 <p className="font-semibold">{quiz.title}</p>
                 <p className="mt-1 text-sm text-muted">{quiz.enrollment.course.code} · {quiz.status.toLowerCase()}</p>

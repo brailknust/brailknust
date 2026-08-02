@@ -38,7 +38,7 @@ const periodOptions = [
   ["WEEKLY", "This week"],
 ] as const;
 
-const fieldClassName = "h-11 w-full rounded-md border border-border bg-background px-3 text-sm";
+const fieldClassName = "h-11 w-full rounded-xl border border-border bg-white px-3 text-sm";
 type GoalView = Awaited<ReturnType<typeof getGoalsPageData>>["goals"][number];
 type CourseOption = Awaited<ReturnType<typeof getGoalsPageData>>["courses"][number];
 
@@ -122,19 +122,19 @@ function GoalFields({ goal, courses }: { goal?: GoalView; courses: CourseOption[
 
 function GoalCard({ goal, courses }: { goal: GoalView; courses: CourseOption[] }) {
   return (
-    <article className="rounded-lg border border-border bg-surface p-5">
+    <article className="rounded-2xl border border-border bg-surface p-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted">
             <span>{labelFor(categoryOptions, goal.category)}</span>
             <span aria-hidden="true">/</span>
             <span>{labelFor(periodOptions, goal.period)}</span>
-            {goal.course ? <span className="rounded-md border border-border px-2 py-1">{goal.course.name}</span> : null}
+            {goal.course ? <span className="rounded-xl border border-border px-2 py-1">{goal.course.name}</span> : null}
           </div>
           <h3 className="mt-3 text-lg font-semibold">{goal.title}</h3>
           <p className="mt-1 text-sm text-muted">{labelFor(metricOptions, goal.metric)} / {formatDeadline(goal.deadline)}</p>
         </div>
-        <span className={`w-fit rounded-md px-2.5 py-1 text-xs font-semibold ${
+        <span className={`w-fit rounded-xl px-2.5 py-1 text-xs font-semibold ${
           goal.status === "COMPLETED" || goal.targetReached
             ? "bg-accent/15 text-accent"
             : "border border-border text-muted"
@@ -153,7 +153,7 @@ function GoalCard({ goal, courses }: { goal: GoalView; courses: CourseOption[] }
         </div>
         <Gauge className="h-5 w-5 text-accent" />
       </div>
-      <div className="mt-3 h-2 overflow-hidden rounded-full bg-background">
+      <div className="mt-3 h-2 overflow-hidden rounded-full bg-white">
         <div className="h-full bg-accent transition-[width]" style={{ width: `${goal.progress}%` }} />
       </div>
 
@@ -161,11 +161,11 @@ function GoalCard({ goal, courses }: { goal: GoalView; courses: CourseOption[] }
         <form action={updateGoalStatus}>
           <input type="hidden" name="id" value={goal.id} />
           {goal.status === "ACTIVE" ? (
-            <button name="status" value="COMPLETED" className="inline-flex h-10 items-center gap-2 rounded-md bg-foreground px-3 text-sm font-semibold text-background">
+            <button name="status" value="COMPLETED" className="inline-flex h-10 items-center gap-2 rounded-xl bg-[var(--accent-strong)] px-3 text-sm font-semibold text-white">
               <Check className="h-4 w-4" /> Complete
             </button>
           ) : (
-            <button name="status" value="ACTIVE" className="inline-flex h-10 items-center gap-2 rounded-md border border-border px-3 text-sm font-semibold">
+            <button name="status" value="ACTIVE" className="inline-flex h-10 items-center gap-2 rounded-xl border border-border px-3 text-sm font-semibold">
               <RotateCcw className="h-4 w-4" /> Reopen
             </button>
           )}
@@ -173,7 +173,7 @@ function GoalCard({ goal, courses }: { goal: GoalView; courses: CourseOption[] }
         {goal.status !== "ARCHIVED" ? (
           <form action={updateGoalStatus}>
             <input type="hidden" name="id" value={goal.id} />
-            <button name="status" value="ARCHIVED" className="inline-flex h-10 items-center gap-2 rounded-md border border-border px-3 text-sm font-semibold text-muted hover:text-foreground">
+            <button name="status" value="ARCHIVED" className="inline-flex h-10 items-center gap-2 rounded-xl border border-border px-3 text-sm font-semibold text-muted hover:text-foreground">
               <Archive className="h-4 w-4" /> Archive
             </button>
           </form>
@@ -185,14 +185,14 @@ function GoalCard({ goal, courses }: { goal: GoalView; courses: CourseOption[] }
           <form action={saveGoal} className="mt-4 border-t border-border pt-4">
             <input type="hidden" name="id" value={goal.id} />
             <GoalFields goal={goal} courses={courses} />
-            <button className="mt-4 h-10 rounded-md bg-foreground px-4 text-sm font-semibold text-background">Save changes</button>
+            <button className="mt-4 h-10 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Save changes</button>
           </form>
         </details>
         <form action={deleteGoal} className="ml-auto">
           <input type="hidden" name="id" value={goal.id} />
           <ConfirmSubmitButton
             message={`Delete "${goal.title}" permanently?`}
-            className="inline-flex h-10 items-center gap-2 rounded-md border border-red-300 px-3 text-sm font-semibold text-red-600"
+            className="inline-flex h-10 items-center gap-2 rounded-xl border border-red-300 px-3 text-sm font-semibold text-red-600"
           >
             <Trash2 className="h-4 w-4" /> Delete
           </ConfirmSubmitButton>
@@ -209,11 +209,11 @@ export default async function GoalsPage() {
   if (!data.activeSemester) {
     return (
       <AppShell title="Goals" eyebrow="Progress">
-        <section className="rounded-lg border border-border bg-background p-6">
+        <section className="rounded-2xl border border-border bg-white p-6">
           <Target className="h-6 w-6 text-accent" />
           <h2 className="mt-5 text-xl font-semibold">Set an active semester first</h2>
           <p className="mt-2 text-sm text-muted">Goals are kept separate for each semester.</p>
-          <Link href="/academics" className="mt-5 inline-flex h-11 items-center gap-2 rounded-md bg-foreground px-4 text-sm font-semibold text-background">
+          <Link href="/academics" className="mt-5 inline-flex h-11 items-center gap-2 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
             Choose a semester <ArrowRight className="h-4 w-4" />
           </Link>
         </section>
@@ -229,12 +229,12 @@ export default async function GoalsPage() {
 
   return (
     <AppShell title="Goals" eyebrow="Progress">
-      <section className="rounded-lg bg-foreground p-5 text-background">
+      <section className="rounded-2xl bg-[var(--accent-strong)] p-5 text-white">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm text-background/65">Active semester</p>
+            <p className="text-sm text-white/65">Active semester</p>
             <h2 className="mt-2 text-2xl font-semibold">{level} - {data.activeSemester.name}</h2>
-            <p className="mt-2 text-sm text-background/70">{data.activeSemester.academicYear}</p>
+            <p className="mt-2 text-sm text-white/70">{data.activeSemester.academicYear}</p>
           </div>
           <div className="grid grid-cols-3 gap-3">
             {[
@@ -242,9 +242,9 @@ export default async function GoalsPage() {
               ["Completed", completed],
               ["Reached", reached],
             ].map(([label, value]) => (
-              <div key={label} className="min-w-20 rounded-md bg-background/10 p-3 text-center">
+              <div key={label} className="min-w-20 rounded-xl bg-white/10 p-3 text-center">
                 <p className="text-xl font-semibold">{value}</p>
-                <p className="text-xs text-background/60">{label}</p>
+                <p className="text-xs text-white/60">{label}</p>
               </div>
             ))}
           </div>
@@ -252,14 +252,14 @@ export default async function GoalsPage() {
       </section>
 
       <div className="mt-6 grid gap-6 xl:grid-cols-[0.8fr_1.2fr]">
-        <section className="self-start rounded-lg border border-border bg-background p-5">
+        <section className="self-start rounded-2xl border border-border bg-white p-5">
           <div className="flex items-center gap-3">
             <Target className="h-5 w-5 text-accent" />
             <h2 className="text-lg font-semibold">Add goal</h2>
           </div>
           <form action={saveGoal} className="mt-5">
             <GoalFields courses={data.courses} />
-            <button className="mt-5 h-11 w-full rounded-md bg-foreground px-4 text-sm font-semibold text-background">
+            <button className="mt-5 h-11 w-full rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
               Create goal
             </button>
           </form>
@@ -277,7 +277,7 @@ export default async function GoalsPage() {
             {visibleGoals.length ? visibleGoals.map((goal) => (
               <GoalCard key={goal.id} goal={goal} courses={data.courses} />
             )) : (
-              <div className="rounded-lg border border-dashed border-border p-8 text-center">
+              <div className="rounded-2xl border border-dashed border-border p-8 text-center">
                 <Target className="mx-auto h-6 w-6 text-accent" />
                 <p className="mt-3 font-semibold">No goals for this semester</p>
               </div>
@@ -287,7 +287,7 @@ export default async function GoalsPage() {
       </div>
 
       {archivedGoals.length ? (
-        <details className="mt-6 rounded-lg border border-border bg-background p-5">
+        <details className="mt-6 rounded-2xl border border-border bg-white p-5">
           <summary className="cursor-pointer font-semibold">Archived goals ({archivedGoals.length})</summary>
           <div className="mt-5 grid gap-4 lg:grid-cols-2">
             {archivedGoals.map((goal) => <GoalCard key={goal.id} goal={goal} courses={data.courses} />)}

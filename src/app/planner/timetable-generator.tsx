@@ -197,7 +197,7 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
   }
 
   return (
-    <section className="rounded-lg border border-border bg-background p-5">
+    <section className="rounded-2xl border border-border bg-white p-5">
       <div className="flex items-center gap-3">
         <ImageUp className="h-5 w-5 text-accent" />
         <h2 className="text-lg font-semibold">Generate study timetable</h2>
@@ -214,25 +214,25 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
             type="file"
             accept="image/*"
             onChange={(event) => setTimetableImage(event.target.files?.[0] ?? null)}
-            className="rounded-md border border-border bg-surface px-3 py-3 text-sm font-normal file:mr-4 file:rounded-md file:border-0 file:bg-foreground file:px-4 file:py-2 file:text-sm file:font-semibold file:text-background"
+            className="rounded-xl border border-border bg-surface px-3 py-3 text-sm font-normal file:mr-4 file:rounded-xl file:border-0 file:bg-[var(--accent-strong)] file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
           />
         </label>
         <button
           type="submit"
           disabled={isExtracting}
-          className="h-11 rounded-md bg-foreground px-4 text-sm font-semibold text-background disabled:cursor-not-allowed disabled:opacity-60"
+          className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isExtracting ? "Extracting..." : "Extract timetable"}
         </button>
       </form>
 
       {statusMessage ? (
-        <p className="mt-4 rounded-md border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-800">
+        <p className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-800">
           {statusMessage}
         </p>
       ) : null}
       {errorMessage ? (
-        <p className="mt-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-800">
+        <p className="mt-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800">
           {errorMessage}
         </p>
       ) : null}
@@ -243,7 +243,7 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
           <button
             type="button"
             onClick={() => setExtractedRows((rows) => [...rows, emptyRow()])}
-            className="inline-flex h-9 items-center gap-2 rounded-md border border-border px-3 text-sm font-semibold"
+            className="inline-flex h-9 items-center gap-2 rounded-xl border border-border px-3 text-sm font-semibold"
           >
             <Plus className="h-4 w-4" />
             Add row
@@ -253,7 +253,7 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
         {extractedRows.length ? (
           <div className="grid gap-3">
             {extractedRows.map((row) => (
-              <div key={row.id} className="rounded-md border border-border bg-surface p-3">
+              <div key={row.id} className="rounded-xl border border-border bg-surface p-3">
                 <div className="grid gap-3 sm:grid-cols-2">
                   <input
                     value={row.courseCode}
@@ -261,7 +261,7 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
                       setExtractedRows((rows) => updateRow(rows, row.id, "courseCode", event.target.value))
                     }
                     placeholder="Course code"
-                    className="h-10 rounded-md border border-border bg-background px-3 text-sm"
+                    className="h-10 rounded-xl border border-border bg-white px-3 text-sm"
                   />
                   <input
                     value={row.courseName}
@@ -269,14 +269,14 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
                       setExtractedRows((rows) => updateRow(rows, row.id, "courseName", event.target.value))
                     }
                     placeholder="Course name"
-                    className="h-10 rounded-md border border-border bg-background px-3 text-sm"
+                    className="h-10 rounded-xl border border-border bg-white px-3 text-sm"
                   />
                   <select
                     value={row.dayOfWeek}
                     onChange={(event) =>
                       setExtractedRows((rows) => updateRow(rows, row.id, "dayOfWeek", event.target.value))
                     }
-                    className="h-10 rounded-md border border-border bg-background px-3 text-sm"
+                    className="h-10 rounded-xl border border-border bg-white px-3 text-sm"
                   >
                     {weekDays.map((day) => (
                       <option key={day} value={day}>
@@ -290,7 +290,7 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
                       setExtractedRows((rows) => updateRow(rows, row.id, "venue", event.target.value))
                     }
                     placeholder="Venue"
-                    className="h-10 rounded-md border border-border bg-background px-3 text-sm"
+                    className="h-10 rounded-xl border border-border bg-white px-3 text-sm"
                   />
                   <input
                     type="time"
@@ -298,7 +298,7 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
                     onChange={(event) =>
                       setExtractedRows((rows) => updateRow(rows, row.id, "startTime", event.target.value))
                     }
-                    className="h-10 rounded-md border border-border bg-background px-3 text-sm"
+                    className="h-10 rounded-xl border border-border bg-white px-3 text-sm"
                   />
                   <div className="flex gap-2">
                     <input
@@ -307,12 +307,12 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
                       onChange={(event) =>
                         setExtractedRows((rows) => updateRow(rows, row.id, "endTime", event.target.value))
                       }
-                      className="h-10 min-w-0 flex-1 rounded-md border border-border bg-background px-3 text-sm"
+                      className="h-10 min-w-0 flex-1 rounded-xl border border-border bg-white px-3 text-sm"
                     />
                     <button
                       type="button"
                       onClick={() => setExtractedRows((rows) => rows.filter((item) => item.id !== row.id))}
-                      className="grid h-10 w-10 place-items-center rounded-md border border-border text-muted transition hover:border-foreground hover:text-foreground"
+                      className="grid h-10 w-10 place-items-center rounded-xl border border-border text-muted transition hover:border-foreground hover:text-foreground"
                       aria-label="Remove row"
                     >
                       <Trash2 className="h-4 w-4" />
@@ -323,13 +323,13 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
             ))}
           </div>
         ) : (
-          <p className="rounded-md border border-border bg-surface p-4 text-sm text-muted">
+          <p className="rounded-xl border border-border bg-surface p-4 text-sm text-muted">
             No class rows yet. Generate from your enrolled courses, upload an image, or add rows manually.
           </p>
         )}
       </div>
 
-      <div className="mt-5 rounded-md border border-border bg-surface p-4">
+      <div className="mt-5 rounded-xl border border-border bg-surface p-4">
         <h3 className="font-semibold">Study preferences</h3>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           <label className="grid gap-2 text-sm font-semibold">
@@ -339,7 +339,7 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
               onChange={(event) =>
                 setPreferences((current) => ({ ...current, sessionLength: Number(event.target.value) }))
               }
-              className="h-10 rounded-md border border-border bg-background px-3 text-sm font-normal"
+              className="h-10 rounded-xl border border-border bg-white px-3 text-sm font-normal"
             >
               <option value={30}>30 minutes</option>
               <option value={45}>45 minutes</option>
@@ -358,7 +358,7 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
                   intensity: event.target.value as PlannerPreferences["intensity"],
                 }))
               }
-              className="h-10 rounded-md border border-border bg-background px-3 text-sm font-normal"
+              className="h-10 rounded-xl border border-border bg-white px-3 text-sm font-normal"
             >
               <option value="light">Light</option>
               <option value="balanced">Balanced</option>
@@ -373,7 +373,7 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
               onChange={(event) =>
                 setPreferences((current) => ({ ...current, preferredStart: event.target.value }))
               }
-              className="h-10 rounded-md border border-border bg-background px-3 text-sm font-normal"
+              className="h-10 rounded-xl border border-border bg-white px-3 text-sm font-normal"
             />
           </label>
           <label className="grid gap-2 text-sm font-semibold">
@@ -384,12 +384,12 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
               onChange={(event) =>
                 setPreferences((current) => ({ ...current, preferredEnd: event.target.value }))
               }
-              className="h-10 rounded-md border border-border bg-background px-3 text-sm font-normal"
+              className="h-10 rounded-xl border border-border bg-white px-3 text-sm font-normal"
             />
           </label>
         </div>
         {activeCourseCount === 0 ? (
-          <p className="mt-4 rounded-md border border-border bg-background p-3 text-sm text-muted">
+          <p className="mt-4 rounded-xl border border-border bg-white p-3 text-sm text-muted">
             Add at least one course to your active semester before generating a study timetable.
           </p>
         ) : null}
@@ -397,7 +397,7 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
           type="button"
           onClick={handleGeneratePlan}
           disabled={activeCourseCount === 0 || isGenerating}
-          className="mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-md bg-foreground px-4 text-sm font-semibold text-background disabled:cursor-not-allowed disabled:opacity-60"
+          className="mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
         >
           <Sparkles className="h-4 w-4" />
           {isGenerating ? "Generating..." : extractedRows.length ? "Generate around class times" : "Generate from enrolled courses"}
@@ -406,15 +406,15 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
 
       {summary ? (
         <div className="mt-5 grid gap-3 sm:grid-cols-3">
-          <div className="rounded-md border border-border bg-surface p-3">
+          <div className="rounded-xl border border-border bg-surface p-3">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Classes</p>
             <p className="mt-2 font-semibold">{summary.classCount}</p>
           </div>
-          <div className="rounded-md border border-border bg-surface p-3">
+          <div className="rounded-xl border border-border bg-surface p-3">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Courses</p>
             <p className="mt-2 font-semibold">{summary.courseCount}</p>
           </div>
-          <div className="rounded-md border border-border bg-surface p-3">
+          <div className="rounded-xl border border-border bg-surface p-3">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Planned hours</p>
             <p className="mt-2 font-semibold">{summary.plannedHours}</p>
           </div>
@@ -429,7 +429,7 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
             if (!sessions.length) return null;
 
             return (
-              <div key={day} className="rounded-md border border-border bg-surface p-3">
+              <div key={day} className="rounded-xl border border-border bg-surface p-3">
                 <p className="font-semibold">{day}</p>
                 <div className="mt-2 grid gap-2">
                   {sessions.map((session) => (
@@ -445,7 +445,7 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
       ) : null}
 
       {rawOcrText ? (
-        <details className="mt-5 rounded-md border border-border bg-surface p-4 text-sm text-muted">
+        <details className="mt-5 rounded-xl border border-border bg-surface p-4 text-sm text-muted">
           <summary className="cursor-pointer font-semibold text-foreground">Raw OCR text</summary>
           <pre className="mt-3 max-h-52 overflow-auto whitespace-pre-wrap">{rawOcrText}</pre>
         </details>

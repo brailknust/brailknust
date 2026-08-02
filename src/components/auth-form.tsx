@@ -116,7 +116,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         type="button"
         onClick={handleGoogleSignIn}
         disabled={isPending}
-        className="mt-8 inline-flex h-11 w-full items-center justify-center gap-2 rounded-md border border-border bg-surface px-5 text-sm font-semibold text-foreground transition hover:border-foreground disabled:cursor-not-allowed disabled:opacity-70"
+        className="mt-8 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-border bg-white px-5 text-sm font-semibold text-foreground hover:border-accent hover:bg-[var(--accent-soft)] disabled:cursor-not-allowed disabled:opacity-70"
       >
         {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleIcon />}
         Continue with Google
@@ -136,7 +136,7 @@ export function AuthForm({ mode }: AuthFormProps) {
               name="fullName"
               required
               placeholder="Your full name"
-              className="h-11 rounded-md border border-border bg-background px-3 text-sm font-normal outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/15"
+              className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal outline-none focus:border-accent focus:ring-2 focus:ring-accent/15"
             />
           </label>
         ) : null}
@@ -154,7 +154,7 @@ export function AuthForm({ mode }: AuthFormProps) {
 
         <label className="grid gap-2 text-sm font-semibold">
           Password
-          <div className="flex h-11 overflow-hidden rounded-md border border-border bg-background focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15">
+          <div className="flex h-11 overflow-hidden rounded-xl border border-border bg-white focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15">
             <input
               name="password"
               type={showPassword ? "text" : "password"}
@@ -176,7 +176,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         {isSignup ? (
           <label className="grid gap-2 text-sm font-semibold">
             Confirm password
-            <div className="flex h-11 overflow-hidden rounded-md border border-border bg-background focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15">
+            <div className="flex h-11 overflow-hidden rounded-xl border border-border bg-white focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15">
               <input
                 name="confirmPassword"
                 type={showConfirmPassword ? "text" : "password"}
@@ -198,7 +198,7 @@ export function AuthForm({ mode }: AuthFormProps) {
 
         <button
           disabled={isPending}
-          className="mt-2 inline-flex h-11 items-center justify-center gap-2 rounded-md bg-foreground px-5 text-sm font-semibold text-background transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
+          className="mt-2 inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-accent px-5 text-sm font-semibold text-white shadow-sm hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-70"
         >
           {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
           {isSignup ? "Create account" : "Login"}
@@ -219,7 +219,7 @@ export function AuthForm({ mode }: AuthFormProps) {
 
       <p className="mt-6 text-center text-sm text-muted">
         {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
-        <Link href={isSignup ? "/login" : "/signup"} className="font-semibold text-foreground hover:underline">
+        <Link href={isSignup ? "/login" : "/signup"} className="font-semibold text-accent hover:underline">
           {isSignup ? "Login" : "Sign up"}
         </Link>
       </p>

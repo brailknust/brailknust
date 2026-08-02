@@ -1,12 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbfbf8;
-  --foreground: #191714;
-  --surface: #f3f1ea;
-  --muted: #68635b;
-  --border: #ddd8cc;
-  --accent: #1f6f5b;
+  --background: #f6f9f7;
+  --foreground: #13251a;
+  --surface: #ffffff;
+  --muted: #627269;
+  --border: #dce8df;
+  --accent: #08783f;
+  --accent-strong: #045c2e;
+  --accent-soft: #eaf6ee;
+  --danger: #b93838;
 }
 
 @theme inline {
@@ -26,6 +29,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -33,18 +37,42 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
 }
 
-header,
-main {
-  transition: margin-left 0.3s ease, width 0.3s ease;
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
-html.sidebar-open main {
-  margin-left: 18rem;
-  width: calc(100% - 18rem);
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
 }
 
 a {
   text-decoration: none;
+}
+
+::selection {
+  background: #ccebd7;
+  color: var(--foreground);
+}
+
+:focus-visible {
+  outline: 3px solid rgb(8 120 63 / 25%);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a,
+  button,
+  input,
+  select,
+  textarea {
+    transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease,
+      box-shadow 160ms ease, transform 160ms ease;
+  }
 }

@@ -22,7 +22,7 @@ const academicYearOptions = Array.from({ length: 7 }, (_, index) => {
   return `${startYear}/${startYear + 1}`;
 });
 const fieldClassName =
-  "h-11 rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/15 disabled:cursor-not-allowed disabled:bg-surface disabled:text-muted";
+  "h-11 rounded-xl border border-border bg-white px-3 text-sm text-foreground outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 disabled:cursor-not-allowed disabled:bg-surface disabled:text-muted";
 const labelClassName = "grid gap-2 text-sm font-semibold text-foreground";
 
 type OnboardingFormProps = {
@@ -47,7 +47,7 @@ export function OnboardingForm({ action, hierarchy, defaultFullName }: Onboardin
 
   return (
     <form action={action} className="mt-8 grid gap-5">
-      <div className="rounded-lg border border-border bg-surface/70 p-4">
+      <div className="rounded-xl border border-border bg-white p-5">
         <h2 className="text-base font-semibold">Personal details</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <label className={labelClassName}>
@@ -72,7 +72,7 @@ export function OnboardingForm({ action, hierarchy, defaultFullName }: Onboardin
         </div>
       </div>
 
-      <div className="rounded-lg border border-border bg-surface/70 p-4">
+      <div className="rounded-xl border border-border bg-white p-5">
         <h2 className="text-base font-semibold">Academic placement</h2>
         <div className="mt-4 grid gap-4">
           <label className={labelClassName}>
@@ -119,7 +119,7 @@ export function OnboardingForm({ action, hierarchy, defaultFullName }: Onboardin
         </div>
       </div>
 
-      <div className="rounded-lg border border-border bg-surface/70 p-4">
+      <div className="rounded-xl border border-border bg-white p-5">
         <h2 className="text-base font-semibold">Current semester</h2>
         <p className="mt-1 text-sm leading-6 text-muted">
           If BRAIL has a curriculum template for your programme, matching courses will be added automatically.
@@ -159,7 +159,7 @@ export function OnboardingForm({ action, hierarchy, defaultFullName }: Onboardin
         </div>
       </div>
 
-      <div className="rounded-lg border border-border bg-surface/70 p-4">
+      <div className="rounded-xl border border-border bg-white p-5">
         <h2 className="text-base font-semibold">Current standing</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <label className={labelClassName}>
@@ -189,7 +189,7 @@ export function OnboardingForm({ action, hierarchy, defaultFullName }: Onboardin
 
       <button
         type="submit"
-        className="mt-2 inline-flex h-12 items-center justify-center rounded-md bg-foreground px-5 text-sm font-semibold text-background transition hover:opacity-90"
+        className="mt-2 inline-flex h-12 items-center justify-center rounded-xl bg-accent px-5 text-sm font-semibold text-white shadow-sm hover:bg-[var(--accent-strong)]"
       >
         Create profile
       </button>

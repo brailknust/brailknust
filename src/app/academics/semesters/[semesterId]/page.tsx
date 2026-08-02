@@ -61,36 +61,36 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
       title={`${formatLevel(data.profile?.level)} - ${semester.name}`}
       eyebrow="Semester"
     >
-      <section className="rounded-lg border border-border bg-foreground p-5 text-background">
+      <section className="rounded-2xl border border-border bg-[var(--accent-strong)] p-5 text-white">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-background/70">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-white/70">
               Semester detail
             </p>
             <h2 className="mt-3 text-2xl font-semibold">{semester.academicYear}</h2>
-            <p className="mt-2 text-sm leading-6 text-background/70">
+            <p className="mt-2 text-sm leading-6 text-white/70">
               Update this semester&apos;s CWA, manage courses, and open course cards for analytics.
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-3 lg:min-w-[520px]">
-            <div className="rounded-md border border-background/15 bg-background/10 p-4">
-              <CalendarDays className="h-5 w-5 text-background/75" />
+            <div className="rounded-xl border border-background/15 bg-white/10 p-4">
+              <CalendarDays className="h-5 w-5 text-white/75" />
               <p className="mt-5 text-2xl font-semibold">{formatCwa(data.profile?.cwa)}</p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-background/60">
+              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
                 CWA
               </p>
             </div>
-            <div className="rounded-md border border-background/15 bg-background/10 p-4">
-              <BookOpen className="h-5 w-5 text-background/75" />
+            <div className="rounded-xl border border-background/15 bg-white/10 p-4">
+              <BookOpen className="h-5 w-5 text-white/75" />
               <p className="mt-5 text-2xl font-semibold">{data.enrollments.length}</p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-background/60">
+              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
                 Courses
               </p>
             </div>
-            <div className="rounded-md border border-background/15 bg-background/10 p-4">
-              <Clock3 className="h-5 w-5 text-background/75" />
+            <div className="rounded-xl border border-background/15 bg-white/10 p-4">
+              <Clock3 className="h-5 w-5 text-white/75" />
               <p className="mt-5 text-2xl font-semibold">{data.timetable.length}</p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-background/60">
+              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
                 Timetable
               </p>
             </div>
@@ -100,14 +100,14 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
 
       <section className="mt-6 grid gap-6 xl:grid-cols-[0.72fr_1.28fr]">
         <div className="grid gap-6">
-          <form action={updateSemesterProfile} className="rounded-lg border border-border bg-background p-5">
+          <form action={updateSemesterProfile} className="rounded-2xl border border-border bg-white p-5">
             <h2 className="text-lg font-semibold">Semester details</h2>
             <input type="hidden" name="semesterId" value={semester.id} />
             <div className="mt-4 grid gap-3">
               <select
                 name="level"
                 defaultValue={data.profile?.level ?? appUser.level ?? ""}
-                className="h-11 rounded-md border border-border bg-background px-3 text-sm"
+                className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
               >
                 <option value="">Select level</option>
                 <option value="LEVEL_100">Level 100</option>
@@ -125,28 +125,28 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
                 step="0.01"
                 defaultValue={data.profile?.cwa?.toString() ?? ""}
                 placeholder="e.g. 72.45"
-                className="h-11 rounded-md border border-border bg-background px-3 text-sm"
+                className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
               />
-              <button className="h-11 rounded-md bg-foreground px-4 text-sm font-semibold text-background">
+              <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                 Save CWA
               </button>
             </div>
           </form>
 
           {!data.isActiveForUser ? (
-            <form action={setActiveSemester} className="rounded-lg border border-border bg-surface p-5">
+            <form action={setActiveSemester} className="rounded-2xl border border-border bg-surface p-5">
               <input type="hidden" name="semesterId" value={semester.id} />
               <h2 className="text-lg font-semibold">Set as active</h2>
               <p className="mt-2 text-sm leading-6 text-muted">
                 Planner and dashboard summaries will use this semester first.
               </p>
-              <button className="mt-4 h-11 rounded-md bg-foreground px-4 text-sm font-semibold text-background">
+              <button className="mt-4 h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                 Make active semester
               </button>
             </form>
           ) : null}
 
-          <form action={deleteSemester} className="rounded-lg border border-border bg-background p-5">
+          <form action={deleteSemester} className="rounded-2xl border border-border bg-white p-5">
             <input type="hidden" name="semesterId" value={semester.id} />
             <h2 className="text-lg font-semibold">Delete semester</h2>
             <p className="mt-2 text-sm leading-6 text-muted">
@@ -155,17 +155,17 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
             </p>
             <ConfirmSubmitButton
               message={`Delete ${formatLevel(data.profile?.level)} - ${semester.name}? This removes the semester from your workspace.`}
-              className="mt-4 h-11 rounded-md border border-border px-4 text-sm font-semibold text-muted transition hover:border-foreground hover:text-foreground"
+              className="mt-4 h-11 rounded-xl border border-border px-4 text-sm font-semibold text-muted transition hover:border-foreground hover:text-foreground"
             >
               Delete semester
             </ConfirmSubmitButton>
           </form>
 
-          <form action={createEnrollment} className="rounded-lg border border-border bg-background p-5">
+          <form action={createEnrollment} className="rounded-2xl border border-border bg-white p-5">
             <h2 className="text-lg font-semibold">Enroll in course</h2>
             <input type="hidden" name="semesterId" value={semester.id} />
             <div className="mt-4 grid gap-3">
-              <select name="courseId" required className="h-11 rounded-md border border-border bg-background px-3 text-sm">
+              <select name="courseId" required className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
                 <option value="">Select course</option>
                 {data.courses.map((course) => (
                   <option key={course.id} value={course.id}>
@@ -176,30 +176,30 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
               <input
                 name="lecturer"
                 placeholder="Lecturer"
-                className="h-11 rounded-md border border-border bg-background px-3 text-sm"
+                className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
               />
-              <button className="h-11 rounded-md bg-foreground px-4 text-sm font-semibold text-background">
+              <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                 Save enrollment
               </button>
             </div>
           </form>
 
-          <form action={createCourse} className="rounded-lg border border-border bg-background p-5">
+          <form action={createCourse} className="rounded-2xl border border-border bg-white p-5">
             <h2 className="text-lg font-semibold">Add course catalog item</h2>
             <div className="mt-4 grid gap-3">
-              <input name="code" required placeholder="COE 153" className="h-11 rounded-md border border-border bg-background px-3 text-sm" />
-              <input name="name" required placeholder="Engineering Technology" className="h-11 rounded-md border border-border bg-background px-3 text-sm" />
+              <input name="code" required placeholder="COE 153" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
+              <input name="name" required placeholder="Engineering Technology" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
               <div className="grid gap-3 sm:grid-cols-2">
-                <input name="creditHours" type="number" min="0" max="12" placeholder="Credits" className="h-11 rounded-md border border-border bg-background px-3 text-sm" />
-                <select name="level" defaultValue="" className="h-11 rounded-md border border-border bg-background px-3 text-sm">
+                <input name="creditHours" type="number" min="0" max="12" placeholder="Credits" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
+                <select name="level" defaultValue="" className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
                   <option value="">Course level</option>
                   {levels.map(([value, label]) => (
                     <option key={value} value={value}>{label}</option>
                   ))}
                 </select>
               </div>
-              <input name="department" placeholder="Department" className="h-11 rounded-md border border-border bg-background px-3 text-sm" />
-              <button className="h-11 rounded-md bg-foreground px-4 text-sm font-semibold text-background">
+              <input name="department" placeholder="Department" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
+              <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                 Save course
               </button>
             </div>
@@ -207,14 +207,14 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
         </div>
 
         <div className="grid gap-6">
-          <section className="rounded-lg border border-border bg-background p-5">
+          <section className="rounded-2xl border border-border bg-white p-5">
             <h2 className="text-lg font-semibold">Courses</h2>
             <div className="mt-4 grid gap-4 md:grid-cols-2">
               {data.enrollments.length ? (
                 data.enrollments.map((enrollment) => (
                   <article
                     key={enrollment.id}
-                    className="rounded-lg border border-border bg-surface p-5 transition hover:border-foreground"
+                    className="rounded-2xl border border-border bg-surface p-5 transition hover:border-foreground"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div>
@@ -228,7 +228,7 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
                           message={`Remove ${enrollment.course.name} from ${formatLevel(data.profile?.level)} - ${semester.name}?`}
                           title="Remove course"
                           aria-label={`Remove ${enrollment.course.name}`}
-                          className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-muted transition hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-600"
+                          className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border text-muted transition hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-600"
                         >
                           <Trash2 className="h-4 w-4" />
                         </ConfirmSubmitButton>
@@ -257,7 +257,7 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
                   </article>
                 ))
               ) : (
-                <p className="rounded-md border border-border bg-surface p-4 text-sm text-muted">
+                <p className="rounded-xl border border-border bg-surface p-4 text-sm text-muted">
                   No courses enrolled for this semester yet.
                 </p>
               )}
@@ -265,11 +265,11 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
           </section>
 
           <section className="grid gap-6 lg:grid-cols-2">
-            <form action={createTimetableBlock} className="rounded-lg border border-border bg-background p-5">
+            <form action={createTimetableBlock} className="rounded-2xl border border-border bg-white p-5">
               <input type="hidden" name="semesterId" value={semester.id} />
               <h2 className="text-lg font-semibold">Add timetable block</h2>
               <div className="mt-4 grid gap-3">
-                <select name="courseId" className="h-11 rounded-md border border-border bg-background px-3 text-sm">
+                <select name="courseId" className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
                   <option value="">General busy block</option>
                   {data.enrollments.map((enrollment) => (
                     <option key={enrollment.courseId} value={enrollment.courseId}>
@@ -277,28 +277,28 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
                     </option>
                   ))}
                 </select>
-                <select name="dayOfWeek" defaultValue="0" className="h-11 rounded-md border border-border bg-background px-3 text-sm">
+                <select name="dayOfWeek" defaultValue="0" className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
                   {weekDays.map((day, index) => (
                     <option key={day} value={index}>{day}</option>
                   ))}
                 </select>
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <input name="startTime" required type="time" className="h-11 rounded-md border border-border bg-background px-3 text-sm" />
-                  <input name="endTime" required type="time" className="h-11 rounded-md border border-border bg-background px-3 text-sm" />
+                  <input name="startTime" required type="time" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
+                  <input name="endTime" required type="time" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
                 </div>
-                <input name="venue" placeholder="Venue" className="h-11 rounded-md border border-border bg-background px-3 text-sm" />
-                <button className="h-11 rounded-md bg-foreground px-4 text-sm font-semibold text-background">
+                <input name="venue" placeholder="Venue" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
+                <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                   Save block
                 </button>
               </div>
             </form>
 
-            <div className="rounded-lg border border-border bg-surface p-5">
+            <div className="rounded-2xl border border-border bg-surface p-5">
               <h2 className="text-lg font-semibold">Timetable blocks</h2>
               <div className="mt-4 grid gap-3">
                 {data.timetable.length ? (
                   data.timetable.map((block) => (
-                    <div key={block.id} className="rounded-md border border-border bg-background p-4">
+                    <div key={block.id} className="rounded-xl border border-border bg-white p-4">
                       <p className="font-semibold">
                         {weekDays[block.dayOfWeek]} {formatTime(block.startTime)}-{formatTime(block.endTime)}
                       </p>

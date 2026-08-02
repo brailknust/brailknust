@@ -28,10 +28,10 @@ export default async function DiagnosticQuizPage({ params }: { params: Promise<{
       <Link href="/practice" className="mb-5 inline-flex items-center gap-2 text-sm font-semibold text-muted">
         <ArrowLeft className="h-4 w-4" /> Back to practice
       </Link>
-      <section className="rounded-lg bg-foreground p-5 text-background">
-        <p className="text-sm text-background/60">{quiz.enrollment.course.code} - {quiz.enrollment.course.name}</p>
+      <section className="rounded-2xl bg-[var(--accent-strong)] p-5 text-white">
+        <p className="text-sm text-white/60">{quiz.enrollment.course.code} - {quiz.enrollment.course.name}</p>
         <h2 className="mt-2 text-2xl font-semibold">{quiz.title}</h2>
-        {completed ? <p className="mt-3 text-lg font-semibold">Score: {quiz.score}/{quiz.maxScore}</p> : <p className="mt-2 text-sm text-background/70">Answer every question before submitting.</p>}
+        {completed ? <p className="mt-3 text-lg font-semibold">Score: {quiz.score}/{quiz.maxScore}</p> : <p className="mt-2 text-sm text-white/70">Answer every question before submitting.</p>}
       </section>
 
       <form action={submitDiagnosticQuiz} className="mt-6 grid gap-5">
@@ -40,7 +40,7 @@ export default async function DiagnosticQuizPage({ params }: { params: Promise<{
           const options = Array.isArray(question.options) ? question.options.map(String) : [];
           const attempt = question.attempts[0];
           return (
-            <fieldset key={question.id} className="rounded-lg border border-border bg-background p-5" disabled={completed}>
+            <fieldset key={question.id} className="rounded-2xl border border-border bg-white p-5" disabled={completed}>
               <legend className="px-2 text-sm font-semibold text-muted">Question {index + 1} · {question.difficulty.toLowerCase()}</legend>
               <p className="mt-2 font-semibold leading-7">{question.prompt}</p>
               <div className="mt-4 grid gap-3">
@@ -49,7 +49,7 @@ export default async function DiagnosticQuizPage({ params }: { params: Promise<{
                   const isSelected = attempt?.selectedAnswer === letter;
                   const isCorrect = question.correctAnswer === letter;
                   return (
-                    <label key={letter} className={`flex gap-3 rounded-md border p-3 text-sm ${completed && isCorrect ? "border-green-400 bg-green-50" : completed && isSelected ? "border-red-300 bg-red-50" : "border-border bg-surface"}`}>
+                    <label key={letter} className={`flex gap-3 rounded-xl border p-3 text-sm ${completed && isCorrect ? "border-green-400 bg-green-50" : completed && isSelected ? "border-red-300 bg-red-50" : "border-border bg-surface"}`}>
                       <input type="radio" name={`answer_${question.id}`} value={letter} required defaultChecked={isSelected} />
                       <span><span className="font-semibold">{letter}.</span> {option}</span>
                     </label>
@@ -68,7 +68,7 @@ export default async function DiagnosticQuizPage({ params }: { params: Promise<{
             </fieldset>
           );
         })}
-        {!completed ? <button className="h-12 rounded-md bg-foreground px-5 text-sm font-semibold text-background">Submit diagnostic</button> : null}
+        {!completed ? <button className="h-12 rounded-xl bg-[var(--accent-strong)] px-5 text-sm font-semibold text-white">Submit diagnostic</button> : null}
       </form>
     </AppShell>
   );

@@ -48,7 +48,7 @@ export function SavedStudyTimetable({ studyPlanId, sessions, courseOptions, init
               key={day}
               type="button"
               onClick={() => setSelectedDayIndex(index)}
-              className={"h-12 shrink-0 rounded-lg px-5 text-sm font-semibold transition " + (active ? "bg-foreground text-background" : "bg-surface text-muted hover:bg-border hover:text-foreground")}
+              className={"h-12 shrink-0 rounded-2xl px-5 text-sm font-semibold transition " + (active ? "bg-[var(--accent-strong)] text-white" : "bg-surface text-muted hover:bg-border hover:text-foreground")}
             >
               {day}
             </button>
@@ -56,7 +56,7 @@ export function SavedStudyTimetable({ studyPlanId, sessions, courseOptions, init
         })}
       </div>
 
-      <section id="study-timetable" className="mt-6 rounded-lg border border-border bg-background p-5">
+      <section id="study-timetable" className="mt-6 rounded-2xl border border-border bg-white p-5">
         <div className="flex items-center justify-between gap-3">
           <h3 className="text-lg font-semibold">{weekDays[selectedDayIndex]}&apos;s Study Sessions</h3>
           <a href="#manual-study-session" className="inline-flex items-center gap-2 text-sm font-semibold text-accent">
@@ -66,7 +66,7 @@ export function SavedStudyTimetable({ studyPlanId, sessions, courseOptions, init
 
         <div className="mt-5 grid gap-4">
           {selectedSessions.length ? selectedSessions.map((session) => (
-            <article key={session.id} className="rounded-md border-l-4 border-accent bg-surface p-5">
+            <article key={session.id} className="rounded-xl border-l-4 border-accent bg-surface p-5">
               <div className="grid gap-4 md:grid-cols-[160px_1fr_auto]">
                 <p className="text-sm font-medium text-muted">{session.startTime} - {session.endTime}</p>
                 <div>
@@ -81,7 +81,7 @@ export function SavedStudyTimetable({ studyPlanId, sessions, courseOptions, init
                     <input type="hidden" name="id" value={session.id} />
                     <input type="hidden" name="studyPlanId" value={studyPlanId} />
                     <input type="hidden" name="dayOfWeek" value={selectedDayIndex} />
-                    <ConfirmSubmitButton message={`Delete the ${session.courseLabel} study session from ${weekDays[selectedDayIndex]}?`} className="grid h-9 w-9 place-items-center rounded-md border border-red-300 text-red-600 transition hover:bg-red-50" aria-label={`Delete ${session.courseLabel} study session`} title="Delete study session">
+                    <ConfirmSubmitButton message={`Delete the ${session.courseLabel} study session from ${weekDays[selectedDayIndex]}?`} className="grid h-9 w-9 place-items-center rounded-xl border border-red-300 text-red-600 transition hover:bg-red-50" aria-label={`Delete ${session.courseLabel} study session`} title="Delete study session">
                       <Trash2 className="h-4 w-4" />
                     </ConfirmSubmitButton>
                   </form>
@@ -95,28 +95,28 @@ export function SavedStudyTimetable({ studyPlanId, sessions, courseOptions, init
                   <input type="hidden" name="studyPlanId" value={studyPlanId} />
                   <label className="grid gap-2 text-sm font-semibold sm:col-span-2">
                     Description
-                    <input name="title" required defaultValue={session.title} className="h-11 rounded-md border border-border bg-background px-3 text-sm font-normal" />
+                    <input name="title" required defaultValue={session.title} className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal" />
                   </label>
                   <label className="grid gap-2 text-sm font-semibold sm:col-span-2">
                     Course
-                    <select name="courseId" defaultValue={session.courseId ?? ""} className="h-11 rounded-md border border-border bg-background px-3 text-sm font-normal">
+                    <select name="courseId" defaultValue={session.courseId ?? ""} className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal">
                       <option value="">General study</option>
                       {courseOptions.map((course) => <option key={course.id} value={course.id}>{course.name}</option>)}
                     </select>
                   </label>
                   <label className="grid gap-2 text-sm font-semibold sm:col-span-2">
                     Day
-                    <select name="dayOfWeek" required defaultValue={session.dayIndex} className="h-11 rounded-md border border-border bg-background px-3 text-sm font-normal">
+                    <select name="dayOfWeek" required defaultValue={session.dayIndex} className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal">
                       {weekDays.map((day, index) => <option key={day} value={index}>{day}</option>)}
                     </select>
                   </label>
-                  <label className="grid gap-2 text-sm font-semibold">Start time<input name="startTime" type="time" required defaultValue={session.startTime} className="h-11 rounded-md border border-border bg-background px-3 text-sm font-normal" /></label>
-                  <label className="grid gap-2 text-sm font-semibold">End time<input name="endTime" type="time" required defaultValue={session.endTime} className="h-11 rounded-md border border-border bg-background px-3 text-sm font-normal" /></label>
-                  <button className="h-11 rounded-md bg-foreground px-4 text-sm font-semibold text-background sm:col-span-2">Save changes</button>
+                  <label className="grid gap-2 text-sm font-semibold">Start time<input name="startTime" type="time" required defaultValue={session.startTime} className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal" /></label>
+                  <label className="grid gap-2 text-sm font-semibold">End time<input name="endTime" type="time" required defaultValue={session.endTime} className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal" /></label>
+                  <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white sm:col-span-2">Save changes</button>
                 </form>
               </details>
             </article>
-          )) : <p className="rounded-md border border-border bg-surface p-4 text-sm text-muted">No study sessions planned for {weekDays[selectedDayIndex]}.</p>}
+          )) : <p className="rounded-xl border border-border bg-surface p-4 text-sm text-muted">No study sessions planned for {weekDays[selectedDayIndex]}.</p>}
         </div>
       </section>
     </div>

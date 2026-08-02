@@ -157,16 +157,16 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
 
   return (
     <AppShell title="Study planner" eyebrow="Planner">
-      <section className="rounded-lg border border-border bg-foreground p-5 text-background">
+      <section className="rounded-2xl border border-border bg-[var(--accent-strong)] p-5 text-white">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-background/70">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-white/70">
               Planning context
             </p>
             <h2 className="mt-3 text-2xl font-semibold">
               {activeSemesterTitle}
             </h2>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-background/70">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-white/70">
               {planner.activeSemester ? `${planner.activeSemester.academicYear} - ` : ""}
               BRAIL is using your active semester courses, saved deadlines, and timetable blocks
               as the base for study planning.
@@ -191,10 +191,10 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                 icon: Clock3,
               },
             ].map((item) => (
-              <div key={item.label} className="rounded-md border border-background/15 bg-background/10 p-4">
-                <item.icon className="h-5 w-5 text-background/75" />
+              <div key={item.label} className="rounded-xl border border-background/15 bg-white/10 p-4">
+                <item.icon className="h-5 w-5 text-white/75" />
                 <p className="mt-5 text-2xl font-semibold">{item.value}</p>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-background/60">
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
                   {item.label}
                 </p>
               </div>
@@ -205,14 +205,14 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
 
       <section className="mt-6 grid gap-6 xl:grid-cols-[0.8fr_1.2fr]">
         <div className="grid gap-6">
-          <form action="/planner" className="rounded-lg border border-border bg-background p-5">
+          <form action="/planner" className="rounded-2xl border border-border bg-white p-5">
             {selectedStudyPlan ? <input type="hidden" name="planId" value={selectedStudyPlan.id} /> : null}
             <h2 className="text-lg font-semibold">Course filter</h2>
             <div className="mt-4 grid gap-3">
               <select
                 name="courseId"
                 defaultValue={selectedCourseId}
-                className="h-11 rounded-md border border-border bg-background px-3 text-sm"
+                className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
               >
                 <option value="">All active semester courses</option>
                 {courseOptions.map((course) => (
@@ -221,20 +221,20 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                   </option>
                 ))}
               </select>
-              <button className="h-11 rounded-md bg-foreground px-4 text-sm font-semibold text-background">
+              <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                 Apply filter
               </button>
             </div>
           </form>
 
-          <form action={createStudyPlan} className="rounded-lg border border-border bg-background p-5">
+          <form action={createStudyPlan} className="rounded-2xl border border-border bg-white p-5">
             <h2 className="text-lg font-semibold">Create study plan</h2>
             <div className="mt-4 grid gap-3">
               <input
                 name="title"
                 required
                 placeholder="e.g. Week 3 revision plan"
-                className="h-11 rounded-md border border-border bg-background px-3 text-sm"
+                className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
               />
               <div className="grid gap-3 sm:grid-cols-2">
                 <label className="grid gap-2 text-sm font-semibold">
@@ -242,7 +242,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                   <input
                     name="startDate"
                     type="date"
-                    className="h-11 rounded-md border border-border bg-background px-3 text-sm font-normal"
+                    className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal"
                   />
                 </label>
                 <label className="grid gap-2 text-sm font-semibold">
@@ -250,11 +250,11 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                   <input
                     name="endDate"
                     type="date"
-                    className="h-11 rounded-md border border-border bg-background px-3 text-sm font-normal"
+                    className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal"
                   />
                 </label>
               </div>
-              <button className="h-11 rounded-md bg-foreground px-4 text-sm font-semibold text-background">
+              <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                 Save plan
               </button>
             </div>
@@ -267,18 +267,18 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
         </div>
 
         <div className="grid gap-6">
-          <section className="rounded-lg border border-border bg-background p-5">
+          <section className="rounded-2xl border border-border bg-white p-5">
             {planner.studyPlans.length > 1 ? (
               <form
                 action="/planner"
-                className="mb-5 grid gap-3 rounded-md border border-border bg-surface p-4 sm:grid-cols-[1fr_auto] sm:items-end"
+                className="mb-5 grid gap-3 rounded-xl border border-border bg-surface p-4 sm:grid-cols-[1fr_auto] sm:items-end"
               >
                 <label className="grid gap-2 text-sm font-semibold">
                   View study plan
                   <select
                     name="planId"
                     defaultValue={selectedStudyPlan?.id}
-                    className="h-11 rounded-md border border-border bg-background px-3 text-sm font-normal"
+                    className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal"
                   >
                     {planner.studyPlans.map((plan) => (
                       <option key={plan.id} value={plan.id}>
@@ -290,7 +290,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                 {selectedCourseId ? (
                   <input type="hidden" name="courseId" value={selectedCourseId} />
                 ) : null}
-                <button className="h-11 rounded-md bg-foreground px-4 text-sm font-semibold text-background">
+                <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                   View plan
                 </button>
               </form>
@@ -308,7 +308,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                 </p>
               </div>
               {selectedStudyPlan ? (
-                <span className="rounded-md border border-border px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+                <span className="rounded-xl border border-border px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
                   {selectedStudyPlan.generatedByAi ? "generated" : "manual"}
                 </span>
               ) : null}
@@ -318,7 +318,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
               <SavedStudyTimetable studyPlanId={selectedStudyPlan.id} sessions={savedStudySessions} courseOptions={courseOptions} initialDayIndex={selectedDayIndex} />
             ) : (
               <div className="mt-5">
-                <p className="rounded-md border border-border bg-surface p-4 text-sm text-muted">
+                <p className="rounded-xl border border-border bg-surface p-4 text-sm text-muted">
                   No generated timetable yet. Generate from enrolled courses or upload a timetable image first.
                 </p>
               </div>
@@ -332,10 +332,10 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                   );
 
                   return (
-                    <article key={day} className="rounded-md border border-border bg-surface p-4">
+                    <article key={day} className="rounded-xl border border-border bg-surface p-4">
                       <div className="flex items-center justify-between gap-3">
                         <h3 className="font-semibold">{day}</h3>
-                        <span className="rounded-md border border-border px-2 py-1 text-xs font-semibold text-muted">
+                        <span className="rounded-xl border border-border px-2 py-1 text-xs font-semibold text-muted">
                           {dayItems.length} session{dayItems.length === 1 ? "" : "s"}
                         </span>
                       </div>
@@ -349,7 +349,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                             return (
                               <div
                                 key={item.id}
-                                className="rounded-md border-l-4 border-accent bg-background p-4"
+                                className="rounded-xl border-l-4 border-accent bg-white p-4"
                               >
                                 <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                                   <div>
@@ -373,14 +373,14 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                                     <select
                                       name="status"
                                       defaultValue={item.status}
-                                      className="h-10 rounded-md border border-border bg-background px-2 text-sm"
+                                      className="h-10 rounded-xl border border-border bg-white px-2 text-sm"
                                     >
                                       <option value="TODO">Todo</option>
                                       <option value="IN_PROGRESS">In progress</option>
                                       <option value="DONE">Done</option>
                                       <option value="ARCHIVED">Archive</option>
                                     </select>
-                                    <button className="h-10 rounded-md border border-border px-3 text-sm font-semibold">
+                                    <button className="h-10 rounded-xl border border-border px-3 text-sm font-semibold">
                                       Update
                                     </button>
                                   </form>
@@ -390,7 +390,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                           })}
                         </div>
                       ) : (
-                        <p className="mt-4 rounded-md border border-border bg-background p-3 text-sm text-muted">
+                        <p className="mt-4 rounded-xl border border-border bg-white p-3 text-sm text-muted">
                           No planned study sessions for {day}.
                         </p>
                       )}
@@ -398,14 +398,14 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                   );
                 })
               ) : (
-                <p className="rounded-md border border-border bg-surface p-4 text-sm text-muted">
+                <p className="rounded-xl border border-border bg-surface p-4 text-sm text-muted">
                   No generated timetable yet. Generate from enrolled courses or upload a timetable image first.
                 </p>
               )}
             </div>
 
             {unscheduledPlanItems.length ? (
-              <div className="mt-5 rounded-md border border-border bg-surface p-4">
+              <div className="mt-5 rounded-xl border border-border bg-surface p-4">
                 <h3 className="font-semibold">Unscheduled sessions</h3>
                 <div className="mt-3 grid gap-2">
                   {unscheduledPlanItems.map((item) => (
@@ -419,7 +419,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
             ) : null}
 
             {selectedStudyPlan ? (
-              <details id="manual-study-session" className="mt-5 rounded-md border border-border bg-surface p-4">
+              <details id="manual-study-session" className="mt-5 rounded-xl border border-border bg-surface p-4">
                 <summary className="flex cursor-pointer items-center gap-2 font-semibold">
                   <Plus className="h-4 w-4" />
                   Add manual study session
@@ -431,7 +431,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                     required
                     defaultValue="Revise notes"
                     aria-label="Description"
-                    className="h-11 rounded-md border border-border bg-background px-3 text-sm"
+                    className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
                   />
                   <div className="grid gap-3 sm:grid-cols-2">
                     <label className="grid gap-2 text-sm font-semibold sm:col-span-2">
@@ -439,7 +439,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                       <select
                         name="courseId"
                         defaultValue={selectedCourseId}
-                        className="h-11 rounded-md border border-border bg-background px-3 text-sm font-normal"
+                        className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal"
                       >
                         <option value="">General study</option>
                         {courseOptions.map((course) => (
@@ -455,7 +455,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                         name="dayOfWeek"
                         required
                         defaultValue={selectedDayIndex ?? 0}
-                        className="h-11 rounded-md border border-border bg-background px-3 text-sm font-normal"
+                        className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal"
                       >
                         {weekDays.map((day, index) => (
                           <option key={day} value={index}>
@@ -471,7 +471,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                         type="time"
                         required
                         defaultValue="18:00"
-                        className="h-11 rounded-md border border-border bg-background px-3 text-sm font-normal"
+                        className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal"
                       />
                     </label>
                     <label className="grid gap-2 text-sm font-semibold">
@@ -481,11 +481,11 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                         type="time"
                         required
                         defaultValue="19:00"
-                        className="h-11 rounded-md border border-border bg-background px-3 text-sm font-normal"
+                        className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal"
                       />
                     </label>
                   </div>
-                  <button className="h-11 rounded-md bg-foreground px-4 text-sm font-semibold text-background">
+                  <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                     Add session
                   </button>
                 </form>
@@ -496,12 +496,12 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
           <UnavailableTimesGrid blocks={unavailableBlocks} />
 
           <section>
-            <div className="rounded-lg border border-border bg-background p-5">
+            <div className="rounded-2xl border border-border bg-white p-5">
               <h2 className="text-lg font-semibold">Open tasks</h2>
               <div className="mt-4 grid gap-3">
                 {filteredTasks.length ? (
                   filteredTasks.slice(0, 8).map((task) => (
-                    <article key={task.id} className="rounded-md border border-border bg-surface p-4">
+                    <article key={task.id} className="rounded-xl border border-border bg-surface p-4">
                       <p className="font-semibold">{task.title}</p>
                       <p className="mt-1 text-sm text-muted">
                         {task.course ? `${task.course.name} - ` : ""}
@@ -510,7 +510,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                     </article>
                   ))
                 ) : (
-                  <p className="rounded-md border border-border bg-surface p-4 text-sm text-muted">
+                  <p className="rounded-xl border border-border bg-surface p-4 text-sm text-muted">
                     No open tasks match this view.
                   </p>
                 )}
