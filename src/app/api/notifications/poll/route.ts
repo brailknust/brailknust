@@ -15,8 +15,10 @@ export async function GET() {
     where: {
       userId: appUser.id,
       isRead: false,
-      type: "STUDY_PLAN",
-      sourceKey: { startsWith: "study-session-close:" },
+      OR: [
+        { type: "STUDY_PLAN", sourceKey: { startsWith: "study-session-close:" } },
+        { type: "DEADLINE", sourceKey: { startsWith: "task-reminder:" } },
+      ],
       createdAt: { gte: new Date(Date.now() - 60 * 60 * 1000) },
     },
     orderBy: { createdAt: "desc" },
@@ -28,6 +30,7 @@ export async function GET() {
     notifications: notifications.map((notification) => ({
       ...notification,
       openUrl: `/notifications/${notification.id}/open`,
+      actionLabel: notification.title === "Task reminder" ? "Open task" : "Open session",
     })),
   });
 }

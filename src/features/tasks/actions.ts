@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 
 import { requireAppUser } from "@/features/auth/queries";
-import { createTaskSchema, taskStatusSchema } from "@/features/tasks/schemas";
+import { createTaskSchema, deleteTaskSchema, taskStatusSchema } from "@/features/tasks/schemas";
 import { prisma } from "@/server/db";
 
 function optionalDateTime(value?: string) {
@@ -22,6 +22,7 @@ export async function createTask(formData: FormData) {
     description: formData.get("description") || undefined,
     courseId: formData.get("courseId") || undefined,
     dueAt: formData.get("dueAt") || undefined,
+    reminderAt: formData.get("reminderAt") || undefined,
     priority: formData.get("priority") || "MEDIUM",
   });
 
@@ -48,6 +49,7 @@ export async function createTask(formData: FormData) {
       title: parsed.title,
       description: parsed.description,
       dueAt: optionalDateTime(parsed.dueAt),
+      reminderAt: optionalDateTime(parsed.reminderAt),
       priority: parsed.priority,
     },
   });
@@ -84,4 +86,36 @@ export async function updateTaskStatus(formData: FormData) {
   revalidatePath("/dashboard");
   revalidatePath("/planner");
   revalidatePath("/performance");
+}
+
+export async function deleteTask(formData: FormData) {
+  const { appUser } = await requireAppUser();
+
+  if (!appUser.activeSemesterId) {
+    throw new Error("Set an active semester before deleting tasks.");
+  }
+
+  const { id } = deleteTaskSchema.parse({ id: formData.get("id") });
+  const task = await prisma.task.findFirst({
+    where: {
+      id,
+      userId: appUser.id,
+      semesterId: appUser.activeSemesterId,
+    },
+    select: { courseId: true },
+  });
+
+  if (!task) return;
+
+  await prisma.task.delete({ where: { id } });
+
+  revalidatePath("/tasks");
+  revalidatePath("/dashboard");
+  revalidatePath("/planner");
+  revalidatePath("/performance");
+  revalidatePath("/academics");
+  revalidatePath(`/academics/semesters/${appUser.activeSemesterId}`);
+  if (task.courseId) {
+    revalidatePath(`/academics/semesters/${appUser.activeSemesterId}/courses/${task.courseId}`);
+  }
 }

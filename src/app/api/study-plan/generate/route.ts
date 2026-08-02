@@ -38,6 +38,7 @@ type CourseSource = {
   id?: string;
   courseCode: string;
   courseName: string;
+  creditHours: number;
 };
 
 type GeneratedSession = {
@@ -81,10 +82,15 @@ function isValidRow(row: TimetableRow) {
   );
 }
 
-function sessionsPerCourse(intensity: PlannerPreferences["intensity"]) {
+function baseSessionsPerCourse(intensity: PlannerPreferences["intensity"]) {
   if (intensity === "light") return 1;
   if (intensity === "intense") return 3;
   return 2;
+}
+
+function sessionsForCourse(creditHours: number, intensity: PlannerPreferences["intensity"]) {
+  const normalizedCredits = Math.max(1, creditHours);
+  return Math.max(1, Math.ceil(baseSessionsPerCourse(intensity) * (normalizedCredits / 2)));
 }
 
 function getWeekBounds() {
@@ -403,6 +409,7 @@ export async function POST(request: Request) {
             id: enrollment?.courseId,
             courseCode: row.courseCode,
             courseName: row.courseName,
+            creditHours: enrollment?.course.creditHours ?? 2,
           },
         ];
       }),
@@ -412,8 +419,11 @@ export async function POST(request: Request) {
     id: enrollment.courseId,
     courseCode: enrollment.course.code,
     courseName: enrollment.course.name,
+    creditHours: enrollment.course.creditHours ?? 2,
   }));
-  const courses = rowCourses.length ? rowCourses : enrolledCourses;
+  const courses = [...(rowCourses.length ? rowCourses : enrolledCourses)].sort(
+    (a, b) => b.creditHours - a.creditHours || a.courseCode.localeCompare(b.courseCode),
+  );
 
   if (courses.length === 0) {
     return NextResponse.json(
@@ -459,7 +469,6 @@ export async function POST(request: Request) {
   const sessionLength = preferences.sessionLength;
   const startWindow = toMinutes(preferences.preferredStart);
   const endWindow = toMinutes(preferences.preferredEnd);
-  const targetCount = sessionsPerCourse(preferences.intensity);
 
   function plannedBlocksForDay(day: string) {
     return planned
@@ -486,6 +495,8 @@ export async function POST(request: Request) {
   }
 
   courses.forEach((course, courseIndex) => {
+    const targetCount = sessionsForCourse(course.creditHours, preferences.intensity);
+
     for (let count = 0; count < targetCount; count += 1) {
       let placed = false;
       const targetDayIndex = (courseIndex + count * Math.ceil(courses.length / targetCount)) % weekDays.length;
@@ -516,8 +527,8 @@ export async function POST(request: Request) {
               durationMinutes: sessionLength,
               priority: count === 0 ? "high" : count === 1 ? "medium" : "low",
               reason: rows.length
-                ? `Scheduled in a free ${sessionLength}-minute block outside your saved classes and unavailable times.`
-                : `Scheduled around your saved unavailable times and spread across your preferred study week.`,
+                ? `Prioritized as a ${course.creditHours}-credit course and scheduled in a free ${sessionLength}-minute block outside your saved classes and unavailable times.`
+                : `Prioritized as a ${course.creditHours}-credit course, scheduled around your saved unavailable times, and spread across your preferred study week.`,
             });
             placed = true;
             break;

@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local OCR tools and their Python virtual environment.
+    "tmp/**",
   ]),
 ]);
 

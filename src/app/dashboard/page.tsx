@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Bell, BookOpen, CalendarDays, CheckCircle2, GraduationCap, ListChecks } from "lucide-react";
+import { Bell, BookOpen, GraduationCap, ListChecks } from "lucide-react";
 import { redirect, unstable_rethrow } from "next/navigation";
 
 import { AppShell } from "@/components/app-shell";
@@ -70,8 +70,8 @@ export default async function DashboardPage() {
     return <DashboardUnavailable title="Database connection unavailable" message="BRAIL could not load your academic data from Supabase for this request." />;
   }
 
-  const openTasks = taskData.tasks.filter((task) => task.status !== "DONE" && task.status !== "ARCHIVED");
-  const upcomingTasks = openTasks.filter((task) => task.dueAt).sort((a, b) => Number(a.dueAt) - Number(b.dueAt)).slice(0, 5);
+  const openTasks = taskData.tasks.filter((task) => task.status === "TODO");
+  const upcomingTasks = openTasks.filter((task) => task.dueAt).slice(0, 3);
 
   return (
     <AppShell title={`Welcome, ${appUser.fullName}`} eyebrow="Dashboard">
@@ -118,14 +118,6 @@ export default async function DashboardPage() {
         </div>
       </section>
 
-      <section className="mt-6 grid gap-4 lg:grid-cols-2">
-        <Link href="/academics" className="rounded-lg border border-border bg-background p-5 transition hover:border-foreground">
-          <CheckCircle2 className="h-5 w-5 text-accent" /><h2 className="mt-6 text-lg font-semibold">Academic setup</h2><p className="mt-2 text-sm leading-6 text-muted">Manage semesters, courses, enrollments, and timetable blocks.</p>
-        </Link>
-        <Link href="/planner" className="rounded-lg border border-border bg-background p-5 transition hover:border-foreground">
-          <CalendarDays className="h-5 w-5 text-accent" /><h2 className="mt-6 text-lg font-semibold">Study planner</h2><p className="mt-2 text-sm leading-6 text-muted">Build and manage your active semester study schedule.</p>
-        </Link>
-      </section>
     </AppShell>
   );
 }

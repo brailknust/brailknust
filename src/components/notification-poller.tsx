@@ -8,11 +8,11 @@ import { useEffect, useState } from "react";
 const browserAlertsKey = "brail-browser-study-alerts";
 const seenAlertsKey = "brail-seen-study-alerts";
 
-type StudyAlert = { id: string; title: string; message: string; openUrl: string };
+type AppAlert = { id: string; title: string; message: string; openUrl: string; actionLabel: string };
 
 export function NotificationPoller() {
   const router = useRouter();
-  const [alert, setAlert] = useState<StudyAlert | null>(null);
+  const [alert, setAlert] = useState<AppAlert | null>(null);
 
   useEffect(() => {
     let disposed = false;
@@ -22,7 +22,7 @@ export function NotificationPoller() {
         const response = await fetch("/api/notifications/poll", { cache: "no-store" });
         if (!response.ok || disposed) return;
 
-        const data = (await response.json()) as { notifications?: StudyAlert[] };
+        const data = (await response.json()) as { notifications?: AppAlert[] };
         const seen = new Set<string>(JSON.parse(sessionStorage.getItem(seenAlertsKey) ?? "[]"));
         const nextAlert = data.notifications?.find((notification) => !seen.has(notification.id));
         if (!nextAlert) return;
@@ -68,7 +68,7 @@ export function NotificationPoller() {
         <div className="min-w-0 flex-1">
           <p className="font-semibold">{alert.title}</p>
           <p className="mt-1 text-sm leading-5 text-muted">{alert.message}</p>
-          <Link href={alert.openUrl} className="mt-3 inline-flex h-9 items-center rounded-md bg-foreground px-3 text-sm font-semibold text-background">Open session</Link>
+          <Link href={alert.openUrl} className="mt-3 inline-flex h-9 items-center rounded-md bg-foreground px-3 text-sm font-semibold text-background">{alert.actionLabel}</Link>
         </div>
         <button type="button" onClick={() => setAlert(null)} className="grid h-8 w-8 shrink-0 place-items-center rounded-md text-muted hover:bg-surface hover:text-foreground" aria-label="Dismiss reminder" title="Dismiss reminder"><X className="h-4 w-4" /></button>
       </div>

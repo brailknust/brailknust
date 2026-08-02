@@ -1,6 +1,7 @@
 import "server-only";
 
 import { prisma } from "@/server/db";
+import { expireOverdueTasks, sortTasksByImportanceAndDueDate } from "@/features/tasks/status";
 
 export async function getTasksPageData(userId: string) {
   const user = await prisma.user.findUnique({
@@ -9,12 +10,14 @@ export async function getTasksPageData(userId: string) {
   });
   const semesterId = user?.activeSemesterId;
 
+  if (semesterId) await expireOverdueTasks(userId, semesterId);
+
   const [tasks, courses] = semesterId
     ? await Promise.all([
         prisma.task.findMany({
           where: { userId, semesterId },
           include: { course: true },
-          orderBy: [{ status: "asc" }, { dueAt: "asc" }, { createdAt: "desc" }],
+          orderBy: { createdAt: "desc" },
         }),
         prisma.course.findMany({
           where: { enrollments: { some: { userId, semesterId } } },
@@ -25,7 +28,7 @@ export async function getTasksPageData(userId: string) {
 
   return {
     activeSemester: user?.activeSemester ?? null,
-    tasks,
+    tasks: sortTasksByImportanceAndDueDate(tasks),
     courses,
   };
 }

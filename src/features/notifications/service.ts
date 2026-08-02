@@ -72,10 +72,19 @@ export async function syncNotificationsForUser(userId: string, force = false) {
           where: {
             userId,
             semesterId,
-            status: { in: ["TODO", "IN_PROGRESS"] },
-            dueAt: { gte: now, lte: deadlineEnd },
+            status: "TODO",
+            OR: [
+              {
+                reminderAt: { lte: now },
+                OR: [{ dueAt: null }, { dueAt: { gte: now } }],
+              },
+              {
+                reminderAt: null,
+                dueAt: { gte: now, lte: deadlineEnd },
+              },
+            ],
           },
-          select: { id: true, title: true, dueAt: true, course: { select: { name: true } } },
+          select: { id: true, title: true, dueAt: true, reminderAt: true, course: { select: { name: true } } },
         })
       : [],
     preference.studySessions
@@ -128,15 +137,17 @@ export async function syncNotificationsForUser(userId: string, force = false) {
   });
 
   const notifications = [
-    ...tasks.flatMap((task) => task.dueAt ? [{
+    ...tasks.map((task) => ({
       userId,
       semesterId,
-      title: "Task deadline approaching",
-      message: `${task.course?.name ? `${task.course.name}: ` : ""}${task.title} is due soon.`,
+      title: task.reminderAt ? "Task reminder" : "Task deadline approaching",
+      message: `${task.course?.name ? `${task.course.name}: ` : ""}${task.title}${task.dueAt ? " is due soon." : "."}`,
       type: "DEADLINE" as const,
       actionUrl: "/tasks",
-      sourceKey: `task-deadline:${task.id}:${task.dueAt.toISOString()}`,
-    }] : []),
+      sourceKey: task.reminderAt
+        ? `task-reminder:${task.id}:${task.reminderAt.toISOString()}`
+        : `task-deadline:${task.id}:${task.dueAt!.toISOString()}`,
+    })),
     ...upcomingStudyItems.map(({ item, occurrence }) => ({
       userId,
       semesterId,

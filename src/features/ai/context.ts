@@ -35,7 +35,7 @@ export async function buildAcademicContext(
         userId,
         semesterId,
         courseId,
-        status: { in: ["TODO", "IN_PROGRESS"] },
+        status: "TODO",
       },
       select: { title: true, description: true, dueAt: true, priority: true, status: true },
       orderBy: [{ dueAt: "asc" }, { priority: "desc" }],

@@ -5,7 +5,12 @@ export const createTaskSchema = z.object({
   description: z.string().trim().optional(),
   courseId: z.string().uuid().optional(),
   dueAt: z.string().optional(),
+  reminderAt: z.string().optional(),
   priority: z.enum(["LOW", "MEDIUM", "HIGH", "URGENT"]).default("MEDIUM"),
 });
 
-export const taskStatusSchema = z.enum(["TODO", "IN_PROGRESS", "DONE", "ARCHIVED"]);
+export const taskStatusSchema = z.enum(["TODO", "DONE"]);
+
+export const deleteTaskSchema = z.object({
+  id: z.string().uuid(),
+});

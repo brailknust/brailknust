@@ -33,6 +33,7 @@ enum TaskStatus {
   TODO
   IN_PROGRESS
   DONE
+  EXPIRED
   ARCHIVED
 }
 
@@ -345,6 +346,7 @@ model Task {
   title       String
   description String?
   dueAt       DateTime?    @map("due_at")
+  reminderAt  DateTime?    @map("reminder_at")
   priority    TaskPriority @default(MEDIUM)
   status      TaskStatus   @default(TODO)
   createdAt   DateTime     @default(now()) @map("created_at")
@@ -354,6 +356,7 @@ model Task {
   user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([dueAt])
+  @@index([reminderAt])
   @@index([userId, semesterId, status])
   @@index([semesterId])
   @@map("tasks")

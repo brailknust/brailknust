@@ -1,6 +1,7 @@
 import "server-only";
 
 import { prisma } from "@/server/db";
+import { expireOverdueTasks } from "@/features/tasks/status";
 
 export async function getPlannerData(userId: string) {
   const user = await prisma.user.findUnique({
@@ -8,6 +9,8 @@ export async function getPlannerData(userId: string) {
     include: { activeSemester: true },
   });
   const semesterId = user?.activeSemesterId;
+
+  if (semesterId) await expireOverdueTasks(userId, semesterId);
 
   const activeEnrollments = semesterId
     ? await prisma.enrollment.findMany({
@@ -27,7 +30,7 @@ export async function getPlannerData(userId: string) {
           where: {
             userId,
             semesterId,
-            status: { notIn: ["DONE", "ARCHIVED"] },
+            status: "TODO",
           },
           include: { course: true },
           orderBy: [{ dueAt: "asc" }, { priority: "desc" }, { createdAt: "desc" }],

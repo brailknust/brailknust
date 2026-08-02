@@ -1,6 +1,7 @@
 import "server-only";
 
 import { prisma } from "@/server/db";
+import { expireOverdueTasks } from "@/features/tasks/status";
 
 export async function getAcademicSetup(userId: string) {
   const [user, semesters, courses, enrollments, timetable] = await Promise.all([
@@ -45,6 +46,8 @@ export async function getAcademicSetup(userId: string) {
 }
 
 export async function getSemesterCards(userId: string) {
+  await expireOverdueTasks(userId);
+
   const user = await prisma.user.findUnique({
     where: { id: userId },
     select: { activeSemesterId: true },
@@ -63,7 +66,7 @@ export async function getSemesterCards(userId: string) {
         where: {
           userId,
           semesterId: { in: semesterIds },
-          status: { notIn: ["DONE", "ARCHIVED"] },
+          status: "TODO",
         },
         select: { semesterId: true },
       })
@@ -78,6 +81,8 @@ export async function getSemesterCards(userId: string) {
 }
 
 export async function getSemesterDetail(userId: string, semesterId: string) {
+  await expireOverdueTasks(userId, semesterId);
+
   const [user, semester, courses, profile, enrollments, timetable] = await Promise.all([
     prisma.user.findUnique({ where: { id: userId }, select: { activeSemesterId: true } }),
     prisma.semester.findFirst({
@@ -128,6 +133,8 @@ export async function getSemesterDetail(userId: string, semesterId: string) {
 }
 
 export async function getCourseAnalytics(userId: string, semesterId: string, courseId: string) {
+  await expireOverdueTasks(userId, semesterId);
+
   const [enrollment, user] = await Promise.all([
     prisma.enrollment.findFirst({
       where: { userId, semesterId, courseId },
@@ -193,7 +200,7 @@ export async function getCourseAnalytics(userId: string, semesterId: string, cou
     materials,
     topics,
     completedTaskCount: tasks.filter((task) => task.status === "DONE").length,
-    openTaskCount: tasks.filter((task) => task.status !== "DONE" && task.status !== "ARCHIVED").length,
+    openTaskCount: tasks.filter((task) => task.status === "TODO").length,
     completedStudyItemCount: studyItems.filter((item) => item.status === "DONE").length,
     isActiveSemester: user?.activeSemesterId === semesterId,
   };
