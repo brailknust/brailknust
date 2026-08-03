@@ -202,7 +202,10 @@ export async function POST(request: Request) {
       material: {
         status: "PUBLISHED",
         type: { in: ["NOTE", "SLIDE", "OTHER"] },
-        topicLinks: { some: { topicId: platformTopic.id } },
+        OR: [
+          { topicId: platformTopic.id },
+          { topicLinks: { some: { topicId: platformTopic.id } } },
+        ],
       },
     },
     include: { material: { select: { title: true, type: true } } },
@@ -214,7 +217,23 @@ export async function POST(request: Request) {
       where: {
         material: {
           status: "PUBLISHED",
-          topicLinks: { some: { topicId: platformTopic.id } },
+          OR: [
+            { topicId: platformTopic.id },
+            { topicLinks: { some: { topicId: platformTopic.id } } },
+          ],
+        },
+      },
+      include: { material: { select: { title: true, type: true } } },
+      orderBy: [{ materialId: "asc" }, { chunkIndex: "asc" }],
+      take: 32,
+    });
+  }
+  if (platformTopic && !platformChunks.length) {
+    platformChunks = await prisma.platformMaterialChunk.findMany({
+      where: {
+        material: {
+          courseId: enrollment.courseId,
+          status: "PUBLISHED",
         },
       },
       include: { material: { select: { title: true, type: true } } },

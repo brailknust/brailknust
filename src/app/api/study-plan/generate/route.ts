@@ -82,15 +82,16 @@ function isValidRow(row: TimetableRow) {
   );
 }
 
-function baseSessionsPerCourse(intensity: PlannerPreferences["intensity"]) {
-  if (intensity === "light") return 1;
-  if (intensity === "intense") return 3;
-  return 2;
-}
-
 function sessionsForCourse(creditHours: number, intensity: PlannerPreferences["intensity"]) {
-  const normalizedCredits = Math.max(1, creditHours);
-  return Math.max(1, Math.ceil(baseSessionsPerCourse(intensity) * (normalizedCredits / 2)));
+  const normalizedCredits = Math.min(4, Math.max(1, Math.round(creditHours)));
+  const sessionsByCredits = {
+    1: { light: 1, balanced: 1, intense: 1 },
+    2: { light: 1, balanced: 1, intense: 2 },
+    3: { light: 2, balanced: 2, intense: 2 },
+    4: { light: 2, balanced: 3, intense: 3 },
+  } as const;
+
+  return sessionsByCredits[normalizedCredits as keyof typeof sessionsByCredits][intensity];
 }
 
 function getWeekBounds() {
@@ -494,10 +495,18 @@ export async function POST(request: Request) {
       .map((item) => item.day);
   }
 
-  courses.forEach((course, courseIndex) => {
-    const targetCount = sessionsForCourse(course.creditHours, preferences.intensity);
+  const courseTargets = courses.map((course) => ({
+    course,
+    targetCount: sessionsForCourse(course.creditHours, preferences.intensity),
+  }));
+  const maximumTargetCount = Math.max(...courseTargets.map((item) => item.targetCount));
 
-    for (let count = 0; count < targetCount; count += 1) {
+  // Schedule in coverage rounds so every course gets one session before
+  // higher-credit courses receive their additional weighted sessions.
+  for (let count = 0; count < maximumTargetCount; count += 1) {
+    courseTargets.forEach(({ course, targetCount }, courseIndex) => {
+      if (count >= targetCount) return;
+
       let placed = false;
       const targetDayIndex = (courseIndex + count * Math.ceil(courses.length / targetCount)) % weekDays.length;
 
@@ -535,8 +544,8 @@ export async function POST(request: Request) {
           }
         }
       }
-    }
-  });
+    });
+  }
 
   const sessions = planned.sort(
     (a, b) =>

@@ -10,7 +10,7 @@ export async function getUnreadNotificationCount(userId: string) {
 }
 
 export async function getNotificationCenterData(userId: string, unreadOnly = false) {
-  await syncNotificationsForUser(userId, true);
+  await syncNotificationsForUser(userId);
   const [preferences, notifications, unreadCount] = await Promise.all([
     prisma.notificationPreference.findUnique({ where: { userId } }),
     prisma.notification.findMany({

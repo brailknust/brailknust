@@ -1,19 +1,14 @@
 import "server-only";
 
 import { prisma } from "@/server/db";
-import { expireOverdueTasks, sortTasksByImportanceAndDueDate } from "@/features/tasks/status";
+import { sortTasksByImportanceAndDueDate, withEffectiveTaskStatus } from "@/features/tasks/status";
 
-export async function getTasksPageData(userId: string) {
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
-    select: { activeSemesterId: true, activeSemester: true },
-  });
-  const semesterId = user?.activeSemesterId;
-
-  if (semesterId) await expireOverdueTasks(userId, semesterId);
-
-  const [tasks, courses] = semesterId
+export async function getTasksPageData(userId: string, semesterId: string | null) {
+  const [activeSemester, tasks, courses] = semesterId
     ? await Promise.all([
+        prisma.semester.findFirst({
+          where: { id: semesterId, ownerId: userId },
+        }),
         prisma.task.findMany({
           where: { userId, semesterId },
           include: { course: true },
@@ -24,11 +19,25 @@ export async function getTasksPageData(userId: string) {
           orderBy: { code: "asc" },
         }),
       ])
-    : [[], []];
+    : [null, [], []];
 
   return {
-    activeSemester: user?.activeSemester ?? null,
-    tasks: sortTasksByImportanceAndDueDate(tasks),
+    activeSemester,
+    tasks: sortTasksByImportanceAndDueDate(tasks.map((task) => withEffectiveTaskStatus(task))),
     courses,
   };
+}
+
+export async function getDashboardTasks(userId: string, semesterId: string | null) {
+  if (!semesterId) return [];
+
+  const tasks = await prisma.task.findMany({
+    where: { userId, semesterId },
+    include: { course: { select: { name: true } } },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return sortTasksByImportanceAndDueDate(
+    tasks.map((task) => withEffectiveTaskStatus(task)),
+  );
 }

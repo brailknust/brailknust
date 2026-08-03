@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Bell, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -11,7 +10,6 @@ const seenAlertsKey = "brail-seen-study-alerts";
 type AppAlert = { id: string; title: string; message: string; openUrl: string; actionLabel: string };
 
 export function NotificationPoller() {
-  const router = useRouter();
   const [alert, setAlert] = useState<AppAlert | null>(null);
 
   useEffect(() => {
@@ -30,7 +28,6 @@ export function NotificationPoller() {
         seen.add(nextAlert.id);
         sessionStorage.setItem(seenAlertsKey, JSON.stringify([...seen].slice(-50)));
         setAlert(nextAlert);
-        router.refresh();
 
         if (localStorage.getItem(browserAlertsKey) === "enabled" && "Notification" in window && Notification.permission === "granted") {
           const notification = new Notification(nextAlert.title, { body: nextAlert.message, tag: nextAlert.id });
@@ -57,7 +54,7 @@ export function NotificationPoller() {
       window.clearInterval(interval);
       document.removeEventListener("visibilitychange", handleVisibility);
     };
-  }, [router]);
+  }, []);
 
   if (!alert) return null;
 

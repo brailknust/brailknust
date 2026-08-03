@@ -31,7 +31,11 @@ function dateLabel(value: Date) {
 export default async function AiChatPage({ searchParams }: AiChatPageProps) {
   const { appUser } = await requireAppUser();
   const params = await searchParams;
-  const data = await getAiChatPageData(appUser.id, params.conversation);
+  const data = await getAiChatPageData(
+    appUser.id,
+    appUser.activeSemesterId,
+    params.conversation,
+  );
 
   if (!data.activeSemester) {
     return (

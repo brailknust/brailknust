@@ -1,7 +1,7 @@
 import "server-only";
 
 import { prisma } from "@/server/db";
-import { expireOverdueTasks } from "@/features/tasks/status";
+import { withEffectiveTaskStatus } from "@/features/tasks/status";
 
 export async function getAcademicSetup(userId: string) {
   const [user, semesters, courses, enrollments, timetable] = await Promise.all([
@@ -45,10 +45,17 @@ export async function getAcademicSetup(userId: string) {
   };
 }
 
-export async function getSemesterCards(userId: string) {
-  await expireOverdueTasks(userId);
+export async function getActiveSemesterSummary(userId: string, activeSemesterId: string | null) {
+  if (!activeSemesterId) return null;
 
-  const user = await prisma.user.findUnique({
+  return prisma.semester.findFirst({
+    where: { id: activeSemesterId, ownerId: userId },
+    select: { id: true, name: true, academicYear: true, level: true, term: true },
+  });
+}
+
+export async function getSemesterCards(userId: string) {
+  let user = await prisma.user.findUnique({
     where: { id: userId },
     select: { activeSemesterId: true },
   });
@@ -61,12 +68,25 @@ export async function getSemesterCards(userId: string) {
     orderBy: [{ academicYear: "desc" }, { name: "asc" }],
   });
   const semesterIds = semesters.map((semester) => semester.id);
+
+  if (semesters.length === 1 && user?.activeSemesterId !== semesters[0].id) {
+    user = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        activeSemesterId: semesters[0].id,
+        cwa: semesters[0].cwa,
+        level: semesters[0].level,
+      },
+      select: { activeSemesterId: true },
+    });
+  }
   const tasks = semesterIds.length
     ? await prisma.task.findMany({
         where: {
           userId,
           semesterId: { in: semesterIds },
           status: "TODO",
+          OR: [{ dueAt: null }, { dueAt: { gte: new Date() } }],
         },
         select: { semesterId: true },
       })
@@ -77,12 +97,11 @@ export async function getSemesterCards(userId: string) {
     profile: semester.profiles[0] ?? null,
     isActiveForUser: user?.activeSemesterId === semester.id,
     openTaskCount: tasks.filter((task) => task.semesterId === semester.id).length,
-  }));
+  })).sort((left, right) =>
+    Number(right.isActiveForUser) - Number(left.isActiveForUser));
 }
 
 export async function getSemesterDetail(userId: string, semesterId: string) {
-  await expireOverdueTasks(userId, semesterId);
-
   const [user, semester, courses, profile, enrollments, timetable] = await Promise.all([
     prisma.user.findUnique({ where: { id: userId }, select: { activeSemesterId: true } }),
     prisma.semester.findFirst({
@@ -125,7 +144,7 @@ export async function getSemesterDetail(userId: string, semesterId: string) {
     profile,
     courses,
     enrollments,
-    tasks,
+    tasks: tasks.map((task) => withEffectiveTaskStatus(task)),
     studyItems,
     timetable,
     isActiveForUser: user?.activeSemesterId === semesterId,
@@ -133,8 +152,6 @@ export async function getSemesterDetail(userId: string, semesterId: string) {
 }
 
 export async function getCourseAnalytics(userId: string, semesterId: string, courseId: string) {
-  await expireOverdueTasks(userId, semesterId);
-
   const [enrollment, user] = await Promise.all([
     prisma.enrollment.findFirst({
       where: { userId, semesterId, courseId },
@@ -192,7 +209,7 @@ export async function getCourseAnalytics(userId: string, semesterId: string, cou
 
   return {
     enrollment,
-    tasks,
+    tasks: tasks.map((task) => withEffectiveTaskStatus(task)),
     studyItems,
     weakAreas,
     timetable,
@@ -200,7 +217,9 @@ export async function getCourseAnalytics(userId: string, semesterId: string, cou
     materials,
     topics,
     completedTaskCount: tasks.filter((task) => task.status === "DONE").length,
-    openTaskCount: tasks.filter((task) => task.status === "TODO").length,
+    openTaskCount: tasks.filter(
+      (task) => task.status === "TODO" && (!task.dueAt || task.dueAt >= new Date()),
+    ).length,
     completedStudyItemCount: studyItems.filter((item) => item.status === "DONE").length,
     isActiveSemester: user?.activeSemesterId === semesterId,
   };

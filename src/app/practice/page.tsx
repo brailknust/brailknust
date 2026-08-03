@@ -28,8 +28,18 @@ export default async function PracticePage() {
             name: true,
             platformTopics: {
               where: { isArchived: false },
-              include: { _count: { select: { chunks: true } } },
+              include: {
+                _count: { select: { chunks: true } },
+                materialLinks: {
+                  where: { material: { status: "PUBLISHED" } },
+                  select: { material: { select: { _count: { select: { chunks: true } } } } },
+                },
+              },
               orderBy: [{ sequence: "asc" }, { title: "asc" }],
+            },
+            platformMaterials: {
+              where: { status: "PUBLISHED" },
+              select: { _count: { select: { chunks: true } } },
             },
           },
         },
@@ -79,7 +89,13 @@ export default async function PracticePage() {
               ...enrollment.course.platformTopics.map((topic) => ({
                 id: topic.id,
                 title: topic.title,
-                chunkCount: topic._count.chunks,
+                chunkCount: Math.max(
+                  topic._count.chunks,
+                  topic.materialLinks.reduce((sum, link) => sum + link.material._count.chunks, 0),
+                ) || enrollment.course.platformMaterials.reduce(
+                  (sum, material) => sum + material._count.chunks,
+                  0,
+                ),
                 source: "Platform" as const,
               })),
               ...enrollment.courseTopics.map((topic) => ({

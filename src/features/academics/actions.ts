@@ -58,6 +58,9 @@ export async function createSemester(formData: FormData) {
     throw new Error(`${parsed.level.replace("LEVEL_", "Level ")} - ${parsed.name} already exists.`);
   }
 
+  const semesterCount = await prisma.semester.count({ where: { ownerId: appUser.id } });
+  const shouldActivate = parsed.isActive || semesterCount === 0;
+
   let semester;
   try {
     semester = await prisma.semester.create({
@@ -67,10 +70,10 @@ export async function createSemester(formData: FormData) {
         term,
         name: parsed.name,
         academicYear: parsed.academicYear,
-        cwa: parsed.isActive ? appUser.cwa : undefined,
+        cwa: shouldActivate ? appUser.cwa : undefined,
         startDate: optionalDate(parsed.startDate),
         endDate: optionalDate(parsed.endDate),
-        isActive: parsed.isActive,
+        isActive: shouldActivate,
       },
     });
   } catch (error) {
@@ -146,7 +149,7 @@ export async function createSemester(formData: FormData) {
     }
   }
 
-  if (parsed.isActive) {
+  if (shouldActivate) {
     await prisma.user.update({
       where: { id: appUser.id },
       data: { activeSemesterId: semester.id, level: parsed.level, cwa: semester.cwa },
@@ -358,13 +361,30 @@ export async function deleteSemester(formData: FormData) {
     });
     if (!semester) throw new Error("Semester not found in your workspace.");
 
-    if (appUser.activeSemesterId === semester.id) {
+    await tx.semester.delete({ where: { id: semester.id } });
+
+    const remaining = await tx.semester.findMany({
+      where: { ownerId: appUser.id },
+      select: { id: true, cwa: true, level: true },
+      orderBy: [{ academicYear: "desc" }, { level: "desc" }, { term: "desc" }],
+      take: 2,
+    });
+
+    if (remaining.length === 1) {
+      await tx.user.update({
+        where: { id: appUser.id },
+        data: {
+          activeSemesterId: remaining[0].id,
+          cwa: remaining[0].cwa,
+          level: remaining[0].level,
+        },
+      });
+    } else if (appUser.activeSemesterId === semester.id) {
       await tx.user.update({
         where: { id: appUser.id },
         data: { activeSemesterId: null, cwa: null },
       });
     }
-    await tx.semester.delete({ where: { id: semester.id } });
   });
 
   revalidatePath("/academics");

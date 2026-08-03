@@ -33,20 +33,23 @@ function plannerUrl(planId: string, occurrence: Date) {
 }
 
 export async function syncNotificationsForUser(userId: string, force = false) {
-  const preference = await prisma.notificationPreference.upsert({
-    where: { userId },
-    create: { userId },
-    update: {},
-  });
-
   const now = new Date();
+  const existingPreference = await prisma.notificationPreference.findUnique({
+    where: { userId },
+  });
   if (
     !force &&
-    preference.lastSyncedAt &&
-    now.getTime() - preference.lastSyncedAt.getTime() < syncThrottleMs
+    existingPreference?.lastSyncedAt &&
+    now.getTime() - existingPreference.lastSyncedAt.getTime() < syncThrottleMs
   ) {
     return;
   }
+
+  const preference =
+    existingPreference ??
+    (await prisma.notificationPreference.create({
+      data: { userId },
+    }));
 
   const user = await prisma.user.findUnique({
     where: { id: userId },

@@ -1,9 +1,9 @@
 import { Bell, BookOpen, LogOut } from "lucide-react";
-import Link from "next/link";
 
 import { AppTopNavigation } from "@/components/app-top-navigation";
 import { NavDrawer } from "@/components/nav-drawer";
 import { NotificationPoller } from "@/components/notification-poller";
+import { PrefetchLink } from "@/components/prefetch-link";
 import { signOut } from "@/features/auth/actions";
 import { requireAppUser } from "@/features/auth/queries";
 
@@ -45,7 +45,7 @@ export async function AppShell({ children, title, eyebrow }: AppShellProps) {
         <div className="mx-auto flex h-[4.875rem] w-full max-w-[90rem] items-center justify-between gap-5 px-5 sm:px-8 lg:px-10">
           <div className="flex min-w-0 items-center gap-3">
             <NavDrawer items={secondaryItems} />
-            <Link href="/dashboard" className="flex min-w-0 items-center gap-3">
+            <PrefetchLink href="/dashboard" className="flex min-w-0 items-center gap-3">
               <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[var(--accent-strong)] text-white">
                 <BookOpen className="h-5 w-5" />
               </span>
@@ -55,15 +55,15 @@ export async function AppShell({ children, title, eyebrow }: AppShellProps) {
                   {eyebrow ?? "Student workspace"}
                 </span>
               </span>
-            </Link>
+            </PrefetchLink>
           </div>
 
           <AppTopNavigation items={primaryItems} />
 
           <div className="flex items-center gap-2">
-            <Link href="/notifications" aria-label="Notifications" className="relative grid h-10 w-10 place-items-center rounded-xl border border-border bg-white text-muted hover:border-accent hover:text-accent">
+            <PrefetchLink href="/notifications" aria-label="Notifications" className="relative grid h-10 w-10 place-items-center rounded-xl border border-border bg-white text-muted hover:border-accent hover:text-accent">
               <Bell className="h-4 w-4" />
-            </Link>
+            </PrefetchLink>
             <form action={signOut}>
               <button type="submit" className="inline-flex h-10 items-center gap-2 rounded-xl border border-border bg-white px-3 text-sm font-medium text-muted hover:border-accent hover:text-accent">
                 <LogOut className="h-4 w-4" />
@@ -75,9 +75,9 @@ export async function AppShell({ children, title, eyebrow }: AppShellProps) {
 
         <nav className="mx-auto flex w-full max-w-[90rem] gap-2 overflow-x-auto px-5 pb-3 lg:hidden" aria-label="Mobile primary navigation">
           {primaryItems.map((item) => (
-            <Link key={item.href} href={item.href} className="shrink-0 rounded-lg border border-border bg-white px-3 py-2 text-xs font-medium text-muted hover:border-accent hover:text-accent">
+            <PrefetchLink key={item.href} href={item.href} className="shrink-0 rounded-lg border border-border bg-white px-3 py-2 text-xs font-medium text-muted hover:border-accent hover:text-accent">
               {item.label}
-            </Link>
+            </PrefetchLink>
           ))}
         </nav>
       </header>

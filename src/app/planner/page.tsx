@@ -98,7 +98,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
   const { appUser } = await requireAppUser();
   const params = searchParams ? await searchParams : {};
   const selectedCourseId = params.courseId ?? "";
-  const planner = await getPlannerData(appUser.id);
+  const planner = await getPlannerData(appUser.id, appUser.activeSemesterId);
   const requestedDayIndex = Number(params.day);
   const selectedDayIndex = Number.isInteger(requestedDayIndex) && requestedDayIndex >= 0 && requestedDayIndex <= 6
     ? requestedDayIndex
@@ -117,7 +117,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
   const scheduledPlanItems = filteredPlanItems.filter((item) => item.scheduledStart);
   const unscheduledPlanItems = filteredPlanItems.filter((item) => !item.scheduledStart);
   const activeSemesterTitle = planner.activeSemester
-    ? `${formatLevel(planner.activeSemesterProfile?.level ?? planner.user?.level)} - ${planner.activeSemester.name}`
+    ? `${formatLevel(planner.activeSemesterProfile?.level ?? appUser.level)} - ${planner.activeSemester.name}`
     : "No active semester set";
   const savedStudySessions = scheduledPlanItems.map((item) => {
     const session = splitSessionTitle(item.title);

@@ -3,16 +3,41 @@ import "server-only";
 import { dailyMessageLimit, isAiConfigured } from "@/features/ai/provider";
 import { prisma } from "@/server/db";
 
+function getConversationSummaries(userId: string, semesterId: string) {
+  return prisma.aiConversation.findMany({
+    where: {
+      userId,
+      semesterId,
+      enrollment: { userId, semesterId },
+    },
+    select: {
+      id: true,
+      title: true,
+      isPinned: true,
+      createdAt: true,
+      updatedAt: true,
+      enrollment: {
+        select: {
+          id: true,
+          course: { select: { code: true, name: true } },
+        },
+      },
+      _count: { select: { messages: true } },
+    },
+    orderBy: [
+      { isPinned: "desc" as const },
+      { enrollment: { course: { code: "asc" as const } } },
+      { updatedAt: "desc" as const },
+    ],
+  });
+}
+
 export async function getAiChatPageData(
   userId: string,
+  semesterId: string | null,
   requestedConversationId?: string,
 ) {
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
-    select: { activeSemesterId: true, activeSemester: true },
-  });
-
-  if (!user?.activeSemesterId) {
+  if (!semesterId) {
     return {
       activeSemester: null,
       profile: null,
@@ -25,16 +50,43 @@ export async function getAiChatPageData(
     };
   }
 
-  const semesterId = user.activeSemesterId;
-  const enrollments = await prisma.enrollment.findMany({
-    where: { userId, semesterId },
-    include: { course: { select: { code: true, name: true } } },
-    orderBy: { course: { code: "asc" } },
-  });
+  const dayStart = new Date();
+  dayStart.setHours(0, 0, 0, 0);
 
-  if (enrollments.length) {
+  const [activeSemester, enrollments, profile, initialConversations, usedToday] = await Promise.all([
+    prisma.semester.findFirst({
+      where: { id: semesterId, ownerId: userId },
+    }),
+    prisma.enrollment.findMany({
+      where: { userId, semesterId },
+      include: { course: { select: { code: true, name: true } } },
+      orderBy: { course: { code: "asc" } },
+    }),
+    prisma.semesterProfile.findUnique({
+      where: { userId_semesterId: { userId, semesterId } },
+    }),
+    getConversationSummaries(userId, semesterId),
+    prisma.aiMessage.count({
+      where: {
+        role: "USER",
+        createdAt: { gte: dayStart },
+        conversation: { userId },
+      },
+    }),
+  ]);
+
+  const pinnedEnrollmentIds = new Set(
+    initialConversations
+      .filter((conversation) => conversation.isPinned)
+      .map((conversation) => conversation.enrollment.id),
+  );
+  const missingPinnedConversations = enrollments.filter(
+    (enrollment) => !pinnedEnrollmentIds.has(enrollment.id),
+  );
+
+  if (missingPinnedConversations.length) {
     await prisma.aiConversation.createMany({
-      data: enrollments.map((enrollment) => ({
+      data: missingPinnedConversations.map((enrollment) => ({
         userId,
         semesterId,
         enrollmentId: enrollment.id,
@@ -44,48 +96,9 @@ export async function getAiChatPageData(
       skipDuplicates: true,
     });
   }
-
-  const dayStart = new Date();
-  dayStart.setHours(0, 0, 0, 0);
-
-  const [profile, conversations, usedToday] = await Promise.all([
-    prisma.semesterProfile.findUnique({
-      where: { userId_semesterId: { userId, semesterId } },
-    }),
-    prisma.aiConversation.findMany({
-      where: {
-        userId,
-        semesterId,
-        enrollment: { userId, semesterId },
-      },
-      select: {
-        id: true,
-        title: true,
-        isPinned: true,
-        createdAt: true,
-        updatedAt: true,
-        enrollment: {
-          select: {
-            id: true,
-            course: { select: { code: true, name: true } },
-          },
-        },
-        _count: { select: { messages: true } },
-      },
-      orderBy: [
-        { isPinned: "desc" },
-        { enrollment: { course: { code: "asc" } } },
-        { updatedAt: "desc" },
-      ],
-    }),
-    prisma.aiMessage.count({
-      where: {
-        role: "USER",
-        createdAt: { gte: dayStart },
-        conversation: { userId },
-      },
-    }),
-  ]);
+  const conversations = missingPinnedConversations.length
+    ? await getConversationSummaries(userId, semesterId)
+    : initialConversations;
 
   const selectedId = conversations.some((item) => item.id === requestedConversationId)
     ? requestedConversationId
@@ -115,7 +128,7 @@ export async function getAiChatPageData(
     : null;
 
   return {
-    activeSemester: user.activeSemester,
+    activeSemester,
     profile,
     enrollments,
     conversations,

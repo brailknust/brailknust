@@ -1,24 +1,18 @@
 import "server-only";
 
 import { prisma } from "@/server/db";
-import { expireOverdueTasks } from "@/features/tasks/status";
 
-export async function getPlannerData(userId: string) {
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
-    include: { activeSemester: true },
-  });
-  const semesterId = user?.activeSemesterId;
-
-  if (semesterId) await expireOverdueTasks(userId, semesterId);
-
-  const activeEnrollments = semesterId
-    ? await prisma.enrollment.findMany({
+export async function getPlannerData(userId: string, semesterId: string | null) {
+  const [activeSemester, activeEnrollments] = semesterId
+    ? await Promise.all([
+      prisma.semester.findFirst({ where: { id: semesterId, ownerId: userId } }),
+      prisma.enrollment.findMany({
         where: { userId, semesterId },
         include: { course: true },
         orderBy: { course: { code: "asc" } },
-      })
-    : [];
+      }),
+    ])
+    : [null, []];
   const activeCourseIds = activeEnrollments.map((enrollment) => enrollment.courseId);
 
   const [activeSemesterProfile, openTasks, timetable, studyPlans] = semesterId
@@ -31,6 +25,7 @@ export async function getPlannerData(userId: string) {
             userId,
             semesterId,
             status: "TODO",
+            OR: [{ dueAt: null }, { dueAt: { gte: new Date() } }],
           },
           include: { course: true },
           orderBy: [{ dueAt: "asc" }, { priority: "desc" }, { createdAt: "desc" }],
@@ -60,8 +55,7 @@ export async function getPlannerData(userId: string) {
     studyPlans.find((plan) => plan.status === "ACTIVE") ?? studyPlans[0] ?? null;
 
   return {
-    user,
-    activeSemester: user?.activeSemester ?? null,
+    activeSemester,
     activeSemesterProfile,
     activeEnrollments,
     openTasks,

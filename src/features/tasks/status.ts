@@ -1,7 +1,5 @@
 import "server-only";
 
-import { prisma } from "@/server/db";
-
 const priorityRank = {
   URGENT: 0,
   HIGH: 1,
@@ -17,16 +15,18 @@ const statusRank = {
   ARCHIVED: 3,
 } as const;
 
-export async function expireOverdueTasks(userId: string, semesterId?: string) {
-  await prisma.task.updateMany({
-    where: {
-      userId,
-      ...(semesterId ? { semesterId } : {}),
-      status: { in: ["TODO", "IN_PROGRESS"] },
-      dueAt: { lt: new Date() },
-    },
-    data: { status: "EXPIRED" },
-  });
+export function withEffectiveTaskStatus<
+  T extends { status: keyof typeof statusRank; dueAt: Date | null },
+>(task: T, now = new Date()): T {
+  if (
+    task.dueAt &&
+    task.dueAt < now &&
+    (task.status === "TODO" || task.status === "IN_PROGRESS")
+  ) {
+    return { ...task, status: "EXPIRED" };
+  }
+
+  return task;
 }
 
 export function sortTasksByImportanceAndDueDate<

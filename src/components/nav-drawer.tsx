@@ -1,8 +1,9 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+
+import { PrefetchLink } from "@/components/prefetch-link";
 
 type NavDrawerProps = {
   items: {
@@ -96,7 +97,7 @@ export function NavDrawer({ items }: NavDrawerProps) {
           </div>
           <nav className="grid gap-2">
             {items.map((item) => (
-              <Link
+              <PrefetchLink
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
@@ -108,7 +109,7 @@ export function NavDrawer({ items }: NavDrawerProps) {
                     {item.badge > 99 ? "99+" : item.badge}
                   </span>
                 ) : null}
-              </Link>
+              </PrefetchLink>
             ))}
           </nav>
           </aside>

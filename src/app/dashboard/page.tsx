@@ -3,10 +3,10 @@ import { Bell, BookOpen, GraduationCap, ListChecks } from "lucide-react";
 import { redirect, unstable_rethrow } from "next/navigation";
 
 import { AppShell } from "@/components/app-shell";
-import { getAcademicSetup } from "@/features/academics/queries";
+import { getActiveSemesterSummary } from "@/features/academics/queries";
 import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
 import { getDashboardNotifications } from "@/features/notifications/queries";
-import { getTasksPageData } from "@/features/tasks/queries";
+import { getDashboardTasks } from "@/features/tasks/queries";
 
 function formatDateTime(value: Date | null) {
   if (!value) return "No due date";
@@ -55,13 +55,13 @@ export default async function DashboardPage() {
 
   if (!appUser) redirect("/onboarding");
 
-  let academicSetup: Awaited<ReturnType<typeof getAcademicSetup>>;
-  let taskData: Awaited<ReturnType<typeof getTasksPageData>>;
+  let activeSemester: Awaited<ReturnType<typeof getActiveSemesterSummary>>;
+  let tasks: Awaited<ReturnType<typeof getDashboardTasks>>;
   let notificationData: Awaited<ReturnType<typeof getDashboardNotifications>>;
   try {
-    [academicSetup, taskData, notificationData] = await Promise.all([
-      getAcademicSetup(appUser.id),
-      getTasksPageData(appUser.id),
+    [activeSemester, tasks, notificationData] = await Promise.all([
+      getActiveSemesterSummary(appUser.id, appUser.activeSemesterId),
+      getDashboardTasks(appUser.id, appUser.activeSemesterId),
       getDashboardNotifications(appUser.id),
     ]);
   } catch (error) {
@@ -70,7 +70,7 @@ export default async function DashboardPage() {
     return <DashboardUnavailable title="Database connection unavailable" message="BRAIL could not load your academic data from Supabase for this request." />;
   }
 
-  const openTasks = taskData.tasks.filter((task) => task.status === "TODO");
+  const openTasks = tasks.filter((task) => task.status === "TODO");
   const upcomingTasks = openTasks.filter((task) => task.dueAt).slice(0, 3);
 
   return (
@@ -78,7 +78,7 @@ export default async function DashboardPage() {
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {[
           { label: "Programme", value: appUser.programme ?? "Programme pending", icon: GraduationCap },
-          { label: "Active semester", value: academicSetup.activeSemester ? `${formatLevel(appUser.level)} - ${academicSetup.activeSemester.name}` : "Not set", icon: BookOpen },
+          { label: "Active semester", value: activeSemester ? `${formatLevel(appUser.level)} - ${activeSemester.name}` : "Not set", icon: BookOpen },
           { label: "Open tasks", value: `${openTasks.length} active`, icon: ListChecks },
           { label: "Unread reminders", value: `${notificationData.unreadCount} new`, icon: Bell },
         ].map((item) => (

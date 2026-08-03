@@ -21,7 +21,7 @@ function formatReminder(value: Date | null) {
 
 export default async function TasksPage() {
   const { appUser } = await requireAppUser();
-  const { tasks, courses } = await getTasksPageData(appUser.id);
+  const { tasks, courses } = await getTasksPageData(appUser.id, appUser.activeSemesterId);
 
   return (
     <AppShell title="Tasks and deadlines" eyebrow="Phase 2">

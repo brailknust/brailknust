@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+import { PrefetchLink } from "@/components/prefetch-link";
 
 type NavigationItem = { label: string; href: string };
 
@@ -13,7 +14,7 @@ export function AppTopNavigation({ items }: { items: NavigationItem[] }) {
       {items.map((item) => {
         const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(`${item.href}/`));
         return (
-          <Link
+          <PrefetchLink
             key={item.href}
             href={item.href}
             aria-current={active ? "page" : undefined}
@@ -24,7 +25,7 @@ export function AppTopNavigation({ items }: { items: NavigationItem[] }) {
             }`}
           >
             {item.label}
-          </Link>
+          </PrefetchLink>
         );
       })}
     </nav>
