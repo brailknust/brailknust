@@ -152,9 +152,18 @@ export async function getSemesterDetail(userId: string, semesterId: string) {
 }
 
 export async function getCourseAnalytics(userId: string, semesterId: string, courseId: string) {
+  const routeIdentifier = decodeURIComponent(courseId).trim();
+  const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+    .test(routeIdentifier);
   const [enrollment, user] = await Promise.all([
     prisma.enrollment.findFirst({
-      where: { userId, semesterId, courseId },
+      where: {
+        userId,
+        semesterId,
+        OR: isUuid
+          ? [{ courseId: routeIdentifier }, { id: routeIdentifier }]
+          : [{ course: { code: routeIdentifier.toUpperCase() } }],
+      },
       include: { course: true, semester: true },
     }),
     prisma.user.findUnique({
@@ -164,30 +173,31 @@ export async function getCourseAnalytics(userId: string, semesterId: string, cou
   ]);
 
   if (!enrollment) return null;
+  const resolvedCourseId = enrollment.courseId;
 
   const [tasks, studyItems, weakAreas, timetable, assessments, materials, topics] = await Promise.all([
     prisma.task.findMany({
-      where: { userId, semesterId, courseId },
+      where: { userId, semesterId, courseId: resolvedCourseId },
       orderBy: [{ status: "asc" }, { dueAt: "asc" }, { createdAt: "desc" }],
     }),
     prisma.studyPlanItem.findMany({
       where: {
-        courseId,
+        courseId: resolvedCourseId,
         studyPlan: { userId, semesterId, status: "ACTIVE" },
       },
       include: { studyPlan: true },
       orderBy: [{ status: "asc" }, { scheduledStart: "asc" }],
     }),
     prisma.weakArea.findMany({
-      where: { userId, semesterId, courseId },
+      where: { userId, semesterId, courseId: resolvedCourseId },
       orderBy: { updatedAt: "desc" },
     }),
     prisma.timetableBlock.findMany({
-      where: { userId, semesterId, courseId },
+      where: { userId, semesterId, courseId: resolvedCourseId },
       orderBy: [{ dayOfWeek: "asc" }, { startTime: "asc" }],
     }),
     prisma.assessment.findMany({
-      where: { userId, semesterId, courseId },
+      where: { userId, semesterId, courseId: resolvedCourseId },
       orderBy: [{ assessedAt: "desc" }, { createdAt: "desc" }],
     }),
     prisma.courseMaterial.findMany({

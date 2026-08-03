@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, BarChart3, BookOpen, CalendarDays, ListChecks } from "lucide-react";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
@@ -67,6 +67,9 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
   }
 
   const { enrollment } = analytics;
+  if (courseId !== enrollment.courseId) {
+    redirect(`/academics/semesters/${semesterId}/courses/${enrollment.courseId}`);
+  }
   const assessmentAverage = analytics.assessments.length
     ? Math.round((analytics.assessments.reduce((sum, item) => sum + (Number(item.score) / Number(item.maxScore)) * 100, 0) / analytics.assessments.length) * 10) / 10
     : null;
