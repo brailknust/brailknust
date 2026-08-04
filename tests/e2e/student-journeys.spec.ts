@@ -17,8 +17,12 @@ test.describe.serial("critical student journeys", () => {
     if (!(await semesterHeading.isVisible())) {
       const addSemester = page.locator("form").filter({ has: page.getByRole("heading", { name: "Add semester" }) });
       const slot = addSemester.locator('select[name="slot"]');
-      const availableSlot = slot.locator('option[value="LEVEL_100|First Semester"]');
-      if (await availableSlot.count()) {
+      const slotAvailable = await slot.evaluate((element) =>
+        Array.from((element as HTMLSelectElement).options).some(
+          (option) => option.value === "LEVEL_100|First Semester",
+        ),
+      );
+      if (slotAvailable) {
         await slot.selectOption("LEVEL_100|First Semester");
         await addSemester.getByRole("button", { name: "Save semester" }).click();
       } else {
