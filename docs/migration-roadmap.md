@@ -69,7 +69,7 @@ Exit gate: passed locally on 2026-08-04. Authorization tests pass, costly routes
 
 Target: 5-7 days.
 
-Status: implementation complete locally on 2026-08-04. The local quality gate passes with 17 test files and 41 tests. The isolated browser suite and required GitHub checks activate after these changes are pushed. See [testing.md](./testing.md) for commands, isolation rules, and CI details.
+Status: implementation complete and verified in CI on 2026-08-04. The local quality gate passes with 17 test files and 41 tests. [GitHub Actions run #7](https://github.com/brailknust/brailknust/actions/runs/30907509525) passed the `Quality` job and all 9 isolated browser journeys without retries. See [testing.md](./testing.md) for commands, isolation rules, and CI details.
 
 - [x] Add Vitest for schemas and business logic.
 - [x] Add React Testing Library for interactive components.
@@ -79,10 +79,10 @@ Status: implementation complete locally on 2026-08-04. The local quality gate pa
 - [x] Cover planner collisions, timetable parsing, task expiry, reminders, goals, CWA, diagnostics, retrieval, and AI context.
 - [x] Cover signup/onboarding, semesters, tasks, planner, materials/AI, diagnostics, peers, notifications, and admin journeys.
 - [x] Add explicit cross-account rejection tests.
-- [ ] Confirm the first isolated GitHub browser run passes.
+- [x] Confirm the first isolated GitHub browser run passes.
 - [ ] Require the `Quality` and `Browser journeys` checks in branch protection.
 
-Exit gate: pending the first isolated GitHub browser run and branch-protection activation. Local lint, TypeScript, 41 automated tests, Prisma validation, and the production build pass.
+Exit gate: pending branch-protection activation. Local lint, TypeScript, 41 automated tests, Prisma validation, and the production build pass. GitHub Actions run #7 also passed both required jobs, including all 9 isolated browser journeys without retries.
 
 ## Phase 3: Complete product UX
 
