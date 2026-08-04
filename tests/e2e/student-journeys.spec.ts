@@ -1,18 +1,7 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 import { readE2eFixture } from "./support/fixture";
 import { login } from "./support/login";
-
-async function submitServerAction(page: Page, pathname: string, submit: () => Promise<void>) {
-  const response = page.waitForResponse((candidate) =>
-    candidate.request().method() === "POST" && new URL(candidate.url()).pathname === pathname,
-  );
-
-  await submit();
-  const completedResponse = await response;
-  const failure = await completedResponse.finished();
-  if (failure) throw failure;
-}
 
 test.describe.serial("critical student journeys", () => {
   test("semesters and courses load within the active academic workspace", async ({ page }) => {
@@ -53,20 +42,19 @@ test.describe.serial("critical student journeys", () => {
     if (!(await task.isVisible())) {
       await page.getByPlaceholder("Assignment title").fill(taskTitle);
       await page.getByLabel("Task priority").selectOption("HIGH");
-      await submitServerAction(page, "/tasks", () =>
-        page.getByRole("button", { name: "Save task" }).click(),
-      );
-      await page.goto("/tasks");
+      await page.getByRole("button", { name: "Save task" }).click();
+      task = page.locator("article").filter({ hasText: taskTitle }).first();
+      await expect(task).toBeVisible();
+      await page.reload();
       task = page.locator("article").filter({ hasText: taskTitle }).first();
     }
     await expect(task).toBeVisible();
 
     let doneBadge = task.locator("span").filter({ hasText: /^DONE$/ });
     if (!(await doneBadge.isVisible())) {
-      await submitServerAction(page, "/tasks", () =>
-        task.getByRole("button", { name: "DONE" }).click(),
-      );
-      await page.goto("/tasks");
+      await task.getByRole("button", { name: "DONE" }).click();
+      await expect(doneBadge).toBeVisible();
+      await page.reload();
       task = page.locator("article").filter({ hasText: taskTitle }).first();
       doneBadge = task.locator("span").filter({ hasText: /^DONE$/ });
     }
@@ -123,10 +111,9 @@ test.describe.serial("critical student journeys", () => {
       const answers = page.locator('fieldset input[type="radio"][value="A"]');
       await expect(answers).toHaveCount(4);
       for (let index = 0; index < 4; index += 1) await answers.nth(index).check();
-      await submitServerAction(page, quizPath, () =>
-        page.getByRole("button", { name: "Submit diagnostic" }).click(),
-      );
-      await page.goto(quizPath);
+      await page.getByRole("button", { name: "Submit diagnostic" }).click();
+      await expect(score).toBeVisible();
+      await page.reload();
     }
 
     await expect(score).toBeVisible();
@@ -158,8 +145,9 @@ test.describe.serial("critical student journeys", () => {
     if (!(await markUnread.isVisible())) {
       const markRead = notification.getByRole("button", { name: "Mark read" });
       await expect(markRead).toBeVisible();
-      await submitServerAction(page, "/notifications", () => markRead.click());
-      await page.goto("/notifications");
+      await markRead.click();
+      await expect(markUnread).toBeVisible();
+      await page.reload();
       notification = page.locator("article").filter({ hasText: fixture.notificationTitle });
       markUnread = notification.getByRole("button", { name: "Mark unread" });
     }
