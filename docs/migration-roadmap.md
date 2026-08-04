@@ -10,7 +10,7 @@ Last verified: 2026-08-04.
 - `npm run lint`, TypeScript validation, and `npm run build` pass; the build generates 32 pages/routes.
 - Authentication, onboarding, academics, tasks, planner, performance, goals, AI chat, diagnostic practice, peers, notifications, and admin content tooling are implemented.
 - Support and Feedback remain explicit placeholders.
-- Automated Phase 1 security tests are configured; CI, broader product tests, and application error boundaries are not yet configured.
+- Phase 1 security tests and Phase 2 unit, integration, component, and browser tests are configured. GitHub CI is defined; application error boundaries remain Phase 3 work.
 - Deployment, production migrations, storage policies, backups, and monitoring are not yet verified.
 
 ## Definition of done
@@ -69,16 +69,20 @@ Exit gate: passed locally on 2026-08-04. Authorization tests pass, costly routes
 
 Target: 5-7 days.
 
-- Add Vitest for schemas and business logic.
-- Add React Testing Library for interactive components.
-- Add Playwright for critical journeys.
-- Create an isolated test database strategy.
-- Add CI for lint, TypeScript, tests, migration validation, and production build.
-- Cover planner collisions, timetable parsing, task expiry, reminders, goals, CWA, diagnostics, retrieval, and AI context.
-- Cover signup/onboarding, semesters, tasks, planner, materials/AI, diagnostics, peers, notifications, and admin journeys.
-- Add explicit cross-account rejection tests.
+Status: implementation complete locally on 2026-08-04. The local quality gate passes with 17 test files and 41 tests. The isolated browser suite and required GitHub checks activate after these changes are pushed. See [testing.md](./testing.md) for commands, isolation rules, and CI details.
 
-Exit gate: every critical journey has a passing browser test and pull requests cannot merge with failed checks.
+- [x] Add Vitest for schemas and business logic.
+- [x] Add React Testing Library for interactive components.
+- [x] Add Playwright for critical journeys.
+- [x] Create an isolated test database strategy.
+- [x] Add CI for lint, TypeScript, tests, migration validation, and production build.
+- [x] Cover planner collisions, timetable parsing, task expiry, reminders, goals, CWA, diagnostics, retrieval, and AI context.
+- [x] Cover signup/onboarding, semesters, tasks, planner, materials/AI, diagnostics, peers, notifications, and admin journeys.
+- [x] Add explicit cross-account rejection tests.
+- [ ] Confirm the first isolated GitHub browser run passes.
+- [ ] Require the `Quality` and `Browser journeys` checks in branch protection.
+
+Exit gate: pending the first isolated GitHub browser run and branch-protection activation. Local lint, TypeScript, 41 automated tests, Prisma validation, and the production build pass.
 
 ## Phase 3: Complete product UX
 

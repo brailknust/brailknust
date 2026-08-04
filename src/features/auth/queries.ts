@@ -46,14 +46,14 @@ export async function requireSupabaseUser() {
   return user;
 }
 
-export const getAppUserByAuthId = cache(async function getAppUserByAuthId(authUserId: string) {
+export async function getAppUserByAuthId(authUserId: string) {
   return prisma.user.findFirst({
     where: {
       authUserId,
       deletedAt: null,
     },
   });
-});
+}
 
 export async function requireAppUser() {
   const authUser = await requireSupabaseUser();

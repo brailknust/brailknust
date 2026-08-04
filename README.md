@@ -23,10 +23,12 @@ Authenticated academic flows require Supabase and Postgres. AI features addition
 
 ```text
 npm run lint
+npm run typecheck
+npm run test:coverage
 npm run build
 ```
 
-An automated test suite is a release-blocking item in the completion roadmap.
+Authenticated browser journeys and database migration replay use an isolated Supabase test environment. See [Testing BRAIL](docs/testing.md) for setup, commands, data-safety rules, and CI checks.
 
 ## Documentation
 
@@ -34,5 +36,6 @@ An automated test suite is a release-blocking item in the completion roadmap.
 - [Release baseline](docs/release-baseline.md)
 - [Completion roadmap](docs/migration-roadmap.md)
 - [Security audit](docs/security-audit.md)
+- [Testing](docs/testing.md)
 
 Use separate Supabase projects and credentials for development, staging, and production. Never commit `.env.local`, database credentials, service-role keys, or AI keys.

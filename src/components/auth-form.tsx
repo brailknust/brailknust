@@ -3,7 +3,7 @@
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 
 import { GoogleIcon } from "@/components/google-icon";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -12,12 +12,22 @@ type AuthFormProps = {
   mode: "login" | "signup";
 };
 
+const subscribeToHydration = () => () => undefined;
+
+function authErrorMessage(error: unknown) {
+  if (error instanceof DOMException && ["AbortError", "TimeoutError"].includes(error.name)) {
+    return "Authentication timed out. Check your connection and try again.";
+  }
+  return error instanceof Error ? error.message : "Could not reach the authentication service.";
+}
+
 export function AuthForm({ mode }: AuthFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const requestedNext = searchParams.get("next");
   const nextPath = requestedNext?.startsWith("/") ? requestedNext : "/dashboard";
   const isSignup = mode === "signup";
+  const isHydrated = useSyncExternalStore(subscribeToHydration, () => true, () => false);
   const [isPending, setIsPending] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -29,20 +39,23 @@ export function AuthForm({ mode }: AuthFormProps) {
     setError(null);
     setMessage(null);
 
-    const supabase = createSupabaseBrowserClient();
-    const callbackNext = isSignup ? "/onboarding" : nextPath;
-    const { error: signInError } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(callbackNext)}`,
-        queryParams: {
-          prompt: "select_account",
+    try {
+      const supabase = createSupabaseBrowserClient();
+      const callbackNext = isSignup ? "/onboarding" : nextPath;
+      const { error: signInError } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(callbackNext)}`,
+          queryParams: {
+            prompt: "select_account",
+          },
         },
-      },
-    });
+      });
 
-    if (signInError) {
-      setError(signInError.message);
+      if (signInError) setError(signInError.message);
+    } catch (authError) {
+      setError(authErrorMessage(authError));
+    } finally {
       setIsPending(false);
     }
   }
@@ -58,56 +71,59 @@ export function AuthForm({ mode }: AuthFormProps) {
     const password = String(formData.get("password") ?? "");
     const confirmPassword = String(formData.get("confirmPassword") ?? "");
     const fullName = String(formData.get("fullName") ?? "");
-    const supabase = createSupabaseBrowserClient();
-
-    if (isSignup) {
-      if (password !== confirmPassword) {
-        setError("Passwords do not match.");
-        setIsPending(false);
-        return;
-      }
-
-      const { data, error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            full_name: fullName,
-          },
-          emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent("/onboarding")}`,
-        },
-      });
-
-      if (signUpError) {
-        setError(signUpError.message);
-        setIsPending(false);
-        return;
-      }
-
-      if (!data.session) {
-        setMessage("Account created. Email confirmation is still enabled in Supabase, so check your email or turn it off in Auth settings.");
-        setIsPending(false);
-        return;
-      }
-
-      router.push("/onboarding");
-      router.refresh();
-      return;
-    }
-
-    const { error: signInError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (signInError) {
-      setError(signInError.message);
+    if (isSignup && password !== confirmPassword) {
+      setError("Passwords do not match.");
       setIsPending(false);
       return;
     }
 
-    router.push(nextPath);
-    router.refresh();
+    try {
+      const supabase = createSupabaseBrowserClient();
+
+      if (isSignup) {
+        const { data, error: signUpError } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: {
+              full_name: fullName,
+            },
+            emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent("/onboarding")}`,
+          },
+        });
+
+        if (signUpError) {
+          setError(signUpError.message);
+          setIsPending(false);
+          return;
+        }
+
+        if (!data.session) {
+          setMessage("Account created. Email confirmation is still enabled in Supabase, so check your email or turn it off in Auth settings.");
+          setIsPending(false);
+          return;
+        }
+
+        router.push("/onboarding");
+        return;
+      }
+
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (signInError) {
+        setError(signInError.message);
+        setIsPending(false);
+        return;
+      }
+
+      router.push(nextPath);
+    } catch (authError) {
+      setError(authErrorMessage(authError));
+      setIsPending(false);
+    }
   }
 
   return (
@@ -115,7 +131,7 @@ export function AuthForm({ mode }: AuthFormProps) {
       <button
         type="button"
         onClick={handleGoogleSignIn}
-        disabled={isPending}
+        disabled={!isHydrated || isPending}
         className="mt-8 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-border bg-white px-5 text-sm font-semibold text-foreground hover:border-accent hover:bg-[var(--accent-soft)] disabled:cursor-not-allowed disabled:opacity-70"
       >
         {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleIcon />}
@@ -197,7 +213,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         ) : null}
 
         <button
-          disabled={isPending}
+          disabled={!isHydrated || isPending}
           className="mt-2 inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-accent px-5 text-sm font-semibold text-white shadow-sm hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-70"
         >
           {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
@@ -206,7 +222,7 @@ export function AuthForm({ mode }: AuthFormProps) {
       </form>
 
       {error ? (
-        <p className="mt-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+        <p data-testid="auth-error" className="mt-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
           {error}
         </p>
       ) : null}
