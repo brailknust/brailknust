@@ -1,7 +1,16 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 import { readE2eFixture } from "./support/fixture";
 import { login } from "./support/login";
+
+async function submitServerAction(page: Page, pathname: string, submit: () => Promise<void>) {
+  const response = page.waitForResponse((candidate) =>
+    candidate.request().method() === "POST" && new URL(candidate.url()).pathname === pathname,
+  );
+
+  await submit();
+  await response;
+}
 
 test.describe.serial("critical student journeys", () => {
   test("semesters and courses load within the active academic workspace", async ({ page }) => {
@@ -38,14 +47,28 @@ test.describe.serial("critical student journeys", () => {
     await login(page, fixture.users.primary, fixture);
     await page.goto("/tasks");
 
-    await page.getByPlaceholder("Assignment title").fill(taskTitle);
-    await page.getByLabel("Task priority").selectOption("HIGH");
-    await page.getByRole("button", { name: "Save task" }).click();
-    await expect(page.getByText(taskTitle)).toBeVisible();
+    let task = page.locator("article").filter({ hasText: taskTitle }).first();
+    if (!(await task.isVisible())) {
+      await page.getByPlaceholder("Assignment title").fill(taskTitle);
+      await page.getByLabel("Task priority").selectOption("HIGH");
+      await submitServerAction(page, "/tasks", () =>
+        page.getByRole("button", { name: "Save task" }).click(),
+      );
+      await page.goto("/tasks");
+      task = page.locator("article").filter({ hasText: taskTitle }).first();
+    }
+    await expect(task).toBeVisible();
 
-    const task = page.locator("article").filter({ hasText: taskTitle });
-    await task.getByRole("button", { name: "DONE" }).click();
-    await expect(task.getByText("DONE", { exact: true })).toBeVisible();
+    let doneBadge = task.locator("span").filter({ hasText: /^DONE$/ });
+    if (!(await doneBadge.isVisible())) {
+      await submitServerAction(page, "/tasks", () =>
+        task.getByRole("button", { name: "DONE" }).click(),
+      );
+      await page.goto("/tasks");
+      task = page.locator("article").filter({ hasText: taskTitle }).first();
+      doneBadge = task.locator("span").filter({ hasText: /^DONE$/ });
+    }
+    await expect(doneBadge).toBeVisible();
   });
 
   test("planner creates a plan and a manual session", async ({ page }) => {
@@ -119,9 +142,13 @@ test.describe.serial("critical student journeys", () => {
     await expect(page.getByText("Joined", { exact: true })).toBeVisible();
 
     await page.goto("/notifications");
-    const notification = page.locator("article").filter({ hasText: fixture.notificationTitle });
+    let notification = page.locator("article").filter({ hasText: fixture.notificationTitle });
     const markRead = notification.getByRole("button", { name: "Mark read" });
-    if (await markRead.isVisible()) await markRead.click();
+    if (await markRead.isVisible()) {
+      await submitServerAction(page, "/notifications", () => markRead.click());
+      await page.goto("/notifications");
+      notification = page.locator("article").filter({ hasText: fixture.notificationTitle });
+    }
     await expect(notification.getByRole("button", { name: "Mark unread" })).toBeVisible();
   });
 });
