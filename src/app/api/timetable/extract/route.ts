@@ -134,8 +134,12 @@ export async function POST(request: Request) {
           : "OCR read the image, but no class rows were detected. Add rows manually or upload a clearer image.",
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Could not read this timetable image.";
-
-    return NextResponse.json({ message, rows: [], rawText: "" }, { status: 422 });
+    console.error("Timetable OCR failed", {
+      errorName: error instanceof Error ? error.name : "UnknownError",
+    });
+    return NextResponse.json(
+      { message: "Could not read this timetable image. Try a clearer image or enter the rows manually.", rows: [], rawText: "" },
+      { status: 422 },
+    );
   }
 }

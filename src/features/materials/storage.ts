@@ -59,9 +59,18 @@ export async function uploadCourseMaterialFile(
 }
 
 export async function removeCourseMaterialFile(storagePath: string) {
+  await removeCourseMaterialFiles([storagePath]);
+}
+
+export async function removeCourseMaterialFiles(storagePaths: string[]) {
+  if (!storagePaths.length) return;
   const supabase = createSupabaseServiceClient();
-  const { error } = await supabase.storage.from(courseMaterialBucket).remove([storagePath]);
-  if (error) throw error;
+  for (let index = 0; index < storagePaths.length; index += 100) {
+    const { error } = await supabase.storage
+      .from(courseMaterialBucket)
+      .remove(storagePaths.slice(index, index + 100));
+    if (error) throw error;
+  }
 }
 
 export async function createCourseMaterialDownloadUrl(storagePath: string) {

@@ -11,6 +11,8 @@ type RateLimitOptions = {
   windowSeconds: number;
 };
 
+const rateLimitRetentionMs = 7 * 24 * 60 * 60 * 1_000;
+
 export async function checkRateLimit(options: RateLimitOptions) {
   const windowMs = options.windowSeconds * 1_000;
   const now = Date.now();
@@ -31,8 +33,7 @@ export async function checkRateLimit(options: RateLimitOptions) {
   if (bucket.count === 1) {
     await prisma.rateLimitBucket.deleteMany({
       where: {
-        subject: options.subject,
-        bucketStart: { lt: new Date(now - 30 * 24 * 60 * 60 * 1_000) },
+        bucketStart: { lt: new Date(now - rateLimitRetentionMs) },
       },
     });
   }

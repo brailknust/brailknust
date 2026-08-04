@@ -4,7 +4,7 @@ Last verified: 2026-08-04.
 
 This document records the approved Phase 0 release scope, feature classification, environment inventory, and interim ownership. It describes what BRAIL supports now without treating future curriculum coverage or delivery infrastructure as already available.
 
-Verification on 2026-08-04: ESLint passed, TypeScript passed with no emitted files, the production build passed with 32 generated pages/routes, and Prisma reported all 31 development migrations applied.
+Verification on 2026-08-04: ESLint passed, TypeScript passed with no emitted files, the production build passed with 32 generated pages/routes, and Prisma reported all 32 development migrations applied.
 
 ## Approved initial scope
 
@@ -34,7 +34,7 @@ Other programmes and levels must not be advertised as having verified automatic 
 | Feature area | Classification | Current status | Acceptance criterion | Interim owner |
 | --- | --- | --- | --- | --- |
 | Authentication and onboarding | Launch-critical | Implemented; automated coverage pending | A new KNUST student can sign up, complete a profile, create an active semester, and reach the dashboard without developer intervention. | Founder |
-| Profile, export, and account deletion | Launch-critical | Implemented; deletion verification pending | A student can update a profile, export account data, and complete a recoverable, policy-compliant deletion flow. | Founder |
+| Profile, export, and account deletion | Launch-critical | Implemented; retry and privacy regression tests pass | A student can update a profile, export account data, and complete a recoverable, policy-compliant deletion flow. | Founder |
 | Semesters, courses, and enrolment | Launch-critical | Implemented; authorization and rule tests pending | Students can manage only their own academic records and can use manual setup when no verified curriculum exists. | Founder |
 | Tasks and deadlines | Launch-critical | Implemented; editing and reminder tests pending | Students can create, edit, complete, and delete tasks with correct overdue and reminder behavior. | Founder |
 | Timetable, OCR, and study planner | Launch-critical | Implemented; OCR and collision evaluation pending | Students can import or enter a timetable, correct extracted data, and generate a non-destructive study plan. | Founder |
@@ -55,7 +55,7 @@ No credentials or project identifiers are recorded in this document.
 
 | Environment | Provisioning | Data policy | Latest migration | Verification status | Interim owner |
 | --- | --- | --- | --- | --- | --- |
-| Development | Configured through local `.env.local` | Synthetic or developer-owned data only | `20260803223000_add_user_deletion_tombstone` (31 of 31) | Prisma reported the database schema up to date on 2026-08-04. | Founder |
+| Development | Configured through local `.env.local` | Synthetic or developer-owned data only | `20260804140000_track_account_deletion_cleanup` (32 of 32) | Prisma and the Phase 1 database verifier reported the schema and access controls up to date on 2026-08-04. | Founder |
 | Staging | Not provisioned | Synthetic pilot-like data; no production secrets | Not applicable | Create and verify before release-candidate testing. | Founder |
 | Production | Not provisioned | Real student data only after policies and controls are approved | Not applicable | Create and verify before accepting real student data. | Founder |
 

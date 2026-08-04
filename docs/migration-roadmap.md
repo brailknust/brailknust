@@ -6,11 +6,11 @@ This is the canonical plan for taking BRAIL from its current implementation to p
 
 Last verified: 2026-08-04.
 
-- Next.js 16.2, React 19, TypeScript, Tailwind CSS 4, Supabase, Prisma, and Postgres.
+- Next.js 16.3, React 19, TypeScript, Tailwind CSS 4, Supabase, Prisma, and Postgres.
 - `npm run lint`, TypeScript validation, and `npm run build` pass; the build generates 32 pages/routes.
 - Authentication, onboarding, academics, tasks, planner, performance, goals, AI chat, diagnostic practice, peers, notifications, and admin content tooling are implemented.
 - Support and Feedback remain explicit placeholders.
-- No automated tests, CI workflow, or application error boundaries are configured.
+- Automated Phase 1 security tests are configured; CI, broader product tests, and application error boundaries are not yet configured.
 - Deployment, production migrations, storage policies, backups, and monitoring are not yet verified.
 
 ## Definition of done
@@ -50,18 +50,20 @@ Target: 4-6 days. This blocks all later release work.
 
 Implementation findings and deployment checks are tracked in [security-audit.md](./security-audit.md).
 
-- Audit every action and API route for authentication and resource ownership.
-- Test horizontal privilege escalation across every user-owned model.
-- Validate admin authorization and audit admin mutations.
-- Review Supabase Storage policies and Postgres row-level security.
-- Rate-limit AI, diagnostic, OCR, upload, notification, support, and feedback endpoints.
-- Validate file signatures, MIME types, extensions, sizes, and safe download headers.
-- Sanitize provider errors and untrusted material content.
-- Add security headers and a Content Security Policy.
-- Define account deletion and data export.
-- Test prompt injection from uploaded content.
+Status: complete for implementation and the configured development environment on 2026-08-04. Staging and production deployment verification remains part of Phase 8 because those environments are not provisioned.
 
-Exit gate: authorization tests pass, costly routes are bounded, storage policies are verified, and sensitive errors cannot reach clients.
+- [x] Audit every existing action and API route for authentication and resource ownership.
+- [x] Test horizontal privilege escalation across the existing user-owned models.
+- [x] Validate admin authorization and audit admin mutations.
+- [x] Verify development Supabase Storage behavior and Postgres row-level security.
+- [x] Rate-limit every existing costly or abuse-sensitive endpoint; Support and Feedback have no submission endpoints yet and retain this requirement for Phase 3.
+- [x] Validate file signatures, MIME types, extensions, sizes, and safe download headers.
+- [x] Sanitize provider errors and delimit untrusted material content.
+- [x] Add security headers and a Content Security Policy.
+- [x] Implement privacy-minimized account export and retryable account deletion.
+- [x] Test prompt injection from uploaded content.
+
+Exit gate: passed locally on 2026-08-04. Authorization tests pass, costly routes are bounded, development storage and database controls are verified, and reviewed provider errors cannot reach clients. Repeat the environment checks in staging and production during Phase 8.
 
 ## Phase 2: Automated tests and CI
 
@@ -186,7 +188,7 @@ Exit gate: no launch blocker remains, at least 90% of pilot users complete criti
 
 | Environment | Purpose | Data policy | Status |
 | --- | --- | --- | --- |
-| Development | Local implementation | Synthetic or developer-owned data only | Configured database verified at all 31 migrations on 2026-08-04 |
+| Development | Local implementation | Synthetic or developer-owned data only | Configured database verified at all 32 migrations on 2026-08-04 |
 | Staging | Release candidate verification | Synthetic pilot-like data; no production secrets | Not provisioned |
 | Production | Student use | Real student data under a published retention policy | Not provisioned |
 
@@ -211,7 +213,8 @@ The critical path is **security -> tests -> workflow hardening -> production inf
 
 - [x] Launch scope approved.
 - [x] Environment and migration inventory complete.
-- [ ] Security exit gate passed.
+- [x] Phase 1 security implementation and development exit gate passed.
+- [ ] Staging and production security deployment checks passed.
 - [ ] Automated testing exit gate passed.
 - [ ] No placeholder routes remain.
 - [ ] Accessibility and mobile review passed.

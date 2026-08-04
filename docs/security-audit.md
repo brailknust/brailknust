@@ -1,55 +1,61 @@
 # BRAIL Security Audit
 
-Last updated: 2026-08-03.
+Last updated: 2026-08-04.
 
-## Completed controls
+Status: Phase 1 implementation and development-environment verification are complete. Staging and production security deployment checks remain release gates because those environments are not provisioned.
 
-- All reviewed user mutations authenticate through `requireAppUser` or equivalent route-handler checks.
-- Reviewed task, academic, assessment, goal, planner, conversation, notification, material, diagnostic, peer-group, peer-Q&A, and download operations constrain user-owned records by the signed-in application user.
-- Existing shared course metadata can no longer be overwritten by student-entered course or timetable data.
-- Admin mutations require `requireAdmin`.
-- Public-schema application tables have a migration enabling RLS and revoking direct Data API privileges from `anon` and `authenticated`.
-- The private material bucket is accessed through server-side signed URLs after an ownership check.
-- AI, diagnostics, OCR, study-plan generation, uploads, and notification polling have database-backed per-user limits.
-- Rate-limit buckets older than seven days are removed opportunistically.
-- Material uploads validate extension, declared MIME type, size, and leading file signature.
-- Timetable images validate extension, MIME type, size, and leading file signature.
-- Material parser and storage failures are logged server-side and sanitized for clients.
+## Authorization and data isolation
+
+- All reviewed Server Actions and route handlers authenticate through `requireAppUser`, `requireAdmin`, or an equivalent route-level session check.
+- Task, academic, assessment, goal, planner, conversation, notification, material, diagnostic, peer-group, peer-Q&A, study-plan, and download operations constrain user-owned records by the signed-in application user.
+- Automated cross-account tests exercise destructive operations across the existing user-owned models and verify that a foreign resource ID remains constrained by the current user and active semester.
+- Administrator role grants and revocations require an administrator, create an audit record, reject deleted targets, and prevent removal of the final administrator.
+- Student-created courses remain private until administrator approval; official catalogue records remain global.
+- Every Prisma-managed public application table has RLS enabled. Direct table privileges are revoked from Supabase `anon` and `authenticated` browser roles.
+- The `course-materials` bucket is private. Material access uses a server-side ownership check followed by a short-lived signed URL.
+
+## Input, provider, and abuse controls
+
+- AI chat, diagnostics, OCR, study-plan generation, uploads, notification polling, and account deletion use database-backed per-user limits. Buckets older than seven days are removed opportunistically.
+- Support and Feedback do not yet expose submission endpoints. Their Phase 3 implementation must include persistence validation and rate limiting before either placeholder is removed.
+- Material and timetable uploads validate extensions, declared MIME types, file sizes, and leading file signatures.
+- Material parser, storage, AI provider, and OCR failures are logged server-side and return generic client messages.
+- Retrieved material is explicitly delimited as untrusted data in AI and diagnostic prompts. Automated tests verify that prompt-injection text remains inside the data boundary.
 - Application-wide CSP, frame, MIME-sniffing, referrer, and permissions headers are configured.
+- The dependency audit reports zero known vulnerabilities after upgrading Next.js and `eslint-config-next` to 16.3.0.
 
-## Deployment verification still required
+## Account lifecycle and privacy
 
-- Development: all 31 Prisma migrations were applied successfully on 2026-08-03.
-- Staging and production: apply all Prisma migrations, then confirm the direct Prisma role can read and write while Supabase `anon` and `authenticated` Data API requests are denied.
-- Verify the `course-materials` bucket remains private and cannot be listed or downloaded with an anonymous or normal user token.
-- Exercise OAuth redirects and Supabase requests under the production CSP.
-- Add automated cross-account tests before declaring the ownership audit complete.
-- Confirm database backups and restore behavior before production use.
+- Students can download a JSON export before deletion.
+- Exports include only the student's own diagnostic attempts and aggregate counts for other users' peer/group activity.
+- Deletion removes private academic records in a transaction, anonymizes peer content that must remain for conversation integrity, and records a non-identifying tombstone.
+- Storage and Supabase Auth cleanup are independently tracked and retryable. An administrator can retry unfinished external cleanup without restoring the deleted account.
+- AI conversations, private materials, and generated diagnostics remain user-controlled and are deleted with the account. Security and operational rate-limit records use a seven-day retention window and do not store prompt or material bodies.
 
-## Product decisions required
+## Verification evidence
 
-The following recommended policies were approved on 2026-08-03 and now require implementation.
+Completed against the configured development environment on 2026-08-04:
 
-### Student-created courses
+- All 32 Prisma migrations applied; `prisma migrate status` reports the schema up to date.
+- Database verifier found zero public application tables without RLS and zero direct `anon` or `authenticated` table grants.
+- A temporary private object could not be listed or downloaded by either an anonymous client or a temporary ordinary authenticated client. The object and temporary Auth user were removed by the verifier.
+- Vitest security suite: 4 files and 14 tests passed.
+- ESLint and TypeScript validation passed.
+- `npm audit` reported zero vulnerabilities.
 
-The `Course` model is global. Students currently may create a missing shared course record, although they can no longer modify an existing one.
+Repeatable commands:
 
-Approved: add ownership and verification state so official catalogue courses are global while student-created courses are private until approved by an administrator.
+```text
+npm run test:security
+npm run security:database
+npm run lint
+npx tsc --noEmit --incremental false
+npm audit --audit-level=high
+```
 
-### Administrator authority
+## Deferred release verification
 
-An email in `ADMIN_EMAILS` is promoted to the persistent database `ADMIN` role. Removing the email later does not automatically revoke that role.
-
-Approved: treat the database role as authoritative and use `ADMIN_EMAILS` only for initial bootstrap, with an explicit admin grant/revoke audit workflow. Prevent removal of the final administrator.
-
-### Account deletion and retention
-
-The application does not yet expose account deletion or data export. A deletion policy must decide whether academic records, peer contributions, support records, and aggregate analytics are deleted, anonymized, or retained.
-
-Approved: immediately delete private academic data and stored files, anonymize peer content that has replies, retain only non-identifying operational aggregates, and provide a JSON export before deletion.
-
-### AI and uploaded-content retention
-
-The retention period for AI conversations, private course materials, generated diagnostics, and server logs is not defined.
-
-Approved: retain user content until the user deletes it or their account; keep security and operational logs for 30 days with no material text or AI prompt bodies.
+- Provision isolated staging and production services during Phase 8, apply every migration, and rerun the database/storage verifier in each environment.
+- Exercise OAuth redirects and Supabase requests under the deployed CSP.
+- Confirm backups, perform a restore test, and rehearse rollback before production use.
+- Add the existing security tests to required CI checks during Phase 2.

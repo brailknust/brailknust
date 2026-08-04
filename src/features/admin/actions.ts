@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { requireAdmin } from "@/features/auth/queries";
 import { removeCourseMaterialFile } from "@/features/materials/storage";
+import { finalizeAccountDeletionCleanup } from "@/features/profile/account-deletion";
 import { prisma } from "@/server/db";
 import { z } from "zod";
 
@@ -37,7 +38,7 @@ export async function grantAdminRole(formData: FormData) {
   const { userId } = adminUserSchema.parse({ userId: formData.get("userId") });
 
   await prisma.$transaction(async (tx) => {
-    const target = await tx.user.findUnique({ where: { id: userId }, select: { role: true } });
+    const target = await tx.user.findFirst({ where: { id: userId, deletedAt: null }, select: { role: true } });
     if (!target) throw new Error("User not found.");
     if (target.role === "ADMIN") return;
 
@@ -55,7 +56,7 @@ export async function revokeAdminRole(formData: FormData) {
   const { userId } = adminUserSchema.parse({ userId: formData.get("userId") });
 
   await prisma.$transaction(async (tx) => {
-    const target = await tx.user.findUnique({ where: { id: userId }, select: { role: true } });
+    const target = await tx.user.findFirst({ where: { id: userId, deletedAt: null }, select: { role: true } });
     if (!target) throw new Error("User not found.");
     if (target.role !== "ADMIN") return;
 
@@ -70,6 +71,14 @@ export async function revokeAdminRole(formData: FormData) {
 
   revalidatePath("/admin/users");
   revalidatePath("/dashboard");
+}
+
+export async function retryAccountDeletionCleanup(formData: FormData) {
+  await requireAdmin();
+  const { userId } = adminUserSchema.parse({ userId: formData.get("userId") });
+  const completed = await finalizeAccountDeletionCleanup(userId);
+  if (!completed) throw new Error("Account cleanup could not be completed. Try again after checking the external services.");
+  revalidatePath("/admin/users");
 }
 
 export async function deletePlatformMaterial(formData: FormData) {

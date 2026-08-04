@@ -160,6 +160,12 @@ model User {
   createdAt              DateTime                 @default(now()) @map("created_at")
   updatedAt              DateTime                 @updatedAt @map("updated_at")
   deletedAt              DateTime?                @map("deleted_at")
+  deletionStoragePaths   Json?                    @map("deletion_storage_paths")
+  deletionStoragePending Boolean                  @default(false) @map("deletion_storage_pending")
+  deletionAuthPending    Boolean                  @default(false) @map("deletion_auth_pending")
+  deletionAttempts       Int                      @default(0) @map("deletion_attempts")
+  deletionLastError      String?                  @map("deletion_last_error")
+  deletionCompletedAt    DateTime?                @map("deletion_completed_at")
   activeSemester         Semester?                @relation("UserActiveSemester", fields: [activeSemesterId], references: [id])
   aiConversations        AiConversation[]
   assessments            Assessment[]
@@ -192,6 +198,7 @@ model User {
 
   @@index([activeSemesterId])
   @@index([deletedAt])
+  @@index([deletionStoragePending, deletionAuthPending])
   @@map("users")
 }
 

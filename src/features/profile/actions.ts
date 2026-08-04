@@ -7,10 +7,10 @@ import { findCurriculumTemplate } from "@/data/curricula";
 import { findKnustProgramme } from "@/data/knust-academic-hierarchy";
 import { requireAppUser, requireSupabaseUser } from "@/features/auth/queries";
 import { profileSchema, updateProfileSchema } from "@/features/profile/schemas";
+import { finalizeAccountDeletionCleanup } from "@/features/profile/account-deletion";
 import { prisma } from "@/server/db";
-import { createSupabaseServiceClient } from "@/server/supabase";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { removeCourseMaterialFile } from "@/features/materials/storage";
+import { checkRateLimit } from "@/server/rate-limit";
 
 function normalizeProgrammeName(programme: FormDataEntryValue | null) {
   return programme === "BSc Computer Engineering" ? "Computer Engineering" : programme;
@@ -212,25 +212,33 @@ const selectedSemester = parsed.activeSemesterId
 }
 
 export async function deleteAccount(formData: FormData) {
-  const { appUser, authUser } = await requireAppUser();
+  const { appUser } = await requireAppUser();
   if (String(formData.get("confirmation") ?? "").trim().toUpperCase() !== "DELETE") {
     throw new Error("Type DELETE to confirm account deletion.");
   }
 
   if (appUser.role === "ADMIN") {
-    const adminCount = await prisma.user.count({ where: { role: "ADMIN" } });
+    const adminCount = await prisma.user.count({ where: { role: "ADMIN", deletedAt: null } });
     if (adminCount <= 1) {
       throw new Error("Grant another administrator access before deleting the final administrator account.");
     }
+  }
+
+  const rateLimit = await checkRateLimit({
+    subject: appUser.id,
+    action: "account-delete",
+    limit: 3,
+    windowSeconds: 24 * 60 * 60,
+  });
+  if (!rateLimit.allowed) {
+    throw new Error("Too many account deletion attempts. Try again later.");
   }
 
   const materials = await prisma.courseMaterial.findMany({
     where: { uploadedBy: appUser.id, storagePath: { not: null } },
     select: { storagePath: true },
   });
-  for (const material of materials) {
-    if (material.storagePath) await removeCourseMaterialFile(material.storagePath);
-  }
+  const materialStoragePaths = materials.flatMap((material) => material.storagePath ? [material.storagePath] : []);
 
   await prisma.$transaction(async (tx) => {
     await tx.peerQuestion.deleteMany({
@@ -310,13 +318,17 @@ export async function deleteAccount(formData: FormData) {
         activeSemesterId: null,
         avatarUrl: null,
         deletedAt: new Date(),
+        deletionStoragePaths: materialStoragePaths,
+        deletionStoragePending: materialStoragePaths.length > 0,
+        deletionAuthPending: true,
+        deletionAttempts: 0,
+        deletionLastError: null,
+        deletionCompletedAt: null,
       },
     });
   });
 
-  const serviceClient = createSupabaseServiceClient();
-  const { error: authDeleteError } = await serviceClient.auth.admin.deleteUser(authUser.id);
-  if (authDeleteError) throw new Error("Your data was removed, but login revocation needs administrator attention.");
+  await finalizeAccountDeletionCleanup(appUser.id);
 
   const supabase = await createSupabaseServerClient();
   await supabase.auth.signOut();

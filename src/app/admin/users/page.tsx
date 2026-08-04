@@ -1,15 +1,16 @@
-import { ShieldCheck, ShieldMinus, ShieldPlus } from "lucide-react";
+import { RefreshCw, ShieldCheck, ShieldMinus, ShieldPlus } from "lucide-react";
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
-import { grantAdminRole, revokeAdminRole } from "@/features/admin/actions";
+import { grantAdminRole, retryAccountDeletionCleanup, revokeAdminRole } from "@/features/admin/actions";
 import { requireAdmin } from "@/features/auth/queries";
 import { prisma } from "@/server/db";
 
 export default async function AdminUsersPage() {
   const { appUser } = await requireAdmin();
-  const [users, audits, adminCount] = await Promise.all([
+  const [users, audits, adminCount, pendingDeletionCleanups] = await Promise.all([
     prisma.user.findMany({
+      where: { deletedAt: null },
       select: { id: true, fullName: true, email: true, role: true, createdAt: true },
       orderBy: [{ role: "asc" }, { fullName: "asc" }],
     }),
@@ -21,7 +22,21 @@ export default async function AdminUsersPage() {
       orderBy: { createdAt: "desc" },
       take: 50,
     }),
-    prisma.user.count({ where: { role: "ADMIN" } }),
+    prisma.user.count({ where: { role: "ADMIN", deletedAt: null } }),
+    prisma.user.findMany({
+      where: {
+        deletedAt: { not: null },
+        OR: [{ deletionStoragePending: true }, { deletionAuthPending: true }],
+      },
+      select: {
+        id: true,
+        deletedAt: true,
+        deletionStoragePending: true,
+        deletionAuthPending: true,
+        deletionAttempts: true,
+      },
+      orderBy: { deletedAt: "asc" },
+    }),
   ]);
 
   return (
@@ -33,6 +48,33 @@ export default async function AdminUsersPage() {
           Administrator changes are permanent audit events. The final administrator cannot be removed.
         </p>
       </section>
+
+      {pendingDeletionCleanups.length ? (
+        <section className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-5">
+          <h2 className="text-lg font-semibold">Account cleanup requiring retry</h2>
+          <div className="mt-4 grid gap-3">
+            {pendingDeletionCleanups.map((cleanup) => (
+              <div key={cleanup.id} className="flex flex-col gap-3 rounded-xl border border-amber-200 bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-sm font-semibold">Deleted account</p>
+                  <p className="mt-1 text-xs text-muted">
+                    Pending: {cleanup.deletionStoragePending ? "private files" : ""}
+                    {cleanup.deletionStoragePending && cleanup.deletionAuthPending ? " and " : ""}
+                    {cleanup.deletionAuthPending ? "login revocation" : ""} · Attempts: {cleanup.deletionAttempts}
+                  </p>
+                </div>
+                <form action={retryAccountDeletionCleanup}>
+                  <input type="hidden" name="userId" value={cleanup.id} />
+                  <button className="inline-flex h-10 items-center gap-2 rounded-xl bg-amber-700 px-3 text-sm font-semibold text-white">
+                    <RefreshCw className="h-4 w-4" />
+                    Retry cleanup
+                  </button>
+                </form>
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className="mt-6 rounded-2xl border border-border bg-white p-5">
         <h2 className="text-lg font-semibold">Users</h2>

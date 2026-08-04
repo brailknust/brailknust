@@ -18,12 +18,17 @@ function searchTerms(message: string) {
   )].slice(0, 8);
 }
 
-export async function retrieveCourseMaterialContext(enrollmentId: string, message: string) {
+export async function retrieveCourseMaterialContext(
+  userId: string,
+  semesterId: string,
+  enrollmentId: string,
+  message: string,
+) {
   const terms = searchTerms(message);
   if (!terms.length) return { passages: [], sources: [] };
 
-  const enrollment = await prisma.enrollment.findUnique({
-    where: { id: enrollmentId },
+  const enrollment = await prisma.enrollment.findFirst({
+    where: { id: enrollmentId, userId, semesterId },
     select: { courseId: true },
   });
   if (!enrollment) return { passages: [], sources: [] };

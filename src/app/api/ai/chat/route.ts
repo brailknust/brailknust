@@ -14,6 +14,7 @@ import {
   type AiProviderMessage,
 } from "@/features/ai/provider";
 import { sendAiMessageSchema } from "@/features/ai/schemas";
+import { formatUntrustedContent } from "@/features/ai/untrusted-content";
 import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
 import { retrieveCourseMaterialContext } from "@/features/materials/retrieval";
 import { prisma } from "@/server/db";
@@ -36,7 +37,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Set an active semester before using AI Chat." }, { status: 400 });
   }
   if (!isAiConfigured()) {
-    return NextResponse.json({ error: "AI Chat is not configured. Add GROQ_API_KEY to .env.local." }, { status: 503 });
+    return NextResponse.json({ error: "AI Chat is temporarily unavailable." }, { status: 503 });
   }
 
   let parsed;
@@ -166,6 +167,8 @@ export async function POST(request: Request) {
   }
 
   const materialContext = await retrieveCourseMaterialContext(
+    appUser.id,
+    appUser.activeSemesterId,
     conversation.enrollmentId,
     parsed.message,
   );
@@ -203,9 +206,8 @@ export async function POST(request: Request) {
       ? [{
           role: "system" as const,
           content: [
-            "RETRIEVED COURSE MATERIAL:",
-            "Use these passages when they support the answer. PLATFORM passages are centrally published course content; PRIVATE passages are the student's own uploads. Prefer PLATFORM passages when sources conflict. Cite supporting passages inline as [S1], [S2], and so on. Do not cite a passage that does not support the claim. If the passages are insufficient, say so rather than inventing course-specific facts.",
-            JSON.stringify(materialContext.passages),
+            "Use relevant passages to support the answer. Prefer PLATFORM passages when sources conflict. Cite support inline as [S1], [S2], and so on. If the passages are insufficient, say so rather than guessing.",
+            formatUntrustedContent("RETRIEVED COURSE MATERIAL", materialContext.passages),
           ].join("\n"),
         }]
       : []),
@@ -225,7 +227,7 @@ export async function POST(request: Request) {
       await prisma.aiConversation.delete({ where: { id: conversation.id } });
     }
     return NextResponse.json(
-      { error: "The AI provider is unavailable. Check the API key, model, or free-tier limit." },
+      { error: "The AI service is temporarily unavailable. Try again later." },
       { status: 502 },
     );
   }

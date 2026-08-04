@@ -48,10 +48,22 @@ export async function GET() {
     prisma.goal.findMany({ where: { userId: appUser.id }, orderBy: { createdAt: "asc" } }),
     prisma.weakArea.findMany({ where: { userId: appUser.id }, orderBy: { updatedAt: "asc" } }),
     prisma.aiConversation.findMany({ where: { userId: appUser.id }, include: { messages: { orderBy: { createdAt: "asc" } } }, orderBy: { createdAt: "asc" } }),
-    prisma.diagnosticQuiz.findMany({ where: { userId: appUser.id }, include: { questions: { include: { attempts: true } } }, orderBy: { createdAt: "asc" } }),
-    prisma.peerQuestion.findMany({ where: { userId: appUser.id }, include: { answers: true }, orderBy: { createdAt: "asc" } }),
+    prisma.diagnosticQuiz.findMany({
+      where: { userId: appUser.id },
+      include: { questions: { include: { attempts: { where: { userId: appUser.id } } } } },
+      orderBy: { createdAt: "asc" },
+    }),
+    prisma.peerQuestion.findMany({
+      where: { userId: appUser.id },
+      include: { _count: { select: { answers: true, votes: true } } },
+      orderBy: { createdAt: "asc" },
+    }),
     prisma.peerAnswer.findMany({ where: { userId: appUser.id }, orderBy: { createdAt: "asc" } }),
-    prisma.studyGroup.findMany({ where: { ownerId: appUser.id }, include: { members: true }, orderBy: { createdAt: "asc" } }),
+    prisma.studyGroup.findMany({
+      where: { ownerId: appUser.id },
+      include: { _count: { select: { members: true } } },
+      orderBy: { createdAt: "asc" },
+    }),
     prisma.studyGroupMember.findMany({ where: { userId: appUser.id }, orderBy: { joinedAt: "asc" } }),
     prisma.notification.findMany({ where: { userId: appUser.id }, orderBy: { createdAt: "asc" } }),
     prisma.courseMaterial.findMany({
