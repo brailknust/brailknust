@@ -4,10 +4,10 @@ This is the canonical plan for taking BRAIL from its current implementation to p
 
 ## Current baseline
 
-Last verified: 2026-08-03.
+Last verified: 2026-08-04.
 
 - Next.js 16.2, React 19, TypeScript, Tailwind CSS 4, Supabase, Prisma, and Postgres.
-- `npm run lint` and `npm run build` pass; the build compiles 30 routes.
+- `npm run lint`, TypeScript validation, and `npm run build` pass; the build generates 32 pages/routes.
 - Authentication, onboarding, academics, tasks, planner, performance, goals, AI chat, diagnostic practice, peers, notifications, and admin content tooling are implemented.
 - Support and Feedback remain explicit placeholders.
 - No automated tests, CI workflow, or application error boundaries are configured.
@@ -30,16 +30,19 @@ BRAIL is launch-ready when:
 
 Target: 1-2 days.
 
+Status: complete on 2026-08-04. The approved scope, feature classifications, acceptance criteria, environment inventory, migration state, and interim ownership are recorded in [release-baseline.md](./release-baseline.md).
+
 - [x] Record current feature and build status.
 - [x] Document required environment variables without secrets.
 - [x] Make `.env.example` trackable.
 - [x] Add setup and verification guidance to the README.
-- [ ] Confirm launch scope: programmes, levels, semester terms, and pilot size.
-- [ ] Inventory development, staging, and production Supabase projects.
-- [ ] Record the latest applied migration in each environment.
-- [ ] Assign feature and operational owners.
+- [x] Confirm launch scope, curriculum limits, supported levels, and semester terms.
+- [x] Record that no pilot is scheduled in the current execution scope.
+- [x] Inventory development, staging, and production Supabase provisioning.
+- [x] Record the latest applied migration in each environment.
+- [x] Assign the Founder as interim feature and operational owner.
 
-Exit gate: environment state is known and launch scope is explicitly approved.
+Exit gate: passed on 2026-08-04. Environment state is known, the current app scope is explicitly approved, and unverified automatic curriculum coverage is excluded from product claims.
 
 ## Phase 1: Security and data integrity
 
@@ -183,9 +186,9 @@ Exit gate: no launch blocker remains, at least 90% of pilot users complete criti
 
 | Environment | Purpose | Data policy | Status |
 | --- | --- | --- | --- |
-| Development | Local implementation | Synthetic or developer-owned data only | Configured Supabase database verified at all 31 migrations on 2026-08-03 |
-| Staging | Release candidate verification | Synthetic pilot-like data; no production secrets | Not verified |
-| Production | Student use | Real student data under a published retention policy | Not verified |
+| Development | Local implementation | Synthetic or developer-owned data only | Configured database verified at all 31 migrations on 2026-08-04 |
+| Staging | Release candidate verification | Synthetic pilot-like data; no production secrets | Not provisioned |
+| Production | Student use | Real student data under a published retention policy | Not provisioned |
 
 Required configuration is documented in `.env.example`. Service-role keys, direct database credentials, and AI keys are server-only and must never use the `NEXT_PUBLIC_` prefix.
 
@@ -206,8 +209,8 @@ The critical path is **security -> tests -> workflow hardening -> production inf
 
 ## Release checklist
 
-- [ ] Launch scope approved.
-- [ ] Environment and migration inventory complete.
+- [x] Launch scope approved.
+- [x] Environment and migration inventory complete.
 - [ ] Security exit gate passed.
 - [ ] Automated testing exit gate passed.
 - [ ] No placeholder routes remain.

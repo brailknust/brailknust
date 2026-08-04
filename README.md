@@ -31,6 +31,7 @@ An automated test suite is a release-blocking item in the completion roadmap.
 ## Documentation
 
 - [Product context](docs/product-context.md)
+- [Release baseline](docs/release-baseline.md)
 - [Completion roadmap](docs/migration-roadmap.md)
 - [Security audit](docs/security-audit.md)
 
