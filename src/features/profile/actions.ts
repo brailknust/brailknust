@@ -132,6 +132,7 @@ export async function completeProfile(formData: FormData) {
     }
   }
 
+  revalidatePath("/", "layout");
   redirect("/dashboard");
 }
 
