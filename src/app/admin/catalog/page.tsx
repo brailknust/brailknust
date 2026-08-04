@@ -4,7 +4,9 @@ import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
 import { knustCurricula } from "@/data/curricula";
 import {
+  approveStudentCourse,
   deleteOrphanCatalogCourse,
+  rejectStudentCourse,
   removeProgrammeCourse,
   restoreProgrammeCourse,
 } from "@/features/admin/actions";
@@ -29,6 +31,8 @@ export default async function AdminProgrammeCatalogPage() {
         name: true,
         department: true,
         level: true,
+        approvalStatus: true,
+        createdBy: { select: { fullName: true, email: true } },
         _count: {
           select: {
             enrollments: true,
@@ -45,7 +49,8 @@ export default async function AdminProgrammeCatalogPage() {
     item,
   ]));
   const configuredCodes = new Set(knustCurricula.flatMap((template) => template.courses.map((course) => course.code)));
-  const unassignedCourses = databaseCourses.filter((course) => !configuredCodes.has(course.code));
+  const unassignedCourses = databaseCourses.filter((course) => course.approvalStatus === "OFFICIAL" && !configuredCodes.has(course.code));
+  const pendingCourses = databaseCourses.filter((course) => course.approvalStatus === "PENDING");
 
   return (
     <AppShell title="Programme course catalog" eyebrow="Administration">
@@ -58,6 +63,32 @@ export default async function AdminProgrammeCatalogPage() {
       </section>
 
       <div className="mt-6 grid gap-6">
+        {pendingCourses.length ? (
+          <section className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+            <h2 className="text-lg font-semibold">Student course approvals</h2>
+            <p className="mt-1 text-sm text-muted">Pending courses remain visible only to their creator until approved.</p>
+            <div className="mt-4 grid gap-3">
+              {pendingCourses.map((course) => (
+                <div key={course.id} className="flex flex-col gap-3 rounded-xl border border-amber-200 bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="text-sm font-semibold">{course.code} - {course.name}</p>
+                    <p className="mt-1 text-xs text-muted">Submitted by {course.createdBy?.fullName ?? "Unknown user"} · {course.createdBy?.email ?? "No email"}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <form action={approveStudentCourse}>
+                      <input type="hidden" name="courseId" value={course.id} />
+                      <button className="h-9 rounded-xl bg-[var(--accent-strong)] px-3 text-xs font-semibold text-white">Approve</button>
+                    </form>
+                    <form action={rejectStudentCourse}>
+                      <input type="hidden" name="courseId" value={course.id} />
+                      <ConfirmSubmitButton message={`Reject ${course.code}? It will remain private to its creator.`} className="h-9 rounded-xl border border-red-200 px-3 text-xs font-semibold text-red-600">Reject</ConfirmSubmitButton>
+                    </form>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : null}
         {knustCurricula.map((template) => (
           <section key={`${template.program}-${template.level}-${template.semester}`} className="rounded-2xl border border-border bg-white p-5">
             <div>

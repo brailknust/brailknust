@@ -2,9 +2,11 @@ import { NextResponse } from "next/server";
 
 import { findCurriculumTemplate } from "@/data/curricula";
 import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
+import { hasValidMaterialFileType, materialFileExtension } from "@/features/materials/extract";
 import { extractTextFromImage } from "@/features/planner/timetable-ocr";
 import { parseTimetableText } from "@/features/planner/timetable-parser";
 import { prisma } from "@/server/db";
+import { checkRateLimit, rateLimitResponse } from "@/server/rate-limit";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -28,6 +30,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Complete onboarding before extracting a timetable." }, { status: 404 });
   }
 
+  const rateLimit = await checkRateLimit({ subject: appUser.id, action: "timetable-ocr", limit: 10, windowSeconds: 3600 });
+  if (!rateLimit.allowed) return rateLimitResponse(rateLimit.retryAfter);
+
   const formData = await request.formData();
   const image = formData.get("image");
 
@@ -37,6 +42,14 @@ export async function POST(request: Request) {
 
   if (!image.type.startsWith("image/")) {
     return NextResponse.json({ message: "The uploaded file must be an image." }, { status: 400 });
+  }
+
+  const extension = materialFileExtension(image.name);
+  if (!["png", "jpg", "jpeg", "webp"].includes(extension) || !(await hasValidMaterialFileType(image))) {
+    return NextResponse.json(
+      { message: "The image contents do not match a supported PNG, JPG, or WEBP file." },
+      { status: 415 },
+    );
   }
 
   if (image.size > maxImageSize) {

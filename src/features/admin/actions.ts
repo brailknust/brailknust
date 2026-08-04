@@ -7,6 +7,71 @@ import { removeCourseMaterialFile } from "@/features/materials/storage";
 import { prisma } from "@/server/db";
 import { z } from "zod";
 
+const adminUserSchema = z.object({ userId: z.string().uuid() });
+const courseApprovalSchema = z.object({ courseId: z.string().uuid() });
+
+export async function approveStudentCourse(formData: FormData) {
+  await requireAdmin();
+  const { courseId } = courseApprovalSchema.parse({ courseId: formData.get("courseId") });
+  await prisma.course.updateMany({
+    where: { id: courseId, approvalStatus: { in: ["PENDING", "REJECTED"] } },
+    data: { approvalStatus: "OFFICIAL", createdById: null },
+  });
+  revalidatePath("/admin/catalog");
+  revalidatePath("/academics");
+}
+
+export async function rejectStudentCourse(formData: FormData) {
+  await requireAdmin();
+  const { courseId } = courseApprovalSchema.parse({ courseId: formData.get("courseId") });
+  await prisma.course.updateMany({
+    where: { id: courseId, approvalStatus: "PENDING", createdById: { not: null } },
+    data: { approvalStatus: "REJECTED" },
+  });
+  revalidatePath("/admin/catalog");
+  revalidatePath("/academics");
+}
+
+export async function grantAdminRole(formData: FormData) {
+  const { appUser } = await requireAdmin();
+  const { userId } = adminUserSchema.parse({ userId: formData.get("userId") });
+
+  await prisma.$transaction(async (tx) => {
+    const target = await tx.user.findUnique({ where: { id: userId }, select: { role: true } });
+    if (!target) throw new Error("User not found.");
+    if (target.role === "ADMIN") return;
+
+    await tx.user.update({ where: { id: userId }, data: { role: "ADMIN" } });
+    await tx.adminRoleAudit.create({
+      data: { actorId: appUser.id, targetUserId: userId, action: "GRANTED" },
+    });
+  });
+
+  revalidatePath("/admin/users");
+}
+
+export async function revokeAdminRole(formData: FormData) {
+  const { appUser } = await requireAdmin();
+  const { userId } = adminUserSchema.parse({ userId: formData.get("userId") });
+
+  await prisma.$transaction(async (tx) => {
+    const target = await tx.user.findUnique({ where: { id: userId }, select: { role: true } });
+    if (!target) throw new Error("User not found.");
+    if (target.role !== "ADMIN") return;
+
+    const adminCount = await tx.user.count({ where: { role: "ADMIN" } });
+    if (adminCount <= 1) throw new Error("The final administrator cannot be removed.");
+
+    await tx.user.update({ where: { id: userId }, data: { role: "STUDENT" } });
+    await tx.adminRoleAudit.create({
+      data: { actorId: appUser.id, targetUserId: userId, action: "REVOKED" },
+    });
+  });
+
+  revalidatePath("/admin/users");
+  revalidatePath("/dashboard");
+}
+
 export async function deletePlatformMaterial(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id") ?? "");

@@ -6,10 +6,12 @@ import { chunkMaterialText } from "@/features/materials/chunking";
 import {
   acceptedMaterialExtensions,
   extractCourseMaterialText,
+  hasValidMaterialFileType,
   materialFileExtension,
 } from "@/features/materials/extract";
 import { uploadCourseMaterialFile } from "@/features/materials/storage";
 import { prisma } from "@/server/db";
+import { checkRateLimit, rateLimitResponse } from "@/server/rate-limit";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -40,6 +42,9 @@ export async function POST(request: Request) {
 
   const appUser = await getAppUserByAuthId(authUser.id);
   if (!appUser) return NextResponse.json({ message: "Complete onboarding first." }, { status: 403 });
+
+  const rateLimit = await checkRateLimit({ subject: appUser.id, action: "material-upload", limit: 10, windowSeconds: 3600 });
+  if (!rateLimit.allowed) return rateLimitResponse(rateLimit.retryAfter);
 
   let formData: FormData;
   try {
@@ -72,6 +77,12 @@ export async function POST(request: Request) {
   if (!acceptedMaterialExtensions.includes(extension)) {
     return NextResponse.json(
       { message: "Upload PDF, DOCX, PPTX, TXT, MD, PNG, JPG, or WEBP." },
+      { status: 415 },
+    );
+  }
+  if (!(await hasValidMaterialFileType(file))) {
+    return NextResponse.json(
+      { message: "The file contents do not match its extension and media type." },
       { status: 415 },
     );
   }
@@ -169,7 +180,8 @@ export async function POST(request: Request) {
       chunkCount: chunks.length,
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Could not process this material.";
+    console.error("Course material processing failed", error);
+    const message = "The material could not be processed. Check the file and try again.";
     await prisma.courseMaterial.update({
       where: { id: material.id },
       data: { status: "FAILED", errorMessage: message.slice(0, 500) },

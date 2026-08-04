@@ -47,9 +47,10 @@ export async function requireSupabaseUser() {
 }
 
 export const getAppUserByAuthId = cache(async function getAppUserByAuthId(authUserId: string) {
-  return prisma.user.findUnique({
+  return prisma.user.findFirst({
     where: {
       authUserId,
+      deletedAt: null,
     },
   });
 });
@@ -80,10 +81,20 @@ export async function requireAdmin() {
 
   if (appUser.role === "ADMIN") return { authUser, appUser };
 
-  if (isConfiguredAdmin) {
-    const promoted = await prisma.user.update({
-      where: { id: appUser.id },
-      data: { role: "ADMIN" },
+  const adminCount = isConfiguredAdmin
+    ? await prisma.user.count({ where: { role: "ADMIN" } })
+    : 1;
+
+  if (isConfiguredAdmin && adminCount === 0) {
+    const promoted = await prisma.$transaction(async (tx) => {
+      const user = await tx.user.update({
+        where: { id: appUser.id },
+        data: { role: "ADMIN" },
+      });
+      await tx.adminRoleAudit.create({
+        data: { targetUserId: appUser.id, action: "BOOTSTRAPPED" },
+      });
+      return user;
     });
     return { authUser, appUser: promoted };
   }

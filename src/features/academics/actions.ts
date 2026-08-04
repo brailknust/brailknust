@@ -122,12 +122,15 @@ export async function createSemester(formData: FormData) {
           creditHours: course.creditHours,
           department: curriculum.department,
           level: curriculum.level,
+          approvalStatus: "OFFICIAL",
         },
         update: {
           name: course.name,
           creditHours: course.creditHours,
           department: curriculum.department,
           level: curriculum.level,
+          approvalStatus: "OFFICIAL",
+          createdById: null,
         },
       });
 
@@ -161,7 +164,7 @@ export async function createSemester(formData: FormData) {
 }
 
 export async function createCourse(formData: FormData) {
-  await requireAppUser();
+  const { appUser } = await requireAppUser();
 
   const parsed = createCourseSchema.parse({
     code: formData.get("code"),
@@ -172,17 +175,18 @@ export async function createCourse(formData: FormData) {
     description: formData.get("description") || undefined,
   });
 
-  await prisma.course.upsert({
+  const existing = await prisma.course.findUnique({
     where: { code: parsed.code },
-    create: parsed,
-    update: {
-      name: parsed.name,
-      creditHours: parsed.creditHours,
-      department: parsed.department,
-      level: parsed.level,
-      description: parsed.description,
-    },
+    select: { approvalStatus: true, createdById: true },
   });
+  if (existing && existing.approvalStatus !== "OFFICIAL" && existing.createdById !== appUser.id) {
+    throw new Error("This course code is already awaiting administrator review.");
+  }
+  if (!existing) {
+    await prisma.course.create({
+      data: { ...parsed, approvalStatus: "PENDING", createdById: appUser.id },
+    });
+  }
 
   revalidatePath("/academics");
   revalidatePath("/dashboard");
@@ -202,6 +206,15 @@ export async function createEnrollment(formData: FormData) {
     select: { id: true },
   });
   if (!semester) throw new Error("Semester not found in your workspace.");
+
+  const course = await prisma.course.findFirst({
+    where: {
+      id: parsed.courseId,
+      OR: [{ approvalStatus: "OFFICIAL" }, { createdById: appUser.id }],
+    },
+    select: { id: true },
+  });
+  if (!course) throw new Error("Course not available in your workspace.");
 
   await prisma.enrollment.upsert({
     where: {

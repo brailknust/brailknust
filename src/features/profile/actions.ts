@@ -8,6 +8,9 @@ import { findKnustProgramme } from "@/data/knust-academic-hierarchy";
 import { requireAppUser, requireSupabaseUser } from "@/features/auth/queries";
 import { profileSchema, updateProfileSchema } from "@/features/profile/schemas";
 import { prisma } from "@/server/db";
+import { createSupabaseServiceClient } from "@/server/supabase";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { removeCourseMaterialFile } from "@/features/materials/storage";
 
 function normalizeProgrammeName(programme: FormDataEntryValue | null) {
   return programme === "BSc Computer Engineering" ? "Computer Engineering" : programme;
@@ -15,6 +18,11 @@ function normalizeProgrammeName(programme: FormDataEntryValue | null) {
 
 export async function completeProfile(formData: FormData) {
   const authUser = await requireSupabaseUser();
+  const deletedAccount = await prisma.user.findFirst({
+    where: { authUserId: authUser.id, deletedAt: { not: null } },
+    select: { id: true },
+  });
+  if (deletedAccount) throw new Error("This account has been deleted and cannot be restored through onboarding.");
 
   const parsed = profileSchema.parse({
     fullName: formData.get("fullName"),
@@ -113,8 +121,8 @@ export async function completeProfile(formData: FormData) {
     for (const course of curriculum.courses.filter((item) => !excludedCourseCodes.has(item.code))) {
       const savedCourse = await prisma.course.upsert({
         where: { code: course.code },
-        create: { code: course.code, name: course.name, creditHours: course.creditHours, department: programme.department, level: parsed.level },
-        update: { name: course.name, creditHours: course.creditHours, department: programme.department, level: parsed.level },
+        create: { code: course.code, name: course.name, creditHours: course.creditHours, department: programme.department, level: parsed.level, approvalStatus: "OFFICIAL" },
+        update: { name: course.name, creditHours: course.creditHours, department: programme.department, level: parsed.level, approvalStatus: "OFFICIAL", createdById: null },
       });
       await prisma.enrollment.upsert({
         where: { userId_courseId_semesterId: { userId: appUser.id, courseId: savedCourse.id, semesterId: activeSemester.id } },
@@ -201,4 +209,116 @@ const selectedSemester = parsed.activeSemesterId
   revalidatePath("/dashboard");
   revalidatePath("/academics");
   revalidatePath("/planner");
+}
+
+export async function deleteAccount(formData: FormData) {
+  const { appUser, authUser } = await requireAppUser();
+  if (String(formData.get("confirmation") ?? "").trim().toUpperCase() !== "DELETE") {
+    throw new Error("Type DELETE to confirm account deletion.");
+  }
+
+  if (appUser.role === "ADMIN") {
+    const adminCount = await prisma.user.count({ where: { role: "ADMIN" } });
+    if (adminCount <= 1) {
+      throw new Error("Grant another administrator access before deleting the final administrator account.");
+    }
+  }
+
+  const materials = await prisma.courseMaterial.findMany({
+    where: { uploadedBy: appUser.id, storagePath: { not: null } },
+    select: { storagePath: true },
+  });
+  for (const material of materials) {
+    if (material.storagePath) await removeCourseMaterialFile(material.storagePath);
+  }
+
+  await prisma.$transaction(async (tx) => {
+    await tx.peerQuestion.deleteMany({
+      where: { userId: appUser.id, answers: { none: {} } },
+    });
+    const retainedQuestions = await tx.peerQuestion.findMany({
+      where: { userId: appUser.id, answers: { some: {} } },
+      select: { id: true, semesterId: true },
+    });
+    const retainedQuestionIds = retainedQuestions.map((question) => question.id);
+
+    if (retainedQuestionIds.length) {
+      const retainedSemesterIds = [...new Set(retainedQuestions.map((question) => question.semesterId))];
+
+      await tx.peerQuestion.updateMany({
+        where: { id: { in: retainedQuestionIds } },
+        data: { courseId: null },
+      });
+      await tx.semester.deleteMany({
+        where: { ownerId: appUser.id, id: { notIn: retainedSemesterIds } },
+      });
+      await Promise.all([
+        tx.assessment.deleteMany({ where: { userId: appUser.id, semesterId: { in: retainedSemesterIds } } }),
+        tx.cwaSnapshot.deleteMany({ where: { userId: appUser.id, semesterId: { in: retainedSemesterIds } } }),
+        tx.enrollment.deleteMany({ where: { userId: appUser.id, semesterId: { in: retainedSemesterIds } } }),
+        tx.goal.deleteMany({ where: { userId: appUser.id, semesterId: { in: retainedSemesterIds } } }),
+        tx.notification.deleteMany({ where: { userId: appUser.id } }),
+        tx.semesterProfile.deleteMany({ where: { userId: appUser.id, semesterId: { in: retainedSemesterIds } } }),
+        tx.studyPlan.deleteMany({ where: { userId: appUser.id, semesterId: { in: retainedSemesterIds } } }),
+        tx.task.deleteMany({ where: { userId: appUser.id, semesterId: { in: retainedSemesterIds } } }),
+        tx.timetableBlock.deleteMany({ where: { userId: appUser.id, semesterId: { in: retainedSemesterIds } } }),
+        tx.weakArea.deleteMany({ where: { userId: appUser.id, semesterId: { in: retainedSemesterIds } } }),
+      ]);
+      await tx.semester.updateMany({
+        where: { id: { in: retainedSemesterIds }, ownerId: appUser.id },
+        data: {
+          name: "Archived peer discussion",
+          cwa: null,
+          startDate: null,
+          endDate: null,
+          isActive: false,
+        },
+      });
+    } else {
+      await tx.semester.deleteMany({ where: { ownerId: appUser.id } });
+    }
+
+    await Promise.all([
+      tx.aiConversation.deleteMany({ where: { userId: appUser.id } }),
+      tx.diagnosticAttempt.deleteMany({ where: { userId: appUser.id } }),
+      tx.diagnosticQuiz.deleteMany({ where: { userId: appUser.id } }),
+      tx.notification.deleteMany({ where: { userId: appUser.id } }),
+      tx.notificationPreference.deleteMany({ where: { userId: appUser.id } }),
+      tx.peerQuestionVote.deleteMany({ where: { userId: appUser.id } }),
+      tx.studyGroupMember.deleteMany({ where: { userId: appUser.id } }),
+      tx.studyGroup.deleteMany({ where: { ownerId: appUser.id } }),
+      tx.topicMastery.deleteMany({ where: { userId: appUser.id } }),
+      tx.resource.deleteMany({ where: { uploadedBy: appUser.id } }),
+      tx.rateLimitBucket.deleteMany({ where: { subject: appUser.id } }),
+    ]);
+    await tx.course.updateMany({
+      where: { createdById: appUser.id, approvalStatus: { not: "OFFICIAL" } },
+      data: { approvalStatus: "REJECTED" },
+    });
+    await tx.user.update({
+      where: { id: appUser.id },
+      data: {
+        role: "STUDENT",
+        email: `deleted-${appUser.id}@brail.invalid`,
+        fullName: "Deleted student",
+        studentId: null,
+        college: null,
+        programme: null,
+        department: null,
+        level: null,
+        cwa: null,
+        activeSemesterId: null,
+        avatarUrl: null,
+        deletedAt: new Date(),
+      },
+    });
+  });
+
+  const serviceClient = createSupabaseServiceClient();
+  const { error: authDeleteError } = await serviceClient.auth.admin.deleteUser(authUser.id);
+  if (authDeleteError) throw new Error("Your data was removed, but login revocation needs administrator attention.");
+
+  const supabase = await createSupabaseServerClient();
+  await supabase.auth.signOut();
+  redirect("/login?accountDeleted=1");
 }

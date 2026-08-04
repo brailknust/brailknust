@@ -1,6 +1,7 @@
 import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
 import { syncNotificationsForUser } from "@/features/notifications/service";
 import { prisma } from "@/server/db";
+import { checkRateLimit, rateLimitResponse } from "@/server/rate-limit";
 
 export async function GET() {
   const authUser = await getSupabaseUser();
@@ -8,6 +9,9 @@ export async function GET() {
 
   const appUser = await getAppUserByAuthId(authUser.id);
   if (!appUser) return Response.json({ error: "Onboarding required" }, { status: 409 });
+
+  const rateLimit = await checkRateLimit({ subject: appUser.id, action: "notification-poll", limit: 60, windowSeconds: 60 });
+  if (!rateLimit.allowed) return rateLimitResponse(rateLimit.retryAfter);
 
   await syncNotificationsForUser(appUser.id);
 

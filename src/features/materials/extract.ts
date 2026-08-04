@@ -39,6 +39,35 @@ export function materialFileExtension(fileName: string) {
   return fileName.toLowerCase().split(".").pop() ?? "";
 }
 
+const materialMimeTypes: Record<string, string[]> = {
+  pdf: ["application/pdf"],
+  docx: ["application/vnd.openxmlformats-officedocument.wordprocessingml.document"],
+  pptx: ["application/vnd.openxmlformats-officedocument.presentationml.presentation"],
+  txt: ["text/plain"],
+  md: ["text/markdown", "text/plain"],
+  png: ["image/png"],
+  jpg: ["image/jpeg"],
+  jpeg: ["image/jpeg"],
+  webp: ["image/webp"],
+};
+
+export async function hasValidMaterialFileType(file: File) {
+  const extension = materialFileExtension(file.name);
+  if (!materialMimeTypes[extension]?.includes(file.type.toLowerCase())) return false;
+
+  const header = new Uint8Array(await file.slice(0, 12).arrayBuffer());
+  if (["txt", "md"].includes(extension)) return !header.includes(0);
+  if (extension === "pdf") return String.fromCharCode(...header.slice(0, 5)) === "%PDF-";
+  if (["docx", "pptx"].includes(extension)) return header[0] === 0x50 && header[1] === 0x4b;
+  if (extension === "png") return header[0] === 0x89 && String.fromCharCode(...header.slice(1, 4)) === "PNG";
+  if (["jpg", "jpeg"].includes(extension)) return header[0] === 0xff && header[1] === 0xd8 && header[2] === 0xff;
+  if (extension === "webp") {
+    return String.fromCharCode(...header.slice(0, 4)) === "RIFF"
+      && String.fromCharCode(...header.slice(8, 12)) === "WEBP";
+  }
+  return false;
+}
+
 export async function extractCourseMaterialText(file: File) {
   const extension = materialFileExtension(file.name);
   if (!acceptedMaterialExtensions.includes(extension)) {
