@@ -58,6 +58,8 @@ Configure the `main` and `readyapp` branch rules in GitHub to require both check
 
 The browser job uploads its Playwright HTML report and failure attachments for 14 days. Fixtures are synthetic and local to the CI runner; no shared Supabase credentials are required.
 
+The CI security check explicitly bootstraps the private `course-materials` bucket because Storage buckets are external to Prisma migrations. That bootstrap is rejected unless Supabase is running on localhost; normal environment verification still treats a missing bucket as a failure.
+
 ## Adding tests
 
 Put pure logic in `tests/unit`, data-bound behavior with mocked ownership boundaries in `tests/integration`, interactive client behavior in `tests/components`, security regressions in `tests/security`, and complete user workflows in `tests/e2e`. Keep E2E data namespaced by the fixture `runId` and extend global teardown whenever a new external resource is created.

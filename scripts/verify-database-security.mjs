@@ -24,6 +24,7 @@ const prisma = new PrismaClient();
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const bootstrapLocalStorage = process.argv.includes("--bootstrap-local-storage");
 const bucket = "course-materials";
 const verificationId = randomUUID();
 const objectName = `${verificationId}.txt`;
@@ -37,6 +38,13 @@ const service = createClient(supabaseUrl, serviceRoleKey, {
 const anonymous = createClient(supabaseUrl, anonKey, {
   auth: { persistSession: false, autoRefreshToken: false },
 });
+
+if (bootstrapLocalStorage) {
+  const localHosts = new Set(["127.0.0.1", "localhost", "::1"]);
+  if (!localHosts.has(new URL(supabaseUrl).hostname)) {
+    throw new Error("Storage bootstrap is restricted to a local Supabase instance.");
+  }
+}
 
 let authUserId;
 let objectUploaded = false;
@@ -80,7 +88,14 @@ try {
     throw new Error("Supabase browser roles still have direct public-table privileges.");
   }
 
-  const bucketResult = await service.storage.getBucket(bucket);
+  let bucketResult = await service.storage.getBucket(bucket);
+  if ((bucketResult.error || !bucketResult.data) && bootstrapLocalStorage) {
+    const created = await service.storage.createBucket(bucket, { public: false });
+    if (created.error && !created.error.message.toLowerCase().includes("already exists")) {
+      throw new Error("Could not bootstrap the private material bucket.");
+    }
+    bucketResult = await service.storage.getBucket(bucket);
+  }
   if (bucketResult.error || !bucketResult.data) {
     throw new Error("The private material bucket is unavailable.");
   }
