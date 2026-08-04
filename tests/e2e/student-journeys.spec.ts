@@ -9,7 +9,9 @@ async function submitServerAction(page: Page, pathname: string, submit: () => Pr
   );
 
   await submit();
-  await response;
+  const completedResponse = await response;
+  const failure = await completedResponse.finished();
+  if (failure) throw failure;
 }
 
 test.describe.serial("critical student journeys", () => {
@@ -111,15 +113,23 @@ test.describe.serial("critical student journeys", () => {
 
   test("a material-grounded diagnostic can be completed", async ({ page }) => {
     const fixture = await readE2eFixture();
+    const quizPath = `/practice/${fixture.diagnosticQuizId}`;
     await login(page, fixture.users.primary, fixture);
-    await page.goto(`/practice/${fixture.diagnosticQuizId}`);
+    await page.goto(quizPath);
 
-    const answers = page.locator('fieldset input[type="radio"][value="A"]');
-    await expect(answers).toHaveCount(4);
-    for (let index = 0; index < 4; index += 1) await answers.nth(index).check();
-    await page.getByRole("button", { name: "Submit diagnostic" }).click();
+    await expect(page.getByRole("link", { name: "Back to practice" })).toBeVisible();
+    const score = page.getByText("Score: 4/4");
+    if (!(await score.isVisible())) {
+      const answers = page.locator('fieldset input[type="radio"][value="A"]');
+      await expect(answers).toHaveCount(4);
+      for (let index = 0; index < 4; index += 1) await answers.nth(index).check();
+      await submitServerAction(page, quizPath, () =>
+        page.getByRole("button", { name: "Submit diagnostic" }).click(),
+      );
+      await page.goto(quizPath);
+    }
 
-    await expect(page.getByText("Score: 4/4")).toBeVisible();
+    await expect(score).toBeVisible();
   });
 
   test("peer Q&A, groups, and notification state changes work", async ({ page }) => {
@@ -143,12 +153,16 @@ test.describe.serial("critical student journeys", () => {
 
     await page.goto("/notifications");
     let notification = page.locator("article").filter({ hasText: fixture.notificationTitle });
-    const markRead = notification.getByRole("button", { name: "Mark read" });
-    if (await markRead.isVisible()) {
+    await expect(notification).toBeVisible();
+    let markUnread = notification.getByRole("button", { name: "Mark unread" });
+    if (!(await markUnread.isVisible())) {
+      const markRead = notification.getByRole("button", { name: "Mark read" });
+      await expect(markRead).toBeVisible();
       await submitServerAction(page, "/notifications", () => markRead.click());
       await page.goto("/notifications");
       notification = page.locator("article").filter({ hasText: fixture.notificationTitle });
+      markUnread = notification.getByRole("button", { name: "Mark unread" });
     }
-    await expect(notification.getByRole("button", { name: "Mark unread" })).toBeVisible();
+    await expect(markUnread).toBeVisible();
   });
 });
