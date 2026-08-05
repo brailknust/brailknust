@@ -58,7 +58,7 @@ export async function getActiveSemesterSummary(userId: string, activeSemesterId:
 }
 
 export async function getSemesterCards(userId: string) {
-  let user = await prisma.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: { id: userId },
     select: { activeSemesterId: true },
   });
