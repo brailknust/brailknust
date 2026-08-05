@@ -10,7 +10,10 @@ export async function getAcademicSetup(userId: string) {
       where: { ownerId: userId },
       orderBy: { createdAt: "desc" },
     }),
-    prisma.course.findMany({ orderBy: { code: "asc" } }),
+    prisma.course.findMany({
+      where: { OR: [{ approvalStatus: "OFFICIAL" }, { createdById: userId }] },
+      orderBy: { code: "asc" },
+    }),
     prisma.enrollment.findMany({
       where: { userId },
       include: { course: true, semester: true },
@@ -107,7 +110,10 @@ export async function getSemesterDetail(userId: string, semesterId: string) {
     prisma.semester.findFirst({
       where: { id: semesterId, ownerId: userId },
     }),
-    prisma.course.findMany({ orderBy: { code: "asc" } }),
+    prisma.course.findMany({
+      where: { OR: [{ approvalStatus: "OFFICIAL" }, { createdById: userId }] },
+      orderBy: { code: "asc" },
+    }),
     prisma.semesterProfile.findUnique({
       where: { userId_semesterId: { userId, semesterId } },
     }),

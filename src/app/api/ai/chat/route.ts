@@ -17,6 +17,7 @@ import { sendAiMessageSchema } from "@/features/ai/schemas";
 import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
 import { retrieveCourseMaterialContext } from "@/features/materials/retrieval";
 import { prisma } from "@/server/db";
+import { checkRateLimit, rateLimitResponse } from "@/server/rate-limit";
 
 function conversationTitle(message: string) {
   const firstLine = message.replace(/\s+/g, " ").trim();
@@ -29,6 +30,8 @@ export async function POST(request: Request) {
 
   const appUser = await getAppUserByAuthId(authUser.id);
   if (!appUser) return NextResponse.json({ error: "Complete onboarding first." }, { status: 403 });
+  const rateLimit = await checkRateLimit({ subject: appUser.id, action: "ai-chat", limit: 10, windowSeconds: 60 });
+  if (!rateLimit.allowed) return rateLimitResponse(rateLimit.retryAfter);
   if (!appUser.activeSemesterId) {
     return NextResponse.json({ error: "Set an active semester before using AI Chat." }, { status: 400 });
   }

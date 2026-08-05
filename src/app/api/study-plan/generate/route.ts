@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
 import { prisma } from "@/server/db";
+import { checkRateLimit, rateLimitResponse } from "@/server/rate-limit";
 
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] as const;
 const generatedPlanTitle = "Generated Study Timetable";
@@ -196,14 +197,23 @@ async function savePlanForUser(
       continue;
     }
 
-    const record = await prisma.course.upsert({
+    const existingCourse = await prisma.course.findUnique({
       where: { code: course.courseCode },
-      update: {
-        name: course.courseName || course.courseCode,
-      },
-      create: {
+      select: { id: true, approvalStatus: true, createdById: true },
+    });
+    if (
+      existingCourse
+      && existingCourse.approvalStatus !== "OFFICIAL"
+      && existingCourse.createdById !== userId
+    ) {
+      throw new Error(`${course.courseCode} is awaiting administrator review for another student.`);
+    }
+    const record = existingCourse ?? await prisma.course.create({
+      data: {
         code: course.courseCode,
         name: course.courseName || course.courseCode,
+        approvalStatus: "PENDING",
+        createdById: userId,
       },
       select: { id: true },
     });
@@ -369,6 +379,9 @@ export async function POST(request: Request) {
   if (!appUser.activeSemesterId) {
     return NextResponse.json({ message: "Set an active semester before generating a study plan." }, { status: 400 });
   }
+
+  const rateLimit = await checkRateLimit({ subject: appUser.id, action: "study-plan-generate", limit: 20, windowSeconds: 3600 });
+  if (!rateLimit.allowed) return rateLimitResponse(rateLimit.retryAfter);
 
   const body = (await request.json().catch(() => null)) as GenerateBody | null;
   const rows = body?.rows?.filter(isValidRow) ?? [];

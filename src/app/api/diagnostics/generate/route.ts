@@ -7,6 +7,7 @@ import {
   generatedQuestionSetSchema,
 } from "@/features/diagnostics/schemas";
 import { prisma } from "@/server/db";
+import { checkRateLimit, rateLimitResponse } from "@/server/rate-limit";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -173,6 +174,8 @@ export async function POST(request: Request) {
   if (!appUser?.activeSemesterId) {
     return NextResponse.json({ message: "Set an active semester first." }, { status: 400 });
   }
+  const rateLimit = await checkRateLimit({ subject: appUser.id, action: "diagnostic-generate", limit: 5, windowSeconds: 600 });
+  if (!rateLimit.allowed) return rateLimitResponse(rateLimit.retryAfter);
   if (!isAiConfigured()) {
     return NextResponse.json({ message: "AI generation is not configured." }, { status: 503 });
   }

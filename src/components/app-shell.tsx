@@ -28,6 +28,7 @@ export async function AppShell({ children, title, eyebrow }: AppShellProps) {
       ? [
           { label: "Admin content", href: "/admin/content" },
           { label: "Programme catalog", href: "/admin/catalog" },
+          { label: "Admin access", href: "/admin/users" },
         ]
       : []),
     { label: "Notifications", href: "/notifications" },

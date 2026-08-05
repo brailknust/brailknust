@@ -8,6 +8,7 @@ import { prisma } from "@/server/db";
 export default async function AdminContentPage() {
   await requireAdmin();
   const courses = await prisma.course.findMany({
+    where: { approvalStatus: "OFFICIAL" },
     select: {
       id: true,
       code: true,

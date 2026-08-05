@@ -3,9 +3,10 @@ import { z } from "zod";
 
 import { requireAdmin } from "@/features/auth/queries";
 import { chunkMaterialText } from "@/features/materials/chunking";
-import { acceptedMaterialExtensions, extractCourseMaterialText, materialFileExtension } from "@/features/materials/extract";
+import { acceptedMaterialExtensions, extractCourseMaterialText, hasValidMaterialFileType, materialFileExtension } from "@/features/materials/extract";
 import { uploadCourseMaterialFile } from "@/features/materials/storage";
 import { prisma } from "@/server/db";
+import { checkRateLimit, rateLimitResponse } from "@/server/rate-limit";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -24,6 +25,8 @@ function safeName(name: string) {
 
 export async function POST(request: Request) {
   const { appUser } = await requireAdmin();
+  const rateLimit = await checkRateLimit({ subject: appUser.id, action: "admin-material-upload", limit: 20, windowSeconds: 3600 });
+  if (!rateLimit.allowed) return rateLimitResponse(rateLimit.retryAfter);
   let formData: FormData;
   try {
     formData = await request.formData();
@@ -44,6 +47,9 @@ export async function POST(request: Request) {
   const extension = materialFileExtension(file.name);
   if (!acceptedMaterialExtensions.includes(extension)) {
     return NextResponse.json({ message: "Unsupported file type." }, { status: 415 });
+  }
+  if (!(await hasValidMaterialFileType(file))) {
+    return NextResponse.json({ message: "The file contents do not match its extension and media type." }, { status: 415 });
   }
   if (file.size > 50 * 1024 * 1024) {
     return NextResponse.json({ message: "The file must be smaller than 50MB." }, { status: 413 });
@@ -100,7 +106,8 @@ export async function POST(request: Request) {
     ]);
     return NextResponse.json({ message: `Published ${chunks.length} searchable chunks.` });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Could not process material.";
+    console.error("Platform material processing failed", error);
+    const message = "The material could not be processed. Check the file and try again.";
     await prisma.platformCourseMaterial.update({
       where: { id: material.id },
       data: { storagePath, status: "FAILED", errorMessage: message.slice(0, 500) },

@@ -125,6 +125,18 @@ enum UserRole {
   ADMIN
 }
 
+enum AdminRoleAction {
+  BOOTSTRAPPED
+  GRANTED
+  REVOKED
+}
+
+enum CourseApprovalStatus {
+  OFFICIAL
+  PENDING
+  REJECTED
+}
+
 enum PlatformMaterialStatus {
   PUBLISHED
   ARCHIVED
@@ -147,6 +159,7 @@ model User {
   avatarUrl              String?                  @map("avatar_url")
   createdAt              DateTime                 @default(now()) @map("created_at")
   updatedAt              DateTime                 @updatedAt @map("updated_at")
+  deletedAt              DateTime?                @map("deleted_at")
   activeSemester         Semester?                @relation("UserActiveSemester", fields: [activeSemesterId], references: [id])
   aiConversations        AiConversation[]
   assessments            Assessment[]
@@ -173,9 +186,27 @@ model User {
   peerVotes              PeerQuestionVote[]
   platformMaterials      PlatformCourseMaterial[]
   programmeCourseExclusions ProgrammeCourseExclusion[]
+  adminRoleChangesMade   AdminRoleAudit[]         @relation("AdminRoleAuditActor")
+  adminRoleChangesReceived AdminRoleAudit[]        @relation("AdminRoleAuditTarget")
+  coursesCreated          Course[]                 @relation("CourseCreator")
 
   @@index([activeSemesterId])
+  @@index([deletedAt])
   @@map("users")
+}
+
+model AdminRoleAudit {
+  id           String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  actorId      String?         @map("actor_id") @db.Uuid
+  targetUserId String          @map("target_user_id") @db.Uuid
+  action       AdminRoleAction
+  createdAt    DateTime        @default(now()) @map("created_at")
+  actor        User?           @relation("AdminRoleAuditActor", fields: [actorId], references: [id], onDelete: SetNull)
+  targetUser   User            @relation("AdminRoleAuditTarget", fields: [targetUserId], references: [id], onDelete: Cascade)
+
+  @@index([targetUserId, createdAt])
+  @@index([actorId])
+  @@map("admin_role_audits")
 }
 
 model Course {
@@ -186,7 +217,10 @@ model Course {
   department        String?
   level             AcademicLevel?
   description       String?
+  approvalStatus    CourseApprovalStatus     @default(PENDING) @map("approval_status")
+  createdById       String?                  @map("created_by_id") @db.Uuid
   createdAt         DateTime                 @default(now()) @map("created_at")
+  createdBy         User?                    @relation("CourseCreator", fields: [createdById], references: [id], onDelete: SetNull)
   assessments       Assessment[]
   enrollments       Enrollment[]
   goals             Goal[]
@@ -201,6 +235,7 @@ model Course {
   platformTopics    PlatformCourseTopic[]
 
   @@map("courses")
+  @@index([approvalStatus, createdById])
 }
 
 model Semester {
@@ -848,4 +883,18 @@ model AiMessage {
   @@index([conversationId, createdAt])
   @@index([role, createdAt])
   @@map("ai_messages")
+}
+
+model RateLimitBucket {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  subject     String
+  action      String
+  bucketStart DateTime @map("bucket_start")
+  count       Int      @default(1)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@unique([subject, action, bucketStart])
+  @@index([bucketStart])
+  @@map("rate_limit_buckets")
 }
