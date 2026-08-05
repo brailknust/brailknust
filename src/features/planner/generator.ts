@@ -74,8 +74,20 @@ export function isValidTimetableRow(row: TimetableRow) {
     row.courseCode.trim().length > 0 &&
     row.courseName.trim().length > 0 &&
     weekDays.includes(row.dayOfWeek as (typeof weekDays)[number]) &&
+    /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(row.startTime) &&
+    /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(row.endTime) &&
     toMinutes(row.startTime) < toMinutes(row.endTime)
   );
+}
+
+export function hasTimetableConflicts(rows: TimetableRow[]) {
+  return rows.some((row, index) => rows.slice(index + 1).some((other) =>
+    row.dayOfWeek === other.dayOfWeek
+    && overlaps(toMinutes(row.startTime), toMinutes(row.endTime), {
+      start: toMinutes(other.startTime),
+      end: toMinutes(other.endTime),
+    }),
+  ));
 }
 
 export function sessionsForCourse(

@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
 import {
   generateStudySessions,
+  hasTimetableConflicts,
   isValidTimetableRow,
   normalizeCourseCode,
   toMinutes,
@@ -313,7 +314,14 @@ export async function POST(request: Request) {
   if (!rateLimit.allowed) return rateLimitResponse(rateLimit.retryAfter);
 
   const body = (await request.json().catch(() => null)) as GenerateBody | null;
-  const rows = body?.rows?.filter(isValidTimetableRow) ?? [];
+  const submittedRows = body?.rows ?? [];
+  if (submittedRows.some((row) => !isValidTimetableRow(row))) {
+    return NextResponse.json({ message: "Correct the timetable rows before generating a study plan." }, { status: 400 });
+  }
+  if (hasTimetableConflicts(submittedRows)) {
+    return NextResponse.json({ message: "Timetable rows overlap. Resolve the class conflict before generating a study plan." }, { status: 409 });
+  }
+  const rows = submittedRows;
 
   const activeEnrollments = await prisma.enrollment.findMany({
     where: {

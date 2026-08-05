@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   generateStudySessions,
+  hasTimetableConflicts,
   isValidTimetableRow,
   overlaps,
   sessionsForCourse,
@@ -82,7 +83,16 @@ describe("study-plan generation", () => {
 
     expect(isValidTimetableRow(validRow)).toBe(true);
     expect(isValidTimetableRow({ ...validRow, endTime: "08:00" })).toBe(false);
+    expect(isValidTimetableRow({ ...validRow, startTime: "25:00" })).toBe(false);
     expect(isValidTimetableRow({ ...validRow, dayOfWeek: "Funday" })).toBe(false);
+    expect(hasTimetableConflicts([
+      validRow,
+      { ...validRow, id: "row-2", courseCode: "COE 202", startTime: "09:30", endTime: "10:30" },
+    ])).toBe(true);
+    expect(hasTimetableConflicts([
+      validRow,
+      { ...validRow, id: "row-2", courseCode: "COE 202", dayOfWeek: "Tuesday" },
+    ])).toBe(false);
     expect(sessionsForCourse(0, "intense")).toBe(1);
     expect(sessionsForCourse(8, "balanced")).toBe(3);
   });
