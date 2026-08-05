@@ -68,21 +68,10 @@ export async function getSemesterCards(userId: string) {
       profiles: { where: { userId } },
       enrollments: { where: { userId }, include: { course: true } },
     },
-    orderBy: [{ academicYear: "desc" }, { name: "asc" }],
+    orderBy: [{ academicYear: "desc" }, { level: "asc" }, { term: "asc" }],
   });
   const semesterIds = semesters.map((semester) => semester.id);
 
-  if (semesters.length === 1 && user?.activeSemesterId !== semesters[0].id) {
-    user = await prisma.user.update({
-      where: { id: userId },
-      data: {
-        activeSemesterId: semesters[0].id,
-        cwa: semesters[0].cwa,
-        level: semesters[0].level,
-      },
-      select: { activeSemesterId: true },
-    });
-  }
   const tasks = semesterIds.length
     ? await prisma.task.findMany({
         where: {

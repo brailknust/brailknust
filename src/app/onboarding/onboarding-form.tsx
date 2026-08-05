@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 
 import { getKnustProgrammesForCollege, type KnustCollege } from "@/data/knust-academic-hierarchy";
+import { getCurriculumVersions } from "@/data/curricula";
 import { PendingSubmitButton } from "@/components/pending-submit-button";
 
 const levels = [
@@ -45,6 +46,7 @@ export function OnboardingForm({ action, hierarchy, defaultFullName }: Onboardin
     () => getKnustProgrammesForCollege(selectedCollege),
     [selectedCollege],
   );
+  const curriculumVersions = useMemo(() => selectedCollege && selectedProgramme ? getCurriculumVersions({ college: selectedCollege, programme: selectedProgramme }) : [], [selectedCollege, selectedProgramme]);
 
   return (
     <form action={action} className="mt-8 grid gap-5">
@@ -117,13 +119,20 @@ export function OnboardingForm({ action, hierarchy, defaultFullName }: Onboardin
               ))}
             </select>
           </label>
+          <label className={labelClassName}>
+            Curriculum version
+            <select name="curriculumVersion" required disabled={!selectedProgramme || !curriculumVersions.length} className={fieldClassName}>
+              <option value="">{selectedProgramme ? (curriculumVersions.length ? "Select curriculum version" : "Curriculum coming soon") : "Select programme first"}</option>
+              {curriculumVersions.map((version) => <option key={version} value={version}>{version}</option>)}
+            </select>
+          </label>
         </div>
       </div>
 
       <div className="rounded-xl border border-border bg-white p-5">
-        <h2 className="text-base font-semibold">Current semester</h2>
+        <h2 className="text-base font-semibold">Active semester</h2>
         <p className="mt-1 text-sm leading-6 text-muted">
-          If BRAIL has a curriculum template for your programme, matching courses will be added automatically.
+          BRAIL will provision your full curriculum. Choose the semester you are studying now; it will not change automatically later.
         </p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <label className={labelClassName}>

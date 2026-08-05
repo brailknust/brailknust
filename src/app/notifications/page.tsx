@@ -28,8 +28,8 @@ function dateLabel(value: Date) {
 export default async function NotificationsPage({ searchParams }: NotificationsPageProps) {
   const { appUser } = await requireAppUser();
   const params = await searchParams;
-  const unreadOnly = params.view === "unread";
-  const data = await getNotificationCenterData(appUser.id, unreadOnly);
+  const view = ["active", "unread", "history", "missed"].includes(params.view ?? "") ? params.view! : "active";
+  const data = await getNotificationCenterData(appUser.id, view);
   const preferences = data.preferences;
 
   return (
@@ -54,8 +54,10 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
       <div className="mt-6 grid gap-6 xl:grid-cols-[1.25fr_0.75fr]">
         <section>
           <nav className="flex gap-2 border-b border-border">
-            <Link href="/notifications" className={`border-b-2 px-4 py-3 text-sm font-semibold ${!unreadOnly ? "border-accent text-accent" : "border-transparent text-muted"}`}>All</Link>
-            <Link href="/notifications?view=unread" className={`border-b-2 px-4 py-3 text-sm font-semibold ${unreadOnly ? "border-accent text-accent" : "border-transparent text-muted"}`}>Unread</Link>
+            <Link href="/notifications" className={`border-b-2 px-4 py-3 text-sm font-semibold ${view === "active" ? "border-accent text-accent" : "border-transparent text-muted"}`}>Active</Link>
+            <Link href="/notifications?view=unread" className={`border-b-2 px-4 py-3 text-sm font-semibold ${view === "unread" ? "border-accent text-accent" : "border-transparent text-muted"}`}>Unread</Link>
+            <Link href="/notifications?view=missed" className={`border-b-2 px-4 py-3 text-sm font-semibold ${view === "missed" ? "border-accent text-accent" : "border-transparent text-muted"}`}>Missed</Link>
+            <Link href="/notifications?view=history" className={`border-b-2 px-4 py-3 text-sm font-semibold ${view === "history" ? "border-accent text-accent" : "border-transparent text-muted"}`}>History</Link>
           </nav>
 
           <div className="mt-5 grid gap-3">
@@ -89,10 +91,10 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
                       <form action={deleteNotification} className="ml-auto">
                         <input type="hidden" name="id" value={notification.id} />
                         <ConfirmSubmitButton
-                          message="Delete this notification permanently?"
+                          message="Dismiss this notification? It will remain in your history."
                           className="grid h-9 w-9 place-items-center rounded-xl border border-red-300 text-red-600"
-                          aria-label="Delete notification"
-                          title="Delete notification"
+                          aria-label="Dismiss notification"
+                          title="Dismiss notification"
                         >
                           <Trash2 className="h-4 w-4" />
                         </ConfirmSubmitButton>
@@ -104,7 +106,7 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
             )) : (
               <div className="rounded-2xl border border-dashed border-border p-8 text-center">
                 <CheckCheck className="mx-auto h-6 w-6 text-accent" />
-                <p className="mt-3 font-semibold">{unreadOnly ? "No unread notifications" : "No notifications yet"}</p>
+                <p className="mt-3 font-semibold">No {view === "active" ? "active" : view} notifications</p>
               </div>
             )}
           </div>

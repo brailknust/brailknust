@@ -13,6 +13,13 @@ enum SemesterTerm {
   SECOND
 }
 
+enum EnrollmentOrigin {
+  CURRICULUM_DEFAULT
+  MANUAL
+  TRANSFER
+  REPEAT
+}
+
 enum AcademicLevel {
   LEVEL_100
   LEVEL_200
@@ -81,6 +88,19 @@ enum NotificationType {
   STUDY_PLAN
   GROUP
   SYSTEM
+}
+
+enum NotificationStatus {
+  PENDING
+  DELIVERED
+  READ
+  DISMISSED
+  EXPIRED
+  FAILED
+}
+
+enum NotificationChannel {
+  IN_APP
 }
 
 enum AssessmentType {
@@ -219,6 +239,7 @@ model User {
   peerVotes                 PeerQuestionVote[]
   platformMaterials         PlatformCourseMaterial[]
   programmeCourseExclusions ProgrammeCourseExclusion[]
+  studentCourseExclusions   StudentCourseExclusion[]
   adminRoleChangesMade      AdminRoleAudit[]           @relation("AdminRoleAuditActor")
   adminRoleChangesReceived  AdminRoleAudit[]           @relation("AdminRoleAuditTarget")
   coursesCreated            Course[]                   @relation("CourseCreator")
@@ -314,14 +335,21 @@ model Semester {
   endDate               DateTime?              @map("end_date") @db.Date
   isActive              Boolean                @default(false) @map("is_active")
   isArchived            Boolean                @default(false) @map("is_archived")
+  isCustom              Boolean                @default(false) @map("is_custom")
+  provisionKey          String?                @map("provision_key")
+  curriculumId          String?                @map("curriculum_id") @db.Uuid
+  curriculumTermId      String?                @map("curriculum_term_id") @db.Uuid
   archivedAt            DateTime?              @map("archived_at")
   createdAt             DateTime               @default(now()) @map("created_at")
   owner                 User                   @relation("UserSemesters", fields: [ownerId], references: [id], onDelete: Cascade)
+  curriculum            ProgrammeCurriculum?   @relation(fields: [curriculumId], references: [id], onDelete: SetNull)
+  curriculumTerm        ProgrammeCurriculumTerm? @relation(fields: [curriculumTermId], references: [id], onDelete: SetNull)
   assessments           Assessment[]
   cwaSnapshots          CwaSnapshot[]
   activeUsers           User[]                 @relation("UserActiveSemester")
   aiConversations       AiConversation[]
   enrollments           Enrollment[]
+  courseExclusions      StudentCourseExclusion[]
   goals                 Goal[]
   goalProgressSnapshots GoalProgressSnapshot[]
   aiUsageEvents         AiUsageEvent[]
@@ -334,10 +362,61 @@ model Semester {
   peerQuestions         PeerQuestion[]
   notifications         Notification[]
 
-  @@unique([ownerId, level, term])
+  @@unique([ownerId, provisionKey])
   @@index([ownerId])
   @@index([ownerId, isArchived])
   @@map("semesters")
+}
+
+model ProgrammeCurriculum {
+  id           String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  college      String
+  department   String
+  programme    String
+  version      String
+  durationYears Int                       @map("duration_years")
+  termsPerYear Int                        @map("terms_per_year")
+  source       String?
+  isPublished  Boolean                    @default(true) @map("is_published")
+  createdAt    DateTime                   @default(now()) @map("created_at")
+  updatedAt    DateTime                   @updatedAt @map("updated_at")
+  terms        ProgrammeCurriculumTerm[]
+  semesters    Semester[]
+
+  @@unique([college, programme, version])
+  @@index([programme, version, isPublished])
+  @@map("programme_curricula")
+}
+
+model ProgrammeCurriculumTerm {
+  id           String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  curriculumId String                     @map("curriculum_id") @db.Uuid
+  level        AcademicLevel
+  term         SemesterTerm
+  name         String
+  source       String?
+  createdAt    DateTime                   @default(now()) @map("created_at")
+  curriculum   ProgrammeCurriculum        @relation(fields: [curriculumId], references: [id], onDelete: Cascade)
+  courses      ProgrammeCurriculumCourse[]
+  semesters    Semester[]
+
+  @@unique([curriculumId, level, term])
+  @@map("programme_curriculum_terms")
+}
+
+model ProgrammeCurriculumCourse {
+  id               String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  curriculumTermId String                  @map("curriculum_term_id") @db.Uuid
+  courseCode       String                  @map("course_code")
+  courseName       String                  @map("course_name")
+  creditHours      Int                     @map("credit_hours")
+  isApproved       Boolean                 @default(false) @map("is_approved")
+  source           String?
+  createdAt        DateTime                @default(now()) @map("created_at")
+  curriculumTerm   ProgrammeCurriculumTerm @relation(fields: [curriculumTermId], references: [id], onDelete: Cascade)
+
+  @@unique([curriculumTermId, courseCode])
+  @@map("programme_curriculum_courses")
 }
 
 model SemesterProfile {
@@ -365,6 +444,8 @@ model Enrollment {
   currentGrade      String?          @map("current_grade")
   attendance        Decimal?         @db.Decimal(5, 2)
   confidenceScore   Decimal?         @map("confidence_score") @db.Decimal(5, 2)
+  origin            EnrollmentOrigin @default(MANUAL)
+  sourceKey         String?          @map("source_key")
   createdAt         DateTime         @default(now()) @map("created_at")
   course            Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
   semester          Semester         @relation(fields: [semesterId], references: [id], onDelete: Cascade)
@@ -376,9 +457,23 @@ model Enrollment {
   topicMasteries    TopicMastery[]
 
   @@unique([userId, courseId, semesterId])
+  @@unique([userId, semesterId, sourceKey])
   @@index([courseId])
   @@index([semesterId])
   @@map("enrollments")
+}
+
+model StudentCourseExclusion {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId      String   @map("user_id") @db.Uuid
+  semesterId  String   @map("semester_id") @db.Uuid
+  courseCode  String   @map("course_code")
+  createdAt   DateTime @default(now()) @map("created_at")
+  semester    Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, semesterId, courseCode])
+  @@map("student_course_exclusions")
 }
 
 model Assessment {
@@ -430,6 +525,7 @@ model Goal {
   currentValue      Decimal                @default(0) @map("current_value") @db.Decimal(10, 2)
   deadline          DateTime?              @db.Date
   status            GoalStatus             @default(ACTIVE)
+  sourceKey         String?                @map("source_key")
   createdAt         DateTime               @default(now()) @map("created_at")
   updatedAt         DateTime               @updatedAt @map("updated_at")
   course            Course?                @relation(fields: [courseId], references: [id])
@@ -440,6 +536,7 @@ model Goal {
   @@index([userId, semesterId, status])
   @@index([semesterId])
   @@index([courseId])
+  @@unique([userId, semesterId, sourceKey])
   @@map("goals")
 }
 
@@ -916,12 +1013,22 @@ model Notification {
   sourceKey  String?          @map("source_key")
   isRead     Boolean          @default(false) @map("is_read")
   readAt     DateTime?        @map("read_at")
+  scheduledFor DateTime?      @map("scheduled_for")
+  expiresAt  DateTime?        @map("expires_at")
+  deliveredAt DateTime?       @map("delivered_at")
+  dismissedAt DateTime?       @map("dismissed_at")
+  failedAt  DateTime?         @map("failed_at")
+  status    NotificationStatus @default(PENDING)
+  channel   NotificationChannel @default(IN_APP)
+  attemptCount Int            @default(0) @map("attempt_count")
   createdAt  DateTime         @default(now()) @map("created_at")
   semester   Semester?        @relation(fields: [semesterId], references: [id], onDelete: Cascade)
   user       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, sourceKey])
   @@index([userId, isRead, createdAt])
+  @@index([userId, status, scheduledFor])
+  @@index([status, expiresAt])
   @@index([semesterId])
   @@map("notifications")
 }

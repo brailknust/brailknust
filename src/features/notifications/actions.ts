@@ -29,6 +29,7 @@ export async function updateNotificationReadState(formData: FormData) {
     data: {
       isRead: parsed.isRead,
       readAt: parsed.isRead ? new Date() : null,
+      status: parsed.isRead ? "READ" : "DELIVERED",
     },
   });
   refreshNotifications();
@@ -37,8 +38,8 @@ export async function updateNotificationReadState(formData: FormData) {
 export async function markAllNotificationsRead() {
   const { appUser } = await requireAppUser();
   await prisma.notification.updateMany({
-    where: { userId: appUser.id, isRead: false },
-    data: { isRead: true, readAt: new Date() },
+    where: { userId: appUser.id, isRead: false, status: { in: ["PENDING", "DELIVERED"] } },
+    data: { isRead: true, readAt: new Date(), status: "READ" },
   });
   refreshNotifications();
 }
@@ -46,8 +47,9 @@ export async function markAllNotificationsRead() {
 export async function deleteNotification(formData: FormData) {
   const { appUser } = await requireAppUser();
   const { id } = notificationIdSchema.parse({ id: formData.get("id") });
-  await prisma.notification.deleteMany({
+  await prisma.notification.updateMany({
     where: { id, userId: appUser.id },
+    data: { isRead: true, readAt: new Date(), dismissedAt: new Date(), status: "DISMISSED" },
   });
   refreshNotifications();
 }

@@ -1,5 +1,4 @@
 import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
-import { syncNotificationsForUser } from "@/features/notifications/service";
 import { prisma } from "@/server/db";
 import { checkRateLimit, rateLimitResponse } from "@/server/rate-limit";
 
@@ -13,17 +12,16 @@ export async function GET() {
   const rateLimit = await checkRateLimit({ subject: appUser.id, action: "notification-poll", limit: 60, windowSeconds: 60 });
   if (!rateLimit.allowed) return rateLimitResponse(rateLimit.retryAfter);
 
-  await syncNotificationsForUser(appUser.id);
-
   const notifications = await prisma.notification.findMany({
     where: {
       userId: appUser.id,
       isRead: false,
+      status: { in: ["PENDING", "DELIVERED"] },
       OR: [
         { type: "STUDY_PLAN", sourceKey: { startsWith: "study-session-close:" } },
         { type: "DEADLINE", sourceKey: { startsWith: "task-reminder:" } },
       ],
-      createdAt: { gte: new Date(Date.now() - 60 * 60 * 1000) },
+      scheduledFor: { gte: new Date(Date.now() - 60 * 60 * 1000) },
     },
     orderBy: { createdAt: "desc" },
     take: 3,

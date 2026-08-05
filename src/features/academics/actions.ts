@@ -5,7 +5,6 @@ import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import { findCurriculumTemplate } from "@/data/curricula";
 import { requireAppUser } from "@/features/auth/queries";
 import {
   createCourseSchema,
@@ -54,14 +53,8 @@ export async function createSemester(formData: FormData) {
     isActive: formData.get("isActive") === "on",
   });
   const term = parsed.name === "First Semester" ? "FIRST" : "SECOND";
-  const existingSemester = await prisma.semester.findUnique({
-    where: {
-      ownerId_level_term: {
-        ownerId: appUser.id,
-        level: parsed.level,
-        term,
-      },
-    },
+  const existingSemester = await prisma.semester.findFirst({
+    where: { ownerId: appUser.id, level: parsed.level, term, isCustom: true },
     select: { id: true },
   });
 
@@ -85,6 +78,7 @@ export async function createSemester(formData: FormData) {
         startDate: optionalDate(parsed.startDate),
         endDate: optionalDate(parsed.endDate),
         isActive: shouldActivate,
+        isCustom: true,
       },
     });
   } catch (error) {
@@ -102,66 +96,6 @@ export async function createSemester(formData: FormData) {
       cwa: semester.cwa,
     },
   });
-
-  const curriculum = appUser.college && appUser.programme && appUser.department
-    ? findCurriculumTemplate({
-        college: appUser.college,
-        programme: appUser.programme,
-        department: appUser.department,
-        level: parsed.level,
-        semester: parsed.name,
-      })
-    : undefined;
-
-  if (curriculum) {
-    const exclusions = await prisma.programmeCourseExclusion.findMany({
-      where: {
-        programme: curriculum.program,
-        level: curriculum.level,
-        semester: curriculum.semester,
-      },
-      select: { courseCode: true },
-    });
-    const excludedCourseCodes = new Set(exclusions.map((item) => item.courseCode));
-
-    for (const course of curriculum.courses.filter((item) => !excludedCourseCodes.has(item.code))) {
-      const savedCourse = await prisma.course.upsert({
-        where: { code: course.code },
-        create: {
-          code: course.code,
-          name: course.name,
-          creditHours: course.creditHours,
-          department: curriculum.department,
-          level: curriculum.level,
-          approvalStatus: "OFFICIAL",
-        },
-        update: {
-          name: course.name,
-          creditHours: course.creditHours,
-          department: curriculum.department,
-          level: curriculum.level,
-          approvalStatus: "OFFICIAL",
-          createdById: null,
-        },
-      });
-
-      await prisma.enrollment.upsert({
-        where: {
-          userId_courseId_semesterId: {
-            userId: appUser.id,
-            courseId: savedCourse.id,
-            semesterId: semester.id,
-          },
-        },
-        create: {
-          userId: appUser.id,
-          courseId: savedCourse.id,
-          semesterId: semester.id,
-        },
-        update: {},
-      });
-    }
-  }
 
   if (shouldActivate) {
     await prisma.user.update({
@@ -338,8 +272,8 @@ export async function updateSemesterProfile(formData: FormData) {
   if (semester.isArchived) throw new Error("Archived semesters are read-only. Reopen the semester before editing CWA.");
 
   const level = parsed.level ?? semester.level;
-  const conflictingSlot = await prisma.semester.findUnique({
-    where: { ownerId_level_term: { ownerId: appUser.id, level, term: semester.term } },
+  const conflictingSlot = await prisma.semester.findFirst({
+    where: { ownerId: appUser.id, level, term: semester.term, isCustom: semester.isCustom },
     select: { id: true },
   });
   if (conflictingSlot && conflictingSlot.id !== semester.id) {
@@ -450,17 +384,12 @@ export async function archiveSemester(formData: FormData) {
     });
 
     if (appUser.activeSemesterId === semester.id) {
-      const nextSemester = await tx.semester.findFirst({
-        where: { ownerId: appUser.id, isArchived: false, NOT: { id: semester.id } },
-        select: { id: true, cwa: true, level: true },
-        orderBy: [{ academicYear: "desc" }, { level: "desc" }, { term: "desc" }],
-      });
       await tx.user.update({
         where: { id: appUser.id },
         data: {
-          activeSemesterId: nextSemester?.id ?? null,
-          cwa: nextSemester?.cwa ?? null,
-          level: nextSemester?.level ?? appUser.level,
+          activeSemesterId: null,
+          cwa: null,
+          level: appUser.level,
         },
       });
     }
@@ -495,6 +424,17 @@ export async function deleteEnrollment(formData: FormData) {
   });
   await requireWritableSemester(appUser.id, parsed.semesterId);
 
+  const enrollment = await prisma.enrollment.findFirst({
+    where: { id: parsed.enrollmentId, userId: appUser.id, semesterId: parsed.semesterId },
+    include: { course: { select: { code: true } } },
+  });
+  if (enrollment?.origin === "CURRICULUM_DEFAULT") {
+    await prisma.studentCourseExclusion.upsert({
+      where: { userId_semesterId_courseCode: { userId: appUser.id, semesterId: parsed.semesterId, courseCode: enrollment.course.code } },
+      create: { userId: appUser.id, semesterId: parsed.semesterId, courseCode: enrollment.course.code },
+      update: {},
+    });
+  }
   await prisma.enrollment.deleteMany({
     where: {
       id: parsed.enrollmentId,

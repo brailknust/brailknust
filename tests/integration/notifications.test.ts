@@ -10,6 +10,7 @@ const mocks = vi.hoisted(() => ({
   goals: vi.fn(),
   groups: vi.fn(),
   createNotifications: vi.fn(),
+  expireNotifications: vi.fn(),
 }));
 
 vi.mock("@/server/db", () => ({
@@ -24,7 +25,7 @@ vi.mock("@/server/db", () => ({
     studyPlanItem: { findMany: mocks.studyItems },
     goal: { findMany: mocks.goals },
     studyGroup: { findMany: mocks.groups },
-    notification: { createMany: mocks.createNotifications },
+    notification: { createMany: mocks.createNotifications, updateMany: mocks.expireNotifications },
   },
 }));
 
@@ -80,6 +81,7 @@ describe("notification synchronization", () => {
       course: { name: "Data Structures" },
     }]);
     mocks.createNotifications.mockResolvedValue({ count: 4 });
+    mocks.expireNotifications.mockResolvedValue({ count: 0 });
   });
 
   afterEach(() => vi.useRealTimers());

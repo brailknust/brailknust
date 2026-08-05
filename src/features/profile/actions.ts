@@ -3,7 +3,9 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import { findCurriculumTemplate } from "@/data/curricula";
+import { getCurriculumVersions } from "@/data/curricula";
+import { ensureDefaultGoals, ensureProgrammeCurriculum, provisionStudentSemesters } from "@/features/academics/curriculum-provisioning";
+import { syncNotificationsForUser } from "@/features/notifications/service";
 import { findKnustProgramme } from "@/data/knust-academic-hierarchy";
 import { requireAppUser, requireSupabaseUser } from "@/features/auth/queries";
 import { profileSchema, updateProfileSchema } from "@/features/profile/schemas";
@@ -29,6 +31,7 @@ export async function completeProfile(formData: FormData) {
     studentId: formData.get("studentId"),
     college: formData.get("college"),
     programme: normalizeProgrammeName(formData.get("programme")),
+    curriculumVersion: formData.get("curriculumVersion") || undefined,
     semesterName: formData.get("semesterName"),
     academicYear: formData.get("academicYear"),
     level: formData.get("level"),
@@ -36,6 +39,8 @@ export async function completeProfile(formData: FormData) {
   });
   const programme = findKnustProgramme(parsed.college, parsed.programme);
   if (!programme) throw new Error("Select a valid KNUST programme.");
+  const versions = getCurriculumVersions({ college: parsed.college, programme: parsed.programme, department: programme.department });
+  if (versions.length && (!parsed.curriculumVersion || !versions.includes(parsed.curriculumVersion))) throw new Error("Select a published curriculum version for this programme.");
 
   const appUser = await prisma.user.upsert({
     where: { authUserId: authUser.id },
@@ -64,76 +69,39 @@ export async function completeProfile(formData: FormData) {
     },
   });
 
+  if (!parsed.curriculumVersion) throw new Error("A curriculum version is required before BRAIL can provision semesters.");
+  const curriculum = await ensureProgrammeCurriculum({ college: parsed.college, programme: parsed.programme, department: programme.department, version: parsed.curriculumVersion });
+  const semesters = await provisionStudentSemesters({ userId: appUser.id, curriculumId: curriculum.id, academicYear: parsed.academicYear, cwa: parsed.cwa });
   const term = parsed.semesterName === "First Semester" ? "FIRST" : "SECOND";
-  const activeSemester = await prisma.semester.upsert({
-    where: {
-      ownerId_level_term: { ownerId: appUser.id, level: parsed.level, term },
-    },
-    create: {
-      ownerId: appUser.id,
-      level: parsed.level,
-      term,
-      name: parsed.semesterName,
-      academicYear: parsed.academicYear,
-      cwa: parsed.cwa,
-      isActive: true,
-    },
-    update: {
-      academicYear: parsed.academicYear,
-      cwa: parsed.cwa,
-      isActive: true,
-    },
-  });
+  const activeSemester = semesters.find((semester) => semester.level === parsed.level && semester.term === term);
+  if (!activeSemester) throw new Error("That semester is not available in the selected curriculum.");
 
   await prisma.user.update({
     where: { id: appUser.id },
     data: { activeSemesterId: activeSemester.id },
   });
 
-  await prisma.semesterProfile.upsert({
-    where: { userId_semesterId: { userId: appUser.id, semesterId: activeSemester.id } },
-    create: { userId: appUser.id, semesterId: activeSemester.id, level: parsed.level, cwa: parsed.cwa },
-    update: { level: parsed.level, cwa: parsed.cwa },
-  });
-
   if (parsed.cwa !== undefined) {
     await prisma.cwaSnapshot.create({ data: { userId: appUser.id, semesterId: activeSemester.id, cwa: parsed.cwa } });
   }
 
-  const curriculum = findCurriculumTemplate({
-    college: parsed.college,
-    programme: parsed.programme,
-    department: programme.department,
-    level: parsed.level,
-    semester: parsed.semesterName,
-  });
-
-  if (curriculum) {
-    const exclusions = await prisma.programmeCourseExclusion.findMany({
-      where: {
-        programme: curriculum.program,
-        level: curriculum.level,
-        semester: curriculum.semester,
-      },
-      select: { courseCode: true },
-    });
-    const excludedCourseCodes = new Set(exclusions.map((item) => item.courseCode));
-    for (const course of curriculum.courses.filter((item) => !excludedCourseCodes.has(item.code))) {
-      const savedCourse = await prisma.course.upsert({
-        where: { code: course.code },
-        create: { code: course.code, name: course.name, creditHours: course.creditHours, department: programme.department, level: parsed.level, approvalStatus: "OFFICIAL" },
-        update: { name: course.name, creditHours: course.creditHours, department: programme.department, level: parsed.level, approvalStatus: "OFFICIAL", createdById: null },
-      });
-      await prisma.enrollment.upsert({
-        where: { userId_courseId_semesterId: { userId: appUser.id, courseId: savedCourse.id, semesterId: activeSemester.id } },
-        create: { userId: appUser.id, courseId: savedCourse.id, semesterId: activeSemester.id },
-        update: {},
-      });
-    }
-  }
+  await ensureDefaultGoals(appUser.id, activeSemester.id);
+  await syncNotificationsForUser(appUser.id, true);
 
   revalidatePath("/", "layout");
   redirect("/dashboard");
+}
+
+/** Safe recovery path for accounts created before curriculum provisioning existed. */
+export async function provisionExistingUserCurriculum() {
+  const { appUser } = await requireAppUser();
+  if (!appUser.college || !appUser.programme || !appUser.department) throw new Error("Complete your academic profile before provisioning a curriculum.");
+  const version = getCurriculumVersions({ college: appUser.college, programme: appUser.programme, department: appUser.department })[0];
+  if (!version) throw new Error("A published curriculum is not available for your programme yet.");
+  const curriculum = await ensureProgrammeCurriculum({ college: appUser.college, programme: appUser.programme, department: appUser.department, version });
+  await provisionStudentSemesters({ userId: appUser.id, curriculumId: curriculum.id, academicYear: `${new Date().getFullYear()}/${new Date().getFullYear() + 1}`, cwa: appUser.cwa ? Number(appUser.cwa) : undefined });
+  revalidatePath("/academics");
+  revalidatePath("/dashboard");
 }
 
 export async function updateProfile(formData: FormData) {

@@ -17,11 +17,13 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
   }
 
+  const cursor = new URL(request.url).searchParams.get("cursor") ?? undefined;
   const users = await prisma.user.findMany({
     where: { activeSemesterId: { not: null } },
     select: { id: true },
     orderBy: { id: "asc" },
-    take: 1_000,
+    take: 100,
+    ...(cursor ? { cursor: { id: cursor }, skip: 1 } : {}),
   });
 
   let synced = 0;
@@ -36,5 +38,10 @@ export async function GET(request: Request) {
     }
   }
 
-  return NextResponse.json({ processed: users.length, synced, failed });
+  // Retention cleanup is deliberately limited to terminal historical records.
+  await prisma.notification.deleteMany({
+    where: { status: { in: ["READ", "DISMISSED", "EXPIRED"] }, createdAt: { lt: new Date(Date.now() - 180 * 24 * 60 * 60 * 1000) } },
+  });
+
+  return NextResponse.json({ processed: users.length, synced, failed, nextCursor: users.length === 100 ? users.at(-1)?.id ?? null : null });
 }

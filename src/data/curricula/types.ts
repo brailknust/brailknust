@@ -10,6 +10,9 @@ export type CurriculumTemplate = {
   college: string;
   department: string;
   program: string;
+  version: string;
+  durationYears: number;
+  termsPerYear: number;
   level: AcademicLevel;
   semester: "First Semester" | "Second Semester";
   source?: string;

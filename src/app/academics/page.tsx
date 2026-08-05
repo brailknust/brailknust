@@ -7,6 +7,7 @@ import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { createSemester, deleteSemester } from "@/features/academics/actions";
 import { getSemesterCards } from "@/features/academics/queries";
 import { requireAppUser } from "@/features/auth/queries";
+import { provisionExistingUserCurriculum } from "@/features/profile/actions";
 
 const semesterOptions = ["First Semester", "Second Semester"] as const;
 const levelOptions = ["LEVEL_100", "LEVEL_200", "LEVEL_300", "LEVEL_400", "LEVEL_500", "LEVEL_600"] as const;
@@ -28,8 +29,11 @@ function formatLevel(value: string | null | undefined) {
 export default async function AcademicsPage() {
   const { appUser } = await requireAppUser();
   const semesters = await getSemesterCards(appUser.id);
-  const usedSlots = new Set(semesters.map((semester) => `${semester.level}|${semester.name}`));
-  const availableSlots = levelOptions.flatMap((level) => semesterOptions.map((name) => ({ level, name }))).filter((slot) => !usedSlots.has(`${slot.level}|${slot.name}`));
+  const hasProvisionedCurriculum = semesters.some((semester) => !semester.isCustom && semester.curriculumId);
+  const curriculumSemesters = semesters.filter((semester) => !semester.isCustom && semester.curriculumId);
+  const customSemesters = semesters.filter((semester) => semester.isCustom || !semester.curriculumId);
+  const customSlots = new Set(semesters.filter((semester) => semester.isCustom).map((semester) => `${semester.level}|${semester.name}`));
+  const availableSlots = levelOptions.flatMap((level) => semesterOptions.map((name) => ({ level, name }))).filter((slot) => !customSlots.has(`${slot.level}|${slot.name}`));
 
   return (
     <AppShell title="Academic semesters" eyebrow="Academics">
@@ -39,16 +43,16 @@ export default async function AcademicsPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-white/70">
               Semester workspace
             </p>
-            <h2 className="mt-3 text-2xl font-semibold">Manage each semester as its own card.</h2>
+            <h2 className="mt-3 text-2xl font-semibold">Your curriculum is provisioned as one academic path.</h2>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-white/70">
-              Open a semester to update its CWA, enroll courses, manage timetable blocks, and
-              drill into per-course analytics.
+              Choose an active semester explicitly. Programme semesters and their course defaults are retained;
+              use a custom semester only for transfers, resits, deferment, or programme changes.
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-3 lg:min-w-[480px]">
             <div className="rounded-xl border border-background/15 bg-white/10 p-4">
               <CalendarDays className="h-5 w-5 text-white/75" />
-              <p className="mt-5 text-2xl font-semibold">{semesters.length}</p>
+              <p className="mt-5 text-2xl font-semibold">{curriculumSemesters.length}</p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
                 Semesters
               </p>
@@ -56,7 +60,7 @@ export default async function AcademicsPage() {
             <div className="rounded-xl border border-background/15 bg-white/10 p-4">
               <BookOpen className="h-5 w-5 text-white/75" />
               <p className="mt-5 text-2xl font-semibold">
-                {semesters.reduce((total, semester) => total + semester.enrollments.length, 0)}
+                {curriculumSemesters.reduce((total, semester) => total + semester.enrollments.length, 0)}
               </p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
                 Enrollments
@@ -65,7 +69,7 @@ export default async function AcademicsPage() {
             <div className="rounded-xl border border-background/15 bg-white/10 p-4">
               <ListChecks className="h-5 w-5 text-white/75" />
               <p className="mt-5 text-2xl font-semibold">
-                {semesters.reduce((total, semester) => total + semester.openTaskCount, 0)}
+                {curriculumSemesters.reduce((total, semester) => total + semester.openTaskCount, 0)}
               </p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
                 Open tasks
@@ -75,11 +79,13 @@ export default async function AcademicsPage() {
         </div>
       </section>
 
+      {!hasProvisionedCurriculum ? <section className="mt-6 rounded-2xl border border-accent/30 bg-surface p-5"><h2 className="text-lg font-semibold">Set up your curriculum</h2><p className="mt-2 text-sm text-muted">Your account predates automatic curriculum setup. Provision the published programme path without changing your active semester or existing records.</p><form action={provisionExistingUserCurriculum} className="mt-4"><PendingSubmitButton pendingLabel="Provisioning curriculum..." className="h-10 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Provision my curriculum</PendingSubmitButton></form></section> : null}
+
       <section className="mt-6 grid gap-6 xl:grid-cols-[0.7fr_1.3fr]">
         <form action={createSemester} className="rounded-2xl border border-border bg-white p-5">
           <div className="flex items-center gap-3">
             <Plus className="h-5 w-5 text-accent" />
-            <h2 className="text-lg font-semibold">Add semester</h2>
+            <h2 className="text-lg font-semibold">Add custom semester</h2>
           </div>
           <div className="mt-5 grid gap-4">
             {availableSlots.length ? (
@@ -93,6 +99,7 @@ export default async function AcademicsPage() {
             ) : (
               <p className="rounded-xl border border-border bg-surface p-4 text-sm text-muted">All available semester slots have been created.</p>
             )}
+            <p className="text-xs leading-5 text-muted">This is an exception record and is not part of your provisioned curriculum.</p>
             <select
               name="academicYear"
               required
@@ -128,14 +135,14 @@ export default async function AcademicsPage() {
               Set as active semester
             </label>
             <PendingSubmitButton disabled={!availableSlots.length} pendingLabel="Saving semester..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50">
-              Save semester
+              Save custom semester
             </PendingSubmitButton>
           </div>
         </form>
 
         <div className="grid gap-4 md:grid-cols-2">
-          {semesters.length ? (
-            semesters.map((semester) => (
+          {curriculumSemesters.length ? (
+            curriculumSemesters.map((semester) => (
               <article
                 key={semester.id}
                 className="rounded-2xl border border-border bg-white p-5 transition hover:border-foreground"
@@ -188,7 +195,7 @@ export default async function AcademicsPage() {
                     Open semester
                     <ArrowRight className="h-4 w-4" />
                   </Link>
-                  <form action={deleteSemester}>
+                  {semester.isCustom ? <form action={deleteSemester}>
                     <input type="hidden" name="semesterId" value={semester.id} />
                     <ConfirmSubmitButton
                       message={`Delete ${formatLevel(semester.level)} - ${semester.name}? This removes the semester from your workspace.`}
@@ -196,17 +203,19 @@ export default async function AcademicsPage() {
                     >
                       Delete
                     </ConfirmSubmitButton>
-                  </form>
+                  </form> : null}
                 </div>
               </article>
             ))
           ) : (
             <p className="rounded-2xl border border-border bg-white p-5 text-sm text-muted">
-              No semesters yet. Create your first semester to begin.
+              No curriculum semesters yet. Provision your programme path above.
             </p>
           )}
         </div>
       </section>
+
+      {customSemesters.length ? <section className="mt-6"><details className="rounded-2xl border border-border bg-white p-5"><summary className="cursor-pointer text-sm font-semibold">Custom and legacy semesters ({customSemesters.length})</summary><p className="mt-2 text-sm text-muted">These records are kept separately so existing work is never deleted. Use them only for transfers, resits, deferment, or other exceptions.</p><div className="mt-4 grid gap-3 md:grid-cols-2">{customSemesters.map((semester) => <Link key={semester.id} href={`/academics/semesters/${semester.id}`} className="rounded-xl border border-border p-4 hover:border-foreground"><p className="text-xs font-semibold uppercase text-muted">{semester.academicYear}</p><p className="mt-2 font-semibold">{formatLevel(semester.level)} - {semester.name}</p><p className="mt-1 text-sm text-muted">{semester.enrollments.length} courses</p></Link>)}</div></details></section> : null}
     </AppShell>
   );
 }

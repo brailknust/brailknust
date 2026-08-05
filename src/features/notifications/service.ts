@@ -34,6 +34,11 @@ function plannerUrl(planId: string, occurrence: Date) {
 
 export async function syncNotificationsForUser(userId: string, force = false) {
   const now = new Date();
+  // A delivered reminder is active only until its expiry. It remains in history afterwards.
+  await prisma.notification.updateMany({
+    where: { userId, status: { in: ["PENDING", "DELIVERED"] }, expiresAt: { lte: now } },
+    data: { status: "EXPIRED" },
+  });
   const existingPreference = await prisma.notificationPreference.findUnique({
     where: { userId },
   });
@@ -150,6 +155,11 @@ export async function syncNotificationsForUser(userId: string, force = false) {
       sourceKey: task.reminderAt
         ? `task-reminder:${task.id}:${task.reminderAt.toISOString()}`
         : `task-deadline:${task.id}:${task.dueAt!.toISOString()}`,
+      scheduledFor: task.reminderAt ?? task.dueAt,
+      expiresAt: task.dueAt ?? deadlineEnd,
+      deliveredAt: now,
+      status: "DELIVERED" as const,
+      channel: "IN_APP" as const,
     })),
     ...upcomingStudyItems.map(({ item, occurrence }) => ({
       userId,
@@ -159,6 +169,11 @@ export async function syncNotificationsForUser(userId: string, force = false) {
       type: "STUDY_PLAN" as const,
       actionUrl: plannerUrl(item.studyPlan.id, occurrence),
       sourceKey: `study-session-close:${item.id}:${occurrence.toISOString()}`,
+      scheduledFor: occurrence,
+      expiresAt: new Date(occurrence.getTime() + 60 * 60 * 1000),
+      deliveredAt: now,
+      status: "DELIVERED" as const,
+      channel: "IN_APP" as const,
     })),
     ...goals.flatMap((goal) => goal.deadline ? [{
       userId,
@@ -168,6 +183,11 @@ export async function syncNotificationsForUser(userId: string, force = false) {
       type: "DEADLINE" as const,
       actionUrl: "/goals",
       sourceKey: `goal-deadline:${goal.id}:${goal.deadline.toISOString()}`,
+      scheduledFor: goal.deadline,
+      expiresAt: goal.deadline,
+      deliveredAt: now,
+      status: "DELIVERED" as const,
+      channel: "IN_APP" as const,
     }] : []),
     ...groups.flatMap((group) => group.meetingAt ? [{
       userId,
@@ -177,6 +197,11 @@ export async function syncNotificationsForUser(userId: string, force = false) {
       type: "GROUP" as const,
       actionUrl: "/peers?view=groups",
       sourceKey: `group-meeting:${group.id}:${group.meetingAt.toISOString()}`,
+      scheduledFor: group.meetingAt,
+      expiresAt: group.meetingAt,
+      deliveredAt: now,
+      status: "DELIVERED" as const,
+      channel: "IN_APP" as const,
     }] : []),
   ];
 

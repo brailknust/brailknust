@@ -16,6 +16,7 @@ export const profileSchema = z
       .trim()
       .refine((value) => knustCollegeNames.has(value), "Select a valid KNUST college."),
     programme: z.string().trim().min(2, "Select your programme."),
+    curriculumVersion: z.string().trim().max(32).optional(),
     semesterName: z.enum(["First Semester", "Second Semester"], {
       message: "Select your current semester.",
     }),
