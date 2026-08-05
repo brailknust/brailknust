@@ -12,10 +12,12 @@ BRAIL is an academic planning and student-support workspace for KNUST students. 
 
 ## Local development
 
-1. Install dependencies with `npm install`.
+1. Install dependencies with `npm install`. This automatically generates the Prisma client.
 2. Copy `.env.example` to `.env.local` and provide the required Supabase and database values.
 3. Apply the Prisma migrations to the development database.
 4. Start the app with `npm run dev`.
+
+If Prisma reports that `@prisma/client` has not initialized, run `npx prisma generate` and restart the development server.
 
 Authenticated academic flows require Supabase and Postgres. AI features additionally require `GROQ_API_KEY`.
 
