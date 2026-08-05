@@ -18,9 +18,42 @@ type AiResponseFormat = "json_object" | {
 
 export const aiModel = serverEnv.AI_MODEL ?? "openai/gpt-oss-20b";
 export const dailyMessageLimit = serverEnv.AI_DAILY_MESSAGE_LIMIT ?? 20;
+const providerTimeoutMs = 45_000;
+const providerRetryCount = 2;
 
 export function isAiConfigured() {
   return Boolean(serverEnv.GROQ_API_KEY);
+}
+
+async function fetchProvider(request: RequestInfo | URL, init: RequestInit) {
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt <= providerRetryCount; attempt += 1) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), providerTimeoutMs);
+    const callerSignal = init.signal;
+    const abortCaller = () => controller.abort(callerSignal?.reason);
+    callerSignal?.addEventListener("abort", abortCaller, { once: true });
+
+    try {
+      const response = await fetch(request, { ...init, signal: controller.signal });
+      if (response.ok || ![429, 500, 502, 503, 504].includes(response.status) || attempt === providerRetryCount) {
+        return response;
+      }
+
+      await response.arrayBuffer();
+      await new Promise((resolve) => setTimeout(resolve, 250 * 2 ** attempt));
+    } catch (error) {
+      lastError = error;
+      if (callerSignal?.aborted || attempt === providerRetryCount) throw error;
+      await new Promise((resolve) => setTimeout(resolve, 250 * 2 ** attempt));
+    } finally {
+      clearTimeout(timeout);
+      callerSignal?.removeEventListener("abort", abortCaller);
+    }
+  }
+
+  throw lastError instanceof Error ? lastError : new Error("AI provider request failed.");
 }
 
 export async function createChatCompletionStream(
@@ -31,7 +64,7 @@ export async function createChatCompletionStream(
     throw new Error("GROQ_API_KEY is not configured.");
   }
 
-  const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+  const response = await fetchProvider("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${serverEnv.GROQ_API_KEY}`,
@@ -106,7 +139,7 @@ export async function createChatCompletion(
     throw new Error("GROQ_API_KEY is not configured.");
   }
 
-  const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+  const response = await fetchProvider("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${serverEnv.GROQ_API_KEY}`,

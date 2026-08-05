@@ -4,12 +4,12 @@ This is the canonical plan for taking BRAIL from its current implementation to p
 
 ## Current baseline
 
-Last verified: 2026-08-04.
+Last verified: 2026-08-05.
 
 - Next.js 16.3, React 19, TypeScript, Tailwind CSS 4, Supabase, Prisma, and Postgres.
 - `npm run lint`, TypeScript validation, and `npm run build` pass; the build generates 32 pages/routes.
 - Authentication, onboarding, academics, tasks, planner, performance, goals, AI chat, diagnostic practice, peers, notifications, and admin content tooling are implemented.
-- Support and Feedback remain explicit placeholders.
+- Support and Feedback now have authenticated persisted workflows; admin review remains a later Phase 6 item.
 - Phase 1 security tests and Phase 2 unit, integration, component, and browser tests are configured. GitHub CI is defined; application error boundaries remain Phase 3 work.
 - Deployment, production migrations, storage policies, backups, and monitoring are not yet verified.
 
@@ -69,7 +69,7 @@ Exit gate: passed locally on 2026-08-04. Authorization tests pass, costly routes
 
 Target: 5-7 days.
 
-Status: implementation complete and verified in CI on 2026-08-04. The local quality gate passes with 17 test files and 42 tests. [GitHub Actions run #7](https://github.com/brailknust/brailknust/actions/runs/30907509525) passed the `Quality` job and all 9 isolated browser journeys without retries. See [testing.md](./testing.md) for commands, isolation rules, and CI details.
+Status: implementation complete and verified in CI on 2026-08-04. The local quality gate passes with 17 test files and 43 tests. GitHub Actions run #9 passed `Quality`; its browser job stopped at database security verification because the new Support and Feedback tables were missing the same RLS lockdown applied to earlier tables. The migration is corrected in the current work and the browser suite must be rerun. See [testing.md](./testing.md) for commands, isolation rules, and CI details.
 
 - [x] Add Vitest for schemas and business logic.
 - [x] Add React Testing Library for interactive components.
@@ -82,7 +82,7 @@ Status: implementation complete and verified in CI on 2026-08-04. The local qual
 - [x] Confirm the first isolated GitHub browser run passes.
 - [ ] Require the `Quality` and `Browser journeys` checks in branch protection.
 
-Exit gate: pending branch-protection activation. Local lint, TypeScript, 42 automated tests, Prisma validation, and the production build pass. GitHub Actions run #7 also passed both required jobs, including all 9 isolated browser journeys without retries.
+Exit gate: pending branch-protection activation and a rerun of the browser job after the RLS migration correction. Local lint, TypeScript, 43 automated tests, Prisma validation, and the production build pass. The prior isolated browser run passed all 9 journeys without retries.
 
 ## Phase 3: Complete product UX
 
@@ -97,6 +97,7 @@ Status: in progress on 2026-08-05. Support and Feedback now persist authenticate
 - Prevent duplicate submissions and confirm destructive actions.
 - Complete mobile, keyboard, focus, label, landmark, contrast, and reduced-motion reviews.
 - Explain unavailable AI and OCR integrations clearly.
+- [x] Add bounded AI provider timeout and retry recovery for chat and diagnostics.
 
 Exit gate: no navigation item leads to a placeholder and every route has deliberate empty and failure states.
 
@@ -113,6 +114,8 @@ Target: 5-8 days.
 - Make plan regeneration non-destructive and idempotent.
 - Evaluate OCR against representative KNUST timetable images.
 - Verify automatic goal metrics and progress-history semantics.
+
+Progress on 2026-08-05: task dates and reminder ordering, assessment dates, assessment weight totals, study-plan date ranges, and timetable time ranges now have explicit validation. Task editing is implemented; remaining work covers timezone-specific integration tests, archival semantics, planner regeneration, OCR evaluation, and goal history.
 
 Exit gate: academic rules are documented and tested and planner operations cannot silently destroy work.
 

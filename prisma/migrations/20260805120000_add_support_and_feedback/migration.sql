@@ -29,3 +29,7 @@ CREATE INDEX "feedback_user_id_status_created_at_idx" ON "feedback"("user_id", "
 
 ALTER TABLE "support_requests" ADD CONSTRAINT "support_requests_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE "feedback" ADD CONSTRAINT "feedback_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "support_requests" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "feedback" ENABLE ROW LEVEL SECURITY;
+REVOKE ALL PRIVILEGES ON TABLE "support_requests", "feedback" FROM anon, authenticated;
