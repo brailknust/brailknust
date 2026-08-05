@@ -5,10 +5,22 @@ import { findProgrammeCurriculum, knustCurricula } from "@/data/curricula";
 import { prisma } from "@/server/db";
 
 const levels: AcademicLevel[] = ["LEVEL_100", "LEVEL_200", "LEVEL_300", "LEVEL_400", "LEVEL_500", "LEVEL_600"];
+const academicYearPattern = /^(\d{4})\/(\d{4})$/;
+
 export function curriculumTermSlots(durationYears: number, termsPerYear: number) {
   return levels.slice(0, durationYears).flatMap((level) => Array.from({ length: termsPerYear }, (_, index) => ({ level, term: (index === 0 ? "FIRST" : "SECOND") as SemesterTerm, name: index === 0 ? "First Semester" : "Second Semester" })));
 }
 export function provisionKey(curriculumId: string, level: AcademicLevel, term: SemesterTerm) { return `curriculum:${curriculumId}:${level}:${term}`; }
+
+export function academicYearForLevel(academicYear: string, anchorLevel: AcademicLevel, targetLevel: AcademicLevel) {
+  const match = academicYear.match(academicYearPattern);
+  if (!match) throw new Error("Academic year must use the format 2025/2026.");
+
+  const offset = levels.indexOf(targetLevel) - levels.indexOf(anchorLevel);
+  if (offset === 0) return academicYear;
+
+  return `${Number(match[1]) + offset}/${Number(match[2]) + offset}`;
+}
 
 export async function ensureProgrammeCurriculum(input: { college: string; programme: string; department: string; version: string }) {
   const definition = findProgrammeCurriculum(input);
@@ -25,11 +37,11 @@ export async function ensureProgrammeCurriculum(input: { college: string; progra
   return curriculum;
 }
 
-export async function provisionStudentSemesters(input: { userId: string; curriculumId: string; academicYear: string; cwa?: number }) {
+export async function provisionStudentSemesters(input: { userId: string; curriculumId: string; academicYear: string; activeLevel: AcademicLevel; cwa?: number }) {
   const curriculum = await prisma.programmeCurriculum.findUniqueOrThrow({ where: { id: input.curriculumId }, include: { terms: { include: { courses: true } } } });
   const semesters = [];
   for (const term of curriculum.terms) {
-    const semester = await prisma.semester.upsert({ where: { ownerId_provisionKey: { ownerId: input.userId, provisionKey: provisionKey(curriculum.id, term.level, term.term) } }, create: { ownerId: input.userId, level: term.level, term: term.term, name: term.name, academicYear: input.academicYear, cwa: input.cwa, curriculumId: curriculum.id, curriculumTermId: term.id, provisionKey: provisionKey(curriculum.id, term.level, term.term) }, update: {} });
+    const semester = await prisma.semester.upsert({ where: { ownerId_provisionKey: { ownerId: input.userId, provisionKey: provisionKey(curriculum.id, term.level, term.term) } }, create: { ownerId: input.userId, level: term.level, term: term.term, name: term.name, academicYear: academicYearForLevel(input.academicYear, input.activeLevel, term.level), cwa: input.cwa, curriculumId: curriculum.id, curriculumTermId: term.id, provisionKey: provisionKey(curriculum.id, term.level, term.term) }, update: {} });
     await prisma.semesterProfile.upsert({ where: { userId_semesterId: { userId: input.userId, semesterId: semester.id } }, create: { userId: input.userId, semesterId: semester.id, level: term.level, cwa: input.cwa }, update: {} });
     const excluded = new Set((await prisma.studentCourseExclusion.findMany({ where: { userId: input.userId, semesterId: semester.id }, select: { courseCode: true } })).map((item) => item.courseCode));
     for (const item of term.courses.filter((course) => course.isApproved && !excluded.has(course.courseCode))) {

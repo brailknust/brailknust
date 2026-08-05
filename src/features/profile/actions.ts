@@ -71,7 +71,7 @@ export async function completeProfile(formData: FormData) {
 
   if (!parsed.curriculumVersion) throw new Error("A curriculum version is required before BRAIL can provision semesters.");
   const curriculum = await ensureProgrammeCurriculum({ college: parsed.college, programme: parsed.programme, department: programme.department, version: parsed.curriculumVersion });
-  const semesters = await provisionStudentSemesters({ userId: appUser.id, curriculumId: curriculum.id, academicYear: parsed.academicYear, cwa: parsed.cwa });
+  const semesters = await provisionStudentSemesters({ userId: appUser.id, curriculumId: curriculum.id, academicYear: parsed.academicYear, activeLevel: parsed.level, cwa: parsed.cwa });
   const term = parsed.semesterName === "First Semester" ? "FIRST" : "SECOND";
   const activeSemester = semesters.find((semester) => semester.level === parsed.level && semester.term === term);
   if (!activeSemester) throw new Error("That semester is not available in the selected curriculum.");
@@ -99,7 +99,14 @@ export async function provisionExistingUserCurriculum() {
   const version = getCurriculumVersions({ college: appUser.college, programme: appUser.programme, department: appUser.department })[0];
   if (!version) throw new Error("A published curriculum is not available for your programme yet.");
   const curriculum = await ensureProgrammeCurriculum({ college: appUser.college, programme: appUser.programme, department: appUser.department, version });
-  await provisionStudentSemesters({ userId: appUser.id, curriculumId: curriculum.id, academicYear: `${new Date().getFullYear()}/${new Date().getFullYear() + 1}`, cwa: appUser.cwa ? Number(appUser.cwa) : undefined });
+  const activeSemester = appUser.activeSemesterId
+    ? await prisma.semester.findFirst({
+        where: { id: appUser.activeSemesterId, ownerId: appUser.id },
+        select: { academicYear: true, level: true },
+      })
+    : null;
+  const academicYear = activeSemester?.academicYear ?? `${new Date().getFullYear()}/${new Date().getFullYear() + 1}`;
+  await provisionStudentSemesters({ userId: appUser.id, curriculumId: curriculum.id, academicYear, activeLevel: activeSemester?.level ?? appUser.level ?? "LEVEL_100", cwa: appUser.cwa ? Number(appUser.cwa) : undefined });
   revalidatePath("/academics");
   revalidatePath("/dashboard");
 }
