@@ -96,7 +96,7 @@ export default async function DashboardPage() {
         ))}
       </div>
 
-      <div className="mt-6 grid gap-6 xl:grid-cols-[1.65fr_1fr]">
+      <div className="mt-6 grid gap-6 xl:grid-cols-2">
       <section className="rounded-2xl border border-border bg-white p-5 shadow-[0_10px_30px_rgba(4,92,46,0.03)]">
         <div className="flex items-center justify-between gap-4">
           <div><h2 className="text-lg font-semibold">Upcoming deadlines</h2><p className="mt-1 text-sm text-muted">Only saved tasks with due dates appear here.</p></div>

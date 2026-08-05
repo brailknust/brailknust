@@ -25,20 +25,20 @@ const features = [
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-[#15231a]">
-      <div className="w-full overflow-hidden bg-white">
-        <header className="sticky top-0 z-50 flex h-[84px] items-center border-b border-[#e8eee9]/90 bg-white/90 px-6 backdrop-blur-xl sm:px-[48px]">
-          <Link href="/" className="flex items-center gap-[14px]">
-            <span className="grid h-[46px] w-[46px] place-items-center rounded-[12px] bg-[#045c2e] text-white shadow-[0_8px_20px_rgba(4,92,46,0.22)]"><BookOpen className="h-[20px] w-[20px]" /></span>
-            <span className="text-[17px] font-bold tracking-[-0.01em]">BRAIL <span className="text-[#08783f]">KNUST</span></span>
-          </Link>
-          <nav className="ml-auto hidden items-center gap-9 text-[14px] text-[#657269] md:flex">
-            <a href="#how-it-works" className="hover:text-[#08783f]">How it works</a>
-            <a href="#features" className="hover:text-[#08783f]">Features</a>
-            <a href="#knust" className="hover:text-[#08783f]">Built for KNUST</a>
-          </nav>
-          <Link href="/login" className="ml-auto inline-flex h-[44px] items-center justify-center rounded-[10px] bg-[#08783f] px-6 text-[13px] font-semibold text-white shadow-[0_8px_20px_rgba(8,120,63,0.16)] transition hover:-translate-y-0.5 hover:bg-[#045c2e] md:ml-9">Log in</Link>
-        </header>
+      <header className="sticky top-0 z-50 flex h-[84px] w-full items-center border-b border-[#e8eee9]/90 bg-white/90 px-6 backdrop-blur-xl sm:px-[48px]">
+        <Link href="/" className="flex items-center gap-[14px]">
+          <span className="grid h-[46px] w-[46px] place-items-center rounded-[12px] bg-[#045c2e] text-white shadow-[0_8px_20px_rgba(4,92,46,0.22)]"><BookOpen className="h-[20px] w-[20px]" /></span>
+          <span className="text-[17px] font-bold tracking-[-0.01em]">BRAIL <span className="text-[#08783f]">KNUST</span></span>
+        </Link>
+        <nav className="ml-auto hidden items-center gap-9 text-[14px] text-[#657269] md:flex">
+          <a href="#how-it-works" className="hover:text-[#08783f]">How it works</a>
+          <a href="#features" className="hover:text-[#08783f]">Features</a>
+          <a href="#knust" className="hover:text-[#08783f]">Built for KNUST</a>
+        </nav>
+        <Link href="/login" className="ml-auto inline-flex h-[44px] items-center justify-center rounded-[10px] bg-[#08783f] px-6 text-[13px] font-semibold text-white shadow-[0_8px_20px_rgba(8,120,63,0.16)] transition hover:-translate-y-0.5 hover:bg-[#045c2e] md:ml-9">Log in</Link>
+      </header>
 
+      <div className="mx-auto w-full max-w-[1440px] overflow-hidden bg-white">
         <section className="relative grid gap-12 overflow-hidden bg-[radial-gradient(circle_at_85%_15%,#eaf6ee_0,transparent_34%)] px-6 pb-20 pt-16 sm:px-[80px] lg:grid-cols-[1.08fr_0.92fr] lg:gap-[92px] lg:pb-[128px] lg:pt-[92px]">
           <div className="relative z-10 pt-[7px]">
             <p className="inline-flex items-center gap-2 rounded-full border border-[#d8eadf] bg-[#f4faf6] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-[#08783f]"><Sparkles className="h-3.5 w-3.5" /> Student workspace</p>
