@@ -1,7 +1,8 @@
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { requireAppUser } from "@/features/auth/queries";
-import { createTask, deleteTask, updateTaskStatus } from "@/features/tasks/actions";
+import { createTask, deleteTask, updateTask, updateTaskStatus } from "@/features/tasks/actions";
 import { getTasksPageData } from "@/features/tasks/queries";
 
 const priorities = ["LOW", "MEDIUM", "HIGH", "URGENT"];
@@ -58,9 +59,9 @@ export default async function TasksPage() {
                 </option>
               ))}
             </select>
-            <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+            <PendingSubmitButton pendingLabel="Saving task..." className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
               Save task
-            </button>
+            </PendingSubmitButton>
           </div>
         </form>
 
@@ -90,6 +91,18 @@ export default async function TasksPage() {
                       </span>
                     </div>
                   </div>
+                  <details className="mt-4 border-t border-border pt-3">
+                    <summary className="cursor-pointer text-sm font-semibold text-accent">Edit task</summary>
+                    <form action={updateTask} className="mt-3 grid gap-3">
+                      <input type="hidden" name="id" value={task.id} />
+                      <input name="title" required minLength={2} maxLength={160} defaultValue={task.title} className="h-10 rounded-md border border-border bg-white px-3 text-sm" />
+                      <textarea name="description" maxLength={5000} defaultValue={task.description ?? ""} className="min-h-20 rounded-md border border-border bg-white px-3 py-2 text-sm" />
+                      <select name="courseId" defaultValue={task.courseId ?? ""} className="h-10 rounded-md border border-border bg-white px-3 text-sm"><option value="">No course</option>{courses.map((course) => <option key={course.id} value={course.id}>{course.name}</option>)}</select>
+                      <div className="grid gap-3 sm:grid-cols-2"><input name="dueAt" type="datetime-local" defaultValue={task.dueAt?.toISOString().slice(0, 16) ?? ""} className="h-10 rounded-md border border-border bg-white px-3 text-sm" /><input name="reminderAt" type="datetime-local" defaultValue={task.reminderAt?.toISOString().slice(0, 16) ?? ""} className="h-10 rounded-md border border-border bg-white px-3 text-sm" /></div>
+                      <select name="priority" defaultValue={task.priority} className="h-10 rounded-md border border-border bg-white px-3 text-sm">{priorities.map((priority) => <option key={priority}>{priority}</option>)}</select>
+                      <PendingSubmitButton pendingLabel="Updating..." className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-border px-3 text-sm font-semibold text-muted">Save changes</PendingSubmitButton>
+                    </form>
+                  </details>
                   <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
                     <form action={updateTaskStatus} className="flex flex-wrap gap-2">
                       <input type="hidden" name="id" value={task.id} />

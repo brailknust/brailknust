@@ -3,7 +3,9 @@ import { describe, expect, it } from "vitest";
 import { semesterProfileSchema } from "@/features/academics/schemas";
 import { assessmentSchema } from "@/features/assessments/schemas";
 import { generatedQuestionSetSchema } from "@/features/diagnostics/schemas";
+import { feedbackSchema } from "@/features/feedback/schemas";
 import { createStudyPlanItemSchema } from "@/features/planner/schemas";
+import { supportRequestSchema } from "@/features/support/schemas";
 
 const uuid = "00000000-0000-4000-8000-000000000001";
 
@@ -45,5 +47,12 @@ describe("business input schemas", () => {
     expect(generatedQuestionSetSchema.safeParse({
       questions: Array.from({ length: 4 }, () => ({ ...validQuestion, options: ["Queue", "Stack"] })),
     }).success).toBe(false);
+  });
+
+  it("bounds support requests and product feedback", () => {
+    expect(supportRequestSchema.safeParse({ subject: "Upload help", message: "The material upload failed after selecting a text file." }).success).toBe(true);
+    expect(supportRequestSchema.safeParse({ subject: "No", message: "Too short" }).success).toBe(false);
+    expect(feedbackSchema.safeParse({ type: "IDEA", message: "Add a way to duplicate a previous study plan." }).success).toBe(true);
+    expect(feedbackSchema.safeParse({ type: "INVALID", message: "This should be rejected." }).success).toBe(false);
   });
 });

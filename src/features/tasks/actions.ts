@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 
 import { requireAppUser } from "@/features/auth/queries";
-import { createTaskSchema, deleteTaskSchema, taskStatusSchema } from "@/features/tasks/schemas";
+import { createTaskSchema, deleteTaskSchema, taskStatusSchema, updateTaskSchema } from "@/features/tasks/schemas";
 import { prisma } from "@/server/db";
 
 function optionalDateTime(value?: string) {
@@ -86,6 +86,58 @@ export async function updateTaskStatus(formData: FormData) {
   revalidatePath("/dashboard");
   revalidatePath("/planner");
   revalidatePath("/performance");
+}
+
+export async function updateTask(formData: FormData) {
+  const { appUser } = await requireAppUser();
+
+  if (!appUser.activeSemesterId) {
+    throw new Error("Set an active semester before editing tasks.");
+  }
+
+  const parsed = updateTaskSchema.parse({
+    id: formData.get("id"),
+    title: formData.get("title"),
+    description: formData.get("description") || undefined,
+    courseId: formData.get("courseId") || undefined,
+    dueAt: formData.get("dueAt") || undefined,
+    reminderAt: formData.get("reminderAt") || undefined,
+    priority: formData.get("priority") || "MEDIUM",
+  });
+
+  const existing = await prisma.task.findFirst({
+    where: { id: parsed.id, userId: appUser.id, semesterId: appUser.activeSemesterId },
+    select: { courseId: true },
+  });
+  if (!existing) return;
+
+  if (parsed.courseId) {
+    const enrollment = await prisma.enrollment.findFirst({
+      where: { userId: appUser.id, semesterId: appUser.activeSemesterId, courseId: parsed.courseId },
+      select: { id: true },
+    });
+    if (!enrollment) throw new Error("Select a course from the active semester.");
+  }
+
+  await prisma.task.update({
+    where: { id: parsed.id },
+    data: {
+      title: parsed.title,
+      description: parsed.description,
+      courseId: parsed.courseId,
+      dueAt: optionalDateTime(parsed.dueAt),
+      reminderAt: optionalDateTime(parsed.reminderAt),
+      priority: parsed.priority,
+    },
+  });
+
+  revalidatePath("/tasks");
+  revalidatePath("/dashboard");
+  revalidatePath("/planner");
+  revalidatePath("/performance");
+  revalidatePath("/academics");
+  if (existing.courseId) revalidatePath(`/academics/semesters/${appUser.activeSemesterId}/courses/${existing.courseId}`);
+  if (parsed.courseId) revalidatePath(`/academics/semesters/${appUser.activeSemesterId}/courses/${parsed.courseId}`);
 }
 
 export async function deleteTask(formData: FormData) {

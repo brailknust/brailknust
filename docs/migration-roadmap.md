@@ -69,7 +69,7 @@ Exit gate: passed locally on 2026-08-04. Authorization tests pass, costly routes
 
 Target: 5-7 days.
 
-Status: implementation complete and verified in CI on 2026-08-04. The local quality gate passes with 17 test files and 41 tests. [GitHub Actions run #7](https://github.com/brailknust/brailknust/actions/runs/30907509525) passed the `Quality` job and all 9 isolated browser journeys without retries. See [testing.md](./testing.md) for commands, isolation rules, and CI details.
+Status: implementation complete and verified in CI on 2026-08-04. The local quality gate passes with 17 test files and 42 tests. [GitHub Actions run #7](https://github.com/brailknust/brailknust/actions/runs/30907509525) passed the `Quality` job and all 9 isolated browser journeys without retries. See [testing.md](./testing.md) for commands, isolation rules, and CI details.
 
 - [x] Add Vitest for schemas and business logic.
 - [x] Add React Testing Library for interactive components.
@@ -82,15 +82,17 @@ Status: implementation complete and verified in CI on 2026-08-04. The local qual
 - [x] Confirm the first isolated GitHub browser run passes.
 - [ ] Require the `Quality` and `Browser journeys` checks in branch protection.
 
-Exit gate: pending branch-protection activation. Local lint, TypeScript, 41 automated tests, Prisma validation, and the production build pass. GitHub Actions run #7 also passed both required jobs, including all 9 isolated browser journeys without retries.
+Exit gate: pending branch-protection activation. Local lint, TypeScript, 42 automated tests, Prisma validation, and the production build pass. GitHub Actions run #7 also passed both required jobs, including all 9 isolated browser journeys without retries.
 
 ## Phase 3: Complete product UX
 
 Target: 3-5 days.
 
-- Replace Support with searchable help and a tracked request flow.
-- Replace Feedback with validated, rate-limited persistence and admin review.
-- Add global and route-level error boundaries and a useful not-found page.
+Status: in progress on 2026-08-05. Support and Feedback now persist authenticated submissions, help content is searchable, root and route error recovery is available, and task/support/feedback mutations expose pending states. Remaining UX, accessibility, and route-state work continues below.
+
+- [x] Replace Support with searchable help and a tracked request flow.
+- [x] Replace Feedback with validated persistence and a user-facing submission flow; admin review remains.
+- [x] Add global and route-level error boundaries and a useful not-found page.
 - Standardize empty, loading, error, and success states.
 - Prevent duplicate submissions and confirm destructive actions.
 - Complete mobile, keyboard, focus, label, landmark, contrast, and reduced-motion reviews.

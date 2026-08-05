@@ -9,6 +9,10 @@ export const createTaskSchema = z.object({
   priority: z.enum(["LOW", "MEDIUM", "HIGH", "URGENT"]).default("MEDIUM"),
 });
 
+export const updateTaskSchema = createTaskSchema.extend({
+  id: z.string().uuid(),
+});
+
 export const taskStatusSchema = z.enum(["TODO", "DONE"]);
 
 export const deleteTaskSchema = z.object({
