@@ -116,7 +116,7 @@ Target: 5-8 days.
 - Evaluate OCR against representative KNUST timetable images.
 - Verify automatic goal metrics and progress-history semantics.
 
-Progress on 2026-08-05: task dates and reminder ordering, assessment dates, assessment weight totals, study-plan date ranges, and timetable time ranges now have explicit validation. Assessment averages now use recorded weights when all relevant results have weights, with a safe unweighted fallback. Timetable generation now rejects overlapping imported class rows. Task editing is implemented; remaining work covers timezone-specific integration tests, archival semantics, planner regeneration, OCR evaluation, and goal history.
+Progress on 2026-08-05: task dates and reminder ordering, assessment dates, assessment weight totals, study-plan date ranges, and timetable time ranges now have explicit validation. Assessment averages now use recorded weights when all relevant results have weights, with a safe unweighted fallback. Timetable generation now rejects overlapping imported class rows and atomically replaces generated sessions, preserving the prior plan when generation persistence fails. Task editing is implemented; remaining work covers timezone-specific integration tests, archival semantics, OCR evaluation, and goal history.
 
 Exit gate: academic rules are documented and tested and planner operations cannot silently destroy work.
 

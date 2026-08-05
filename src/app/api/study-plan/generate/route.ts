@@ -117,17 +117,18 @@ async function savePlanForUser(
   sourceCourses: CourseSource[],
   sessions: GeneratedSession[],
 ) {
-  const { startDate, endDate } = getWeekBounds();
-  const courseRecords = new Map<string, { id: string }>();
-  const courses = Array.from(new Map(sourceCourses.map((course) => [course.courseCode, course])).values());
+  return prisma.$transaction(async (tx) => {
+    const { startDate, endDate } = getWeekBounds();
+    const courseRecords = new Map<string, { id: string }>();
+    const courses = Array.from(new Map(sourceCourses.map((course) => [course.courseCode, course])).values());
 
-  for (const course of courses) {
+    for (const course of courses) {
     if (course.id) {
       courseRecords.set(course.courseCode, { id: course.id });
       continue;
     }
 
-    const existingCourse = await prisma.course.findUnique({
+    const existingCourse = await tx.course.findUnique({
       where: { code: course.courseCode },
       select: { id: true, approvalStatus: true, createdById: true },
     });
@@ -138,7 +139,7 @@ async function savePlanForUser(
     ) {
       throw new Error(`${course.courseCode} is awaiting administrator review for another student.`);
     }
-    const record = existingCourse ?? await prisma.course.create({
+    const record = existingCourse ?? await tx.course.create({
       data: {
         code: course.courseCode,
         name: course.courseName || course.courseCode,
@@ -150,7 +151,7 @@ async function savePlanForUser(
 
     courseRecords.set(course.courseCode, record);
 
-    await prisma.enrollment.upsert({
+    await tx.enrollment.upsert({
       where: {
         userId_courseId_semesterId: {
           userId,
@@ -167,10 +168,10 @@ async function savePlanForUser(
     });
   }
 
-  const courseIds = Array.from(courseRecords.values()).map((course) => course.id);
+    const courseIds = Array.from(courseRecords.values()).map((course) => course.id);
 
-  if (courseIds.length && rows.length) {
-    await prisma.timetableBlock.deleteMany({
+    if (courseIds.length && rows.length) {
+      await tx.timetableBlock.deleteMany({
       where: {
         userId,
         semesterId: activeSemesterId,
@@ -180,7 +181,7 @@ async function savePlanForUser(
       },
     });
 
-    await prisma.timetableBlock.createMany({
+      await tx.timetableBlock.createMany({
       data: rows
         .map((row) => {
           const course = courseRecords.get(row.courseCode);
@@ -201,7 +202,7 @@ async function savePlanForUser(
     });
   }
 
-  const existingPlan = await prisma.studyPlan.findFirst({
+    const existingPlan = await tx.studyPlan.findFirst({
     where: {
       userId,
       semesterId: activeSemesterId,
@@ -211,12 +212,12 @@ async function savePlanForUser(
     select: { id: true },
   });
 
-  if (existingPlan) {
-    await prisma.studyPlanItem.deleteMany({
+    if (existingPlan) {
+      await tx.studyPlanItem.deleteMany({
       where: { studyPlanId: existingPlan.id },
     });
 
-    await prisma.studyPlan.update({
+      await tx.studyPlan.update({
       where: { id: existingPlan.id },
       data: {
         status: "ACTIVE",
@@ -226,9 +227,9 @@ async function savePlanForUser(
     });
   }
 
-  const plan =
-    existingPlan ??
-    (await prisma.studyPlan.create({
+    const plan =
+      existingPlan ??
+      (await tx.studyPlan.create({
       data: {
         userId,
         semesterId: activeSemesterId,
@@ -241,7 +242,7 @@ async function savePlanForUser(
       select: { id: true },
     }));
 
-  await prisma.studyPlanItem.createMany({
+    await tx.studyPlanItem.createMany({
     data: sessions.map((session) => {
       const courseCode = session.subject.split(" - ")[0]?.trim();
       const course = courseRecords.get(courseCode);
@@ -258,7 +259,8 @@ async function savePlanForUser(
     }),
   });
 
-  return plan.id;
+    return plan.id;
+  });
 }
 
 export async function GET() {
