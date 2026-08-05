@@ -196,13 +196,18 @@ export async function getCourseAnalytics(userId: string, semesterId: string, cou
       orderBy: [{ assessedAt: "desc" }, { createdAt: "desc" }],
     }),
     prisma.courseMaterial.findMany({
-      where: { enrollmentId: enrollment.id, status: { not: "ARCHIVED" } },
+      where: { enrollmentId: enrollment.id },
       include: {
         chunks: {
           select: { topic: { select: { title: true } } },
           take: 1,
         },
         _count: { select: { chunks: true } },
+        ingestionAttempts: {
+          orderBy: { attempt: "desc" },
+          take: 1,
+          select: { attempt: true, status: true, chunkCount: true },
+        },
       },
       orderBy: { updatedAt: "desc" },
     }),

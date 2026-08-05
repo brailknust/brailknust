@@ -51,6 +51,19 @@ export async function saveCourseMaterial(formData: FormData) {
   if (existing) return;
 
   await prisma.$transaction(async (tx) => {
+    const priorVersion = await tx.courseMaterial.findFirst({
+      where: {
+        enrollmentId: enrollment.id,
+        title: parsed.title,
+        type: parsed.type,
+        status: { in: ["PENDING", "READY"] },
+      },
+      select: { id: true, version: true },
+      orderBy: { version: "desc" },
+    });
+    if (priorVersion) {
+      await tx.courseMaterial.update({ where: { id: priorVersion.id }, data: { status: "ARCHIVED" } });
+    }
     const topic = parsed.topic
       ? await tx.courseTopic.upsert({
           where: {
@@ -77,6 +90,8 @@ export async function saveCourseMaterial(formData: FormData) {
         sourceUrl: parsed.sourceUrl || null,
         contentHash,
         status: "READY",
+        version: (priorVersion?.version ?? 0) + 1,
+        supersedesId: priorVersion?.id,
       },
       select: { id: true },
     });
@@ -89,6 +104,9 @@ export async function saveCourseMaterial(formData: FormData) {
         content,
         charCount: content.length,
       })),
+    });
+    await tx.materialIngestionAttempt.create({
+      data: { materialId: material.id, attempt: 1, status: "READY", chunkCount: chunks.length, completedAt: new Date() },
     });
   });
 
@@ -149,6 +167,7 @@ export async function retryCourseMaterialProcessing(formData: FormData) {
       storagePath: true,
       originalFileName: true,
       mimeType: true,
+      _count: { select: { ingestionAttempts: true } },
     },
   });
   if (!material) throw new Error("Failed material not found.");
@@ -158,6 +177,10 @@ export async function retryCourseMaterialProcessing(formData: FormData) {
   await prisma.courseMaterial.update({
     where: { id: material.id },
     data: { status: "PENDING", errorMessage: null },
+  });
+  const attempt = material._count.ingestionAttempts + 1;
+  await prisma.materialIngestionAttempt.create({
+    data: { materialId: material.id, attempt, status: "PENDING" },
   });
 
   try {
@@ -187,6 +210,10 @@ export async function retryCourseMaterialProcessing(formData: FormData) {
         where: { id: material.id },
         data: { status: "READY", errorMessage: null },
       });
+      await tx.materialIngestionAttempt.update({
+        where: { materialId_attempt: { materialId: material.id, attempt } },
+        data: { status: "READY", chunkCount: chunks.length, completedAt: new Date(), errorMessage: null },
+      });
     });
   } catch (error) {
     console.error("Course material retry failed", error);
@@ -195,6 +222,14 @@ export async function retryCourseMaterialProcessing(formData: FormData) {
       data: {
         status: "FAILED",
         errorMessage: "The material could not be processed. Check the file and try again.",
+      },
+    });
+    await prisma.materialIngestionAttempt.update({
+      where: { materialId_attempt: { materialId: material.id, attempt } },
+      data: {
+        status: "FAILED",
+        errorMessage: "The material could not be processed. Check the file and try again.",
+        completedAt: new Date(),
       },
     });
   }

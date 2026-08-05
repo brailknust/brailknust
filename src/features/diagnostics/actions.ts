@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAppUser } from "@/features/auth/queries";
+import { diagnosticFeedbackSchema } from "@/features/diagnostics/feedback";
 import { prisma } from "@/server/db";
 
 export async function submitDiagnosticQuiz(formData: FormData) {
@@ -141,4 +142,26 @@ export async function submitDiagnosticQuiz(formData: FormData) {
   revalidatePath(`/practice/${quiz.id}`);
   revalidatePath("/performance");
   redirect(`/practice/${quiz.id}`);
+}
+
+export async function saveDiagnosticFeedback(formData: FormData) {
+  const { appUser } = await requireAppUser();
+  const parsed = diagnosticFeedbackSchema.parse({
+    quizId: formData.get("quizId"),
+    rating: formData.get("rating"),
+    comment: formData.get("comment") || undefined,
+  });
+  const quiz = await prisma.diagnosticQuiz.findFirst({
+    where: { id: parsed.quizId, userId: appUser.id, status: "COMPLETED" },
+    select: { id: true },
+  });
+  if (!quiz) throw new Error("Complete this diagnostic before leaving feedback.");
+
+  await prisma.diagnosticFeedback.upsert({
+    where: { quizId: quiz.id },
+    create: { quizId: quiz.id, userId: appUser.id, rating: parsed.rating, comment: parsed.comment ?? null },
+    update: { rating: parsed.rating, comment: parsed.comment ?? null },
+  });
+  revalidatePath(`/practice/${quiz.id}`);
+  revalidatePath("/practice");
 }

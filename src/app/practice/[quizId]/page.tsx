@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { AppShell } from "@/components/app-shell";
 import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { requireAppUser } from "@/features/auth/queries";
-import { submitDiagnosticQuiz } from "@/features/diagnostics/actions";
+import { saveDiagnosticFeedback, submitDiagnosticQuiz } from "@/features/diagnostics/actions";
 import { prisma } from "@/server/db";
 
 export default async function DiagnosticQuizPage({ params }: { params: Promise<{ quizId: string }> }) {
@@ -19,6 +19,7 @@ export default async function DiagnosticQuizPage({ params }: { params: Promise<{
         include: { attempts: { where: { userId: appUser.id }, take: 1 } },
         orderBy: { position: "asc" },
       },
+      feedback: { where: { userId: appUser.id } },
     },
   });
   if (!quiz) notFound();
@@ -71,6 +72,25 @@ export default async function DiagnosticQuizPage({ params }: { params: Promise<{
         })}
         {!completed ? <PendingSubmitButton pendingLabel="Submitting diagnostic..." className="h-12 rounded-xl bg-[var(--accent-strong)] px-5 text-sm font-semibold text-white">Submit diagnostic</PendingSubmitButton> : null}
       </form>
+      {completed ? (
+        <section className="mt-6 rounded-2xl border border-border bg-white p-5">
+          <h2 className="text-lg font-semibold">How useful was this diagnostic?</h2>
+          <form action={saveDiagnosticFeedback} className="mt-4 grid gap-3">
+            <input type="hidden" name="quizId" value={quiz.id} />
+            <label className="text-sm font-medium" htmlFor="diagnostic-rating">Rating</label>
+            <select id="diagnostic-rating" name="rating" defaultValue={quiz.feedback?.rating ?? 5} className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
+              <option value="5">Very useful</option>
+              <option value="4">Useful</option>
+              <option value="3">Neutral</option>
+              <option value="2">Not very useful</option>
+              <option value="1">Not useful</option>
+            </select>
+            <label className="text-sm font-medium" htmlFor="diagnostic-feedback">Optional note</label>
+            <textarea id="diagnostic-feedback" name="comment" maxLength={1000} defaultValue={quiz.feedback?.comment ?? ""} className="min-h-24 rounded-xl border border-border bg-white px-3 py-2 text-sm" />
+            <PendingSubmitButton pendingLabel="Saving feedback..." className="h-11 justify-self-start rounded-xl border border-border px-4 text-sm font-semibold">Save feedback</PendingSubmitButton>
+          </form>
+        </section>
+      ) : null}
     </AppShell>
   );
 }

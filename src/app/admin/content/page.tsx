@@ -7,7 +7,10 @@ import { prisma } from "@/server/db";
 
 export default async function AdminContentPage() {
   await requireAdmin();
-  const courses = await prisma.course.findMany({
+  const dayStart = new Date();
+  dayStart.setUTCHours(0, 0, 0, 0);
+  const [courses, aiUsage, failedIngestionCount, pendingIngestionCount] = await Promise.all([
+    prisma.course.findMany({
     where: { approvalStatus: "OFFICIAL" },
     select: {
       id: true,
@@ -16,7 +19,15 @@ export default async function AdminContentPage() {
       _count: { select: { platformTopics: true, platformMaterials: true } },
     },
     orderBy: { code: "asc" },
-  });
+    }),
+    prisma.aiUsageEvent.aggregate({
+      where: { createdAt: { gte: dayStart } },
+      _count: { _all: true },
+      _sum: { totalTokens: true },
+    }),
+    prisma.materialIngestionAttempt.count({ where: { status: "FAILED" } }),
+    prisma.materialIngestionAttempt.count({ where: { status: "PENDING" } }),
+  ]);
 
   return (
     <AppShell title="Platform course library" eyebrow="Administration">
@@ -26,6 +37,24 @@ export default async function AdminContentPage() {
         <p className="mt-2 text-sm text-white/70">
           Build each official course outline, then publish materials beneath the relevant topic.
         </p>
+      </section>
+
+      <section className="mb-6 grid gap-3 sm:grid-cols-3">
+        <div className="border border-border bg-white p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted">AI operations today</p>
+          <p className="mt-2 text-2xl font-semibold">{aiUsage._count._all}</p>
+          <p className="mt-1 text-xs text-muted">{aiUsage._sum.totalTokens ?? 0} estimated tokens</p>
+        </div>
+        <div className="border border-border bg-white p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted">Failed processing</p>
+          <p className="mt-2 text-2xl font-semibold">{failedIngestionCount}</p>
+          <p className="mt-1 text-xs text-muted">Materials awaiting retry or replacement</p>
+        </div>
+        <div className="border border-border bg-white p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted">Processing now</p>
+          <p className="mt-2 text-2xl font-semibold">{pendingIngestionCount}</p>
+          <p className="mt-1 text-xs text-muted">Uploads being ingested</p>
+        </div>
       </section>
 
       <section className="rounded-2xl border border-border bg-white p-5">

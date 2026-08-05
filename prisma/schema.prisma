@@ -226,6 +226,7 @@ model User {
   resources                 Resource[]
   courseMaterials           CourseMaterial[]
   diagnosticAttempts        DiagnosticAttempt[]
+  diagnosticFeedback        DiagnosticFeedback[]
   diagnosticQuizzes         DiagnosticQuiz[]
   topicMasteries            TopicMastery[]
   semesterProfiles          SemesterProfile[]
@@ -324,29 +325,29 @@ model Course {
 }
 
 model Semester {
-  id                    String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  ownerId               String                 @map("owner_id") @db.Uuid
+  id                    String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  ownerId               String                   @map("owner_id") @db.Uuid
   level                 AcademicLevel
   term                  SemesterTerm
   name                  String
-  academicYear          String                 @map("academic_year")
-  cwa                   Decimal?               @db.Decimal(5, 2)
-  startDate             DateTime?              @map("start_date") @db.Date
-  endDate               DateTime?              @map("end_date") @db.Date
-  isActive              Boolean                @default(false) @map("is_active")
-  isArchived            Boolean                @default(false) @map("is_archived")
-  isCustom              Boolean                @default(false) @map("is_custom")
-  provisionKey          String?                @map("provision_key")
-  curriculumId          String?                @map("curriculum_id") @db.Uuid
-  curriculumTermId      String?                @map("curriculum_term_id") @db.Uuid
-  archivedAt            DateTime?              @map("archived_at")
-  createdAt             DateTime               @default(now()) @map("created_at")
-  owner                 User                   @relation("UserSemesters", fields: [ownerId], references: [id], onDelete: Cascade)
-  curriculum            ProgrammeCurriculum?   @relation(fields: [curriculumId], references: [id], onDelete: SetNull)
+  academicYear          String                   @map("academic_year")
+  cwa                   Decimal?                 @db.Decimal(5, 2)
+  startDate             DateTime?                @map("start_date") @db.Date
+  endDate               DateTime?                @map("end_date") @db.Date
+  isActive              Boolean                  @default(false) @map("is_active")
+  isArchived            Boolean                  @default(false) @map("is_archived")
+  isCustom              Boolean                  @default(false) @map("is_custom")
+  provisionKey          String?                  @map("provision_key")
+  curriculumId          String?                  @map("curriculum_id") @db.Uuid
+  curriculumTermId      String?                  @map("curriculum_term_id") @db.Uuid
+  archivedAt            DateTime?                @map("archived_at")
+  createdAt             DateTime                 @default(now()) @map("created_at")
+  owner                 User                     @relation("UserSemesters", fields: [ownerId], references: [id], onDelete: Cascade)
+  curriculum            ProgrammeCurriculum?     @relation(fields: [curriculumId], references: [id], onDelete: SetNull)
   curriculumTerm        ProgrammeCurriculumTerm? @relation(fields: [curriculumTermId], references: [id], onDelete: SetNull)
   assessments           Assessment[]
   cwaSnapshots          CwaSnapshot[]
-  activeUsers           User[]                 @relation("UserActiveSemester")
+  activeUsers           User[]                   @relation("UserActiveSemester")
   aiConversations       AiConversation[]
   enrollments           Enrollment[]
   courseExclusions      StudentCourseExclusion[]
@@ -369,19 +370,19 @@ model Semester {
 }
 
 model ProgrammeCurriculum {
-  id           String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  college      String
-  department   String
-  programme    String
-  version      String
+  id            String                    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  college       String
+  department    String
+  programme     String
+  version       String
   durationYears Int                       @map("duration_years")
-  termsPerYear Int                        @map("terms_per_year")
-  source       String?
-  isPublished  Boolean                    @default(true) @map("is_published")
-  createdAt    DateTime                   @default(now()) @map("created_at")
-  updatedAt    DateTime                   @updatedAt @map("updated_at")
-  terms        ProgrammeCurriculumTerm[]
-  semesters    Semester[]
+  termsPerYear  Int                       @map("terms_per_year")
+  source        String?
+  isPublished   Boolean                   @default(true) @map("is_published")
+  createdAt     DateTime                  @default(now()) @map("created_at")
+  updatedAt     DateTime                  @updatedAt @map("updated_at")
+  terms         ProgrammeCurriculumTerm[]
+  semesters     Semester[]
 
   @@unique([college, programme, version])
   @@index([programme, version, isPublished])
@@ -389,14 +390,14 @@ model ProgrammeCurriculum {
 }
 
 model ProgrammeCurriculumTerm {
-  id           String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  curriculumId String                     @map("curriculum_id") @db.Uuid
+  id           String                      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  curriculumId String                      @map("curriculum_id") @db.Uuid
   level        AcademicLevel
   term         SemesterTerm
   name         String
   source       String?
-  createdAt    DateTime                   @default(now()) @map("created_at")
-  curriculum   ProgrammeCurriculum        @relation(fields: [curriculumId], references: [id], onDelete: Cascade)
+  createdAt    DateTime                    @default(now()) @map("created_at")
+  curriculum   ProgrammeCurriculum         @relation(fields: [curriculumId], references: [id], onDelete: Cascade)
   courses      ProgrammeCurriculumCourse[]
   semesters    Semester[]
 
@@ -464,13 +465,13 @@ model Enrollment {
 }
 
 model StudentCourseExclusion {
-  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  userId      String   @map("user_id") @db.Uuid
-  semesterId  String   @map("semester_id") @db.Uuid
-  courseCode  String   @map("course_code")
-  createdAt   DateTime @default(now()) @map("created_at")
-  semester    Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId     String   @map("user_id") @db.Uuid
+  semesterId String   @map("semester_id") @db.Uuid
+  courseCode String   @map("course_code")
+  createdAt  DateTime @default(now()) @map("created_at")
+  semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, semesterId, courseCode])
   @@map("student_course_exclusions")
@@ -533,10 +534,10 @@ model Goal {
   user              User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
   progressSnapshots GoalProgressSnapshot[]
 
+  @@unique([userId, semesterId, sourceKey])
   @@index([userId, semesterId, status])
   @@index([semesterId])
   @@index([courseId])
-  @@unique([userId, semesterId, sourceKey])
   @@map("goals")
 }
 
@@ -795,10 +796,27 @@ model DiagnosticQuiz {
   enrollment   Enrollment           @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
   user         User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   questions    DiagnosticQuestion[]
+  feedback     DiagnosticFeedback?
 
   @@index([userId, createdAt])
   @@index([enrollmentId, status])
   @@map("diagnostic_quizzes")
+}
+
+model DiagnosticFeedback {
+  id        String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  quizId    String         @unique @map("quiz_id") @db.Uuid
+  userId    String         @map("user_id") @db.Uuid
+  rating    Int
+  comment   String?
+  createdAt DateTime       @default(now()) @map("created_at")
+  updatedAt DateTime       @updatedAt @map("updated_at")
+  quiz      DiagnosticQuiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([rating, createdAt])
+  @@map("diagnostic_feedback")
 }
 
 model DiagnosticQuestion {
@@ -863,29 +881,51 @@ model TopicMastery {
 }
 
 model CourseMaterial {
-  id               String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  enrollmentId     String          @map("enrollment_id") @db.Uuid
-  uploadedBy       String          @map("uploaded_by") @db.Uuid
-  title            String
-  type             ResourceType    @default(OTHER)
-  sourceUrl        String?         @map("source_url")
-  storagePath      String?         @map("storage_path")
-  originalFileName String?         @map("original_file_name")
-  mimeType         String?         @map("mime_type")
-  fileSize         Int?            @map("file_size")
-  contentHash      String?         @map("content_hash")
-  status           MaterialStatus  @default(PENDING)
-  errorMessage     String?         @map("error_message")
-  createdAt        DateTime        @default(now()) @map("created_at")
-  updatedAt        DateTime        @updatedAt @map("updated_at")
-  enrollment       Enrollment      @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
-  uploader         User            @relation(fields: [uploadedBy], references: [id], onDelete: Cascade)
-  chunks           MaterialChunk[]
+  id                String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  enrollmentId      String                     @map("enrollment_id") @db.Uuid
+  uploadedBy        String                     @map("uploaded_by") @db.Uuid
+  title             String
+  type              ResourceType               @default(OTHER)
+  sourceUrl         String?                    @map("source_url")
+  storagePath       String?                    @map("storage_path")
+  originalFileName  String?                    @map("original_file_name")
+  mimeType          String?                    @map("mime_type")
+  fileSize          Int?                       @map("file_size")
+  contentHash       String?                    @map("content_hash")
+  status            MaterialStatus             @default(PENDING)
+  errorMessage      String?                    @map("error_message")
+  version           Int                        @default(1)
+  supersedesId      String?                    @map("supersedes_id") @db.Uuid
+  createdAt         DateTime                   @default(now()) @map("created_at")
+  updatedAt         DateTime                   @updatedAt @map("updated_at")
+  enrollment        Enrollment                 @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  uploader          User                       @relation(fields: [uploadedBy], references: [id], onDelete: Cascade)
+  chunks            MaterialChunk[]
+  supersedes        CourseMaterial?            @relation("CourseMaterialVersions", fields: [supersedesId], references: [id], onDelete: SetNull)
+  replacements      CourseMaterial[]           @relation("CourseMaterialVersions")
+  ingestionAttempts MaterialIngestionAttempt[]
 
   @@unique([enrollmentId, contentHash])
   @@index([enrollmentId, status, updatedAt])
   @@index([uploadedBy])
+  @@index([enrollmentId, title, type, version])
   @@map("course_materials")
+}
+
+model MaterialIngestionAttempt {
+  id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  materialId   String         @map("material_id") @db.Uuid
+  attempt      Int
+  status       MaterialStatus @default(PENDING)
+  chunkCount   Int?           @map("chunk_count")
+  errorMessage String?        @map("error_message")
+  startedAt    DateTime       @default(now()) @map("started_at")
+  completedAt  DateTime?      @map("completed_at")
+  material     CourseMaterial @relation(fields: [materialId], references: [id], onDelete: Cascade)
+
+  @@unique([materialId, attempt])
+  @@index([status, startedAt])
+  @@map("material_ingestion_attempts")
 }
 
 model MaterialChunk {
@@ -1003,27 +1043,27 @@ model ProgrammeCourseExclusion {
 }
 
 model Notification {
-  id         String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  userId     String           @map("user_id") @db.Uuid
-  semesterId String?          @map("semester_id") @db.Uuid
-  title      String
-  message    String
-  type       NotificationType @default(SYSTEM)
-  actionUrl  String?          @map("action_url")
-  sourceKey  String?          @map("source_key")
-  isRead     Boolean          @default(false) @map("is_read")
-  readAt     DateTime?        @map("read_at")
-  scheduledFor DateTime?      @map("scheduled_for")
-  expiresAt  DateTime?        @map("expires_at")
-  deliveredAt DateTime?       @map("delivered_at")
-  dismissedAt DateTime?       @map("dismissed_at")
-  failedAt  DateTime?         @map("failed_at")
-  status    NotificationStatus @default(PENDING)
-  channel   NotificationChannel @default(IN_APP)
-  attemptCount Int            @default(0) @map("attempt_count")
-  createdAt  DateTime         @default(now()) @map("created_at")
-  semester   Semester?        @relation(fields: [semesterId], references: [id], onDelete: Cascade)
-  user       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId       String              @map("user_id") @db.Uuid
+  semesterId   String?             @map("semester_id") @db.Uuid
+  title        String
+  message      String
+  type         NotificationType    @default(SYSTEM)
+  actionUrl    String?             @map("action_url")
+  sourceKey    String?             @map("source_key")
+  isRead       Boolean             @default(false) @map("is_read")
+  readAt       DateTime?           @map("read_at")
+  scheduledFor DateTime?           @map("scheduled_for")
+  expiresAt    DateTime?           @map("expires_at")
+  deliveredAt  DateTime?           @map("delivered_at")
+  dismissedAt  DateTime?           @map("dismissed_at")
+  failedAt     DateTime?           @map("failed_at")
+  status       NotificationStatus  @default(PENDING)
+  channel      NotificationChannel @default(IN_APP)
+  attemptCount Int                 @default(0) @map("attempt_count")
+  createdAt    DateTime            @default(now()) @map("created_at")
+  semester     Semester?           @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  user         User                @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, sourceKey])
   @@index([userId, isRead, createdAt])

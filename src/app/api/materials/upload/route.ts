@@ -131,19 +131,38 @@ export async function POST(request: Request) {
     );
   }
 
-  const material = await prisma.courseMaterial.create({
-    data: {
-      enrollmentId: enrollment.id,
-      uploadedBy: appUser.id,
-      title: parsed.data.title,
-      type: parsed.data.type,
-      originalFileName: file.name,
-      mimeType: file.type || "application/octet-stream",
-      fileSize: file.size,
-      contentHash,
-      status: "PENDING",
-    },
-    select: { id: true },
+  const material = await prisma.$transaction(async (tx) => {
+    const priorVersion = await tx.courseMaterial.findFirst({
+      where: {
+        enrollmentId: enrollment.id,
+        title: parsed.data.title,
+        type: parsed.data.type,
+        status: { in: ["PENDING", "READY"] },
+      },
+      select: { id: true, version: true },
+      orderBy: { version: "desc" },
+    });
+    if (priorVersion) {
+      await tx.courseMaterial.update({ where: { id: priorVersion.id }, data: { status: "ARCHIVED" } });
+    }
+    const created = await tx.courseMaterial.create({
+      data: {
+        enrollmentId: enrollment.id,
+        uploadedBy: appUser.id,
+        title: parsed.data.title,
+        type: parsed.data.type,
+        originalFileName: file.name,
+        mimeType: file.type || "application/octet-stream",
+        fileSize: file.size,
+        contentHash,
+        status: "PENDING",
+        version: (priorVersion?.version ?? 0) + 1,
+        supersedesId: priorVersion?.id,
+      },
+      select: { id: true },
+    });
+    await tx.materialIngestionAttempt.create({ data: { materialId: created.id, attempt: 1, status: "PENDING" } });
+    return created;
   });
   const storagePath = `${appUser.id}/${enrollment.id}/${material.id}/${safeFileName(file.name)}`;
 
@@ -195,6 +214,10 @@ export async function POST(request: Request) {
         where: { id: material.id },
         data: { status: "READY", errorMessage: null },
       });
+      await tx.materialIngestionAttempt.update({
+        where: { materialId_attempt: { materialId: material.id, attempt: 1 } },
+        data: { status: "READY", chunkCount: chunks.length, completedAt: new Date(), errorMessage: null },
+      });
     });
 
     return NextResponse.json({
@@ -208,6 +231,10 @@ export async function POST(request: Request) {
     await prisma.courseMaterial.update({
       where: { id: material.id },
       data: { status: "FAILED", errorMessage: message.slice(0, 500) },
+    });
+    await prisma.materialIngestionAttempt.update({
+      where: { materialId_attempt: { materialId: material.id, attempt: 1 } },
+      data: { status: "FAILED", errorMessage: message.slice(0, 500), completedAt: new Date() },
     });
     return NextResponse.json({ message, materialId: material.id }, { status: 422 });
   }

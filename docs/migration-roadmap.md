@@ -69,7 +69,7 @@ Exit gate: passed locally on 2026-08-04. Authorization tests pass, costly routes
 
 Target: 5-7 days.
 
-Status: implementation complete locally. The local quality gate passes with 20 test files and 54 tests. GitHub Actions run #9 passed `Quality`; its browser job stopped at database security verification before the Support and Feedback RLS correction. That migration has been corrected and later local migrations add material de-duplication, semester archival, goal progress history, and AI usage accounting. Browser CI must be rerun after the current branch is pushed. Branch protection on `main` was explicitly deferred by the Founder on 2026-08-05. See [testing.md](./testing.md) for commands, isolation rules, and CI details.
+Status: implementation complete locally. The local quality gate passes with 22 test files and 59 tests. GitHub Actions run #9 passed `Quality`; its browser job stopped at database security verification before the Support and Feedback RLS correction. That migration has been corrected and later local migrations add material de-duplication, semester archival, goal progress history, AI usage accounting, and diagnostic feedback. Browser CI must be rerun after the current branch is pushed. Branch protection on `main` was explicitly deferred by the Founder on 2026-08-05. See [testing.md](./testing.md) for commands, isolation rules, and CI details.
 
 - [x] Add Vitest for schemas and business logic.
 - [x] Add React Testing Library for interactive components.
@@ -135,7 +135,7 @@ Target: 5-8 days.
 - Add failed-ingestion reprocessing, duplicate handling, and content versioning.
 - Review source and permission metadata for platform materials.
 
-Progress on 2026-08-05: course material records now carry a SHA-256 content hash, repeated READY/PENDING uploads are rejected or ignored, and a FAILED upload with its stored original file can be reprocessed safely. AI chat and diagnostics now record token estimates, latency, failure state, model, and configurable estimated spend; daily per-user and global token quotas are enforced before provider calls. Material versioning and ingestion job tracking remain.
+Progress on 2026-08-05: course material records now carry a SHA-256 content hash, repeated READY/PENDING uploads are rejected or ignored, and a FAILED upload with its stored original file can be reprocessed safely. Replacing a material archives the prior active version, preserves a version chain, and records each ingestion attempt. AI chat and diagnostics record token estimates, latency, failure state, model, and configurable estimated spend; daily per-user and global token quotas are enforced before provider calls. Students can rate completed diagnostics, and administrators can see AI and ingestion operational counts. A course-specific evaluation set remains.
 
 Exit gate: quality thresholds are met, AI cost is bounded, and failed ingestion is recoverable.
 

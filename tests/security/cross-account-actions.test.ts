@@ -7,9 +7,9 @@ const mocks = vi.hoisted(() => {
     assessment: { deleteMany: vi.fn() },
     courseMaterial: { delete: vi.fn(), findFirst: vi.fn(), update: vi.fn() },
     diagnosticQuiz: { findFirst: vi.fn() },
-    enrollment: { deleteMany: vi.fn() },
+    enrollment: { deleteMany: vi.fn(), findFirst: vi.fn() },
     goal: { deleteMany: vi.fn() },
-    notification: { deleteMany: vi.fn() },
+    notification: { deleteMany: vi.fn(), updateMany: vi.fn() },
     peerQuestion: { deleteMany: vi.fn() },
     semester: { findFirst: vi.fn() },
     studyGroup: { deleteMany: vi.fn() },
@@ -73,6 +73,7 @@ describe("cross-account mutation boundaries", () => {
   });
 
   it("scopes enrollment deletion to the signed-in user", async () => {
+    mocks.prisma.enrollment.findFirst.mockResolvedValue(null);
     mocks.prisma.enrollment.deleteMany.mockResolvedValue({ count: 0 });
     await deleteEnrollment(form({ enrollmentId: foreignId, semesterId: currentSemesterId }));
     expect(mocks.prisma.enrollment.deleteMany).toHaveBeenCalledWith({
@@ -105,7 +106,7 @@ describe("cross-account mutation boundaries", () => {
 
   it("scopes conversations and notifications to the signed-in user", async () => {
     mocks.prisma.aiConversation.deleteMany.mockResolvedValue({ count: 0 });
-    mocks.prisma.notification.deleteMany.mockResolvedValue({ count: 0 });
+    mocks.prisma.notification.updateMany.mockResolvedValue({ count: 0 });
     await deleteAiConversation(form({ conversationId: foreignId }));
     await deleteNotification(form({ id: foreignId }));
     expect(mocks.prisma.aiConversation.deleteMany).toHaveBeenCalledWith({
@@ -116,9 +117,9 @@ describe("cross-account mutation boundaries", () => {
         isPinned: false,
       },
     });
-    expect(mocks.prisma.notification.deleteMany).toHaveBeenCalledWith({
+    expect(mocks.prisma.notification.updateMany).toHaveBeenCalledWith(expect.objectContaining({
       where: { id: foreignId, userId: currentUserId },
-    });
+    }));
   });
 
   it("does not delete another user's private material", async () => {

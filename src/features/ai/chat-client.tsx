@@ -121,6 +121,7 @@ export function AiChatClient({
       router.refresh();
     } catch (caught) {
       if (controller.signal.aborted) {
+        setMessages((current) => current.filter((item) => item.id !== assistantId));
         setError("Response stopped.");
       } else {
         setMessages((current) =>
@@ -145,7 +146,7 @@ export function AiChatClient({
   return (
     <div className="flex min-h-[560px] flex-1 flex-col lg:min-h-0">
       <div className="min-h-0 flex-1 overflow-y-auto px-3 py-5 sm:px-6">
-        {messages.length ? (
+      {messages.length ? (
           <div className="mx-auto grid max-w-3xl gap-5" aria-live="polite">
             {messages.map((item) => (
               <div

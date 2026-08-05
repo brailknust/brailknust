@@ -353,7 +353,7 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
                     <div>
                       <p className="font-semibold">{material.title}</p>
                       <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-muted">
-                        {material.type.replace("_", " ")} · {material.status.toLowerCase()} · {material._count.chunks} searchable chunks
+                        v{material.version} · {material.type.replace("_", " ")} · {material.status.toLowerCase()} · {material._count.chunks} searchable chunks
                       </p>
                       {material.chunks[0]?.topic ? (
                         <p className="mt-2 text-sm text-muted">Topic: {material.chunks[0].topic.title}</p>
@@ -391,6 +391,9 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
                   ) : null}
                   {material.errorMessage ? (
                     <p className="mt-3 text-sm text-red-600">{material.errorMessage}</p>
+                  ) : null}
+                  {material.ingestionAttempts[0] ? (
+                    <p className="mt-2 text-xs text-muted">Processing attempt {material.ingestionAttempts[0].attempt}: {material.ingestionAttempts[0].status.toLowerCase()}</p>
                   ) : null}
                   {!isArchived && material.status === "FAILED" && material.storagePath ? (
                     <form action={retryCourseMaterialProcessing} className="mt-3">
