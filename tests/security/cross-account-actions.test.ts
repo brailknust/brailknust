@@ -5,7 +5,7 @@ const mocks = vi.hoisted(() => {
     $transaction: vi.fn(),
     aiConversation: { deleteMany: vi.fn() },
     assessment: { deleteMany: vi.fn() },
-    courseMaterial: { delete: vi.fn(), findFirst: vi.fn() },
+    courseMaterial: { delete: vi.fn(), findFirst: vi.fn(), update: vi.fn() },
     diagnosticQuiz: { findFirst: vi.fn() },
     enrollment: { deleteMany: vi.fn() },
     goal: { deleteMany: vi.fn() },
@@ -22,6 +22,7 @@ const mocks = vi.hoisted(() => {
     revalidatePath: vi.fn(),
     redirect: vi.fn(),
     removeCourseMaterialFile: vi.fn(),
+    downloadCourseMaterialFile: vi.fn(),
     syncNotificationsForUser: vi.fn(),
   };
 });
@@ -29,6 +30,7 @@ const mocks = vi.hoisted(() => {
 vi.mock("@/server/db", () => ({ prisma: mocks.prisma }));
 vi.mock("@/features/auth/queries", () => ({ requireAppUser: mocks.requireAppUser }));
 vi.mock("@/features/materials/storage", () => ({
+  downloadCourseMaterialFile: mocks.downloadCourseMaterialFile,
   removeCourseMaterialFile: mocks.removeCourseMaterialFile,
 }));
 vi.mock("@/features/notifications/service", () => ({
@@ -42,7 +44,7 @@ import { deleteAiConversation } from "@/features/ai/actions";
 import { deleteAssessment } from "@/features/assessments/actions";
 import { submitDiagnosticQuiz } from "@/features/diagnostics/actions";
 import { deleteGoal } from "@/features/goals/actions";
-import { deleteCourseMaterial } from "@/features/materials/actions";
+import { deleteCourseMaterial, retryCourseMaterialProcessing } from "@/features/materials/actions";
 import { deleteNotification } from "@/features/notifications/actions";
 import { deletePeerQuestion, deleteStudyGroup } from "@/features/peers/actions";
 import { deleteStudyPlanItem } from "@/features/planner/actions";
@@ -131,6 +133,24 @@ describe("cross-account mutation boundaries", () => {
       select: { id: true, storagePath: true },
     });
     expect(mocks.prisma.courseMaterial.delete).not.toHaveBeenCalled();
+  });
+
+  it("does not retry another user's failed material", async () => {
+    mocks.prisma.courseMaterial.findFirst.mockResolvedValue(null);
+    await expect(retryCourseMaterialProcessing(form({
+      materialId: foreignId,
+      semesterId: currentSemesterId,
+      courseId,
+    }))).rejects.toThrow("Failed material not found");
+    expect(mocks.prisma.courseMaterial.findFirst).toHaveBeenCalledWith(expect.objectContaining({
+      where: expect.objectContaining({
+        id: foreignId,
+        uploadedBy: currentUserId,
+        status: "FAILED",
+        enrollment: { userId: currentUserId, semesterId: currentSemesterId, courseId },
+      }),
+    }));
+    expect(mocks.downloadCourseMaterialFile).not.toHaveBeenCalled();
   });
 
   it("scopes study sessions through the user's active plan", async () => {

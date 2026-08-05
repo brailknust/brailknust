@@ -62,6 +62,13 @@ export async function removeCourseMaterialFile(storagePath: string) {
   await removeCourseMaterialFiles([storagePath]);
 }
 
+export async function downloadCourseMaterialFile(storagePath: string) {
+  const supabase = createSupabaseServiceClient();
+  const { data, error } = await supabase.storage.from(courseMaterialBucket).download(storagePath);
+  if (error) throw error;
+  return data;
+}
+
 export async function removeCourseMaterialFiles(storagePaths: string[]) {
   if (!storagePaths.length) return;
   const supabase = createSupabaseServiceClient();

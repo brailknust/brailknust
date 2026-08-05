@@ -16,3 +16,9 @@ export const deleteCourseMaterialSchema = z.object({
   semesterId: z.string().uuid(),
   courseId: z.string().uuid(),
 });
+
+export const retryCourseMaterialSchema = z.object({
+  materialId: z.string().uuid(),
+  semesterId: z.string().uuid(),
+  courseId: z.string().uuid(),
+});

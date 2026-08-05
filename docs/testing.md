@@ -1,6 +1,6 @@
 # Testing BRAIL
 
-Phase 2 and later UX work use a layered release gate: fast Vitest checks protect business rules and components, while Playwright drives authenticated journeys against an isolated Supabase environment. The local suite currently contains 51 tests across 19 files.
+Phase 2 and later workflow work uses a layered release gate: fast Vitest checks protect business rules and components, while Playwright drives authenticated journeys against an isolated Supabase environment. The local suite currently contains 54 tests across 20 files.
 
 ## Test layers
 

@@ -18,6 +18,7 @@ type AiResponseFormat = "json_object" | {
 
 export const aiModel = serverEnv.AI_MODEL ?? "openai/gpt-oss-20b";
 export const dailyMessageLimit = serverEnv.AI_DAILY_MESSAGE_LIMIT ?? 20;
+export const chatMaxCompletionTokens = 1_200;
 const providerTimeoutMs = 45_000;
 const providerRetryCount = 2;
 
@@ -74,7 +75,7 @@ export async function createChatCompletionStream(
       model: aiModel,
       messages,
       temperature: 0.35,
-      max_completion_tokens: 1200,
+      max_completion_tokens: chatMaxCompletionTokens,
       stream: true,
     }),
     signal,

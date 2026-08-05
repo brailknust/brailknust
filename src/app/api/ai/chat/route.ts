@@ -8,11 +8,13 @@ import {
 } from "@/features/ai/course-scope";
 import {
   aiModel,
+  chatMaxCompletionTokens,
   createChatCompletionStream,
   dailyMessageLimit,
   isAiConfigured,
   type AiProviderMessage,
 } from "@/features/ai/provider";
+import { checkAiUsageQuota, estimateMessageTokens, estimateTokenCount, recordAiUsage } from "@/features/ai/usage";
 import { sendAiMessageSchema } from "@/features/ai/schemas";
 import { formatUntrustedContent } from "@/features/ai/untrusted-content";
 import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
@@ -217,7 +219,18 @@ export async function POST(request: Request) {
     })),
   ];
 
+  const promptTokens = estimateMessageTokens(providerMessages);
+  const quota = await checkAiUsageQuota(appUser.id, promptTokens + chatMaxCompletionTokens);
+  if (!quota.allowed) {
+    await prisma.aiMessage.delete({ where: { id: userMessage.id } });
+    if (createdConversation) {
+      await prisma.aiConversation.delete({ where: { id: conversation.id } });
+    }
+    return NextResponse.json({ error: quota.message }, { status: 429 });
+  }
+
   let deltas;
+  const providerStartedAt = Date.now();
   try {
     deltas = await createChatCompletionStream(providerMessages, request.signal);
   } catch (error) {
@@ -259,9 +272,38 @@ export async function POST(request: Request) {
             }),
           ]);
         }
+        try {
+          await recordAiUsage({
+            userId: appUser.id,
+            semesterId: appUser.activeSemesterId,
+            operation: "CHAT",
+            model: aiModel,
+            promptTokens,
+            completionTokens: estimateTokenCount(assistantText),
+            latencyMs: Date.now() - providerStartedAt,
+            succeeded: true,
+          });
+        } catch (usageError) {
+          console.error("AI usage tracking failed", usageError);
+        }
         controller.close();
       } catch (error) {
         console.error("AI response stream failed", error);
+        try {
+          await recordAiUsage({
+            userId: appUser.id,
+            semesterId: appUser.activeSemesterId,
+            operation: "CHAT",
+            model: aiModel,
+            promptTokens,
+            completionTokens: estimateTokenCount(assistantText),
+            latencyMs: Date.now() - providerStartedAt,
+            succeeded: false,
+            failureCode: "stream_failed",
+          });
+        } catch (usageError) {
+          console.error("AI usage tracking failed", usageError);
+        }
         controller.error(error);
       }
     },

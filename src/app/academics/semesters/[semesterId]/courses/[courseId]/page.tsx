@@ -10,7 +10,7 @@ import { deleteWeakArea, saveWeakArea, updateEnrollmentPerformance } from "@/fea
 import { deleteAssessment, saveAssessment } from "@/features/assessments/actions";
 import { getCourseAnalytics } from "@/features/academics/queries";
 import { requireAppUser } from "@/features/auth/queries";
-import { deleteCourseMaterial, saveCourseMaterial } from "@/features/materials/actions";
+import { deleteCourseMaterial, retryCourseMaterialProcessing, saveCourseMaterial } from "@/features/materials/actions";
 import { MaterialUpload } from "@/features/materials/material-upload";
 import { createTask } from "@/features/tasks/actions";
 
@@ -391,6 +391,16 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
                   ) : null}
                   {material.errorMessage ? (
                     <p className="mt-3 text-sm text-red-600">{material.errorMessage}</p>
+                  ) : null}
+                  {!isArchived && material.status === "FAILED" && material.storagePath ? (
+                    <form action={retryCourseMaterialProcessing} className="mt-3">
+                      <input type="hidden" name="materialId" value={material.id} />
+                      <input type="hidden" name="semesterId" value={semesterId} />
+                      <input type="hidden" name="courseId" value={courseId} />
+                      <PendingSubmitButton pendingLabel="Retrying..." className="h-9 rounded-xl border border-border bg-white px-3 text-xs font-semibold">
+                        Retry processing
+                      </PendingSubmitButton>
+                    </form>
                   ) : null}
                 </article>
               )) : (

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { aiModel, createChatCompletion, isAiConfigured } from "@/features/ai/provider";
+import { checkAiUsageQuota, estimateMessageTokens, estimateTokenCount, recordAiUsage } from "@/features/ai/usage";
 import { formatUntrustedContent } from "@/features/ai/untrusted-content";
 import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
 import {
@@ -271,6 +272,7 @@ export async function POST(request: Request) {
 
   let generated;
   let failureMessage = "Could not generate a valid question set. Try again.";
+  const maxCompletionTokens = Math.min(5_500, Math.max(2_200, parsed.data.questionCount * 450 + 700));
   const sources = diagnosticSources(topicChunks, SOURCE_CHAR_BUDGET);
   if (!sources.length) {
     return NextResponse.json(
@@ -279,17 +281,25 @@ export async function POST(request: Request) {
     );
   }
 
+  const messages = diagnosticMessages({
+    course: `${enrollment.course.code} - ${enrollment.course.name}`,
+    topic: topic.title,
+    learningOutcomes: platformTopic?.learningOutcomes,
+    questionCount: parsed.data.questionCount,
+    sources,
+  });
+  const promptTokens = estimateMessageTokens(messages);
+  const quota = await checkAiUsageQuota(appUser.id, promptTokens + maxCompletionTokens);
+  if (!quota.allowed) {
+    return NextResponse.json({ message: quota.message }, { status: 429 });
+  }
+
+  const providerStartedAt = Date.now();
+  let raw = "";
   try {
-      const messages = diagnosticMessages({
-        course: `${enrollment.course.code} - ${enrollment.course.name}`,
-        topic: topic.title,
-        learningOutcomes: platformTopic?.learningOutcomes,
-        questionCount: parsed.data.questionCount,
-        sources,
-      });
-      const raw = await createChatCompletion(messages, {
+      raw = await createChatCompletion(messages, {
         temperature: 0.4,
-        maxCompletionTokens: Math.min(5_500, Math.max(2_200, parsed.data.questionCount * 450 + 700)),
+        maxCompletionTokens,
         reasoningEffort: "low",
         responseFormat: DIAGNOSTIC_RESPONSE_FORMAT,
         signal: request.signal,
@@ -324,6 +334,22 @@ export async function POST(request: Request) {
       failureMessage = "The AI generated document-trivia questions instead of subject questions. Try again.";
     } else if (detail.includes("json_validate_failed") || error instanceof SyntaxError) {
       failureMessage = "The AI returned an incomplete question set. Try again.";
+    }
+  } finally {
+    try {
+      await recordAiUsage({
+        userId: appUser.id,
+        semesterId: appUser.activeSemesterId,
+        operation: "DIAGNOSTIC",
+        model: aiModel,
+        promptTokens,
+        completionTokens: raw ? estimateTokenCount(raw) : 0,
+        latencyMs: Date.now() - providerStartedAt,
+        succeeded: Boolean(generated),
+        failureCode: generated ? undefined : "generation_failed",
+      });
+    } catch (usageError) {
+      console.error("AI usage tracking failed", usageError);
     }
   }
 
