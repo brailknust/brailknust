@@ -1,6 +1,7 @@
 import "server-only";
 
 import { prisma } from "@/server/db";
+import { calculateAssessmentAverage } from "@/features/academics/calculations";
 
 function weekBounds() {
   const now = new Date();
@@ -55,7 +56,7 @@ export async function getGoalsPageData(userId: string) {
     }),
     prisma.assessment.findMany({
       where: { userId, semesterId },
-      select: { courseId: true, score: true, maxScore: true, assessedAt: true, createdAt: true },
+      select: { courseId: true, score: true, maxScore: true, weight: true, assessedAt: true, createdAt: true },
     }),
   ]);
 
@@ -82,9 +83,7 @@ export async function getGoalsPageData(userId: string) {
         courseMatches(item.courseId) &&
         (!weekly || inRange(item.assessedAt ?? item.createdAt, start, end))
       );
-      current = relevant.length
-        ? relevant.reduce((sum, item) => sum + Number(item.score) / Number(item.maxScore) * 100, 0) / relevant.length
-        : 0;
+      current = calculateAssessmentAverage(relevant);
     }
 
     const target = Number(goal.targetValue);

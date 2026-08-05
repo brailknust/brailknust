@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { semesterProfileSchema } from "@/features/academics/schemas";
+import { calculateAssessmentAverage } from "@/features/academics/calculations";
 import { assessmentSchema } from "@/features/assessments/schemas";
 import { generatedQuestionSetSchema } from "@/features/diagnostics/schemas";
 import { feedbackSchema } from "@/features/feedback/schemas";
@@ -21,6 +22,18 @@ describe("business input schemas", () => {
       score: 21,
       maxScore: 20,
     }).success).toBe(false);
+  });
+
+  it("calculates weighted assessment averages and ignores invalid results", () => {
+    expect(calculateAssessmentAverage([
+      { score: 18, maxScore: 20, weight: 20 },
+      { score: 40, maxScore: 50, weight: 80 },
+    ])).toBe(82);
+    expect(calculateAssessmentAverage([
+      { score: 18, maxScore: 20 },
+      { score: 40, maxScore: 50 },
+      { score: 60, maxScore: 0 },
+    ])).toBe(85);
   });
 
   it("rejects study sessions whose end is not after the start", () => {
