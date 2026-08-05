@@ -15,8 +15,26 @@ const statusRank = {
   ARCHIVED: 3,
 } as const;
 
+export type TaskStatusValue = keyof typeof statusRank;
+
+const transitionTargets: Record<TaskStatusValue, TaskStatusValue[]> = {
+  TODO: ["IN_PROGRESS", "DONE", "ARCHIVED"],
+  IN_PROGRESS: ["TODO", "DONE", "ARCHIVED"],
+  EXPIRED: ["DONE", "ARCHIVED"],
+  DONE: ["TODO", "IN_PROGRESS", "ARCHIVED"],
+  ARCHIVED: ["TODO"],
+};
+
+export function allowedNextTaskStatuses(status: TaskStatusValue) {
+  return transitionTargets[status];
+}
+
+export function canTransitionTaskStatus(currentStatus: TaskStatusValue, nextStatus: TaskStatusValue) {
+  return currentStatus === nextStatus || transitionTargets[currentStatus].includes(nextStatus);
+}
+
 export function withEffectiveTaskStatus<
-  T extends { status: keyof typeof statusRank; dueAt: Date | null },
+  T extends { status: TaskStatusValue; dueAt: Date | null },
 >(task: T, now = new Date()): T {
   if (
     task.dueAt &&

@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  allowedNextTaskStatuses,
+  canTransitionTaskStatus,
   sortTasksByImportanceAndDueDate,
   withEffectiveTaskStatus,
 } from "@/features/tasks/status";
@@ -29,5 +31,12 @@ describe("task status and ordering", () => {
       "expired",
       "done",
     ]);
+  });
+
+  it("defines safe status transitions", () => {
+    expect(allowedNextTaskStatuses("TODO")).toEqual(["IN_PROGRESS", "DONE", "ARCHIVED"]);
+    expect(canTransitionTaskStatus("IN_PROGRESS", "DONE")).toBe(true);
+    expect(canTransitionTaskStatus("EXPIRED", "IN_PROGRESS")).toBe(false);
+    expect(canTransitionTaskStatus("DONE", "TODO")).toBe(true);
   });
 });

@@ -3,6 +3,7 @@ import { ArrowLeft, CheckCircle2, XCircle } from "lucide-react";
 import { notFound } from "next/navigation";
 
 import { AppShell } from "@/components/app-shell";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { requireAppUser } from "@/features/auth/queries";
 import { submitDiagnosticQuiz } from "@/features/diagnostics/actions";
 import { prisma } from "@/server/db";
@@ -68,7 +69,7 @@ export default async function DiagnosticQuizPage({ params }: { params: Promise<{
             </fieldset>
           );
         })}
-        {!completed ? <button className="h-12 rounded-xl bg-[var(--accent-strong)] px-5 text-sm font-semibold text-white">Submit diagnostic</button> : null}
+        {!completed ? <PendingSubmitButton pendingLabel="Submitting diagnostic..." className="h-12 rounded-xl bg-[var(--accent-strong)] px-5 text-sm font-semibold text-white">Submit diagnostic</PendingSubmitButton> : null}
       </form>
     </AppShell>
   );

@@ -16,6 +16,9 @@ export const createSemesterSchema = z.object({
   startDate: z.string().optional(),
   endDate: z.string().optional(),
   isActive: z.coerce.boolean().default(false),
+}).refine((value) => !value.startDate || !value.endDate || value.startDate <= value.endDate, {
+  message: "Semester end date must be on or after the start date.",
+  path: ["endDate"],
 });
 
 export const createCourseSchema = z.object({
@@ -37,9 +40,12 @@ export const createTimetableBlockSchema = z.object({
   semesterId: z.string().uuid(),
   courseId: z.string().uuid().optional(),
   dayOfWeek: z.coerce.number().int().min(0).max(6),
-  startTime: z.string().regex(/^\d{2}:\d{2}$/),
-  endTime: z.string().regex(/^\d{2}:\d{2}$/),
+  startTime: z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/),
+  endTime: z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/),
   venue: z.string().trim().optional(),
+}).refine((value) => value.endTime > value.startTime, {
+  message: "End time must be after start time.",
+  path: ["endTime"],
 });
 
 export const semesterProfileSchema = z.object({
@@ -53,6 +59,10 @@ export const activeSemesterSchema = z.object({
 });
 
 export const deleteSemesterSchema = z.object({
+  semesterId: z.string().uuid(),
+});
+
+export const semesterArchiveSchema = z.object({
   semesterId: z.string().uuid(),
 });
 

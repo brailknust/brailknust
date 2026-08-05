@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createHash } from "node:crypto";
 import { z } from "zod";
 
+import { requireWritableSemester } from "@/features/academics/semester-state";
 import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
 import { chunkMaterialText } from "@/features/materials/chunking";
 import {
@@ -107,6 +108,14 @@ export async function POST(request: Request) {
   });
   if (!enrollment) {
     return NextResponse.json({ message: "Course enrollment not found." }, { status: 404 });
+  }
+  try {
+    await requireWritableSemester(appUser.id, parsed.data.semesterId);
+  } catch (error) {
+    return NextResponse.json(
+      { message: error instanceof Error ? error.message : "This semester cannot be changed." },
+      { status: 409 },
+    );
   }
 
   const bytes = Buffer.from(await file.arrayBuffer());

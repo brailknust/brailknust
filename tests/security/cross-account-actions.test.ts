@@ -11,6 +11,7 @@ const mocks = vi.hoisted(() => {
     goal: { deleteMany: vi.fn() },
     notification: { deleteMany: vi.fn() },
     peerQuestion: { deleteMany: vi.fn() },
+    semester: { findFirst: vi.fn() },
     studyGroup: { deleteMany: vi.fn() },
     studyPlanItem: { deleteMany: vi.fn() },
     task: { delete: vi.fn(), findFirst: vi.fn() },
@@ -65,6 +66,7 @@ describe("cross-account mutation boundaries", () => {
       authUser: { id: "auth-user-b" },
       appUser: { id: currentUserId, activeSemesterId: currentSemesterId },
     });
+    mocks.prisma.semester.findFirst.mockResolvedValue({ id: currentSemesterId, isArchived: false });
     mocks.prisma.$transaction.mockImplementation(async (queries: unknown[]) => Promise.all(queries));
   });
 

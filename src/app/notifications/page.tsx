@@ -82,9 +82,9 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
                       <form action={updateNotificationReadState}>
                         <input type="hidden" name="id" value={notification.id} />
                         <input type="hidden" name="isRead" value={notification.isRead ? "false" : "true"} />
-                        <button className="h-9 rounded-xl border border-border px-3 text-sm font-semibold text-muted hover:text-foreground">
+                        <PendingSubmitButton pendingLabel="Updating..." className="h-9 rounded-xl border border-border px-3 text-sm font-semibold text-muted hover:text-foreground">
                           Mark {notification.isRead ? "unread" : "read"}
-                        </button>
+                        </PendingSubmitButton>
                       </form>
                       <form action={deleteNotification} className="ml-auto">
                         <input type="hidden" name="id" value={notification.id} />
@@ -151,7 +151,7 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
                 <option value="168">1 week before</option>
               </select>
             </label>
-            <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Save preferences</button>
+            <PendingSubmitButton pendingLabel="Saving preferences..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Save preferences</PendingSubmitButton>
           </form>
         </section>
       </div>

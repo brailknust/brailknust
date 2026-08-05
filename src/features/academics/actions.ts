@@ -16,18 +16,29 @@ import {
   deleteSemesterSchema,
   deleteEnrollmentSchema,
   enrollmentPerformanceSchema,
+  semesterArchiveSchema,
   semesterProfileSchema,
   weakAreaSchema,
   deleteWeakAreaSchema,
 } from "@/features/academics/schemas";
+import { requireWritableSemester } from "@/features/academics/semester-state";
+import { parseAccraDate } from "@/features/academics/time";
 import { prisma } from "@/server/db";
 
 function optionalDate(value?: string) {
-  return value ? new Date(`${value}T00:00:00.000Z`) : undefined;
+  return parseAccraDate(value);
 }
 
 function timeOfDay(value: string) {
   return new Date(`1970-01-01T${value}:00.000Z`);
+}
+
+function timeMinutes(value: Date) {
+  return value.getUTCHours() * 60 + value.getUTCMinutes();
+}
+
+function overlaps(start: number, end: number, existingStart: number, existingEnd: number) {
+  return start < existingEnd && end > existingStart;
 }
 
 export async function createSemester(formData: FormData) {
@@ -203,9 +214,10 @@ export async function createEnrollment(formData: FormData) {
 
   const semester = await prisma.semester.findFirst({
     where: { id: parsed.semesterId, ownerId: appUser.id },
-    select: { id: true },
+    select: { id: true, isArchived: true },
   });
   if (!semester) throw new Error("Semester not found in your workspace.");
+  if (semester.isArchived) throw new Error("Archived semesters are read-only. Reopen the semester before enrolling in courses.");
 
   const course = await prisma.course.findFirst({
     where: {
@@ -268,9 +280,10 @@ export async function createTimetableBlock(formData: FormData) {
 
   const semester = await prisma.semester.findFirst({
     where: { id: parsed.semesterId, ownerId: appUser.id },
-    select: { id: true },
+    select: { id: true, isArchived: true },
   });
   if (!semester) throw new Error("Semester not found in your workspace.");
+  if (semester.isArchived) throw new Error("Archived semesters are read-only. Reopen the semester before editing the timetable.");
 
   if (parsed.courseId) {
     const enrollment = await prisma.enrollment.findFirst({
@@ -281,14 +294,26 @@ export async function createTimetableBlock(formData: FormData) {
     if (!enrollment) throw new Error("Select a course from this semester.");
   }
 
+  const startTime = timeOfDay(parsed.startTime);
+  const endTime = timeOfDay(parsed.endTime);
+  const existingBlocks = await prisma.timetableBlock.findMany({
+    where: { userId: appUser.id, semesterId: parsed.semesterId, dayOfWeek: parsed.dayOfWeek },
+    select: { startTime: true, endTime: true },
+  });
+  const start = timeMinutes(startTime);
+  const end = timeMinutes(endTime);
+  if (existingBlocks.some((block) => overlaps(start, end, timeMinutes(block.startTime), timeMinutes(block.endTime)))) {
+    throw new Error("This timetable block overlaps with an existing block.");
+  }
+
   await prisma.timetableBlock.create({
     data: {
       userId: appUser.id,
       semesterId: parsed.semesterId,
       courseId: parsed.courseId,
       dayOfWeek: parsed.dayOfWeek,
-      startTime: timeOfDay(parsed.startTime),
-      endTime: timeOfDay(parsed.endTime),
+      startTime,
+      endTime,
       venue: parsed.venue,
       isBusy: true,
     },
@@ -310,6 +335,7 @@ export async function updateSemesterProfile(formData: FormData) {
     where: { id: parsed.semesterId, ownerId: appUser.id },
   });
   if (!semester) throw new Error("Semester not found in your workspace.");
+  if (semester.isArchived) throw new Error("Archived semesters are read-only. Reopen the semester before editing CWA.");
 
   const level = parsed.level ?? semester.level;
   const conflictingSlot = await prisma.semester.findUnique({
@@ -351,6 +377,7 @@ export async function setActiveSemester(formData: FormData) {
     where: { id: parsed.semesterId, ownerId: appUser.id },
   });
   if (!semester) throw new Error("Semester not found in your workspace.");
+  if (semester.isArchived) throw new Error("Archived semesters cannot be made active until they are reopened.");
 
   await prisma.user.update({
     where: { id: appUser.id },
@@ -406,6 +433,59 @@ export async function deleteSemester(formData: FormData) {
   redirect("/academics");
 }
 
+export async function archiveSemester(formData: FormData) {
+  const { appUser } = await requireAppUser();
+  const parsed = semesterArchiveSchema.parse({ semesterId: formData.get("semesterId") });
+
+  await prisma.$transaction(async (tx) => {
+    const semester = await tx.semester.findFirst({
+      where: { id: parsed.semesterId, ownerId: appUser.id },
+      select: { id: true },
+    });
+    if (!semester) throw new Error("Semester not found in your workspace.");
+
+    await tx.semester.update({
+      where: { id: semester.id },
+      data: { isArchived: true, archivedAt: new Date(), isActive: false },
+    });
+
+    if (appUser.activeSemesterId === semester.id) {
+      const nextSemester = await tx.semester.findFirst({
+        where: { ownerId: appUser.id, isArchived: false, NOT: { id: semester.id } },
+        select: { id: true, cwa: true, level: true },
+        orderBy: [{ academicYear: "desc" }, { level: "desc" }, { term: "desc" }],
+      });
+      await tx.user.update({
+        where: { id: appUser.id },
+        data: {
+          activeSemesterId: nextSemester?.id ?? null,
+          cwa: nextSemester?.cwa ?? null,
+          level: nextSemester?.level ?? appUser.level,
+        },
+      });
+    }
+  });
+
+  revalidatePath("/academics");
+  revalidatePath(`/academics/semesters/${parsed.semesterId}`);
+  revalidatePath("/dashboard");
+  revalidatePath("/planner");
+}
+
+export async function reopenSemester(formData: FormData) {
+  const { appUser } = await requireAppUser();
+  const parsed = semesterArchiveSchema.parse({ semesterId: formData.get("semesterId") });
+
+  const result = await prisma.semester.updateMany({
+    where: { id: parsed.semesterId, ownerId: appUser.id },
+    data: { isArchived: false, archivedAt: null },
+  });
+  if (!result.count) throw new Error("Semester not found in your workspace.");
+
+  revalidatePath("/academics");
+  revalidatePath(`/academics/semesters/${parsed.semesterId}`);
+}
+
 export async function deleteEnrollment(formData: FormData) {
   const { appUser } = await requireAppUser();
 
@@ -413,6 +493,7 @@ export async function deleteEnrollment(formData: FormData) {
     enrollmentId: formData.get("enrollmentId"),
     semesterId: formData.get("semesterId"),
   });
+  await requireWritableSemester(appUser.id, parsed.semesterId);
 
   await prisma.enrollment.deleteMany({
     where: {
@@ -440,6 +521,7 @@ export async function updateEnrollmentPerformance(formData: FormData) {
     attendance: formData.get("attendance") || undefined,
     confidenceScore: formData.get("confidenceScore") || undefined,
   });
+  await requireWritableSemester(appUser.id, parsed.semesterId);
 
   await prisma.enrollment.updateMany({
     where: {
@@ -479,6 +561,7 @@ export async function saveWeakArea(formData: FormData) {
     select: { id: true },
   });
   if (!enrollment) throw new Error("Course enrollment not found for this semester.");
+  await requireWritableSemester(appUser.id, parsed.semesterId);
 
   if (parsed.id) {
     await prisma.weakArea.updateMany({
@@ -515,6 +598,7 @@ export async function deleteWeakArea(formData: FormData) {
     semesterId: formData.get("semesterId"),
     courseId: formData.get("courseId"),
   });
+  await requireWritableSemester(appUser.id, parsed.semesterId);
 
   await prisma.weakArea.deleteMany({
     where: { id: parsed.id, userId: appUser.id, semesterId: parsed.semesterId, courseId: parsed.courseId },

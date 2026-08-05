@@ -1,8 +1,11 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { requireWritableSemester } from "@/features/academics/semester-state";
+import { parseAccraDate } from "@/features/academics/time";
 import { requireAppUser } from "@/features/auth/queries";
 import { assessmentSchema, deleteAssessmentSchema } from "@/features/assessments/schemas";
+import { syncGoalProgressSnapshots } from "@/features/goals/progress-sync";
 import { prisma } from "@/server/db";
 
 export async function saveAssessment(formData: FormData) {
@@ -23,6 +26,7 @@ export async function saveAssessment(formData: FormData) {
     select: { id: true },
   });
   if (!enrollment) throw new Error("Course enrollment not found for this semester.");
+  await requireWritableSemester(appUser.id, parsed.semesterId);
 
   const data = {
     title: parsed.title,
@@ -30,7 +34,7 @@ export async function saveAssessment(formData: FormData) {
     score: parsed.score,
     maxScore: parsed.maxScore,
     weight: parsed.weight,
-    assessedAt: parsed.assessedAt ? new Date(parsed.assessedAt + "T00:00:00.000Z") : undefined,
+    assessedAt: parseAccraDate(parsed.assessedAt),
   };
   if (parsed.id) {
     const current = await prisma.assessment.findFirst({
@@ -59,6 +63,7 @@ export async function saveAssessment(formData: FormData) {
       data: { ...data, userId: appUser.id, semesterId: parsed.semesterId, courseId: parsed.courseId },
     });
   }
+  await syncGoalProgressSnapshots(appUser.id, parsed.semesterId);
   revalidatePath(`/academics/semesters/${parsed.semesterId}/courses/${parsed.courseId}`);
   revalidatePath("/performance");
 }
@@ -70,9 +75,11 @@ export async function deleteAssessment(formData: FormData) {
     semesterId: formData.get("semesterId"),
     courseId: formData.get("courseId"),
   });
+  await requireWritableSemester(appUser.id, parsed.semesterId);
   await prisma.assessment.deleteMany({
     where: { id: parsed.id, userId: appUser.id, semesterId: parsed.semesterId, courseId: parsed.courseId },
   });
+  await syncGoalProgressSnapshots(appUser.id, parsed.semesterId);
   revalidatePath(`/academics/semesters/${parsed.semesterId}/courses/${parsed.courseId}`);
   revalidatePath("/performance");
 }

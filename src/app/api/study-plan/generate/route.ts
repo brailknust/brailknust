@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { accraWeekBounds } from "@/features/academics/time";
 import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
 import {
   generateStudySessions,
@@ -26,15 +27,9 @@ type GenerateBody = {
 
 
 function getWeekBounds() {
-  const now = new Date();
-  const startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
-  const day = startDate.getUTCDay();
-  const daysSinceMonday = (day + 6) % 7;
-  startDate.setUTCDate(startDate.getUTCDate() - daysSinceMonday);
-
+  const { start: startDate } = accraWeekBounds();
   const endDate = new Date(startDate);
   endDate.setUTCDate(startDate.getUTCDate() + 6);
-
   return { startDate, endDate };
 }
 
@@ -214,7 +209,7 @@ async function savePlanForUser(
 
     if (existingPlan) {
       await tx.studyPlanItem.deleteMany({
-      where: { studyPlanId: existingPlan.id },
+      where: { studyPlanId: existingPlan.id, aiReason: { not: null } },
     });
 
       await tx.studyPlan.update({
@@ -310,6 +305,17 @@ export async function POST(request: Request) {
 
   if (!appUser.activeSemesterId) {
     return NextResponse.json({ message: "Set an active semester before generating a study plan." }, { status: 400 });
+  }
+
+  const activeSemester = await prisma.semester.findFirst({
+    where: { id: appUser.activeSemesterId, ownerId: appUser.id },
+    select: { isArchived: true },
+  });
+  if (activeSemester?.isArchived) {
+    return NextResponse.json(
+      { message: "Archived semesters are read-only. Reopen this semester before generating a study plan." },
+      { status: 409 },
+    );
   }
 
   const rateLimit = await checkRateLimit({ subject: appUser.id, action: "study-plan-generate", limit: 20, windowSeconds: 3600 });

@@ -11,6 +11,7 @@ import {
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import {
   createAiConversation,
   deleteAiConversation,
@@ -113,13 +114,14 @@ export default async function AiChatPage({ searchParams }: AiChatPageProps) {
                   </select>
                   <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
                 </div>
-                <button
+                <PendingSubmitButton
+                  pendingLabel=""
                   className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[var(--accent-strong)] text-white transition-opacity hover:opacity-85"
                   aria-label="Create conversation"
                   title="Create conversation"
                 >
                   <MessageSquarePlus className="h-4 w-4" />
-                </button>
+                </PendingSubmitButton>
               </div>
             </form>
           ) : (
@@ -179,7 +181,7 @@ export default async function AiChatPage({ searchParams }: AiChatPageProps) {
                         Conversation name
                       </label>
                       <input id={`conversation-title-${conversation.id}`} name="title" required maxLength={100} defaultValue={conversation.title} className="h-9 min-w-0 rounded-xl border border-border bg-surface px-2 text-xs outline-none focus:border-foreground" />
-                      <button className="h-8 rounded-xl bg-[var(--accent-strong)] px-3 text-xs font-semibold text-white">Save</button>
+                      <PendingSubmitButton pendingLabel="Saving..." className="h-8 rounded-xl bg-[var(--accent-strong)] px-3 text-xs font-semibold text-white">Save</PendingSubmitButton>
                     </form>
                   </details>
                   {!conversation.isPinned ? (

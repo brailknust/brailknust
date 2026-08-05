@@ -3,7 +3,10 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+import { requireActiveWritableSemester } from "@/features/academics/semester-state";
+import { accraWeekBounds, parseAccraDate } from "@/features/academics/time";
 import { requireAppUser } from "@/features/auth/queries";
+import { syncGoalProgressSnapshots } from "@/features/goals/progress-sync";
 import {
   createStudyPlanItemSchema,
   createStudyPlanSchema,
@@ -15,7 +18,7 @@ import { syncNotificationsForUser } from "@/features/notifications/service";
 import { prisma } from "@/server/db";
 
 function optionalDate(value?: string) {
-  return value ? new Date(value) : undefined;
+  return parseAccraDate(value);
 }
 
 function timeToMinutes(value: string) {
@@ -25,11 +28,8 @@ function timeToMinutes(value: string) {
 
 function scheduledStartForDay(dayOfWeek: number, startTime: string) {
   const source = new Date();
-  const weekStart = new Date(
-    Date.UTC(source.getUTCFullYear(), source.getUTCMonth(), source.getUTCDate()),
-  );
-  const daysSinceMonday = (weekStart.getUTCDay() + 6) % 7;
-  weekStart.setUTCDate(weekStart.getUTCDate() - daysSinceMonday + dayOfWeek);
+  const { start: weekStart } = accraWeekBounds(source);
+  weekStart.setUTCDate(weekStart.getUTCDate() + dayOfWeek);
 
   const [hours, minutes] = startTime.split(":").map(Number);
   weekStart.setUTCHours(hours, minutes, 0, 0);
@@ -48,6 +48,7 @@ export async function toggleUnavailableTime(formData: FormData) {
   if (!appUser.activeSemesterId) {
     throw new Error("Set an active semester before updating unavailable times.");
   }
+  await requireActiveWritableSemester(appUser.id, appUser.activeSemesterId);
 
   const dayOfWeek = Number(formData.get("dayOfWeek"));
   const startTime = String(formData.get("startTime") ?? "");
@@ -95,6 +96,7 @@ export async function createStudyPlan(formData: FormData) {
   if (!appUser.activeSemesterId) {
     throw new Error("Set an active semester before creating a study plan.");
   }
+  await requireActiveWritableSemester(appUser.id, appUser.activeSemesterId);
 
   const parsed = createStudyPlanSchema.parse({
     title: formData.get("title"),
@@ -124,6 +126,7 @@ export async function createStudyPlanItem(formData: FormData) {
   if (!appUser.activeSemesterId) {
     throw new Error("Set an active semester before adding study sessions.");
   }
+  await requireActiveWritableSemester(appUser.id, appUser.activeSemesterId);
 
   const parsed = createStudyPlanItemSchema.parse({
     studyPlanId: formData.get("studyPlanId"),
@@ -171,6 +174,7 @@ export async function createStudyPlanItem(formData: FormData) {
   });
 
   await syncNotificationsForUser(appUser.id, true);
+  await syncGoalProgressSnapshots(appUser.id, appUser.activeSemesterId);
   revalidatePath("/planner");
   revalidatePath("/performance");
   redirect(`/planner?planId=${parsed.studyPlanId}&day=${parsed.dayOfWeek}#study-timetable`);
@@ -182,6 +186,7 @@ export async function updateStudyPlanItem(formData: FormData) {
   if (!appUser.activeSemesterId) {
     throw new Error("Set an active semester before editing study sessions.");
   }
+  await requireActiveWritableSemester(appUser.id, appUser.activeSemesterId);
 
   const parsed = updateStudyPlanItemSchema.parse({
     id: formData.get("id"),
@@ -248,6 +253,7 @@ export async function updateStudyPlanItem(formData: FormData) {
   }
 
   await syncNotificationsForUser(appUser.id, true);
+  await syncGoalProgressSnapshots(appUser.id, appUser.activeSemesterId);
   revalidatePath("/planner");
   revalidatePath("/dashboard");
   revalidatePath("/performance");
@@ -260,6 +266,7 @@ export async function deleteStudyPlanItem(formData: FormData) {
   if (!appUser.activeSemesterId) {
     throw new Error("Set an active semester before deleting study sessions.");
   }
+  await requireActiveWritableSemester(appUser.id, appUser.activeSemesterId);
 
   const parsed = deleteStudyPlanItemSchema.parse({
     id: formData.get("id"),
@@ -291,6 +298,7 @@ export async function deleteStudyPlanItem(formData: FormData) {
   }
 
   await syncNotificationsForUser(appUser.id, true);
+  await syncGoalProgressSnapshots(appUser.id, appUser.activeSemesterId);
   revalidatePath("/planner");
   revalidatePath("/dashboard");
   revalidatePath("/performance");
@@ -303,6 +311,7 @@ export async function updateStudyPlanItemStatus(formData: FormData) {
   if (!appUser.activeSemesterId) {
     throw new Error("Set an active semester before updating study sessions.");
   }
+  await requireActiveWritableSemester(appUser.id, appUser.activeSemesterId);
 
   const id = String(formData.get("id") ?? "");
   const status = studyPlanItemStatusSchema.parse(formData.get("status"));
@@ -319,6 +328,7 @@ export async function updateStudyPlanItemStatus(formData: FormData) {
   });
 
   await syncNotificationsForUser(appUser.id, true);
+  await syncGoalProgressSnapshots(appUser.id, appUser.activeSemesterId);
   revalidatePath("/planner");
   revalidatePath("/dashboard");
   revalidatePath("/performance");

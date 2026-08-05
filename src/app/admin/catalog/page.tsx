@@ -2,6 +2,7 @@ import { BookX, RotateCcw } from "lucide-react";
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { knustCurricula } from "@/data/curricula";
 import {
   approveStudentCourse,
@@ -77,7 +78,7 @@ export default async function AdminProgrammeCatalogPage() {
                   <div className="flex gap-2">
                     <form action={approveStudentCourse}>
                       <input type="hidden" name="courseId" value={course.id} />
-                      <button className="h-9 rounded-xl bg-[var(--accent-strong)] px-3 text-xs font-semibold text-white">Approve</button>
+                      <PendingSubmitButton pendingLabel="Approving..." className="h-9 rounded-xl bg-[var(--accent-strong)] px-3 text-xs font-semibold text-white">Approve</PendingSubmitButton>
                     </form>
                     <form action={rejectStudentCourse}>
                       <input type="hidden" name="courseId" value={course.id} />
@@ -122,9 +123,9 @@ export default async function AdminProgrammeCatalogPage() {
                     {removal ? (
                       <form action={restoreProgrammeCourse}>
                         {fields}
-                        <button className="inline-flex h-9 items-center gap-2 rounded-xl border border-border px-3 text-xs font-semibold">
+                        <PendingSubmitButton pendingLabel="Restoring..." className="inline-flex h-9 items-center gap-2 rounded-xl border border-border px-3 text-xs font-semibold">
                           <RotateCcw className="h-3.5 w-3.5" /> Restore
-                        </button>
+                        </PendingSubmitButton>
                       </form>
                     ) : (
                       <form action={removeProgrammeCourse}>

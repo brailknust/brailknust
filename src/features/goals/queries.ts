@@ -2,17 +2,8 @@ import "server-only";
 
 import { prisma } from "@/server/db";
 import { calculateAssessmentAverage } from "@/features/academics/calculations";
-
-function weekBounds() {
-  const now = new Date();
-  const start = new Date(now);
-  const day = start.getUTCDay();
-  start.setUTCDate(start.getUTCDate() - (day === 0 ? 6 : day - 1));
-  start.setUTCHours(0, 0, 0, 0);
-  const end = new Date(start);
-  end.setUTCDate(end.getUTCDate() + 7);
-  return { start, end };
-}
+import { accraWeekBounds } from "@/features/academics/time";
+import { calculateGoalProgress } from "@/features/goals/progress";
 
 function inRange(value: Date | null, start: Date, end: Date) {
   return Boolean(value && value >= start && value < end);
@@ -40,7 +31,13 @@ export async function getGoalsPageData(userId: string) {
     }),
     prisma.goal.findMany({
       where: { userId, semesterId },
-      include: { course: true },
+      include: {
+        course: true,
+        progressSnapshots: {
+          orderBy: { recordedAt: "desc" },
+          take: 6,
+        },
+      },
       orderBy: [{ status: "asc" }, { deadline: "asc" }, { createdAt: "desc" }],
     }),
     prisma.task.findMany({
@@ -60,7 +57,7 @@ export async function getGoalsPageData(userId: string) {
     }),
   ]);
 
-  const { start, end } = weekBounds();
+  const { start, end } = accraWeekBounds();
   const calculatedGoals = goals.map((goal) => {
     const weekly = goal.period === "WEEKLY";
     const courseMatches = (courseId: string | null) => !goal.courseId || courseId === goal.courseId;
@@ -86,15 +83,14 @@ export async function getGoalsPageData(userId: string) {
       current = calculateAssessmentAverage(relevant);
     }
 
-    const target = Number(goal.targetValue);
-    const progress = target > 0 ? Math.min(Math.round(current / target * 100), 100) : 0;
+    const progress = calculateGoalProgress(current, Number(goal.targetValue));
     return {
       ...goal,
-      currentValue: Math.round(current * 10) / 10,
+      currentValue: progress.currentValue,
       storedCurrentValue: Number(goal.currentValue),
-      targetValue: target,
-      progress,
-      targetReached: current >= target,
+      targetValue: progress.targetValue,
+      progress: progress.progress,
+      targetReached: progress.targetReached,
     };
   });
 

@@ -13,6 +13,7 @@ import {
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { requireAppUser } from "@/features/auth/queries";
 import {
   createStudyGroup,
@@ -204,9 +205,9 @@ export default async function PeersPage({ searchParams }: PeersPageProps) {
                 Meeting place or link
                 <input name="meetingPlace" maxLength={200} placeholder="Engineering library" className={fieldClassName} />
               </label>
-              <button className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+              <PendingSubmitButton pendingLabel="Creating group..." className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                 <Plus className="h-4 w-4" /> Create group
-              </button>
+              </PendingSubmitButton>
             </form>
           </section>
 
@@ -285,7 +286,7 @@ export default async function PeersPage({ searchParams }: PeersPageProps) {
                           Meeting place or link
                           <input name="meetingPlace" maxLength={200} defaultValue={group.meetingPlace ?? ""} className={fieldClassName} />
                         </label>
-                        <button className="h-10 w-fit rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Save changes</button>
+                        <PendingSubmitButton pendingLabel="Saving..." className="h-10 w-fit rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Save changes</PendingSubmitButton>
                       </form>
                     </details>
                   ) : null}
@@ -294,16 +295,16 @@ export default async function PeersPage({ searchParams }: PeersPageProps) {
                     {!group.isMember ? (
                       <form action={joinStudyGroup}>
                         <input type="hidden" name="groupId" value={group.id} />
-                        <button disabled={group.isFull} className="inline-flex h-10 items-center gap-2 rounded-xl bg-[var(--accent-strong)] px-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-45">
+                        <PendingSubmitButton disabled={group.isFull} pendingLabel="Joining..." className="inline-flex h-10 items-center gap-2 rounded-xl bg-[var(--accent-strong)] px-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-45">
                           <UserPlus className="h-4 w-4" /> {group.isFull ? "Group full" : "Join group"}
-                        </button>
+                        </PendingSubmitButton>
                       </form>
                     ) : !group.isOwner ? (
                       <form action={leaveStudyGroup}>
                         <input type="hidden" name="groupId" value={group.id} />
-                        <button className="inline-flex h-10 items-center gap-2 rounded-xl border border-border px-3 text-sm font-semibold text-muted hover:text-foreground">
+                        <PendingSubmitButton pendingLabel="Leaving..." className="inline-flex h-10 items-center gap-2 rounded-xl border border-border px-3 text-sm font-semibold text-muted hover:text-foreground">
                           <LogOut className="h-4 w-4" /> Leave group
-                        </button>
+                        </PendingSubmitButton>
                       </form>
                     ) : null}
                     {group.isOwner ? (

@@ -4,6 +4,8 @@ import { notFound, redirect } from "next/navigation";
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
+import { calculateAssessmentAverage } from "@/features/academics/calculations";
 import { deleteWeakArea, saveWeakArea, updateEnrollmentPerformance } from "@/features/academics/actions";
 import { deleteAssessment, saveAssessment } from "@/features/assessments/actions";
 import { getCourseAnalytics } from "@/features/academics/queries";
@@ -71,8 +73,9 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
     redirect(`/academics/semesters/${semesterId}/courses/${enrollment.courseId}`);
   }
   const assessmentAverage = analytics.assessments.length
-    ? Math.round((analytics.assessments.reduce((sum, item) => sum + (Number(item.score) / Number(item.maxScore)) * 100, 0) / analytics.assessments.length) * 10) / 10
+    ? calculateAssessmentAverage(analytics.assessments)
     : null;
+  const isArchived = enrollment.semester.isArchived;
 
   return (
     <AppShell title={`${enrollment.course.name} analytics`} eyebrow="Course">
@@ -122,6 +125,15 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
         </div>
       </section>
 
+      {isArchived ? (
+        <section className="mt-6 rounded-2xl border border-border bg-surface p-5">
+          <h2 className="text-lg font-semibold">Read-only course history</h2>
+          <p className="mt-2 text-sm leading-6 text-muted">
+            This semester is archived, so course records are visible but cannot be changed.
+          </p>
+        </section>
+      ) : null}
+
       <section className="mt-6 grid gap-6 xl:grid-cols-[0.72fr_1.28fr]">
         <div className="grid gap-6">
           <form action={updateEnrollmentPerformance} className="rounded-2xl border border-border bg-white p-5">
@@ -129,7 +141,7 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
             <input type="hidden" name="enrollmentId" value={enrollment.id} />
             <input type="hidden" name="semesterId" value={semesterId} />
             <input type="hidden" name="courseId" value={courseId} />
-            <div className="mt-4 grid gap-4">
+            <fieldset disabled={isArchived} className="mt-4 grid gap-4 disabled:opacity-60">
               <input
                 name="lecturer"
                 defaultValue={enrollment.lecturer ?? ""}
@@ -168,10 +180,10 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
                   />
                 </label>
               </div>
-              <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+              <PendingSubmitButton pendingLabel="Saving performance..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                 Save performance
-              </button>
-            </div>
+              </PendingSubmitButton>
+            </fieldset>
           </form>
 
           <div className="rounded-2xl border border-border bg-surface p-5">
@@ -229,18 +241,20 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
               <div><h2 className="text-lg font-semibold">Assessments</h2><p className="mt-1 text-sm text-muted">Saved scores produce the course average and Performance history.</p></div>
               <p className="text-2xl font-semibold">{assessmentAverage === null ? "Not set" : `${assessmentAverage}%`}</p>
             </div>
-            <form action={saveAssessment} className="mt-5 grid gap-3 rounded-xl border border-border bg-surface p-4">
+            <form action={saveAssessment} className="mt-5 rounded-xl border border-border bg-surface p-4">
               <input type="hidden" name="semesterId" value={semesterId} /><input type="hidden" name="courseId" value={courseId} />
-              <div className="grid gap-3 sm:grid-cols-2"><input name="title" required placeholder="Assessment title" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" /><select name="type" defaultValue="QUIZ" className="h-11 rounded-xl border border-border bg-white px-3 text-sm">{["QUIZ","ASSIGNMENT","LAB","PROJECT","MIDSEM","EXAM","OTHER"].map((type) => <option key={type}>{type}</option>)}</select></div>
-              <div className="grid gap-3 sm:grid-cols-4"><input name="score" required type="number" min="0" step="0.01" placeholder="Score" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" /><input name="maxScore" required type="number" min="0.01" step="0.01" placeholder="Out of" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" /><input name="weight" type="number" min="0.01" max="100" step="0.01" placeholder="Weight % optional" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" /><input name="assessedAt" type="date" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" /></div>
-              <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Add assessment</button>
+              <fieldset disabled={isArchived} className="grid gap-3 disabled:opacity-60">
+                <div className="grid gap-3 sm:grid-cols-2"><input name="title" required placeholder="Assessment title" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" /><select name="type" defaultValue="QUIZ" className="h-11 rounded-xl border border-border bg-white px-3 text-sm">{["QUIZ","ASSIGNMENT","LAB","PROJECT","MIDSEM","EXAM","OTHER"].map((type) => <option key={type}>{type}</option>)}</select></div>
+                <div className="grid gap-3 sm:grid-cols-4"><input name="score" required type="number" min="0" step="0.01" placeholder="Score" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" /><input name="maxScore" required type="number" min="0.01" step="0.01" placeholder="Out of" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" /><input name="weight" type="number" min="0.01" max="100" step="0.01" placeholder="Weight % optional" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" /><input name="assessedAt" type="date" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" /></div>
+                <PendingSubmitButton pendingLabel="Adding assessment..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Add assessment</PendingSubmitButton>
+              </fieldset>
             </form>
             <div className="mt-4 grid gap-3 md:grid-cols-2">
               {analytics.assessments.length ? analytics.assessments.map((item) => {
                 const scorePercent = Math.round((Number(item.score) / Number(item.maxScore)) * 1000) / 10;
                 return <article key={item.id} className="rounded-xl border border-border bg-surface p-4">
-                  <div className="flex justify-between gap-3"><div><p className="font-semibold">{item.title}</p><p className="mt-1 text-sm text-muted">{item.type} - {item.score.toString()}/{item.maxScore.toString()} ({scorePercent}%)</p></div><form action={deleteAssessment}><input type="hidden" name="id" value={item.id} /><input type="hidden" name="semesterId" value={semesterId} /><input type="hidden" name="courseId" value={courseId} /><ConfirmSubmitButton message={`Delete assessment "${item.title}"?`} className="rounded-xl border border-border px-3 py-2 text-xs font-semibold text-muted">Delete</ConfirmSubmitButton></form></div>
-                  <details className="mt-3 border-t border-border pt-3"><summary className="cursor-pointer text-sm font-semibold text-accent">Edit</summary><form action={saveAssessment} className="mt-3 grid gap-3"><input type="hidden" name="id" value={item.id} /><input type="hidden" name="semesterId" value={semesterId} /><input type="hidden" name="courseId" value={courseId} /><input name="title" required defaultValue={item.title} className="h-10 rounded-xl border border-border bg-white px-3 text-sm" /><div className="grid gap-3 sm:grid-cols-2"><select name="type" defaultValue={item.type} className="h-10 rounded-xl border border-border bg-white px-3 text-sm">{["QUIZ","ASSIGNMENT","LAB","PROJECT","MIDSEM","EXAM","OTHER"].map((type) => <option key={type}>{type}</option>)}</select><input name="assessedAt" type="date" defaultValue={item.assessedAt?.toISOString().slice(0,10) ?? ""} className="h-10 rounded-xl border border-border bg-white px-3 text-sm" /></div><div className="grid gap-3 sm:grid-cols-3"><input name="score" required type="number" step="0.01" defaultValue={item.score.toString()} className="h-10 rounded-xl border border-border bg-white px-3 text-sm" /><input name="maxScore" required type="number" step="0.01" defaultValue={item.maxScore.toString()} className="h-10 rounded-xl border border-border bg-white px-3 text-sm" /><input name="weight" type="number" step="0.01" defaultValue={item.weight?.toString() ?? ""} placeholder="Weight %" className="h-10 rounded-xl border border-border bg-white px-3 text-sm" /></div><button className="h-10 rounded-xl border border-border bg-white px-3 text-sm font-semibold">Save changes</button></form></details>
+                  <div className="flex justify-between gap-3"><div><p className="font-semibold">{item.title}</p><p className="mt-1 text-sm text-muted">{item.type} - {item.score.toString()}/{item.maxScore.toString()} ({scorePercent}%)</p></div>{!isArchived ? <form action={deleteAssessment}><input type="hidden" name="id" value={item.id} /><input type="hidden" name="semesterId" value={semesterId} /><input type="hidden" name="courseId" value={courseId} /><ConfirmSubmitButton message={`Delete assessment "${item.title}"?`} className="rounded-xl border border-border px-3 py-2 text-xs font-semibold text-muted">Delete</ConfirmSubmitButton></form> : null}</div>
+                  {!isArchived ? <details className="mt-3 border-t border-border pt-3"><summary className="cursor-pointer text-sm font-semibold text-accent">Edit</summary><form action={saveAssessment} className="mt-3 grid gap-3"><input type="hidden" name="id" value={item.id} /><input type="hidden" name="semesterId" value={semesterId} /><input type="hidden" name="courseId" value={courseId} /><input name="title" required defaultValue={item.title} className="h-10 rounded-xl border border-border bg-white px-3 text-sm" /><div className="grid gap-3 sm:grid-cols-2"><select name="type" defaultValue={item.type} className="h-10 rounded-xl border border-border bg-white px-3 text-sm">{["QUIZ","ASSIGNMENT","LAB","PROJECT","MIDSEM","EXAM","OTHER"].map((type) => <option key={type}>{type}</option>)}</select><input name="assessedAt" type="date" defaultValue={item.assessedAt?.toISOString().slice(0,10) ?? ""} className="h-10 rounded-xl border border-border bg-white px-3 text-sm" /></div><div className="grid gap-3 sm:grid-cols-3"><input name="score" required type="number" step="0.01" defaultValue={item.score.toString()} className="h-10 rounded-xl border border-border bg-white px-3 text-sm" /><input name="maxScore" required type="number" step="0.01" defaultValue={item.maxScore.toString()} className="h-10 rounded-xl border border-border bg-white px-3 text-sm" /><input name="weight" type="number" step="0.01" defaultValue={item.weight?.toString() ?? ""} placeholder="Weight %" className="h-10 rounded-xl border border-border bg-white px-3 text-sm" /></div><PendingSubmitButton pendingLabel="Saving..." className="h-10 rounded-xl border border-border bg-white px-3 text-sm font-semibold">Save changes</PendingSubmitButton></form></details> : null}
                 </article>;
               }) : <p className="text-sm text-muted">No assessments recorded yet.</p>}
             </div>
@@ -259,21 +273,22 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
               </div>
             </div>
 
-            <MaterialUpload
+            {!isArchived ? <MaterialUpload
               enrollmentId={enrollment.id}
               semesterId={semesterId}
               courseId={courseId}
               topics={analytics.topics.map((topic) => ({ id: topic.id, title: topic.title }))}
-            />
+            /> : null}
 
             <details className="mt-4 rounded-xl border border-border bg-surface p-4">
               <summary className="cursor-pointer text-sm font-semibold">
                 Or paste text manually
               </summary>
-            <form action={saveCourseMaterial} className="mt-5 grid gap-3 rounded-xl border border-border bg-surface p-4">
+            <form action={saveCourseMaterial} className="mt-5 rounded-xl border border-border bg-surface p-4">
               <input type="hidden" name="enrollmentId" value={enrollment.id} />
               <input type="hidden" name="semesterId" value={semesterId} />
               <input type="hidden" name="courseId" value={courseId} />
+              <fieldset disabled={isArchived} className="grid gap-3 disabled:opacity-60">
               <div className="grid gap-3 sm:grid-cols-2">
                 <input
                   name="title"
@@ -324,9 +339,10 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
                 Only material saved under this enrollment is retrieved in this course&apos;s conversations.
                 Confirm that you have permission to add copyrighted material.
               </p>
-              <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+              <PendingSubmitButton pendingLabel="Adding material..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                 Add to course knowledge
-              </button>
+              </PendingSubmitButton>
+              </fieldset>
             </form>
             </details>
 
@@ -343,7 +359,7 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
                         <p className="mt-2 text-sm text-muted">Topic: {material.chunks[0].topic.title}</p>
                       ) : null}
                     </div>
-                    <form action={deleteCourseMaterial}>
+                    {!isArchived ? <form action={deleteCourseMaterial}>
                       <input type="hidden" name="materialId" value={material.id} />
                       <input type="hidden" name="semesterId" value={semesterId} />
                       <input type="hidden" name="courseId" value={courseId} />
@@ -353,7 +369,7 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
                       >
                         Delete
                       </ConfirmSubmitButton>
-                    </form>
+                    </form> : null}
                   </div>
                   {material.sourceUrl ? (
                     <a
@@ -386,7 +402,7 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
           <section className="grid gap-6 lg:grid-cols-2">
             <div className="rounded-2xl border border-border bg-white p-5">
               <h2 className="text-lg font-semibold">Course tasks</h2>
-              {analytics.isActiveSemester ? (
+              {analytics.isActiveSemester && !isArchived ? (
                 <form action={createTask} className="mt-4 grid gap-3 rounded-xl border border-border bg-surface p-4">
                   <input type="hidden" name="courseId" value={courseId} />
                   <input
@@ -423,9 +439,9 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
                       </select>
                     </label>
                   </div>
-                  <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+                  <PendingSubmitButton pendingLabel="Adding task..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                     Add course task
-                  </button>
+                  </PendingSubmitButton>
                 </form>
               ) : (
                 <p className="mt-3 rounded-xl border border-border bg-surface p-3 text-sm text-muted">
@@ -495,38 +511,40 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
                         <div className="rounded-2xl border border-border bg-white p-5">
               <h2 className="text-lg font-semibold">Weak areas</h2>
               <p className="mt-1 text-sm text-muted">Record topics needing more attention.</p>
-              <form action={saveWeakArea} className="mt-4 grid gap-3 rounded-xl border border-border bg-surface p-4">
+              <form action={saveWeakArea} className="mt-4 rounded-xl border border-border bg-surface p-4">
                 <input type="hidden" name="semesterId" value={semesterId} />
                 <input type="hidden" name="courseId" value={courseId} />
+                <fieldset disabled={isArchived} className="grid gap-3 disabled:opacity-60">
                 <input name="topic" required placeholder="Topic" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
                 <div className="grid gap-3 sm:grid-cols-2">
                   <input name="weaknessScore" type="number" min="0" max="100" step="0.01" placeholder="Weakness %" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
                   <input name="detectedFrom" placeholder="Detected from" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
                 </div>
                 <textarea name="recommendation" placeholder="Recommended next action" className="min-h-20 rounded-xl border border-border bg-white px-3 py-3 text-sm" />
-                <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Add weak area</button>
+                <PendingSubmitButton pendingLabel="Adding weak area..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Add weak area</PendingSubmitButton>
+                </fieldset>
               </form>
               <div className="mt-4 grid gap-3">
                 {analytics.weakAreas.length ? analytics.weakAreas.map((area) => (
                   <article key={area.id} className="rounded-xl border border-border bg-surface p-4">
                     <div className="flex items-start justify-between gap-3">
                       <div><p className="font-semibold">{area.topic}</p><p className="mt-1 text-sm text-muted">Weakness: {formatPercent(area.weaknessScore)}</p>{area.detectedFrom ? <p className="mt-1 text-sm text-muted">From: {area.detectedFrom}</p> : null}</div>
-                      <form action={deleteWeakArea}>
+                      {!isArchived ? <form action={deleteWeakArea}>
                         <input type="hidden" name="id" value={area.id} /><input type="hidden" name="semesterId" value={semesterId} /><input type="hidden" name="courseId" value={courseId} />
                         <ConfirmSubmitButton message={`Delete weak area "${area.topic}"?`} className="rounded-xl border border-border px-3 py-2 text-xs font-semibold text-muted">Delete</ConfirmSubmitButton>
-                      </form>
+                      </form> : null}
                     </div>
                     {area.recommendation ? <p className="mt-3 text-sm text-muted">{area.recommendation}</p> : null}
-                    <details className="mt-4 border-t border-border pt-3">
+                    {!isArchived ? <details className="mt-4 border-t border-border pt-3">
                       <summary className="cursor-pointer text-sm font-semibold text-accent">Edit</summary>
                       <form action={saveWeakArea} className="mt-3 grid gap-3">
                         <input type="hidden" name="id" value={area.id} /><input type="hidden" name="semesterId" value={semesterId} /><input type="hidden" name="courseId" value={courseId} />
                         <input name="topic" required defaultValue={area.topic} className="h-10 rounded-xl border border-border bg-white px-3 text-sm" />
                         <div className="grid gap-3 sm:grid-cols-2"><input name="weaknessScore" type="number" min="0" max="100" step="0.01" defaultValue={area.weaknessScore?.toString() ?? ""} placeholder="Weakness %" className="h-10 rounded-xl border border-border bg-white px-3 text-sm" /><input name="detectedFrom" defaultValue={area.detectedFrom ?? ""} placeholder="Detected from" className="h-10 rounded-xl border border-border bg-white px-3 text-sm" /></div>
                         <textarea name="recommendation" defaultValue={area.recommendation ?? ""} placeholder="Recommendation" className="min-h-20 rounded-xl border border-border bg-white px-3 py-2 text-sm" />
-                        <button className="h-10 rounded-xl border border-border bg-white px-3 text-sm font-semibold">Save changes</button>
+                        <PendingSubmitButton pendingLabel="Saving..." className="h-10 rounded-xl border border-border bg-white px-3 text-sm font-semibold">Save changes</PendingSubmitButton>
                       </form>
-                    </details>
+                    </details> : null}
                   </article>
                 )) : <p className="text-sm text-muted">No weak areas have been recorded yet.</p>}
               </div>

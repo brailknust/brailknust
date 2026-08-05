@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import {
   createPlatformTopic,
   deletePlatformTopic,
@@ -56,7 +57,7 @@ export default async function AdminCourseTopicsPage({ params }: { params: Promis
         </div>
         <textarea name="description" maxLength={1000} rows={2} placeholder="Topic description" className="rounded-xl border border-border bg-white p-3 text-sm" />
         <textarea name="learningOutcomes" maxLength={3000} rows={3} placeholder="Learning outcomes, one per line" className="rounded-xl border border-border bg-white p-3 text-sm" />
-        <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Add topic</button>
+        <PendingSubmitButton pendingLabel="Adding topic..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Add topic</PendingSubmitButton>
       </form>
       <PlatformUpload
         course={{ id: course.id, code: course.code, name: course.name }}
@@ -82,7 +83,7 @@ export default async function AdminCourseTopicsPage({ params }: { params: Promis
               <textarea name="description" maxLength={1000} rows={2} defaultValue={topic.description ?? ""} placeholder="Description" className="rounded-xl border border-border bg-white p-3 text-sm" />
               <textarea name="learningOutcomes" maxLength={3000} rows={3} defaultValue={topic.learningOutcomes ?? ""} placeholder="Learning outcomes, one per line" className="rounded-xl border border-border bg-white p-3 text-sm" />
               <p className="text-xs text-muted">{topic._count.materialLinks} materials · {topic._count.chunks} chunks · {topic._count.diagnosticQuestions} questions</p>
-              <button className="h-10 rounded-xl border border-border px-4 text-sm font-semibold">Save changes</button>
+              <PendingSubmitButton pendingLabel="Saving..." className="h-10 rounded-xl border border-border px-4 text-sm font-semibold">Save changes</PendingSubmitButton>
             </form>
             <div className="mt-4 border-t border-border pt-4">
               <p className="text-xs font-semibold uppercase tracking-wide text-muted">Topic materials</p>
@@ -114,7 +115,7 @@ export default async function AdminCourseTopicsPage({ params }: { params: Promis
                 <input type="hidden" name="id" value={topic.id} />
                 <input type="hidden" name="courseId" value={course.id} />
                 <input type="hidden" name="isArchived" value={String(topic.isArchived)} />
-                <button className="h-10 w-full rounded-xl border border-border px-4 text-sm font-semibold">{topic.isArchived ? "Restore" : "Archive"}</button>
+                <PendingSubmitButton pendingLabel="Updating..." className="h-10 w-full rounded-xl border border-border px-4 text-sm font-semibold">{topic.isArchived ? "Restore" : "Archive"}</PendingSubmitButton>
               </form>
               {course.platformTopics.length > 1 ? (
                 <form action={mergePlatformTopics} className="flex gap-2">
@@ -124,7 +125,7 @@ export default async function AdminCourseTopicsPage({ params }: { params: Promis
                     <option value="" disabled>Merge into…</option>
                     {course.platformTopics.filter((other) => other.id !== topic.id).map((other) => <option key={other.id} value={other.id}>{other.title}</option>)}
                   </select>
-                  <button className="h-10 rounded-xl border border-border px-3 text-xs font-semibold">Merge</button>
+                  <PendingSubmitButton pendingLabel="Merging..." className="h-10 rounded-xl border border-border px-3 text-xs font-semibold">Merge</PendingSubmitButton>
                 </form>
               ) : null}
             </div>

@@ -1,12 +1,12 @@
 # Testing BRAIL
 
-Phase 2 and later UX work use a layered release gate: fast Vitest checks protect business rules and components, while Playwright drives authenticated journeys against an isolated Supabase environment. The local suite currently contains 42 tests across 17 files.
+Phase 2 and later UX work use a layered release gate: fast Vitest checks protect business rules and components, while Playwright drives authenticated journeys against an isolated Supabase environment. The local suite currently contains 51 tests across 19 files.
 
 ## Test layers
 
 | Layer | Command | Coverage |
 | --- | --- | --- |
-| Unit and integration | `npm test` | Schemas, task expiry, planner collisions, timetable parsing, goals, notifications, retrieval, AI context, material chunking, and cross-account scope rules |
+| Unit and integration | `npm test` | Schemas, Accra time, task expiry and transitions, planner collisions, timetable parsing, goals and progress snapshots, notifications, retrieval, AI context, material chunking, and cross-account scope rules |
 | Component | `npm run test:components` | Authentication, onboarding controls, and destructive-action confirmation |
 | Coverage gate | `npm run test:coverage` | The complete `src/features` and `src/components` surface, including untested files |
 | Browser journeys | `npm run test:e2e` | Signup/onboarding, admin access, semesters, tasks, planner, private materials, diagnostics, peers, groups, and notifications |
@@ -47,6 +47,8 @@ The Playwright setup creates uniquely named Auth users, application users, semes
 
 Remote browser testing is refused by default. A disposable remote test project requires `E2E_ALLOW_REMOTE=1`; using `.env.local` also requires `E2E_USE_DEVELOPMENT_ENV=1`. Never point either option at production or a project containing real student data.
 
+Current local note from 2026-08-05: `npm run test:e2e` refused to start because `.env.test.local` is not present and the required isolated Supabase variables are unavailable. This is the expected safety behavior.
+
 ## CI gate
 
 `.github/workflows/ci.yml` creates two pull-request checks:
@@ -54,7 +56,7 @@ Remote browser testing is refused by default. A disposable remote test project r
 - `Quality`: install, Prisma generation, lint, TypeScript, coverage, schema validation, and production build.
 - `Browser journeys`: local Supabase startup, full migration replay, database security verification, production build, and Playwright.
 
-Configure the `main` and `readyapp` branch rules in GitHub to require both checks before merge. Also require pull requests, dismiss stale approvals, and prevent bypassing the checks for administrators.
+Branch protection is recommended for `main`, but the Founder explicitly deferred it on 2026-08-05. When enabled later, require pull requests, require both checks before merge, require up-to-date branches, block force pushes and deletion, dismiss stale approvals, and prevent administrator bypass.
 
 The browser job uploads its Playwright HTML report and failure attachments for 14 days. Fixtures are synthetic and local to the CI runner; no shared Supabase credentials are required.
 

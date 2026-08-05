@@ -18,7 +18,7 @@ export const updateTaskSchema = createTaskSchema.extend({
   id: z.string().uuid(),
 });
 
-export const taskStatusSchema = z.enum(["TODO", "DONE"]);
+export const taskStatusSchema = z.enum(["TODO", "IN_PROGRESS", "DONE", "ARCHIVED"]);
 
 export const deleteTaskSchema = z.object({
   id: z.string().uuid(),

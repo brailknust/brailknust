@@ -3,6 +3,7 @@ import { ArrowRight, BookOpen, CalendarDays, ListChecks, Plus } from "lucide-rea
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { createSemester, deleteSemester } from "@/features/academics/actions";
 import { getSemesterCards } from "@/features/academics/queries";
 import { requireAppUser } from "@/features/auth/queries";
@@ -126,9 +127,9 @@ export default async function AcademicsPage() {
               <input name="isActive" type="checkbox" className="h-4 w-4" />
               Set as active semester
             </label>
-            <button disabled={!availableSlots.length} className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50">
+            <PendingSubmitButton disabled={!availableSlots.length} pendingLabel="Saving semester..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50">
               Save semester
-            </button>
+            </PendingSubmitButton>
           </div>
         </form>
 
@@ -151,6 +152,11 @@ export default async function AcademicsPage() {
                   {semester.isActiveForUser ? (
                     <span className="rounded-xl bg-[var(--accent-strong)] px-3 py-2 text-xs font-semibold text-white">
                       Active
+                    </span>
+                  ) : null}
+                  {semester.isArchived ? (
+                    <span className="rounded-xl border border-border px-3 py-2 text-xs font-semibold text-muted">
+                      Archived
                     </span>
                   ) : null}
                 </div>

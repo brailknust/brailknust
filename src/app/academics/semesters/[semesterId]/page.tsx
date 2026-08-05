@@ -4,12 +4,15 @@ import { notFound } from "next/navigation";
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import {
+  archiveSemester,
   createCourse,
   createEnrollment,
   createTimetableBlock,
   deleteEnrollment,
   deleteSemester,
+  reopenSemester,
   setActiveSemester,
   updateSemesterProfile,
 } from "@/features/academics/actions";
@@ -55,6 +58,7 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
   }
 
   const semester = data.semester;
+  const isArchived = semester.isArchived;
 
   return (
     <AppShell
@@ -98,12 +102,27 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
         </div>
       </section>
 
+      {isArchived ? (
+        <section className="mt-6 rounded-2xl border border-border bg-surface p-5">
+          <h2 className="text-lg font-semibold">Archived semester</h2>
+          <p className="mt-2 text-sm leading-6 text-muted">
+            This semester is read-only. You can review courses, timetable blocks, assessments, and history without changing records.
+          </p>
+          <form action={reopenSemester} className="mt-4">
+            <input type="hidden" name="semesterId" value={semester.id} />
+            <PendingSubmitButton pendingLabel="Reopening..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+              Reopen semester
+            </PendingSubmitButton>
+          </form>
+        </section>
+      ) : null}
+
       <section className="mt-6 grid gap-6 xl:grid-cols-[0.72fr_1.28fr]">
         <div className="grid gap-6">
           <form action={updateSemesterProfile} className="rounded-2xl border border-border bg-white p-5">
             <h2 className="text-lg font-semibold">Semester details</h2>
             <input type="hidden" name="semesterId" value={semester.id} />
-            <div className="mt-4 grid gap-3">
+            <fieldset disabled={isArchived} className="mt-4 grid gap-3 disabled:opacity-60">
               <select
                 name="level"
                 defaultValue={data.profile?.level ?? appUser.level ?? ""}
@@ -127,22 +146,40 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
                 placeholder="e.g. 72.45"
                 className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
               />
-              <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+              <PendingSubmitButton pendingLabel="Saving CWA..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                 Save CWA
-              </button>
-            </div>
+              </PendingSubmitButton>
+            </fieldset>
           </form>
 
-          {!data.isActiveForUser ? (
+          {!data.isActiveForUser && !isArchived ? (
             <form action={setActiveSemester} className="rounded-2xl border border-border bg-surface p-5">
               <input type="hidden" name="semesterId" value={semester.id} />
               <h2 className="text-lg font-semibold">Set as active</h2>
               <p className="mt-2 text-sm leading-6 text-muted">
                 Planner and dashboard summaries will use this semester first.
               </p>
-              <button className="mt-4 h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+              <PendingSubmitButton pendingLabel="Activating..." className="mt-4 h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                 Make active semester
-              </button>
+              </PendingSubmitButton>
+            </form>
+          ) : null}
+
+          {!isArchived ? (
+            <form action={archiveSemester} className="rounded-2xl border border-border bg-surface p-5">
+              <input type="hidden" name="semesterId" value={semester.id} />
+              <h2 className="text-lg font-semibold">Archive semester</h2>
+              <p className="mt-2 text-sm leading-6 text-muted">
+                Keeps this semester for history while preventing new edits.
+              </p>
+              <ConfirmSubmitButton
+                message={`Archive ${formatLevel(data.profile?.level)} - ${semester.name}? You can reopen it later.`}
+                titleText="Archive semester"
+                confirmLabel="Archive"
+                className="mt-4 h-11 rounded-xl border border-border px-4 text-sm font-semibold text-muted transition hover:border-foreground hover:text-foreground"
+              >
+                Archive semester
+              </ConfirmSubmitButton>
             </form>
           ) : null}
 
@@ -164,7 +201,7 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
           <form action={createEnrollment} className="rounded-2xl border border-border bg-white p-5">
             <h2 className="text-lg font-semibold">Enroll in course</h2>
             <input type="hidden" name="semesterId" value={semester.id} />
-            <div className="mt-4 grid gap-3">
+            <fieldset disabled={isArchived} className="mt-4 grid gap-3 disabled:opacity-60">
               <select name="courseId" required className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
                 <option value="">Select course</option>
                 {data.courses.map((course) => (
@@ -178,15 +215,15 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
                 placeholder="Lecturer"
                 className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
               />
-              <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+              <PendingSubmitButton pendingLabel="Saving enrollment..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                 Save enrollment
-              </button>
-            </div>
+              </PendingSubmitButton>
+            </fieldset>
           </form>
 
           <form action={createCourse} className="rounded-2xl border border-border bg-white p-5">
             <h2 className="text-lg font-semibold">Add course catalog item</h2>
-            <div className="mt-4 grid gap-3">
+            <fieldset disabled={isArchived} className="mt-4 grid gap-3 disabled:opacity-60">
               <input name="code" required placeholder="COE 153" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
               <input name="name" required placeholder="Engineering Technology" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
               <div className="grid gap-3 sm:grid-cols-2">
@@ -199,10 +236,10 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
                 </select>
               </div>
               <input name="department" placeholder="Department" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
-              <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+              <PendingSubmitButton pendingLabel="Saving course..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                 Save course
-              </button>
-            </div>
+              </PendingSubmitButton>
+            </fieldset>
           </form>
         </div>
 
@@ -221,7 +258,7 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
                         <p className="font-semibold">{enrollment.course.name}</p>
                         <p className="mt-2 text-sm text-muted">{enrollment.course.code}</p>
                       </div>
-                      <form action={deleteEnrollment}>
+                      {!isArchived ? <form action={deleteEnrollment}>
                         <input type="hidden" name="enrollmentId" value={enrollment.id} />
                         <input type="hidden" name="semesterId" value={semester.id} />
                         <ConfirmSubmitButton
@@ -232,7 +269,7 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
                         >
                           <Trash2 className="h-4 w-4" />
                         </ConfirmSubmitButton>
-                      </form>
+                      </form> : null}
                     </div>
                     <div className="mt-5 grid gap-3 sm:grid-cols-3">
                       <div>
@@ -268,7 +305,7 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
             <form action={createTimetableBlock} className="rounded-2xl border border-border bg-white p-5">
               <input type="hidden" name="semesterId" value={semester.id} />
               <h2 className="text-lg font-semibold">Add timetable block</h2>
-              <div className="mt-4 grid gap-3">
+              <fieldset disabled={isArchived} className="mt-4 grid gap-3 disabled:opacity-60">
                 <select name="courseId" className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
                   <option value="">General busy block</option>
                   {data.enrollments.map((enrollment) => (
@@ -287,10 +324,10 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
                   <input name="endTime" required type="time" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
                 </div>
                 <input name="venue" placeholder="Venue" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
-                <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+                <PendingSubmitButton pendingLabel="Saving block..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                   Save block
-                </button>
-              </div>
+                </PendingSubmitButton>
+              </fieldset>
             </form>
 
             <div className="rounded-2xl border border-border bg-surface p-5">

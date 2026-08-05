@@ -192,6 +192,7 @@ model User {
   cwaSnapshots           CwaSnapshot[]
   enrollments            Enrollment[]
   goals                  Goal[]
+  goalProgressSnapshots  GoalProgressSnapshot[]
   groupsOwned            StudyGroup[]             @relation("StudyGroupOwner")
   memberships            StudyGroupMember[]
   notifications          Notification[]
@@ -306,6 +307,8 @@ model Semester {
   startDate       DateTime?         @map("start_date") @db.Date
   endDate         DateTime?         @map("end_date") @db.Date
   isActive        Boolean           @default(false) @map("is_active")
+  isArchived      Boolean           @default(false) @map("is_archived")
+  archivedAt      DateTime?         @map("archived_at")
   createdAt       DateTime          @default(now()) @map("created_at")
   owner           User              @relation("UserSemesters", fields: [ownerId], references: [id], onDelete: Cascade)
   assessments     Assessment[]
@@ -314,6 +317,7 @@ model Semester {
   aiConversations AiConversation[]
   enrollments     Enrollment[]
   goals           Goal[]
+  goalProgressSnapshots GoalProgressSnapshot[]
   groups          StudyGroup[]
   profiles        SemesterProfile[]
   studyPlans      StudyPlan[]
@@ -325,6 +329,7 @@ model Semester {
 
   @@unique([ownerId, level, term])
   @@index([ownerId])
+  @@index([ownerId, isArchived])
   @@map("semesters")
 }
 
@@ -423,11 +428,32 @@ model Goal {
   course       Course?      @relation(fields: [courseId], references: [id])
   semester     Semester     @relation(fields: [semesterId], references: [id], onDelete: Cascade)
   user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  progressSnapshots GoalProgressSnapshot[]
 
   @@index([userId, semesterId, status])
   @@index([semesterId])
   @@index([courseId])
   @@map("goals")
+}
+
+model GoalProgressSnapshot {
+  id           String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId       String     @map("user_id") @db.Uuid
+  semesterId   String     @map("semester_id") @db.Uuid
+  goalId       String     @map("goal_id") @db.Uuid
+  metric       GoalMetric
+  currentValue Decimal    @map("current_value") @db.Decimal(10, 2)
+  targetValue  Decimal    @map("target_value") @db.Decimal(10, 2)
+  progress     Int
+  source       String     @default("computed")
+  recordedAt   DateTime   @default(now()) @map("recorded_at")
+  goal         Goal       @relation(fields: [goalId], references: [id], onDelete: Cascade)
+  semester     Semester   @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([goalId, recordedAt])
+  @@index([userId, semesterId, recordedAt])
+  @@map("goal_progress_snapshots")
 }
 
 model Task {

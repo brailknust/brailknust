@@ -1,7 +1,10 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { requireActiveWritableSemester } from "@/features/academics/semester-state";
+import { parseAccraDate } from "@/features/academics/time";
 import { requireAppUser } from "@/features/auth/queries";
+import { syncGoalProgressSnapshots } from "@/features/goals/progress-sync";
 import { deleteGoalSchema, goalSchema, goalStatusSchema } from "@/features/goals/schemas";
 import { prisma } from "@/server/db";
 
@@ -13,6 +16,7 @@ function revalidateGoals() {
 export async function saveGoal(formData: FormData) {
   const { appUser } = await requireAppUser();
   if (!appUser.activeSemesterId) throw new Error("Set an active semester before adding goals.");
+  await requireActiveWritableSemester(appUser.id, appUser.activeSemesterId);
 
   const parsed = goalSchema.parse({
     id: formData.get("id") || undefined,
@@ -45,7 +49,7 @@ export async function saveGoal(formData: FormData) {
     period: parsed.period,
     targetValue: parsed.targetValue,
     courseId: parsed.courseId ?? null,
-    deadline: parsed.deadline ? new Date(parsed.deadline + "T00:00:00.000Z") : null,
+    deadline: parseAccraDate(parsed.deadline) ?? null,
     ...(parsed.metric === "MANUAL" ? { currentValue: parsed.currentValue } : {}),
   };
 
@@ -69,12 +73,14 @@ export async function saveGoal(formData: FormData) {
     });
   }
 
+  await syncGoalProgressSnapshots(appUser.id, appUser.activeSemesterId);
   revalidateGoals();
 }
 
 export async function updateGoalStatus(formData: FormData) {
   const { appUser } = await requireAppUser();
   if (!appUser.activeSemesterId) throw new Error("Set an active semester before updating goals.");
+  await requireActiveWritableSemester(appUser.id, appUser.activeSemesterId);
 
   const parsed = goalStatusSchema.parse({
     id: formData.get("id"),
@@ -89,12 +95,14 @@ export async function updateGoalStatus(formData: FormData) {
     },
     data: { status: parsed.status },
   });
+  await syncGoalProgressSnapshots(appUser.id, appUser.activeSemesterId);
   revalidateGoals();
 }
 
 export async function deleteGoal(formData: FormData) {
   const { appUser } = await requireAppUser();
   if (!appUser.activeSemesterId) throw new Error("Set an active semester before deleting goals.");
+  await requireActiveWritableSemester(appUser.id, appUser.activeSemesterId);
 
   const parsed = deleteGoalSchema.parse({ id: formData.get("id") });
   await prisma.goal.deleteMany({

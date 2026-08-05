@@ -4,6 +4,7 @@ import { createHash } from "node:crypto";
 
 import { revalidatePath } from "next/cache";
 
+import { requireWritableSemester } from "@/features/academics/semester-state";
 import { requireAppUser } from "@/features/auth/queries";
 import { chunkMaterialText } from "@/features/materials/chunking";
 import {
@@ -36,6 +37,7 @@ export async function saveCourseMaterial(formData: FormData) {
     select: { id: true },
   });
   if (!enrollment) throw new Error("Course enrollment not found.");
+  await requireWritableSemester(appUser.id, parsed.semesterId);
 
   const chunks = chunkMaterialText(parsed.content);
   if (!chunks.length) throw new Error("The material did not contain usable text.");
@@ -112,6 +114,7 @@ export async function deleteCourseMaterial(formData: FormData) {
     select: { id: true, storagePath: true },
   });
   if (!material) return;
+  await requireWritableSemester(appUser.id, parsed.semesterId);
 
   if (material.storagePath) {
     await removeCourseMaterialFile(material.storagePath);

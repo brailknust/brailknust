@@ -107,6 +107,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
   const selectedStudyPlan =
     planner.studyPlans.find((plan) => plan.id === params.planId) ??
     planner.activeStudyPlan;
+  const isArchived = Boolean(planner.activeSemester?.isArchived);
 
   const courseOptions = planner.activeEnrollments.map((enrollment) => enrollment.course);
   const filteredTasks = selectedCourseId
@@ -204,6 +205,15 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
         </div>
       </section>
 
+      {isArchived ? (
+        <section className="mt-6 rounded-2xl border border-border bg-surface p-5">
+          <h2 className="text-lg font-semibold">Archived semester</h2>
+          <p className="mt-2 text-sm leading-6 text-muted">
+            Planner history is read-only because the active semester is archived.
+          </p>
+        </section>
+      ) : null}
+
       <section className="mt-6 grid gap-6 xl:grid-cols-[0.8fr_1.2fr]">
         <div className="grid gap-6">
           <form action="/planner" className="rounded-2xl border border-border bg-white p-5">
@@ -230,7 +240,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
 
           <form action={createStudyPlan} className="rounded-2xl border border-border bg-white p-5">
             <h2 className="text-lg font-semibold">Create study plan</h2>
-            <div className="mt-4 grid gap-3">
+            <fieldset disabled={isArchived} className="mt-4 grid gap-3 disabled:opacity-60">
               <input
                 name="title"
                 required
@@ -258,13 +268,13 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
               <PendingSubmitButton className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white" pendingLabel="Saving plan...">
                 Save plan
               </PendingSubmitButton>
-            </div>
+            </fieldset>
           </form>
 
-          <TimetableGenerator
+          {!isArchived ? <TimetableGenerator
             activeCourseCount={courseOptions.length}
             initialRows={savedClassRows}
-          />
+          /> : null}
         </div>
 
         <div className="grid gap-6">
@@ -316,7 +326,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
             </div>
 
             {savedStudySessions.length ? (
-              <SavedStudyTimetable studyPlanId={selectedStudyPlan.id} sessions={savedStudySessions} courseOptions={courseOptions} initialDayIndex={selectedDayIndex} />
+              <SavedStudyTimetable studyPlanId={selectedStudyPlan.id} sessions={savedStudySessions} courseOptions={courseOptions} initialDayIndex={selectedDayIndex} readOnly={isArchived} />
             ) : (
               <div className="mt-5">
                 <p className="rounded-xl border border-border bg-surface p-4 text-sm text-muted">
@@ -419,7 +429,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
               </div>
             ) : null}
 
-            {selectedStudyPlan ? (
+            {selectedStudyPlan && !isArchived ? (
               <details id="manual-study-session" className="mt-5 rounded-xl border border-border bg-surface p-4">
                 <summary className="flex cursor-pointer items-center gap-2 font-semibold">
                   <Plus className="h-4 w-4" />
@@ -486,15 +496,15 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                       />
                     </label>
                   </div>
-                  <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+                  <PendingSubmitButton pendingLabel="Adding session..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                     Add session
-                  </button>
+                  </PendingSubmitButton>
                 </form>
               </details>
             ) : null}
           </section>
 
-          <UnavailableTimesGrid blocks={unavailableBlocks} />
+          <UnavailableTimesGrid blocks={unavailableBlocks} readOnly={isArchived} />
 
           <section>
             <div className="rounded-2xl border border-border bg-white p-5">

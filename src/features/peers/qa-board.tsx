@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUp, MessageCircle, Pencil, Plus, Search, Trash2 } from "lucide-react";
 
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import {
   deletePeerAnswer,
   deletePeerQuestion,
@@ -54,9 +55,9 @@ export function QaBoard({ courses, questions, search, courseId }: QaBoardProps) 
             Details
             <textarea name="body" required minLength={20} maxLength={5000} placeholder="Include what you have tried and where you are stuck." className="min-h-32 rounded-md border border-border bg-background px-3 py-3 text-sm" />
           </label>
-          <button className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-foreground px-4 text-sm font-semibold text-background">
+          <PendingSubmitButton pendingLabel="Posting..." className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-foreground px-4 text-sm font-semibold text-background">
             <Plus className="h-4 w-4" /> Post question
-          </button>
+          </PendingSubmitButton>
         </form>
       </section>
 
@@ -133,7 +134,7 @@ export function QaBoard({ courses, questions, search, courseId }: QaBoardProps) 
                         {courses.map((course) => <option key={course.id} value={course.id}>{course.name}</option>)}
                       </select>
                       <textarea name="body" required minLength={20} maxLength={5000} defaultValue={question.body} className="min-h-28 rounded-md border border-border bg-background px-3 py-3 text-sm" />
-                      <button className="h-10 w-fit rounded-md bg-foreground px-4 text-sm font-semibold text-background">Save changes</button>
+                      <PendingSubmitButton pendingLabel="Saving..." className="h-10 w-fit rounded-md bg-foreground px-4 text-sm font-semibold text-background">Save changes</PendingSubmitButton>
                     </form>
                   </details>
                   <form action={deletePeerQuestion}>
@@ -166,7 +167,7 @@ export function QaBoard({ courses, questions, search, courseId }: QaBoardProps) 
                               <input type="hidden" name="id" value={answer.id} />
                               <input type="hidden" name="questionId" value={question.id} />
                               <textarea name="body" required maxLength={5000} defaultValue={answer.body} className="min-h-24 rounded-md border border-border bg-surface px-3 py-3 text-sm" />
-                              <button className="h-9 w-fit rounded-md bg-foreground px-3 text-xs font-semibold text-background">Save answer</button>
+                              <PendingSubmitButton pendingLabel="Saving..." className="h-9 w-fit rounded-md bg-foreground px-3 text-xs font-semibold text-background">Save answer</PendingSubmitButton>
                             </form>
                           </details>
                           <form action={deletePeerAnswer}>
@@ -193,7 +194,7 @@ export function QaBoard({ courses, questions, search, courseId }: QaBoardProps) 
                     Add answer
                     <textarea name="body" required minLength={2} maxLength={5000} rows={2} placeholder="Write a useful answer" className="min-h-20 rounded-md border border-border bg-background px-3 py-3 text-sm" />
                   </label>
-                  <button className="h-10 rounded-md bg-foreground px-4 text-sm font-semibold text-background">Post answer</button>
+                  <PendingSubmitButton pendingLabel="Posting..." className="h-10 rounded-md bg-foreground px-4 text-sm font-semibold text-background">Post answer</PendingSubmitButton>
                 </form>
               </div>
             </article>

@@ -1,9 +1,11 @@
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
 import { PendingSubmitButton } from "@/components/pending-submit-button";
+import { formatAccraDateTimeInput } from "@/features/academics/time";
 import { requireAppUser } from "@/features/auth/queries";
 import { createTask, deleteTask, updateTask, updateTaskStatus } from "@/features/tasks/actions";
 import { getTasksPageData } from "@/features/tasks/queries";
+import { allowedNextTaskStatuses } from "@/features/tasks/status";
 
 const priorities = ["LOW", "MEDIUM", "HIGH", "URGENT"];
 
@@ -22,14 +24,23 @@ function formatReminder(value: Date | null) {
 
 export default async function TasksPage() {
   const { appUser } = await requireAppUser();
-  const { tasks, courses } = await getTasksPageData(appUser.id, appUser.activeSemesterId);
+  const { activeSemester, tasks, courses } = await getTasksPageData(appUser.id, appUser.activeSemesterId);
+  const isArchived = Boolean(activeSemester?.isArchived);
 
   return (
     <AppShell title="Tasks and deadlines" eyebrow="Phase 2">
+      {isArchived ? (
+        <section className="mb-6 rounded-2xl border border-border bg-surface p-5">
+          <h2 className="text-lg font-semibold">Archived semester</h2>
+          <p className="mt-2 text-sm leading-6 text-muted">
+            Tasks are read-only because the active semester is archived.
+          </p>
+        </section>
+      ) : null}
       <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
         <form action={createTask} className="rounded-2xl border border-border bg-white p-5">
           <h2 className="text-lg font-semibold">Add task</h2>
-          <div className="mt-5 grid gap-4">
+          <fieldset disabled={isArchived || !activeSemester} className="mt-5 grid gap-4 disabled:opacity-60">
             <input name="title" required placeholder="Assignment title" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
             <textarea name="description" placeholder="Details or notes" className="min-h-28 rounded-xl border border-border bg-white px-3 py-3 text-sm" />
             <select name="courseId" className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
@@ -62,7 +73,7 @@ export default async function TasksPage() {
             <PendingSubmitButton pendingLabel="Saving task..." className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
               Save task
             </PendingSubmitButton>
-          </div>
+          </fieldset>
         </form>
 
         <section className="rounded-2xl border border-border bg-surface p-5">
@@ -91,33 +102,34 @@ export default async function TasksPage() {
                       </span>
                     </div>
                   </div>
-                  <details className="mt-4 border-t border-border pt-3">
+                  {!isArchived ? <details className="mt-4 border-t border-border pt-3">
                     <summary className="cursor-pointer text-sm font-semibold text-accent">Edit task</summary>
                     <form action={updateTask} className="mt-3 grid gap-3">
                       <input type="hidden" name="id" value={task.id} />
                       <input name="title" required minLength={2} maxLength={160} defaultValue={task.title} className="h-10 rounded-md border border-border bg-white px-3 text-sm" />
                       <textarea name="description" maxLength={5000} defaultValue={task.description ?? ""} className="min-h-20 rounded-md border border-border bg-white px-3 py-2 text-sm" />
                       <select name="courseId" defaultValue={task.courseId ?? ""} className="h-10 rounded-md border border-border bg-white px-3 text-sm"><option value="">No course</option>{courses.map((course) => <option key={course.id} value={course.id}>{course.name}</option>)}</select>
-                      <div className="grid gap-3 sm:grid-cols-2"><input name="dueAt" type="datetime-local" defaultValue={task.dueAt?.toISOString().slice(0, 16) ?? ""} className="h-10 rounded-md border border-border bg-white px-3 text-sm" /><input name="reminderAt" type="datetime-local" defaultValue={task.reminderAt?.toISOString().slice(0, 16) ?? ""} className="h-10 rounded-md border border-border bg-white px-3 text-sm" /></div>
+                      <div className="grid gap-3 sm:grid-cols-2"><input name="dueAt" type="datetime-local" defaultValue={formatAccraDateTimeInput(task.dueAt)} className="h-10 rounded-md border border-border bg-white px-3 text-sm" /><input name="reminderAt" type="datetime-local" defaultValue={formatAccraDateTimeInput(task.reminderAt)} className="h-10 rounded-md border border-border bg-white px-3 text-sm" /></div>
                       <select name="priority" defaultValue={task.priority} className="h-10 rounded-md border border-border bg-white px-3 text-sm">{priorities.map((priority) => <option key={priority}>{priority}</option>)}</select>
                       <PendingSubmitButton pendingLabel="Updating..." className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-border px-3 text-sm font-semibold text-muted">Save changes</PendingSubmitButton>
                     </form>
-                  </details>
+                  </details> : null}
                   <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
-                    <form action={updateTaskStatus} className="flex flex-wrap gap-2">
+                    {!isArchived ? <form action={updateTaskStatus} className="flex flex-wrap gap-2">
                       <input type="hidden" name="id" value={task.id} />
-                      {(task.status === "EXPIRED" ? ["DONE"] : ["TODO", "DONE"]).map((status) => (
-                        <button
+                      {allowedNextTaskStatuses(task.status).map((status) => (
+                        <PendingSubmitButton
                           key={status}
                           name="status"
                           value={status}
+                          pendingLabel="Updating..."
                           className="rounded-xl border border-border px-3 py-2 text-sm font-semibold text-muted transition hover:border-foreground hover:text-foreground"
                         >
                           {status.replace("_", " ")}
-                        </button>
+                        </PendingSubmitButton>
                       ))}
-                    </form>
-                    <form action={deleteTask}>
+                    </form> : null}
+                    {!isArchived ? <form action={deleteTask}>
                       <input type="hidden" name="id" value={task.id} />
                       <ConfirmSubmitButton
                         message={`Delete "${task.title}" permanently?`}
@@ -125,7 +137,7 @@ export default async function TasksPage() {
                       >
                         Delete
                       </ConfirmSubmitButton>
-                    </form>
+                    </form> : null}
                   </div>
                 </article>
               ))

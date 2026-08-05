@@ -4,6 +4,7 @@ import { Clock3, Pencil, Plus, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
 
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { deleteStudyPlanItem, updateStudyPlanItem } from "@/features/planner/actions";
 
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] as const;
@@ -27,9 +28,10 @@ type SavedStudyTimetableProps = {
   sessions: SavedStudySession[];
   courseOptions: CourseOption[];
   initialDayIndex?: number;
+  readOnly?: boolean;
 };
 
-export function SavedStudyTimetable({ studyPlanId, sessions, courseOptions, initialDayIndex }: SavedStudyTimetableProps) {
+export function SavedStudyTimetable({ studyPlanId, sessions, courseOptions, initialDayIndex, readOnly = false }: SavedStudyTimetableProps) {
   const firstSessionDay = initialDayIndex ?? sessions.find((session) => session.dayIndex >= 0)?.dayIndex ?? 0;
   const [selectedDayIndex, setSelectedDayIndex] = useState(firstSessionDay);
 
@@ -59,9 +61,9 @@ export function SavedStudyTimetable({ studyPlanId, sessions, courseOptions, init
       <section id="study-timetable" className="mt-6 rounded-2xl border border-border bg-white p-5">
         <div className="flex items-center justify-between gap-3">
           <h3 className="text-lg font-semibold">{weekDays[selectedDayIndex]}&apos;s Study Sessions</h3>
-          <a href="#manual-study-session" className="inline-flex items-center gap-2 text-sm font-semibold text-accent">
+          {!readOnly ? <a href="#manual-study-session" className="inline-flex items-center gap-2 text-sm font-semibold text-accent">
             <Plus className="h-4 w-4" /> Add Study Session
-          </a>
+          </a> : null}
         </div>
 
         <div className="mt-5 grid gap-4">
@@ -75,7 +77,7 @@ export function SavedStudyTimetable({ studyPlanId, sessions, courseOptions, init
                   <p className="mt-3 inline-flex items-center gap-2 text-sm text-muted"><Clock3 className="h-4 w-4" />{session.durationLabel}</p>
                   {session.reason ? <p className="mt-3 text-sm leading-6 text-muted">{session.reason}</p> : null}
                 </div>
-                <div className="flex items-start gap-2">
+                {!readOnly ? <div className="flex items-start gap-2">
 
                   <form action={deleteStudyPlanItem}>
                     <input type="hidden" name="id" value={session.id} />
@@ -85,10 +87,10 @@ export function SavedStudyTimetable({ studyPlanId, sessions, courseOptions, init
                       <Trash2 className="h-4 w-4" />
                     </ConfirmSubmitButton>
                   </form>
-                </div>
+                </div> : null}
               </div>
 
-              <details className="mt-4 border-t border-border pt-4">
+              {!readOnly ? <details className="mt-4 border-t border-border pt-4">
                 <summary className="inline-flex cursor-pointer list-none items-center gap-2 text-sm font-semibold text-accent"><Pencil className="h-4 w-4" /> Edit session</summary>
                 <form action={updateStudyPlanItem} className="mt-4 grid gap-3 sm:grid-cols-2">
                   <input type="hidden" name="id" value={session.id} />
@@ -112,9 +114,9 @@ export function SavedStudyTimetable({ studyPlanId, sessions, courseOptions, init
                   </label>
                   <label className="grid gap-2 text-sm font-semibold">Start time<input name="startTime" type="time" required defaultValue={session.startTime} className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal" /></label>
                   <label className="grid gap-2 text-sm font-semibold">End time<input name="endTime" type="time" required defaultValue={session.endTime} className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal" /></label>
-                  <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white sm:col-span-2">Save changes</button>
+                  <PendingSubmitButton pendingLabel="Saving..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white sm:col-span-2">Save changes</PendingSubmitButton>
                 </form>
-              </details>
+              </details> : null}
             </article>
           )) : <p className="rounded-xl border border-border bg-surface p-4 text-sm text-muted">No study sessions planned for {weekDays[selectedDayIndex]}.</p>}
         </div>

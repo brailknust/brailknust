@@ -2,12 +2,28 @@
 
 import { revalidatePath } from "next/cache";
 
+import { requireActiveWritableSemester } from "@/features/academics/semester-state";
+import { parseAccraDateTime } from "@/features/academics/time";
 import { requireAppUser } from "@/features/auth/queries";
+import { syncGoalProgressSnapshots } from "@/features/goals/progress-sync";
 import { createTaskSchema, deleteTaskSchema, taskStatusSchema, updateTaskSchema } from "@/features/tasks/schemas";
+import { canTransitionTaskStatus, withEffectiveTaskStatus } from "@/features/tasks/status";
 import { prisma } from "@/server/db";
 
 function optionalDateTime(value?: string) {
-  return value ? new Date(value) : undefined;
+  return parseAccraDateTime(value);
+}
+
+function revalidateTaskViews(activeSemesterId: string, courseIds: Array<string | null | undefined> = []) {
+  revalidatePath("/tasks");
+  revalidatePath("/dashboard");
+  revalidatePath("/planner");
+  revalidatePath("/performance");
+  revalidatePath("/academics");
+  revalidatePath(`/academics/semesters/${activeSemesterId}`);
+  for (const courseId of new Set(courseIds.filter(Boolean))) {
+    revalidatePath(`/academics/semesters/${activeSemesterId}/courses/${courseId}`);
+  }
 }
 
 export async function createTask(formData: FormData) {
@@ -16,6 +32,7 @@ export async function createTask(formData: FormData) {
   if (!appUser.activeSemesterId) {
     throw new Error("Set an active semester before adding tasks.");
   }
+  await requireActiveWritableSemester(appUser.id, appUser.activeSemesterId);
 
   const parsed = createTaskSchema.parse({
     title: formData.get("title"),
@@ -54,13 +71,8 @@ export async function createTask(formData: FormData) {
     },
   });
 
-  revalidatePath("/tasks");
-  revalidatePath("/dashboard");
-  revalidatePath("/planner");
-  revalidatePath("/performance");
-  if (parsed.courseId) {
-    revalidatePath(`/academics/semesters/${appUser.activeSemesterId}/courses/${parsed.courseId}`);
-  }
+  await syncGoalProgressSnapshots(appUser.id, appUser.activeSemesterId);
+  revalidateTaskViews(appUser.activeSemesterId, [parsed.courseId]);
 }
 
 export async function updateTaskStatus(formData: FormData) {
@@ -69,23 +81,28 @@ export async function updateTaskStatus(formData: FormData) {
   if (!appUser.activeSemesterId) {
     throw new Error("Set an active semester before updating tasks.");
   }
+  await requireActiveWritableSemester(appUser.id, appUser.activeSemesterId);
 
   const id = String(formData.get("id") ?? "");
   const status = taskStatusSchema.parse(formData.get("status"));
-
-  await prisma.task.updateMany({
+  const existing = await prisma.task.findFirst({
     where: {
       id,
       userId: appUser.id,
       semesterId: appUser.activeSemesterId,
     },
-    data: { status },
+    select: { status: true, dueAt: true, courseId: true },
   });
+  if (!existing) return;
 
-  revalidatePath("/tasks");
-  revalidatePath("/dashboard");
-  revalidatePath("/planner");
-  revalidatePath("/performance");
+  const effectiveStatus = withEffectiveTaskStatus(existing).status;
+  if (!canTransitionTaskStatus(effectiveStatus, status)) {
+    throw new Error(`Task status cannot move from ${effectiveStatus.replace("_", " ")} to ${status.replace("_", " ")}.`);
+  }
+
+  await prisma.task.update({ where: { id }, data: { status } });
+  await syncGoalProgressSnapshots(appUser.id, appUser.activeSemesterId);
+  revalidateTaskViews(appUser.activeSemesterId, [existing.courseId]);
 }
 
 export async function updateTask(formData: FormData) {
@@ -94,6 +111,7 @@ export async function updateTask(formData: FormData) {
   if (!appUser.activeSemesterId) {
     throw new Error("Set an active semester before editing tasks.");
   }
+  await requireActiveWritableSemester(appUser.id, appUser.activeSemesterId);
 
   const parsed = updateTaskSchema.parse({
     id: formData.get("id"),
@@ -131,13 +149,8 @@ export async function updateTask(formData: FormData) {
     },
   });
 
-  revalidatePath("/tasks");
-  revalidatePath("/dashboard");
-  revalidatePath("/planner");
-  revalidatePath("/performance");
-  revalidatePath("/academics");
-  if (existing.courseId) revalidatePath(`/academics/semesters/${appUser.activeSemesterId}/courses/${existing.courseId}`);
-  if (parsed.courseId) revalidatePath(`/academics/semesters/${appUser.activeSemesterId}/courses/${parsed.courseId}`);
+  await syncGoalProgressSnapshots(appUser.id, appUser.activeSemesterId);
+  revalidateTaskViews(appUser.activeSemesterId, [existing.courseId, parsed.courseId]);
 }
 
 export async function deleteTask(formData: FormData) {
@@ -146,6 +159,7 @@ export async function deleteTask(formData: FormData) {
   if (!appUser.activeSemesterId) {
     throw new Error("Set an active semester before deleting tasks.");
   }
+  await requireActiveWritableSemester(appUser.id, appUser.activeSemesterId);
 
   const { id } = deleteTaskSchema.parse({ id: formData.get("id") });
   const task = await prisma.task.findFirst({
@@ -160,14 +174,6 @@ export async function deleteTask(formData: FormData) {
   if (!task) return;
 
   await prisma.task.delete({ where: { id } });
-
-  revalidatePath("/tasks");
-  revalidatePath("/dashboard");
-  revalidatePath("/planner");
-  revalidatePath("/performance");
-  revalidatePath("/academics");
-  revalidatePath(`/academics/semesters/${appUser.activeSemesterId}`);
-  if (task.courseId) {
-    revalidatePath(`/academics/semesters/${appUser.activeSemesterId}/courses/${task.courseId}`);
-  }
+  await syncGoalProgressSnapshots(appUser.id, appUser.activeSemesterId);
+  revalidateTaskViews(appUser.activeSemesterId, [task.courseId]);
 }

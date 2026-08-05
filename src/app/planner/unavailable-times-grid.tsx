@@ -31,13 +31,14 @@ function overlaps(start: string, end: string, block: UnavailableBlock) {
   return start < block.endTime && end > block.startTime;
 }
 
-export function UnavailableTimesGrid({ blocks }: { blocks: UnavailableBlock[] }) {
+export function UnavailableTimesGrid({ blocks, readOnly = false }: { blocks: UnavailableBlock[]; readOnly?: boolean }) {
   return (
     <section className="rounded-2xl border border-border bg-white p-5">
       <h2 className="text-lg font-semibold">Weekly unavailable times</h2>
       <p className="mt-2 text-sm leading-6 text-muted">
-        Click a free block to mark it busy. Click it again to make it available. Saved classes
-        are shown separately and cannot be changed here.
+        {readOnly
+          ? "Unavailable times are visible for history in this archived semester."
+          : "Click a free block to mark it busy. Click it again to make it available. Saved classes are shown separately and cannot be changed here."}
       </p>
 
       <div className="mt-5 overflow-x-auto rounded-2xl border border-border bg-surface p-2">
@@ -69,7 +70,7 @@ export function UnavailableTimesGrid({ blocks }: { blocks: UnavailableBlock[] })
                     block.startTime === slot.startTime &&
                     block.endTime === slot.endTime,
                 );
-                const disabled = Boolean(classBlock) || (overlapping.length > 0 && !isUnavailable);
+                const disabled = readOnly || Boolean(classBlock) || (overlapping.length > 0 && !isUnavailable);
 
                 return (
                   <form action={toggleUnavailableTime} key={`${day}-${slot.startTime}`}>
