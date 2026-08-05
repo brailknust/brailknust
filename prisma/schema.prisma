@@ -188,6 +188,18 @@ enum FeedbackStatus {
   CLOSED
 }
 
+enum CurriculumImportStatus {
+  DRAFT
+  APPLIED
+  ROLLED_BACK
+}
+
+enum CurriculumImportRowStatus {
+  VALID
+  INVALID
+  APPLIED
+}
+
 model User {
   id                        String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   authUserId                String                     @unique @map("auth_user_id") @db.Uuid
@@ -246,6 +258,7 @@ model User {
   coursesCreated            Course[]                   @relation("CourseCreator")
   supportRequests           SupportRequest[]
   feedback                  Feedback[]
+  curriculumImports         CurriculumImport[]
 
   @@index([activeSemesterId])
   @@index([deletedAt])
@@ -383,10 +396,53 @@ model ProgrammeCurriculum {
   updatedAt     DateTime                  @updatedAt @map("updated_at")
   terms         ProgrammeCurriculumTerm[]
   semesters     Semester[]
+  importedFrom  CurriculumImport?
 
   @@unique([college, programme, version])
   @@index([programme, version, isPublished])
   @@map("programme_curricula")
+}
+
+model CurriculumImport {
+  id             String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdById    String                  @map("created_by_id") @db.Uuid
+  college        String
+  department     String
+  programme      String
+  version        String
+  durationYears  Int                     @map("duration_years")
+  termsPerYear   Int                     @map("terms_per_year")
+  source         String?
+  status         CurriculumImportStatus  @default(DRAFT)
+  curriculumId   String?                 @unique @map("curriculum_id") @db.Uuid
+  createdAt      DateTime                @default(now()) @map("created_at")
+  appliedAt      DateTime?               @map("applied_at")
+  rolledBackAt   DateTime?               @map("rolled_back_at")
+  createdBy      User                    @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  curriculum     ProgrammeCurriculum?    @relation(fields: [curriculumId], references: [id], onDelete: SetNull)
+  rows           CurriculumImportRow[]
+
+  @@index([status, createdAt])
+  @@index([createdById, createdAt])
+  @@map("curriculum_imports")
+}
+
+model CurriculumImportRow {
+  id          String                    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  importId    String                    @map("import_id") @db.Uuid
+  rowNumber   Int                       @map("row_number")
+  courseCode  String?                   @map("course_code")
+  courseName  String?                   @map("course_name")
+  creditHours Int?                      @map("credit_hours")
+  level       AcademicLevel?
+  term        SemesterTerm?
+  status      CurriculumImportRowStatus @default(VALID)
+  error       String?
+  import      CurriculumImport          @relation(fields: [importId], references: [id], onDelete: Cascade)
+
+  @@unique([importId, rowNumber])
+  @@index([importId, status])
+  @@map("curriculum_import_rows")
 }
 
 model ProgrammeCurriculumTerm {

@@ -1,12 +1,15 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/features/auth/queries";
 import { removeCourseMaterialFile } from "@/features/materials/storage";
 import { finalizeAccountDeletionCleanup } from "@/features/profile/account-deletion";
 import { prisma } from "@/server/db";
 import { z } from "zod";
+import { curriculumTermSlots } from "@/features/academics/curriculum-provisioning";
+import { parseCurriculumCsv } from "@/features/admin/curriculum-import";
 
 const adminUserSchema = z.object({ userId: z.string().uuid() });
 const courseApprovalSchema = z.object({ courseId: z.string().uuid() });
@@ -18,6 +21,104 @@ const feedbackStatusSchema = z.object({
   id: z.string().uuid(),
   status: z.enum(["NEW", "REVIEWED", "PLANNED", "CLOSED"]),
 });
+const curriculumImportSchema = z.object({
+  college: z.string().trim().min(2).max(200),
+  department: z.string().trim().min(2).max(200),
+  programme: z.string().trim().min(2).max(200),
+  version: z.string().trim().min(2).max(32),
+  durationYears: z.coerce.number().int().min(1).max(6),
+  termsPerYear: z.coerce.number().int().min(1).max(2),
+  source: z.string().trim().max(500).optional(),
+  csv: z.string().max(250_000),
+});
+
+export async function previewCurriculumImport(formData: FormData) {
+  const { appUser } = await requireAdmin();
+  const parsed = curriculumImportSchema.parse({
+    college: formData.get("college"), department: formData.get("department"), programme: formData.get("programme"),
+    version: formData.get("version"), durationYears: formData.get("durationYears"), termsPerYear: formData.get("termsPerYear"),
+    source: formData.get("source") || undefined, csv: formData.get("csv"),
+  });
+  const rows = parseCurriculumCsv(parsed.csv);
+  const duplicateVersion = await prisma.programmeCurriculum.findUnique({
+    where: { college_programme_version: { college: parsed.college, programme: parsed.programme, version: parsed.version } },
+    select: { id: true },
+  });
+  const importRecord = await prisma.curriculumImport.create({
+    data: {
+      createdById: appUser.id,
+      college: parsed.college,
+      department: parsed.department,
+      programme: parsed.programme,
+      version: parsed.version,
+      durationYears: parsed.durationYears,
+      termsPerYear: parsed.termsPerYear,
+      source: parsed.source,
+      rows: {
+        create: rows.map((row) => ({
+          ...row,
+          status: row.error || duplicateVersion ? "INVALID" : "VALID",
+          error: duplicateVersion ? "This curriculum version already exists." : row.error,
+        })),
+      },
+    },
+  });
+  redirect(`/admin/catalog?import=${importRecord.id}`);
+}
+
+export async function applyCurriculumImport(formData: FormData) {
+  await requireAdmin();
+  const importId = z.string().uuid().parse(formData.get("importId"));
+  await prisma.$transaction(async (tx) => {
+    const importRecord = await tx.curriculumImport.findUnique({ where: { id: importId }, include: { rows: true } });
+    if (!importRecord || importRecord.status !== "DRAFT") throw new Error("This curriculum preview is no longer available to apply.");
+    if (!importRecord.rows.length || importRecord.rows.some((row) => row.status !== "VALID")) throw new Error("Fix every invalid import row before applying this curriculum.");
+    const slots = curriculumTermSlots(importRecord.durationYears, importRecord.termsPerYear);
+    const validSlotKeys = new Set(slots.map((slot) => `${slot.level}:${slot.term}`));
+    if (importRecord.rows.some((row) => !row.level || !row.term || !validSlotKeys.has(`${row.level}:${row.term}`))) {
+      throw new Error("Every course must fit within the selected duration and terms per year.");
+    }
+    const existing = await tx.programmeCurriculum.findUnique({
+      where: { college_programme_version: { college: importRecord.college, programme: importRecord.programme, version: importRecord.version } }, select: { id: true },
+    });
+    if (existing) throw new Error("A curriculum with this college, programme, and version already exists.");
+    const curriculum = await tx.programmeCurriculum.create({
+      data: {
+        college: importRecord.college, department: importRecord.department, programme: importRecord.programme,
+        version: importRecord.version, durationYears: importRecord.durationYears, termsPerYear: importRecord.termsPerYear,
+        source: importRecord.source, isPublished: true,
+      },
+    });
+    for (const slot of slots) {
+      const term = await tx.programmeCurriculumTerm.create({
+        data: { curriculumId: curriculum.id, level: slot.level, term: slot.term, name: slot.name, source: importRecord.source },
+      });
+      const courses = importRecord.rows.filter((row) => row.level === slot.level && row.term === slot.term);
+      if (courses.length) await tx.programmeCurriculumCourse.createMany({
+        data: courses.map((row) => ({ curriculumTermId: term.id, courseCode: row.courseCode!, courseName: row.courseName!, creditHours: row.creditHours!, isApproved: true, source: importRecord.source })),
+      });
+    }
+    await tx.curriculumImport.update({ where: { id: importRecord.id }, data: { status: "APPLIED", curriculumId: curriculum.id, appliedAt: new Date() } });
+    await tx.curriculumImportRow.updateMany({ where: { importId: importRecord.id }, data: { status: "APPLIED" } });
+  });
+  revalidatePath("/admin/catalog");
+  revalidatePath("/onboarding");
+}
+
+export async function rollbackCurriculumImport(formData: FormData) {
+  await requireAdmin();
+  const importId = z.string().uuid().parse(formData.get("importId"));
+  await prisma.$transaction(async (tx) => {
+    const importRecord = await tx.curriculumImport.findUnique({ where: { id: importId }, select: { id: true, status: true, curriculumId: true } });
+    if (!importRecord || importRecord.status !== "APPLIED" || !importRecord.curriculumId) throw new Error("Only an applied curriculum import can be rolled back.");
+    const semesterCount = await tx.semester.count({ where: { curriculumId: importRecord.curriculumId } });
+    if (semesterCount) throw new Error("This curriculum is already assigned to student semesters and cannot be rolled back.");
+    await tx.programmeCurriculum.delete({ where: { id: importRecord.curriculumId } });
+    await tx.curriculumImport.update({ where: { id: importRecord.id }, data: { status: "ROLLED_BACK", rolledBackAt: new Date() } });
+  });
+  revalidatePath("/admin/catalog");
+  revalidatePath("/onboarding");
+}
 
 export async function updateSupportRequestStatus(formData: FormData) {
   await requireAdmin();

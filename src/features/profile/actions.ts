@@ -3,8 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import { getCurriculumVersions } from "@/data/curricula";
-import { ensureDefaultGoals, ensureProgrammeCurriculum, provisionStudentSemesters } from "@/features/academics/curriculum-provisioning";
+import { ensureDefaultGoals, ensureProgrammeCurriculum, getPublishedCurriculumVersions, provisionStudentSemesters } from "@/features/academics/curriculum-provisioning";
 import { syncNotificationsForUser } from "@/features/notifications/service";
 import { findKnustProgramme } from "@/data/knust-academic-hierarchy";
 import { requireAppUser, requireSupabaseUser } from "@/features/auth/queries";
@@ -39,7 +38,7 @@ export async function completeProfile(formData: FormData) {
   });
   const programme = findKnustProgramme(parsed.college, parsed.programme);
   if (!programme) throw new Error("Select a valid KNUST programme.");
-  const versions = getCurriculumVersions({ college: parsed.college, programme: parsed.programme, department: programme.department });
+  const versions = await getPublishedCurriculumVersions({ college: parsed.college, programme: parsed.programme, department: programme.department });
   if (versions.length && (!parsed.curriculumVersion || !versions.includes(parsed.curriculumVersion))) throw new Error("Select a published curriculum version for this programme.");
 
   const appUser = await prisma.user.upsert({
@@ -96,7 +95,7 @@ export async function completeProfile(formData: FormData) {
 export async function provisionExistingUserCurriculum() {
   const { appUser } = await requireAppUser();
   if (!appUser.college || !appUser.programme || !appUser.department) throw new Error("Complete your academic profile before provisioning a curriculum.");
-  const version = getCurriculumVersions({ college: appUser.college, programme: appUser.programme, department: appUser.department })[0];
+  const version = (await getPublishedCurriculumVersions({ college: appUser.college, programme: appUser.programme, department: appUser.department }))[0];
   if (!version) throw new Error("A published curriculum is not available for your programme yet.");
   const curriculum = await ensureProgrammeCurriculum({ college: appUser.college, programme: appUser.programme, department: appUser.department, version });
   const activeSemester = appUser.activeSemesterId

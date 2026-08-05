@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { AcademicLevel, SemesterTerm } from "@prisma/client";
-import { findProgrammeCurriculum, knustCurricula } from "@/data/curricula";
+import { findProgrammeCurriculum, getCurriculumVersions, knustCurricula } from "@/data/curricula";
 import { prisma } from "@/server/db";
 
 const levels: AcademicLevel[] = ["LEVEL_100", "LEVEL_200", "LEVEL_300", "LEVEL_400", "LEVEL_500", "LEVEL_600"];
@@ -23,6 +23,10 @@ export function academicYearForLevel(academicYear: string, anchorLevel: Academic
 }
 
 export async function ensureProgrammeCurriculum(input: { college: string; programme: string; department: string; version: string }) {
+  const importedCurriculum = await prisma.programmeCurriculum.findFirst({
+    where: { college: input.college, programme: input.programme, department: input.department, version: input.version, isPublished: true },
+  });
+  if (importedCurriculum) return importedCurriculum;
   const definition = findProgrammeCurriculum(input);
   if (!definition) throw new Error("No published curriculum version is available for this programme.");
   const curriculum = await prisma.programmeCurriculum.upsert({
@@ -35,6 +39,14 @@ export async function ensureProgrammeCurriculum(input: { college: string; progra
     for (const course of template?.courses ?? []) await prisma.programmeCurriculumCourse.upsert({ where: { curriculumTermId_courseCode: { curriculumTermId: term.id, courseCode: course.code } }, create: { curriculumTermId: term.id, courseCode: course.code, courseName: course.name, creditHours: course.creditHours, isApproved: true, source: template?.source }, update: {} });
   }
   return curriculum;
+}
+
+export async function getPublishedCurriculumVersions(input: { college: string; programme: string; department?: string }) {
+  const imported = await prisma.programmeCurriculum.findMany({
+    where: { college: input.college, programme: input.programme, isPublished: true, ...(input.department ? { department: input.department } : {}) },
+    select: { version: true },
+  });
+  return [...new Set([...imported.map((item) => item.version), ...getCurriculumVersions(input)])].sort().reverse();
 }
 
 export async function provisionStudentSemesters(input: { userId: string; curriculumId: string; academicYear: string; activeLevel: AcademicLevel; cwa?: number }) {

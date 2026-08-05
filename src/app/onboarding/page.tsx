@@ -6,6 +6,7 @@ import { knustAcademicHierarchy } from "@/data/knust-academic-hierarchy";
 import { completeProfile } from "@/features/profile/actions";
 import { getAppUserByAuthId, requireSupabaseUser } from "@/features/auth/queries";
 import { OnboardingForm } from "@/app/onboarding/onboarding-form";
+import { prisma } from "@/server/db";
 
 export default async function OnboardingPage() {
   const authUser = await requireSupabaseUser();
@@ -14,6 +15,11 @@ export default async function OnboardingPage() {
   if (appUser) {
     redirect("/dashboard");
   }
+
+  const importedCurricula = await prisma.programmeCurriculum.findMany({
+    where: { isPublished: true },
+    select: { college: true, programme: true, version: true },
+  });
 
   return (
     <main className="min-h-screen bg-white px-5 py-8 text-foreground sm:px-8 sm:py-10">
@@ -37,6 +43,7 @@ export default async function OnboardingPage() {
           action={completeProfile}
           hierarchy={knustAcademicHierarchy}
           defaultFullName={authUser.user_metadata.full_name ?? authUser.email ?? ""}
+          importedCurricula={importedCurricula}
         />
         </div>
       </section>

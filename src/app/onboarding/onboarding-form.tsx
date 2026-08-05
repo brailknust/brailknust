@@ -31,9 +31,10 @@ type OnboardingFormProps = {
   action: (formData: FormData) => void;
   hierarchy: KnustCollege[];
   defaultFullName: string;
+  importedCurricula?: Array<{ college: string; programme: string; version: string }>;
 };
 
-export function OnboardingForm({ action, hierarchy, defaultFullName }: OnboardingFormProps) {
+export function OnboardingForm({ action, hierarchy, defaultFullName, importedCurricula = [] }: OnboardingFormProps) {
   const [selectedCollege, setSelectedCollege] = useState("");
   const [selectedProgramme, setSelectedProgramme] = useState("");
 
@@ -46,7 +47,13 @@ export function OnboardingForm({ action, hierarchy, defaultFullName }: Onboardin
     () => getKnustProgrammesForCollege(selectedCollege),
     [selectedCollege],
   );
-  const curriculumVersions = useMemo(() => selectedCollege && selectedProgramme ? getCurriculumVersions({ college: selectedCollege, programme: selectedProgramme }) : [], [selectedCollege, selectedProgramme]);
+  const curriculumVersions = useMemo(() => {
+    if (!selectedCollege || !selectedProgramme) return [];
+    const importedVersions = importedCurricula
+      .filter((curriculum) => curriculum.college === selectedCollege && curriculum.programme === selectedProgramme)
+      .map((curriculum) => curriculum.version);
+    return [...new Set([...getCurriculumVersions({ college: selectedCollege, programme: selectedProgramme }), ...importedVersions])].sort().reverse();
+  }, [importedCurricula, selectedCollege, selectedProgramme]);
 
   return (
     <form action={action} className="mt-8 grid gap-5">

@@ -1,4 +1,4 @@
-import { BookX, RotateCcw } from "lucide-react";
+import { BookX, FileUp, RotateCcw } from "lucide-react";
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
@@ -7,8 +7,11 @@ import { knustCurricula } from "@/data/curricula";
 import {
   approveStudentCourse,
   deleteOrphanCatalogCourse,
+  applyCurriculumImport,
+  previewCurriculumImport,
   rejectStudentCourse,
   removeProgrammeCourse,
+  rollbackCurriculumImport,
   restoreProgrammeCourse,
 } from "@/features/admin/actions";
 import { requireAdmin } from "@/features/auth/queries";
@@ -18,9 +21,12 @@ function levelLabel(level: string) {
   return level.replace("LEVEL_", "Level ");
 }
 
-export default async function AdminProgrammeCatalogPage() {
+type AdminProgrammeCatalogPageProps = { searchParams: Promise<{ import?: string }> };
+
+export default async function AdminProgrammeCatalogPage({ searchParams }: AdminProgrammeCatalogPageProps) {
   await requireAdmin();
-  const [exclusions, databaseCourses] = await Promise.all([
+  const [{ import: selectedImportId }, exclusions, databaseCourses, curriculumImports] = await Promise.all([
+    searchParams,
     prisma.programmeCourseExclusion.findMany({
       include: { removedBy: { select: { fullName: true } } },
       orderBy: { createdAt: "desc" },
@@ -44,6 +50,11 @@ export default async function AdminProgrammeCatalogPage() {
       },
       orderBy: { code: "asc" },
     }),
+    prisma.curriculumImport.findMany({
+      include: { createdBy: { select: { fullName: true } }, rows: { orderBy: { rowNumber: "asc" } } },
+      orderBy: { createdAt: "desc" },
+      take: 12,
+    }),
   ]);
   const excluded = new Map(exclusions.map((item) => [
     `${item.programme}|${item.level}|${item.semester}|${item.courseCode}`,
@@ -52,6 +63,7 @@ export default async function AdminProgrammeCatalogPage() {
   const configuredCodes = new Set(knustCurricula.flatMap((template) => template.courses.map((course) => course.code)));
   const unassignedCourses = databaseCourses.filter((course) => course.approvalStatus === "OFFICIAL" && !configuredCodes.has(course.code));
   const pendingCourses = databaseCourses.filter((course) => course.approvalStatus === "PENDING");
+  const selectedImport = curriculumImports.find((item) => item.id === selectedImportId) ?? curriculumImports.find((item) => item.status === "DRAFT");
 
   return (
     <AppShell title="Programme course catalog" eyebrow="Administration">
@@ -61,6 +73,37 @@ export default async function AdminProgrammeCatalogPage() {
         <p className="mt-2 max-w-2xl text-sm leading-6 text-white/70">
           Removing a catalog course prevents it from being automatically added for future students in that programme. Existing student records are preserved.
         </p>
+      </section>
+
+      <section className="mt-6 grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
+        <form action={previewCurriculumImport} className="rounded-2xl border border-border bg-white p-5">
+          <div className="flex items-center gap-3"><FileUp className="h-5 w-5 text-accent" /><h2 className="text-lg font-semibold">Curriculum import preview</h2></div>
+          <p className="mt-2 text-sm leading-6 text-muted">Create a private preview first. Required CSV headers: courseCode, courseName, creditHours, level, term.</p>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <input required name="college" placeholder="College" className="h-10 rounded-lg border border-border px-3 text-sm" />
+            <input required name="department" placeholder="Department" className="h-10 rounded-lg border border-border px-3 text-sm" />
+            <input required name="programme" placeholder="Programme" className="h-10 rounded-lg border border-border px-3 text-sm" />
+            <input required name="version" placeholder="Version, e.g. 2026/2027" className="h-10 rounded-lg border border-border px-3 text-sm" />
+            <label className="grid gap-1 text-xs font-semibold text-muted">Duration in years<input required name="durationYears" type="number" min="1" max="6" defaultValue="4" className="h-10 rounded-lg border border-border px-3 text-sm text-foreground" /></label>
+            <label className="grid gap-1 text-xs font-semibold text-muted">Terms per year<input required name="termsPerYear" type="number" min="1" max="2" defaultValue="2" className="h-10 rounded-lg border border-border px-3 text-sm text-foreground" /></label>
+          </div>
+          <input name="source" placeholder="Source URL or approval reference (optional)" className="mt-3 h-10 w-full rounded-lg border border-border px-3 text-sm" />
+          <textarea required name="csv" rows={8} placeholder={'courseCode,courseName,creditHours,level,term\nCENG 201,Circuit Theory,3,LEVEL_200,FIRST'} className="mt-3 w-full rounded-lg border border-border px-3 py-2 font-mono text-xs" />
+          <PendingSubmitButton pendingLabel="Validating..." className="mt-3 h-10 rounded-lg bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Preview import</PendingSubmitButton>
+        </form>
+
+        <div className="rounded-2xl border border-border bg-white p-5">
+          <h2 className="text-lg font-semibold">Import review</h2>
+          {selectedImport ? <>
+            <p className="mt-2 text-sm text-muted">{selectedImport.programme} - {selectedImport.version} by {selectedImport.createdBy.fullName}</p>
+            <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-muted">{selectedImport.status.toLowerCase()} - {selectedImport.rows.length} rows</p>
+            <div className="mt-4 max-h-64 overflow-y-auto rounded-lg border border-border">
+              {selectedImport.rows.map((row) => <div key={row.id} className="border-b border-border px-3 py-2 text-xs last:border-b-0"><span className={row.status === "INVALID" ? "font-semibold text-red-600" : "font-semibold text-foreground"}>Row {row.rowNumber}</span>{" "}{row.courseCode ?? "No course code"} - {row.courseName ?? "No course name"}{row.error ? <p className="mt-1 text-red-600">{row.error}</p> : null}</div>)}
+            </div>
+            {selectedImport.status === "DRAFT" ? <form action={applyCurriculumImport} className="mt-4"><input type="hidden" name="importId" value={selectedImport.id} /><PendingSubmitButton pendingLabel="Applying..." className="h-10 rounded-lg bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Apply published curriculum</PendingSubmitButton></form> : null}
+            {selectedImport.status === "APPLIED" ? <form action={rollbackCurriculumImport} className="mt-4"><input type="hidden" name="importId" value={selectedImport.id} /><ConfirmSubmitButton titleText="Rollback curriculum import" confirmLabel="Rollback" message="Rollback deletes this published curriculum only while no student semester uses it." className="h-10 rounded-lg border border-red-200 px-4 text-sm font-semibold text-red-600">Rollback import</ConfirmSubmitButton></form> : null}
+          </> : <p className="mt-3 text-sm text-muted">Preview a CSV import to review every course before publishing it.</p>}
+        </div>
       </section>
 
       <div className="mt-6 grid gap-6">

@@ -152,7 +152,7 @@ Target: 1-3 weeks for initial coverage; ongoing afterward.
 - Add a student-facing content-correction workflow.
 - Verify imported materials using the existing import-report scripts.
 
-Progress on 2026-08-05: administrators can now review and update Support and Feedback statuses from `/admin/feedback`. Curriculum import preview, versioning, rollback, pagination, and student content-correction workflows remain.
+Progress on 2026-08-05: administrators can now review and update Support and Feedback statuses from `/admin/feedback`. Administrators can also create a CSV curriculum preview at `/admin/catalog`; every row is validated and retained for review, then an explicit apply step publishes a versioned programme curriculum. Rollback is available until a student semester uses that imported curriculum. Published database versions appear during onboarding alongside the bundled launch curriculum. Pagination, bulk catalog operations, immutable catalog/topic/material audit records, student content-correction workflows, and launch-scope import verification remain.
 
 Exit gate: advertised coverage is verified and administrator changes are attributable and reversible.
 

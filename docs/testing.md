@@ -6,7 +6,7 @@ Phase 2 and later workflow work uses a layered release gate: fast Vitest checks 
 
 | Layer | Command | Coverage |
 | --- | --- | --- |
-| Unit and integration | `npm test` | Schemas, Accra time, task expiry and transitions, planner collisions, timetable parsing, goals and progress snapshots, notifications, retrieval, AI context, material chunking, and cross-account scope rules |
+| Unit and integration | `npm test` | Schemas, Accra time, curriculum CSV validation, task expiry and transitions, planner collisions, timetable parsing, goals and progress snapshots, notifications, retrieval, AI context, material chunking, and cross-account scope rules |
 | Component | `npm run test:components` | Authentication, onboarding controls, and destructive-action confirmation |
 | Coverage gate | `npm run test:coverage` | The complete `src/features` and `src/components` surface, including untested files |
 | Browser journeys | `npm run test:e2e` | Signup/onboarding, admin access, semesters, tasks, planner, private materials, diagnostics, peers, groups, and notifications |
