@@ -15,6 +15,7 @@ const serverEnvSchema = z.object({
   AI_DAILY_MESSAGE_LIMIT: z.coerce.number().int().min(1).max(1000).optional(),
   SUPABASE_SERVICE_ROLE_KEY: optionalEnvString,
   ADMIN_EMAILS: optionalEnvString,
+  CRON_SECRET: optionalEnvString,
 });
 
 const clientEnvSchema = z.object({
@@ -30,6 +31,7 @@ export const serverEnv = serverEnvSchema.parse({
   AI_DAILY_MESSAGE_LIMIT: process.env.AI_DAILY_MESSAGE_LIMIT,
   SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
   ADMIN_EMAILS: process.env.ADMIN_EMAILS,
+  CRON_SECRET: process.env.CRON_SECRET,
 });
 
 export const clientEnv = clientEnvSchema.parse({

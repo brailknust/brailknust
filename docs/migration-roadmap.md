@@ -162,6 +162,8 @@ Target: 3-5 days.
 - Define in-app, email, and push scope.
 - Add retention, cleanup, delivery-failure tracking, and preference tests.
 
+Progress on 2026-08-05: an authenticated scheduled notification endpoint now synchronizes up to 1,000 active users using the existing stable source keys and duplicate-safe inserts. A deployment scheduler and `CRON_SECRET` remain intentionally unconfigured until Phase 8 infrastructure approval.
+
 Exit gate: reminders work while users are offline, duplicates are prevented, and preferences suppress all relevant delivery paths.
 
 ## Phase 8: Production infrastructure
