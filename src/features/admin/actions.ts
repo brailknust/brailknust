@@ -10,6 +10,28 @@ import { z } from "zod";
 
 const adminUserSchema = z.object({ userId: z.string().uuid() });
 const courseApprovalSchema = z.object({ courseId: z.string().uuid() });
+const supportStatusSchema = z.object({
+  id: z.string().uuid(),
+  status: z.enum(["OPEN", "IN_PROGRESS", "RESOLVED"]),
+});
+const feedbackStatusSchema = z.object({
+  id: z.string().uuid(),
+  status: z.enum(["NEW", "REVIEWED", "PLANNED", "CLOSED"]),
+});
+
+export async function updateSupportRequestStatus(formData: FormData) {
+  await requireAdmin();
+  const parsed = supportStatusSchema.parse({ id: formData.get("id"), status: formData.get("status") });
+  await prisma.supportRequest.update({ where: { id: parsed.id }, data: { status: parsed.status } });
+  revalidatePath("/admin/feedback");
+}
+
+export async function updateFeedbackStatus(formData: FormData) {
+  await requireAdmin();
+  const parsed = feedbackStatusSchema.parse({ id: formData.get("id"), status: formData.get("status") });
+  await prisma.feedback.update({ where: { id: parsed.id }, data: { status: parsed.status } });
+  revalidatePath("/admin/feedback");
+}
 
 export async function approveStudentCourse(formData: FormData) {
   await requireAdmin();

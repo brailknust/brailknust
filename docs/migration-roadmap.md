@@ -150,6 +150,8 @@ Target: 1-3 weeks for initial coverage; ongoing afterward.
 - Add a student-facing content-correction workflow.
 - Verify imported materials using the existing import-report scripts.
 
+Progress on 2026-08-05: administrators can now review and update Support and Feedback statuses from `/admin/feedback`. Curriculum import preview, versioning, rollback, pagination, and student content-correction workflows remain.
+
 Exit gate: advertised coverage is verified and administrator changes are attributable and reversible.
 
 ## Phase 7: Notifications and background jobs
