@@ -18,13 +18,7 @@ import { requireAppUser } from "@/features/auth/queries";
 import { deleteGoal, saveGoal, updateGoalStatus } from "@/features/goals/actions";
 import { getGoalsPageData } from "@/features/goals/queries";
 
-const categoryOptions = [
-  ["ACADEMIC", "Academic"],
-  ["STUDY_TIME", "Study time"],
-  ["COURSE_MASTERY", "Course mastery"],
-  ["TASKS", "Tasks"],
-  ["PERSONAL", "Personal"],
-] as const;
+const categoryOptions = [["ACADEMIC", "Academic"], ["STUDY_TIME", "Study time"], ["COURSE_MASTERY", "Course mastery"], ["TASKS", "Tasks"], ["PERSONAL", "Personal"]] as const;
 
 const metricOptions = [
   ["MANUAL", "Manual progress"],
@@ -37,6 +31,14 @@ const metricOptions = [
 const periodOptions = [
   ["SEMESTER", "Whole semester"],
   ["WEEKLY", "This week"],
+] as const;
+
+const goalTypeOptions = [
+  ["ACADEMIC_CWA", "Academic CWA"],
+  ["COURSE_STUDY_TIME", "Course study time"],
+  ["COURSE_MASTERY", "Course mastery"],
+  ["PRACTICE_QUESTIONS", "Practice questions"],
+  ["MANUAL_CHECKLIST", "Manual or checklist"],
 ] as const;
 
 const fieldClassName = "h-11 w-full rounded-xl border border-border bg-white px-3 text-sm";
@@ -61,32 +63,14 @@ function formatValue(metric: GoalView["metric"], value: number) {
 function GoalFields({ goal, courses }: { goal?: GoalView; courses: CourseOption[] }) {
   return (
     <div className="grid gap-4">
-      <label className="grid gap-2 text-sm font-medium">
-        Goal title
-        <input
-          name="title"
-          required
-          maxLength={160}
-          defaultValue={goal?.title}
-          placeholder="Raise my assessment average"
-          className={fieldClassName}
-        />
-      </label>
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="grid gap-2 text-sm font-medium">
-          Category
-          <select name="category" defaultValue={goal?.category ?? "ACADEMIC"} className={fieldClassName}>
-            {categoryOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+          Goal template
+          <select name="goalType" defaultValue={goal?.goalType === "MANUAL_CHECKLIST" ? "ACADEMIC_CWA" : goal?.goalType ?? "ACADEMIC_CWA"} className={fieldClassName}>
+            {goalTypeOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
           </select>
+          <span className="text-xs font-normal text-muted">BRAIL automatically selects its tracking source.</span>
         </label>
-        <label className="grid gap-2 text-sm font-medium">
-          Progress source
-          <select name="metric" defaultValue={goal?.metric ?? "MANUAL"} className={fieldClassName}>
-            {metricOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
-          </select>
-        </label>
-      </div>
-      <div className="grid gap-4 sm:grid-cols-2">
         <label className="grid gap-2 text-sm font-medium">
           Period
           <select name="period" defaultValue={goal?.period ?? "SEMESTER"} className={fieldClassName}>
@@ -103,14 +87,10 @@ function GoalFields({ goal, courses }: { goal?: GoalView; courses: CourseOption[
           </select>
         </label>
       </div>
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2">
         <label className="grid gap-2 text-sm font-medium">
           Target
           <input name="targetValue" type="number" min="0.1" max="1000000" step="0.1" required defaultValue={goal?.targetValue} className={fieldClassName} />
-        </label>
-        <label className="grid gap-2 text-sm font-medium">
-          Manual progress
-          <input name="currentValue" type="number" min="0" max="1000000" step="0.1" defaultValue={goal?.storedCurrentValue ?? 0} className={fieldClassName} />
         </label>
         <label className="grid gap-2 text-sm font-medium">
           Deadline
@@ -134,6 +114,7 @@ function GoalCard({ goal, courses }: { goal: GoalView; courses: CourseOption[] }
           </div>
           <h3 className="mt-3 text-lg font-semibold">{goal.title}</h3>
           <p className="mt-1 text-sm text-muted">{labelFor(metricOptions, goal.metric)} / {formatDeadline(goal.deadline)}</p>
+          <p className="mt-2 text-sm text-muted">{goal.evidence}</p>
         </div>
         <span className={`w-fit rounded-xl px-2.5 py-1 text-xs font-semibold ${
           goal.status === "COMPLETED" || goal.targetReached
@@ -159,7 +140,7 @@ function GoalCard({ goal, courses }: { goal: GoalView; courses: CourseOption[] }
       </div>
 
       <div className="mt-5 flex flex-wrap gap-2">
-        <form action={updateGoalStatus}>
+        {goal.goalType === "MANUAL_CHECKLIST" ? <form action={updateGoalStatus}>
           <input type="hidden" name="id" value={goal.id} />
           {goal.status === "ACTIVE" ? (
             <button name="status" value="COMPLETED" className="inline-flex h-10 items-center gap-2 rounded-xl bg-[var(--accent-strong)] px-3 text-sm font-semibold text-white">
@@ -170,7 +151,7 @@ function GoalCard({ goal, courses }: { goal: GoalView; courses: CourseOption[] }
               <RotateCcw className="h-4 w-4" /> Reopen
             </button>
           )}
-        </form>
+        </form> : null}
         {goal.status !== "ARCHIVED" ? (
           <form action={updateGoalStatus}>
             <input type="hidden" name="id" value={goal.id} />

@@ -127,6 +127,8 @@ enum GoalMetric {
   STUDY_MINUTES
   TASKS_COMPLETED
   ASSESSMENT_AVERAGE
+  COURSE_MASTERY
+  QUESTIONS_COMPLETED
 }
 
 enum GoalPeriod {
@@ -137,7 +139,33 @@ enum GoalPeriod {
 enum GoalStatus {
   ACTIVE
   COMPLETED
+  MISSED
+  PAUSED
   ARCHIVED
+}
+
+enum GoalType {
+  ACADEMIC_CWA
+  COURSE_STUDY_TIME
+  COURSE_MASTERY
+  PRACTICE_QUESTIONS
+  MANUAL_CHECKLIST
+}
+
+enum GoalTargetUnit {
+  PERCENT
+  MINUTES
+  QUESTIONS
+  COUNT
+  MANUAL
+}
+
+enum GoalTrackingSource {
+  ACADEMIC_RECORDS
+  PLANNER_SESSIONS
+  QUIZZES_AND_ASSESSMENTS
+  PRACTICE_ATTEMPTS
+  MANUAL
 }
 
 enum AiMessageRole {
@@ -575,12 +603,16 @@ model Goal {
   semesterId        String                 @map("semester_id") @db.Uuid
   courseId          String?                @map("course_id") @db.Uuid
   title             String
+  goalType          GoalType               @default(MANUAL_CHECKLIST) @map("goal_type")
   category          GoalCategory
   metric            GoalMetric             @default(MANUAL)
   period            GoalPeriod             @default(SEMESTER)
   targetValue       Decimal                @map("target_value") @db.Decimal(10, 2)
+  targetUnit        GoalTargetUnit         @default(MANUAL) @map("target_unit")
+  trackingSource    GoalTrackingSource     @default(MANUAL) @map("tracking_source")
   currentValue      Decimal                @default(0) @map("current_value") @db.Decimal(10, 2)
   deadline          DateTime?              @db.Date
+  startsAt          DateTime?              @map("starts_at") @db.Date
   status            GoalStatus             @default(ACTIVE)
   sourceKey         String?                @map("source_key")
   createdAt         DateTime               @default(now()) @map("created_at")

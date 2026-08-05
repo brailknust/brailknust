@@ -4,6 +4,7 @@ import { prisma } from "@/server/db";
 import { calculateAssessmentAverage } from "@/features/academics/calculations";
 import { accraWeekBounds } from "@/features/academics/time";
 import { calculateGoalProgress } from "@/features/goals/progress";
+import { calculateCwaGoal, calculateMasteryGoal, calculatePracticeQuestionGoal, calculateStudyTimeGoal } from "@/features/goals/calculators";
 
 function inRange(value: Date | null, start: Date, end: Date) {
   return Boolean(value && value >= start && value < end);
@@ -20,7 +21,7 @@ export async function getGoalsPageData(userId: string) {
   }
 
   const semesterId = user.activeSemesterId;
-  const [profile, enrollments, goals, tasks, studyItems, assessments] = await Promise.all([
+  const [profile, enrollments, goals, tasks, studyItems, assessments, masteries, attempts] = await Promise.all([
     prisma.semesterProfile.findUnique({
       where: { userId_semesterId: { userId, semesterId } },
     }),
@@ -55,6 +56,11 @@ export async function getGoalsPageData(userId: string) {
       where: { userId, semesterId },
       select: { courseId: true, score: true, maxScore: true, weight: true, assessedAt: true, createdAt: true },
     }),
+    prisma.topicMastery.findMany({ where: { userId, enrollment: { semesterId } }, select: { enrollment: { select: { courseId: true } }, masteryScore: true } }),
+    prisma.diagnosticAttempt.findMany({
+      where: { userId, question: { quiz: { enrollment: { semesterId } } } },
+      select: { answeredAt: true, question: { select: { quiz: { select: { enrollment: { select: { courseId: true } } } } } } },
+    }),
   ]);
 
   const { start, end } = accraWeekBounds();
@@ -62,9 +68,10 @@ export async function getGoalsPageData(userId: string) {
     const weekly = goal.period === "WEEKLY";
     const courseMatches = (courseId: string | null) => !goal.courseId || courseId === goal.courseId;
     let current = Number(goal.currentValue);
+    let evidence = "Updated from your saved academic records.";
 
     if (goal.metric === "CWA") {
-      current = Number(profile?.cwa ?? 0);
+      const result = calculateCwaGoal(Number(profile?.cwa ?? 0), Number(goal.targetValue)); current = result.currentValue; evidence = result.evidence;
     } else if (goal.metric === "TASKS_COMPLETED") {
       current = tasks.filter((task) =>
         courseMatches(task.courseId) && (!weekly || inRange(task.updatedAt, start, end))
@@ -75,12 +82,19 @@ export async function getGoalsPageData(userId: string) {
           courseMatches(item.courseId) && (!weekly || inRange(item.scheduledStart, start, end))
         )
         .reduce((sum, item) => sum + (item.durationMinutes ?? 0), 0);
+      evidence = calculateStudyTimeGoal(current, Number(goal.targetValue), goal.course?.code).evidence;
     } else if (goal.metric === "ASSESSMENT_AVERAGE") {
       const relevant = assessments.filter((item) =>
         courseMatches(item.courseId) &&
         (!weekly || inRange(item.assessedAt ?? item.createdAt, start, end))
       );
       current = calculateAssessmentAverage(relevant);
+    } else if (goal.metric === "COURSE_MASTERY") {
+      const result = calculateMasteryGoal(masteries.filter((item) => courseMatches(item.enrollment.courseId)).map((item) => Number(item.masteryScore)), assessments.filter((item) => courseMatches(item.courseId)).map((item) => ({ score: Number(item.score), maxScore: Number(item.maxScore), weight: item.weight ? Number(item.weight) : null })), Number(goal.targetValue));
+      current = result.currentValue; evidence = result.evidence;
+    } else if (goal.metric === "QUESTIONS_COMPLETED") {
+      current = attempts.filter((item) => courseMatches(item.question.quiz.enrollment.courseId) && (!weekly || inRange(item.answeredAt, start, end))).length;
+      evidence = calculatePracticeQuestionGoal(current, Number(goal.targetValue)).evidence;
     }
 
     const progress = calculateGoalProgress(current, Number(goal.targetValue));
@@ -91,6 +105,7 @@ export async function getGoalsPageData(userId: string) {
       targetValue: progress.targetValue,
       progress: progress.progress,
       targetReached: progress.targetReached,
+      evidence,
     };
   });
 

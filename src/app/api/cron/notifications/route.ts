@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { syncNotificationsForUser } from "@/features/notifications/service";
 import { prisma } from "@/server/db";
 import { serverEnv } from "@/lib/env";
+import { syncGoalProgressSnapshots } from "@/features/goals/progress-sync";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -31,6 +32,8 @@ export async function GET(request: Request) {
   for (const user of users) {
     try {
       await syncNotificationsForUser(user.id, true);
+      const active = await prisma.user.findUnique({ where: { id: user.id }, select: { activeSemesterId: true } });
+      if (active?.activeSemesterId) await syncGoalProgressSnapshots(user.id, active.activeSemesterId);
       synced += 1;
     } catch (error) {
       failed += 1;

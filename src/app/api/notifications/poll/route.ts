@@ -17,22 +17,18 @@ export async function GET() {
       userId: appUser.id,
       isRead: false,
       status: { in: ["PENDING", "DELIVERED"] },
-      OR: [
-        { type: "STUDY_PLAN", sourceKey: { startsWith: "study-session-close:" } },
-        { type: "DEADLINE", sourceKey: { startsWith: "task-reminder:" } },
-      ],
-      scheduledFor: { gte: new Date(Date.now() - 60 * 60 * 1000) },
+      scheduledFor: { lte: new Date() },
     },
     orderBy: { createdAt: "desc" },
     take: 3,
-    select: { id: true, title: true, message: true },
+    select: { id: true, title: true, message: true, actionUrl: true },
   });
 
   return Response.json({
     notifications: notifications.map((notification) => ({
       ...notification,
-      openUrl: `/notifications/${notification.id}/open`,
-      actionLabel: notification.title === "Task reminder" ? "Open task" : "Open session",
+      openUrl: notification.actionUrl ? `/notifications/${notification.id}/open` : "/notifications",
+      actionLabel: "Open",
     })),
   });
 }

@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { requireAppUser } from "@/features/auth/queries";
 import { diagnosticFeedbackSchema } from "@/features/diagnostics/feedback";
 import { prisma } from "@/server/db";
+import { syncGoalProgressSnapshots } from "@/features/goals/progress-sync";
 
 export async function submitDiagnosticQuiz(formData: FormData) {
   const { appUser } = await requireAppUser();
@@ -137,6 +138,8 @@ export async function submitDiagnosticQuiz(formData: FormData) {
       await prisma.weakArea.delete({ where: { id: existingWeakArea.id } });
     }
   }
+
+  await syncGoalProgressSnapshots(appUser.id, quiz.enrollment.semesterId);
 
   revalidatePath("/practice");
   revalidatePath(`/practice/${quiz.id}`);

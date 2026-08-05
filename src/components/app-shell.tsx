@@ -1,4 +1,4 @@
-import { Bell, BookOpen, LogOut } from "lucide-react";
+import { BookOpen, LogOut } from "lucide-react";
 
 import { AppTopNavigation } from "@/components/app-top-navigation";
 import { NavDrawer } from "@/components/nav-drawer";
@@ -6,6 +6,7 @@ import { NotificationPoller } from "@/components/notification-poller";
 import { PrefetchLink } from "@/components/prefetch-link";
 import { signOut } from "@/features/auth/actions";
 import { requireAppUser } from "@/features/auth/queries";
+import { NotificationBell } from "@/components/notification-bell";
 
 type AppShellProps = {
   children: React.ReactNode;
@@ -64,9 +65,7 @@ export async function AppShell({ children, eyebrow, fullBleed = false }: AppShel
           <AppTopNavigation items={primaryItems} />
 
           <div className="flex items-center gap-2">
-            <PrefetchLink href="/notifications" aria-label="Notifications" className="relative grid h-10 w-10 place-items-center rounded-xl border border-border bg-white text-muted hover:border-accent hover:text-accent">
-              <Bell className="h-4 w-4" />
-            </PrefetchLink>
+            <NotificationBell />
             <form action={signOut}>
               <button type="submit" className="inline-flex h-10 items-center gap-2 rounded-xl border border-border bg-white px-3 text-sm font-medium text-muted hover:border-accent hover:text-accent">
                 <LogOut className="h-4 w-4" />
