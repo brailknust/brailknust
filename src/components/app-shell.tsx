@@ -11,9 +11,10 @@ type AppShellProps = {
   children: React.ReactNode;
   title: string;
   eyebrow?: string;
+  fullBleed?: boolean;
 };
 
-export async function AppShell({ children, title, eyebrow }: AppShellProps) {
+export async function AppShell({ children, eyebrow, fullBleed = false }: AppShellProps) {
   const { appUser } = await requireAppUser();
   const primaryItems = [
     { label: "Dashboard", href: "/dashboard" },
@@ -42,7 +43,7 @@ export async function AppShell({ children, title, eyebrow }: AppShellProps) {
   ];
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="flex min-h-screen flex-col bg-background text-foreground">
       <header className="sticky top-0 z-40 border-b border-border bg-white">
         <div className="mx-auto flex h-[4.875rem] w-full max-w-[90rem] items-center justify-between gap-5 px-5 sm:px-8 lg:px-10">
           <div className="flex min-w-0 items-center gap-3">
@@ -84,13 +85,10 @@ export async function AppShell({ children, title, eyebrow }: AppShellProps) {
         </nav>
       </header>
 
-      <section className="mx-auto w-full max-w-[90rem] px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
-        <div className="mb-7 flex flex-col gap-4 border-b border-border pb-6 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">{eyebrow ?? "Student workspace"}</p>
-            <h1 className="mt-2 text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">{title}</h1>
-          </div>
-        </div>
+      <section className={fullBleed
+        ? "flex min-h-0 flex-1 flex-col lg:h-[calc(100dvh-4.875rem)]"
+        : "mx-auto w-full max-w-[90rem] px-5 py-8 sm:px-8 lg:px-10 lg:py-10"}
+      >
         {children}
       </section>
       <NotificationPoller />

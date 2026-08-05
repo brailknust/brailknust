@@ -59,33 +59,14 @@ export default async function AiChatPage({ searchParams }: AiChatPageProps) {
   const selectedId = data.selectedConversation?.id ?? null;
 
   return (
-    <AppShell title="AI Chat" eyebrow="AI Support">
-      <section className="mb-4 flex items-center justify-between gap-4 rounded-2xl bg-[var(--accent-strong)] p-4 text-white sm:p-5">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
-            Academic context
-          </p>
-          <h2 className="mt-1.5 text-base font-semibold sm:text-lg">
-            {level} · {data.activeSemester.name}
-          </h2>
-          <p className="mt-0.5 text-xs text-white/60">{data.activeSemester.academicYear}</p>
-        </div>
-        <div className="shrink-0 rounded-xl bg-white/10 px-3 py-2 text-center sm:px-4">
-          <p className="text-lg font-semibold">{Math.max(data.dailyLimit - data.usedToday, 0)}</p>
-          <p className="text-[11px] leading-4 text-white/60">
-            <span className="sm:hidden">messages left</span>
-            <span className="hidden sm:inline">messages left today</span>
-          </p>
-        </div>
-      </section>
-
-      <div className="grid overflow-hidden rounded-2xl border border-border bg-white lg:h-[calc(100dvh-12rem)] lg:min-h-[680px] lg:grid-cols-[320px_minmax(0,1fr)]">
+    <AppShell title="AI Chat" eyebrow="AI Support" fullBleed>
+      <div className="grid min-h-0 flex-1 overflow-hidden bg-white lg:grid-cols-[320px_minmax(0,1fr)]">
         <aside className="flex min-h-0 flex-col border-b border-border bg-surface lg:border-b-0 lg:border-r">
           <div className="border-b border-border p-4">
             <div className="mb-3 flex items-center justify-between gap-3">
               <div>
                 <p className="text-sm font-semibold">Conversations</p>
-                <p className="mt-0.5 text-xs text-muted">Course-specific AI support</p>
+                <p className="mt-0.5 text-xs text-muted">{level} · {data.activeSemester.name} · {data.activeSemester.academicYear}</p>
               </div>
               <span className="rounded-full border border-border bg-white px-2 py-1 text-xs text-muted">
                 {data.conversations.length}
