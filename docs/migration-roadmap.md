@@ -204,7 +204,7 @@ Exit gate: no launch blocker remains, at least 90% of pilot users complete criti
 
 | Environment | Purpose | Data policy | Status |
 | --- | --- | --- | --- |
-| Development | Local implementation | Synthetic or developer-owned data only | Configured database verified at all 32 migrations on 2026-08-04; current branch contains 35 migrations pending full environment replay |
+| Development | Local implementation | Synthetic or developer-owned data only | Configured database verified at all 35 migrations on 2026-08-05 |
 | Staging | Release candidate verification | Synthetic pilot-like data; no production secrets | Not provisioned |
 | Production | Student use | Real student data under a published retention policy | Not provisioned |
 
