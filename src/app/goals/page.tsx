@@ -13,6 +13,7 @@ import {
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { requireAppUser } from "@/features/auth/queries";
 import { deleteGoal, saveGoal, updateGoalStatus } from "@/features/goals/actions";
 import { getGoalsPageData } from "@/features/goals/queries";
@@ -185,7 +186,7 @@ function GoalCard({ goal, courses }: { goal: GoalView; courses: CourseOption[] }
           <form action={saveGoal} className="mt-4 border-t border-border pt-4">
             <input type="hidden" name="id" value={goal.id} />
             <GoalFields goal={goal} courses={courses} />
-            <button className="mt-4 h-10 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Save changes</button>
+            <PendingSubmitButton className="mt-4 h-10 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white" pendingLabel="Saving...">Save changes</PendingSubmitButton>
           </form>
         </details>
         <form action={deleteGoal} className="ml-auto">
@@ -259,9 +260,9 @@ export default async function GoalsPage() {
           </div>
           <form action={saveGoal} className="mt-5">
             <GoalFields courses={data.courses} />
-            <button className="mt-5 h-11 w-full rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+            <PendingSubmitButton className="mt-5 h-11 w-full rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white" pendingLabel="Creating...">
               Create goal
-            </button>
+            </PendingSubmitButton>
           </form>
         </section>
 

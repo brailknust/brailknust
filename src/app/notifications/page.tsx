@@ -3,6 +3,7 @@ import { Bell, CheckCheck, Clock3, ExternalLink, Trash2 } from "lucide-react";
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { BrowserAlertSettings } from "@/app/notifications/browser-alert-settings";
 import { requireAppUser } from "@/features/auth/queries";
 import {
@@ -42,9 +43,9 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
           </div>
           {data.unreadCount ? (
             <form action={markAllNotificationsRead}>
-              <button className="inline-flex h-10 items-center gap-2 rounded-xl bg-white px-4 text-sm font-semibold text-foreground">
+              <PendingSubmitButton className="inline-flex h-10 items-center gap-2 rounded-xl bg-white px-4 text-sm font-semibold text-foreground" pendingLabel="Marking...">
                 <CheckCheck className="h-4 w-4" /> Mark all read
-              </button>
+              </PendingSubmitButton>
             </form>
           ) : null}
         </div>

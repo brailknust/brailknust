@@ -1,6 +1,7 @@
 import { CalendarDays, Clock3, ListChecks, Plus } from "lucide-react";
 
 import { AppShell } from "@/components/app-shell";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { requireAppUser } from "@/features/auth/queries";
 import {
   createStudyPlan,
@@ -221,9 +222,9 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                   </option>
                 ))}
               </select>
-              <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+              <PendingSubmitButton className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                 Apply filter
-              </button>
+              </PendingSubmitButton>
             </div>
           </form>
 
@@ -254,9 +255,9 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                   />
                 </label>
               </div>
-              <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+              <PendingSubmitButton className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white" pendingLabel="Saving plan...">
                 Save plan
-              </button>
+              </PendingSubmitButton>
             </div>
           </form>
 
@@ -290,9 +291,9 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
                 {selectedCourseId ? (
                   <input type="hidden" name="courseId" value={selectedCourseId} />
                 ) : null}
-                <button className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+                <PendingSubmitButton className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
                   View plan
-                </button>
+                </PendingSubmitButton>
               </form>
             ) : null}
 

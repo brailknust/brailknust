@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 
 import { getKnustProgrammesForCollege, type KnustCollege } from "@/data/knust-academic-hierarchy";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 
 const levels = [
   ["LEVEL_100", "Level 100"],
@@ -174,12 +175,12 @@ export function ProfileForm({ action, hierarchy, semesters, defaults }: ProfileF
         </div>
       </div>
 
-      <button
-        type="submit"
+      <PendingSubmitButton
         className="inline-flex h-12 items-center justify-center rounded-xl bg-[var(--accent-strong)] px-5 text-sm font-semibold text-white transition hover:opacity-90"
+        pendingLabel="Saving profile..."
       >
         Save profile
-      </button>
+      </PendingSubmitButton>
     </form>
   );
 }

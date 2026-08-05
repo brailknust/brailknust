@@ -88,11 +88,12 @@ Exit gate: pending branch-protection activation and a rerun of the browser job a
 
 Target: 3-5 days.
 
-Status: in progress on 2026-08-05. Support and Feedback now persist authenticated submissions, help content is searchable, root and route error recovery is available, and task/support/feedback mutations expose pending states. Remaining UX, accessibility, and route-state work continues below.
+Status: in progress on 2026-08-05. Support and Feedback now persist authenticated submissions, help content is searchable, root and route error recovery is available, and the main student mutation flows expose pending states. Remaining UX, accessibility, and route-state work continues below.
 
 - [x] Replace Support with searchable help and a tracked request flow.
 - [x] Replace Feedback with validated persistence and a user-facing submission flow; admin review remains.
 - [x] Add global and route-level error boundaries and a useful not-found page.
+- [x] Add pending submit states to onboarding, profile, goals, planner, notifications, tasks, support, and feedback.
 - Standardize empty, loading, error, and success states.
 - Prevent duplicate submissions and confirm destructive actions.
 - Complete mobile, keyboard, focus, label, landmark, contrast, and reduced-motion reviews.
