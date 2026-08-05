@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { createHash } from "node:crypto";
 import { z } from "zod";
 
 import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
@@ -108,6 +109,19 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Course enrollment not found." }, { status: 404 });
   }
 
+  const bytes = Buffer.from(await file.arrayBuffer());
+  const contentHash = createHash("sha256").update(bytes).digest("hex");
+  const existing = await prisma.courseMaterial.findFirst({
+    where: { enrollmentId: enrollment.id, contentHash, status: { not: "FAILED" } },
+    select: { id: true, status: true },
+  });
+  if (existing) {
+    return NextResponse.json(
+      { message: "This material is already uploaded for the selected course.", materialId: existing.id, status: existing.status },
+      { status: 409 },
+    );
+  }
+
   const material = await prisma.courseMaterial.create({
     data: {
       enrollmentId: enrollment.id,
@@ -117,6 +131,7 @@ export async function POST(request: Request) {
       originalFileName: file.name,
       mimeType: file.type || "application/octet-stream",
       fileSize: file.size,
+      contentHash,
       status: "PENDING",
     },
     select: { id: true },
@@ -124,7 +139,6 @@ export async function POST(request: Request) {
   const storagePath = `${appUser.id}/${enrollment.id}/${material.id}/${safeFileName(file.name)}`;
 
   try {
-    const bytes = Buffer.from(await file.arrayBuffer());
     await uploadCourseMaterialFile(
       storagePath,
       bytes,

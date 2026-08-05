@@ -743,6 +743,7 @@ model CourseMaterial {
   originalFileName String?         @map("original_file_name")
   mimeType         String?         @map("mime_type")
   fileSize         Int?            @map("file_size")
+  contentHash      String?         @map("content_hash")
   status           MaterialStatus  @default(PENDING)
   errorMessage     String?         @map("error_message")
   createdAt        DateTime        @default(now()) @map("created_at")
@@ -753,6 +754,7 @@ model CourseMaterial {
 
   @@index([enrollmentId, status, updatedAt])
   @@index([uploadedBy])
+  @@unique([enrollmentId, contentHash])
   @@map("course_materials")
 }
 

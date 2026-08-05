@@ -1,5 +1,7 @@
 "use server";
 
+import { createHash } from "node:crypto";
+
 import { revalidatePath } from "next/cache";
 
 import { requireAppUser } from "@/features/auth/queries";
@@ -37,6 +39,12 @@ export async function saveCourseMaterial(formData: FormData) {
 
   const chunks = chunkMaterialText(parsed.content);
   if (!chunks.length) throw new Error("The material did not contain usable text.");
+  const contentHash = createHash("sha256").update(parsed.content.trim()).digest("hex");
+  const existing = await prisma.courseMaterial.findFirst({
+    where: { enrollmentId: enrollment.id, contentHash, status: { not: "FAILED" } },
+    select: { id: true },
+  });
+  if (existing) return;
 
   await prisma.$transaction(async (tx) => {
     const topic = parsed.topic
@@ -63,6 +71,7 @@ export async function saveCourseMaterial(formData: FormData) {
         title: parsed.title,
         type: parsed.type,
         sourceUrl: parsed.sourceUrl || null,
+        contentHash,
         status: "READY",
       },
       select: { id: true },

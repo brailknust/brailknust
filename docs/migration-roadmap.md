@@ -135,6 +135,8 @@ Target: 5-8 days.
 - Add failed-ingestion reprocessing, duplicate handling, and content versioning.
 - Review source and permission metadata for platform materials.
 
+Progress on 2026-08-05: course material records now carry a SHA-256 content hash, repeated READY/PENDING uploads are rejected or ignored, and FAILED records remain retryable. Material versioning, ingestion job tracking, and AI usage accounting remain.
+
 Exit gate: quality thresholds are met, AI cost is bounded, and failed ingestion is recoverable.
 
 ## Phase 6: Curriculum and admin operations
