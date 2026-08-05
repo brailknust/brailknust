@@ -294,6 +294,7 @@ export async function updateSemesterProfile(formData: FormData) {
 
   if (parsed.cwa !== undefined) {
     await prisma.cwaSnapshot.create({ data: { userId: appUser.id, semesterId: semester.id, cwa: parsed.cwa } });
+    await prisma.cwaEvidenceRecord.create({ data: { userId: appUser.id, semesterId: semester.id, mode: "OFFICIAL", value: parsed.cwa, evidence: "Student-entered verified result" } });
   }
   if (appUser.activeSemesterId === semester.id) {
     await prisma.user.update({ where: { id: appUser.id }, data: { cwa: parsed.cwa, level } });

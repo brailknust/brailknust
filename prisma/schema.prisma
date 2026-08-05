@@ -168,6 +168,37 @@ enum GoalTrackingSource {
   MANUAL
 }
 
+enum AttendanceStatus {
+  UNCONFIRMED
+  ATTENDED
+  MISSED
+  CANCELLED
+  EXCUSED
+}
+enum AttendanceSource {
+  TIMETABLE_PROMPT
+  SELF_REPORTED
+  OCR_IMPORTED
+}
+enum StudySessionStatus {
+  PLANNED
+  ACTIVE
+  COMPLETED
+  PARTIAL
+  CANCELLED
+  EXPIRED
+}
+enum StudyCompletionSource {
+  TIMER_TRACKED
+  SELF_REPORTED
+  AUTO_CLOSED
+}
+enum CwaEvidenceMode {
+  OFFICIAL
+  PROJECTED
+  ASSESSMENT_PREDICTION
+}
+
 enum AiMessageRole {
   USER
   ASSISTANT
@@ -286,6 +317,9 @@ model User {
   coursesCreated            Course[]                   @relation("CourseCreator")
   supportRequests           SupportRequest[]
   feedback                  Feedback[]
+  attendanceRecords         AttendanceRecord[]
+  studySessions             StudySession[]
+  cwaEvidenceRecords        CwaEvidenceRecord[]
   curriculumImports         CurriculumImport[]
 
   @@index([activeSemesterId])
@@ -360,6 +394,8 @@ model Course {
   peerQuestions     PeerQuestion[]
   platformMaterials PlatformCourseMaterial[]
   platformTopics    PlatformCourseTopic[]
+  attendanceRecords AttendanceRecord[]
+  studySessions     StudySession[]
 
   @@index([approvalStatus, createdById])
   @@map("courses")
@@ -403,6 +439,9 @@ model Semester {
   weakAreas             WeakArea[]
   peerQuestions         PeerQuestion[]
   notifications         Notification[]
+  attendanceRecords    AttendanceRecord[]
+  studySessions        StudySession[]
+  cwaEvidenceRecords   CwaEvidenceRecord[]
 
   @@unique([ownerId, provisionKey])
   @@index([ownerId])
@@ -687,6 +726,7 @@ model TimetableBlock {
   course     Course?  @relation(fields: [courseId], references: [id])
   semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attendanceRecords AttendanceRecord[]
 
   @@index([userId, semesterId, dayOfWeek])
   @@index([semesterId])
@@ -725,9 +765,71 @@ model StudyPlanItem {
   createdAt       DateTime   @default(now()) @map("created_at")
   course          Course?    @relation(fields: [courseId], references: [id])
   studyPlan       StudyPlan  @relation(fields: [studyPlanId], references: [id], onDelete: Cascade)
+  studySessions   StudySession[]
 
   @@index([studyPlanId])
   @@map("study_plan_items")
+}
+
+model AttendanceRecord {
+  id               String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId           String           @map("user_id") @db.Uuid
+  semesterId       String           @map("semester_id") @db.Uuid
+  courseId         String?          @map("course_id") @db.Uuid
+  timetableBlockId String           @map("timetable_block_id") @db.Uuid
+  classDate        DateTime         @map("class_date") @db.Date
+  scheduledStart   DateTime         @map("scheduled_start")
+  scheduledEnd     DateTime         @map("scheduled_end")
+  status           AttendanceStatus @default(UNCONFIRMED)
+  respondedAt      DateTime?        @map("responded_at")
+  source           AttendanceSource @default(TIMETABLE_PROMPT)
+  notes            String?
+  createdAt        DateTime         @default(now()) @map("created_at")
+  course           Course?          @relation(fields: [courseId], references: [id], onDelete: SetNull)
+  semester         Semester         @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  timetableBlock   TimetableBlock   @relation(fields: [timetableBlockId], references: [id], onDelete: Cascade)
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([userId, timetableBlockId, classDate])
+  @@index([userId, semesterId, status])
+  @@map("attendance_records")
+}
+
+model StudySession {
+  id              String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId          String                @map("user_id") @db.Uuid
+  semesterId      String                @map("semester_id") @db.Uuid
+  courseId        String?               @map("course_id") @db.Uuid
+  studyPlanItemId String?               @map("study_plan_item_id") @db.Uuid
+  plannedStart    DateTime?             @map("planned_start")
+  plannedEnd      DateTime?             @map("planned_end")
+  startedAt       DateTime?             @map("started_at")
+  endedAt         DateTime?             @map("ended_at")
+  durationMinutes Int                   @default(0) @map("duration_minutes")
+  status          StudySessionStatus    @default(PLANNED)
+  completionSource StudyCompletionSource? @map("completion_source")
+  lastHeartbeatAt DateTime?             @map("last_heartbeat_at")
+  createdAt       DateTime              @default(now()) @map("created_at")
+  course          Course?               @relation(fields: [courseId], references: [id], onDelete: SetNull)
+  semester        Semester              @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  studyPlanItem   StudyPlanItem?        @relation(fields: [studyPlanItemId], references: [id], onDelete: SetNull)
+  user            User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, semesterId, status])
+  @@index([studyPlanItemId])
+  @@map("study_sessions")
+}
+
+model CwaEvidenceRecord {
+  id         String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId     String          @map("user_id") @db.Uuid
+  semesterId String          @map("semester_id") @db.Uuid
+  mode       CwaEvidenceMode
+  value      Decimal         @db.Decimal(5, 2)
+  evidence   String
+  createdAt  DateTime        @default(now()) @map("created_at")
+  user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  semester   Semester        @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  @@index([userId, semesterId, mode, createdAt])
+  @@map("cwa_evidence_records")
 }
 
 model WeakArea {
