@@ -33,11 +33,28 @@ export async function saveAssessment(formData: FormData) {
     assessedAt: parsed.assessedAt ? new Date(parsed.assessedAt + "T00:00:00.000Z") : undefined,
   };
   if (parsed.id) {
+    const current = await prisma.assessment.findFirst({
+      where: { id: parsed.id, userId: appUser.id, semesterId: parsed.semesterId, courseId: parsed.courseId },
+      select: { weight: true },
+    });
+    if (!current) return;
+    const weightTotal = await prisma.assessment.aggregate({
+      where: { userId: appUser.id, semesterId: parsed.semesterId, courseId: parsed.courseId, NOT: { id: parsed.id } },
+      _sum: { weight: true },
+    });
+    const total = Number(weightTotal._sum.weight ?? 0) + Number(parsed.weight ?? 0);
+    if (total > 100) throw new Error("Assessment weights for a course cannot exceed 100%.");
     await prisma.assessment.updateMany({
       where: { id: parsed.id, userId: appUser.id, semesterId: parsed.semesterId, courseId: parsed.courseId },
       data,
     });
   } else {
+    const weightTotal = await prisma.assessment.aggregate({
+      where: { userId: appUser.id, semesterId: parsed.semesterId, courseId: parsed.courseId },
+      _sum: { weight: true },
+    });
+    const total = Number(weightTotal._sum.weight ?? 0) + Number(parsed.weight ?? 0);
+    if (total > 100) throw new Error("Assessment weights for a course cannot exceed 100%.");
     await prisma.assessment.create({
       data: { ...data, userId: appUser.id, semesterId: parsed.semesterId, courseId: parsed.courseId },
     });

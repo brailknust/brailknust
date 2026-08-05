@@ -33,6 +33,15 @@ describe("business input schemas", () => {
     }).success).toBe(false);
   });
 
+  it("rejects invalid academic dates and reminder order", async () => {
+    const { createTaskSchema } = await import("@/features/tasks/schemas");
+    const { createStudyPlanSchema } = await import("@/features/planner/schemas");
+
+    expect(createTaskSchema.safeParse({ title: "Submit work", dueAt: "not-a-date" }).success).toBe(false);
+    expect(createTaskSchema.safeParse({ title: "Submit work", dueAt: "2026-08-10T12:00", reminderAt: "2026-08-10T13:00" }).success).toBe(false);
+    expect(createStudyPlanSchema.safeParse({ title: "Week plan", startDate: "2026-08-10", endDate: "2026-08-09" }).success).toBe(false);
+  });
+
   it("requires valid, four-option diagnostic questions", () => {
     const validQuestion = {
       prompt: "Which structure provides first-in first-out access?",
