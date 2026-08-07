@@ -1,12 +1,12 @@
 # Testing BRAIL
 
-Phase 2 and later workflow work uses a layered release gate: fast Vitest checks protect business rules and components, while Playwright drives authenticated journeys against an isolated Supabase environment. The local suite currently contains 75 tests across 28 files.
+Phase 2 and later workflow work uses a layered release gate: fast Vitest checks protect business rules and components, while Playwright drives authenticated journeys against an isolated Supabase environment. The local suite currently contains 87 tests across 31 files.
 
 ## Test layers
 
 | Layer | Command | Coverage |
 | --- | --- | --- |
-| Unit and integration | `npm test` | Schemas, Accra time, curriculum CSV validation, catalog filtering/pagination, privacy-minimized audit metadata, correction-request boundaries, task expiry and transitions, planner collisions, timetable parsing, goals and progress snapshots, notifications, retrieval, AI context, material chunking, and cross-account scope rules |
+| Unit and integration | `npm test` | Schemas, Accra time, curriculum CSV validation, elective/exclusion/renamed-code rules, launch-scope verification, catalog filtering/pagination, privacy-minimized audit metadata, correction-request boundaries, task expiry and transitions, planner collisions, timetable parsing, goals and progress snapshots, notifications, retrieval, AI context, material chunking, and cross-account scope rules |
 | Component | `npm run test:components` | Authentication, onboarding controls, and destructive-action confirmation |
 | Coverage gate | `npm run test:coverage` | The complete `src/features` and `src/components` surface, including untested files |
 | Browser journeys | `npm run test:e2e` | Signup/onboarding, admin access, semesters, tasks, planner, private materials, diagnostics, peers, groups, and notifications |
@@ -42,6 +42,8 @@ npm run security:database
 npm run test:e2e:install
 npm run test:e2e
 ```
+
+The administrator-only operational curriculum check is separate from the isolated test suite. `npm run curriculum:sync` synchronizes bundled declarations into the configured development database, preserves any authoritative CSV-imported curriculum, records an immutable aggregate audit event, and refreshes `import-reports/knust-launch-scope-verification.json`. It requires an active administrator whose address is already present in the server-only `ADMIN_EMAILS` allow-list; the report contains no identity or secret values.
 
 The Playwright setup creates uniquely named Auth users, application users, semesters, courses, materials, diagnostics, peer records, and notifications. Global teardown removes those records and any uploaded Storage objects after both passing and failing runs.
 

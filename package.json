@@ -16,6 +16,7 @@
     "test:e2e": "playwright test",
     "test:e2e:install": "playwright install chromium",
     "db:test:migrate": "prisma migrate deploy",
+    "curriculum:sync": "node --experimental-strip-types scripts/sync-bundled-curricula.mjs",
     "security:database": "node scripts/verify-database-security.mjs"
   },
   "dependencies": {

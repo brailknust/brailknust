@@ -15,6 +15,7 @@ enum SemesterTerm {
 
 enum EnrollmentOrigin {
   CURRICULUM_DEFAULT
+  CURRICULUM_ELECTIVE
   MANUAL
   TRANSFER
   REPEAT
@@ -261,6 +262,11 @@ enum CurriculumImportRowStatus {
   VALID
   INVALID
   APPLIED
+}
+
+enum CurriculumCourseKind {
+  CORE
+  ELECTIVE
 }
 
 enum AdminContentTargetType {
@@ -537,17 +543,20 @@ model CurriculumImport {
 }
 
 model CurriculumImportRow {
-  id          String                    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  importId    String                    @map("import_id") @db.Uuid
-  rowNumber   Int                       @map("row_number")
-  courseCode  String?                   @map("course_code")
-  courseName  String?                   @map("course_name")
-  creditHours Int?                      @map("credit_hours")
-  level       AcademicLevel?
-  term        SemesterTerm?
-  status      CurriculumImportRowStatus @default(VALID)
-  error       String?
-  import      CurriculumImport          @relation(fields: [importId], references: [id], onDelete: Cascade)
+  id                 String                    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  importId           String                    @map("import_id") @db.Uuid
+  rowNumber          Int                       @map("row_number")
+  courseCode         String?                   @map("course_code")
+  courseName         String?                   @map("course_name")
+  creditHours        Int?                      @map("credit_hours")
+  level              AcademicLevel?
+  term               SemesterTerm?
+  courseKind         CurriculumCourseKind      @default(CORE) @map("course_kind")
+  electiveGroup      String?                   @map("elective_group")
+  replacesCourseCode String?                   @map("replaces_course_code")
+  status             CurriculumImportRowStatus @default(VALID)
+  error              String?
+  import             CurriculumImport          @relation(fields: [importId], references: [id], onDelete: Cascade)
 
   @@unique([importId, rowNumber])
   @@index([importId, status])
@@ -571,17 +580,22 @@ model ProgrammeCurriculumTerm {
 }
 
 model ProgrammeCurriculumCourse {
-  id               String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  curriculumTermId String                  @map("curriculum_term_id") @db.Uuid
-  courseCode       String                  @map("course_code")
-  courseName       String                  @map("course_name")
-  creditHours      Int                     @map("credit_hours")
-  isApproved       Boolean                 @default(false) @map("is_approved")
-  source           String?
-  createdAt        DateTime                @default(now()) @map("created_at")
-  curriculumTerm   ProgrammeCurriculumTerm @relation(fields: [curriculumTermId], references: [id], onDelete: Cascade)
+  id                 String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  curriculumTermId   String                  @map("curriculum_term_id") @db.Uuid
+  courseCode         String                  @map("course_code")
+  courseName         String                  @map("course_name")
+  creditHours        Int                     @map("credit_hours")
+  courseKind         CurriculumCourseKind    @default(CORE) @map("course_kind")
+  electiveGroup      String?                 @map("elective_group")
+  replacesCourseCode String?                 @map("replaces_course_code")
+  isApproved         Boolean                 @default(false) @map("is_approved")
+  source             String?
+  createdAt          DateTime                @default(now()) @map("created_at")
+  curriculumTerm     ProgrammeCurriculumTerm @relation(fields: [curriculumTermId], references: [id], onDelete: Cascade)
 
   @@unique([curriculumTermId, courseCode])
+  @@index([curriculumTermId, courseKind, electiveGroup])
+  @@index([replacesCourseCode])
   @@map("programme_curriculum_courses")
 }
 

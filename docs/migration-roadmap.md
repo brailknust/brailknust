@@ -69,7 +69,7 @@ Exit gate: passed locally on 2026-08-04. Authorization tests pass, costly routes
 
 Target: 5-7 days.
 
-Status: implementation complete locally. The local quality gate passes with 28 test files and 75 tests. GitHub Actions run #9 passed `Quality`; its browser job stopped at database security verification before the Support and Feedback RLS correction. That migration has been corrected and later local migrations add material de-duplication, semester archival, goal progress history, AI usage accounting, diagnostic feedback, immutable content auditing, and correction requests. Browser CI must be rerun after the current branch is pushed. Branch protection on `main` was explicitly deferred by the Founder on 2026-08-05. See [testing.md](./testing.md) for commands, isolation rules, and CI details.
+Status: implementation complete locally. The local quality gate passes with 31 test files and 87 tests. GitHub Actions run #9 passed `Quality`; its browser job stopped at database security verification before the Support and Feedback RLS correction. That migration has been corrected and later local migrations add material de-duplication, semester archival, goal progress history, AI usage accounting, diagnostic feedback, immutable content auditing, correction requests, and curriculum course rules. Browser CI must be rerun after the current branch is pushed. Branch protection on `main` was explicitly deferred by the Founder on 2026-08-05. See [testing.md](./testing.md) for commands, isolation rules, and CI details.
 
 - [x] Add Vitest for schemas and business logic.
 - [x] Add React Testing Library for interactive components.
@@ -82,7 +82,7 @@ Status: implementation complete locally. The local quality gate passes with 28 t
 - [x] Confirm the first isolated GitHub browser run passes.
 - [ ] Require the `Quality` and `Browser journeys` checks in branch protection. Deferred by Founder decision on 2026-08-05.
 
-Exit gate: branch-protection activation is deferred, and browser CI still needs a rerun after the current pushed state. Local lint, TypeScript, 75 automated tests, Prisma validation, and the production build pass. `npm run test:e2e` is currently blocked locally because `.env.test.local` is not configured. The prior isolated browser run passed all 9 journeys without retries.
+Exit gate: branch-protection activation is deferred, and browser CI still needs a rerun after the current pushed state. Local lint, TypeScript, 87 automated tests, Prisma validation, and the production build pass. `npm run test:e2e` is currently blocked locally because `.env.test.local` is not configured. The prior isolated browser run passed all 9 journeys without retries.
 
 ## Phase 3: Complete product UX
 
@@ -143,16 +143,16 @@ Exit gate: quality thresholds are met, AI cost is bounded, and failed ingestion 
 
 Target: 1-3 weeks for initial coverage; ongoing afterward.
 
-- Import and verify every course in the approved launch scope.
-- Version curriculum by academic year.
-- Handle electives, exclusions, renamed courses, and course-code changes.
-- Add import preview, validation, and rollback.
+- [ ] Import and externally verify every course in the approved launch scope. The bundled declaration is internally complete; external KNUST approval remains required.
+- [x] Version curriculum by academic year.
+- [x] Handle electives, exclusions, renamed courses, and course-code changes.
+- [x] Add import preview, validation, and rollback.
 - [x] Add admin search, filters, pagination, and bulk operations.
 - [x] Add immutable audit records for catalogue, topic, and material changes.
 - [x] Add a student-facing content-correction workflow.
-- Verify imported materials using the existing import-report scripts.
+- [x] Verify imported materials using the existing import-report scripts.
 
-Progress on 2026-08-07: administrators can review and update Support, Feedback, and student content-correction statuses. `/admin/catalog` now provides combined search, approval/assignment/level filters, bounded pagination, and selected approve, reject, and unused-record cleanup operations. Catalog, topic, and platform-material mutations append actor-attributed, privacy-minimized records to a database-enforced immutable audit ledger viewable at `/admin/audit`. Enrolled students can report course, official-topic, and shared-material corrections from course views and see administrator outcomes. Curriculum CSV preview/apply/rollback remains integrated with onboarding. Launch-scope import verification and elective, exclusion, rename, and course-code-change rules remain.
+Progress on 2026-08-07: administrators can review and update Support, Feedback, and student content-correction statuses. `/admin/catalog` now provides combined search, approval/assignment/level filters, bounded pagination, and selected approve, reject, and unused-record cleanup operations. Catalog, topic, and platform-material mutations append actor-attributed, privacy-minimized records to a database-enforced immutable audit ledger viewable at `/admin/audit`. Enrolled students can report course, official-topic, and shared-material corrections from course views and see administrator outcomes. Curriculum CSV preview/apply/rollback remains integrated with onboarding. Core/elective classification, elective opt-in enrollment, exclusion continuity across renamed codes, and predecessor-code mapping are implemented. The development catalogue was synchronized and internally verified at 8/8 terms and 53/53 declared courses; the material report passed at 24/24 published files. The operational sync preserves authoritative imports, records an immutable audit event, and writes a safe report. These are internal checks of user-provided sources, not external KNUST approval.
 
 Exit gate: advertised coverage is verified and administrator changes are attributable and reversible.
 
@@ -204,7 +204,7 @@ Exit gate: no launch blocker remains, at least 90% of pilot users complete criti
 
 | Environment | Purpose | Data policy | Status |
 | --- | --- | --- | --- |
-| Development | Local implementation | Synthetic or developer-owned data only | Configured database verified at all 46 migrations on 2026-08-07 |
+| Development | Local implementation | Synthetic or developer-owned data only | Configured database verified at all 47 migrations on 2026-08-07 |
 | Staging | Release candidate verification | Synthetic pilot-like data; no production secrets | Not provisioned |
 | Production | Student use | Real student data under a published retention policy | Not provisioned |
 

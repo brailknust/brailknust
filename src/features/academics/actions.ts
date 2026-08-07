@@ -148,7 +148,7 @@ export async function createEnrollment(formData: FormData) {
 
   const semester = await prisma.semester.findFirst({
     where: { id: parsed.semesterId, ownerId: appUser.id },
-    select: { id: true, isArchived: true },
+    select: { id: true, isArchived: true, curriculumTermId: true },
   });
   if (!semester) throw new Error("Semester not found in your workspace.");
   if (semester.isArchived) throw new Error("Archived semesters are read-only. Reopen the semester before enrolling in courses.");
@@ -158,9 +158,25 @@ export async function createEnrollment(formData: FormData) {
       id: parsed.courseId,
       OR: [{ approvalStatus: "OFFICIAL" }, { createdById: appUser.id }],
     },
-    select: { id: true },
+    select: { id: true, code: true },
   });
   if (!course) throw new Error("Course not available in your workspace.");
+
+  const curriculumItem = semester.curriculumTermId
+    ? await prisma.programmeCurriculumCourse.findUnique({
+      where: { curriculumTermId_courseCode: { curriculumTermId: semester.curriculumTermId, courseCode: course.code } },
+      select: { courseKind: true, replacesCourseCode: true },
+    })
+    : null;
+  if (curriculumItem) {
+    await prisma.studentCourseExclusion.deleteMany({
+      where: {
+        userId: appUser.id,
+        semesterId: parsed.semesterId,
+        courseCode: { in: [course.code, curriculumItem.replacesCourseCode].filter((code): code is string => Boolean(code)) },
+      },
+    });
+  }
 
   await prisma.enrollment.upsert({
     where: {
@@ -175,6 +191,12 @@ export async function createEnrollment(formData: FormData) {
       courseId: parsed.courseId,
       semesterId: parsed.semesterId,
       lecturer: parsed.lecturer,
+      origin: curriculumItem?.courseKind === "ELECTIVE"
+        ? "CURRICULUM_ELECTIVE"
+        : curriculumItem
+          ? "CURRICULUM_DEFAULT"
+          : "MANUAL",
+      sourceKey: curriculumItem ? `curriculum-course:${semester.curriculumTermId}:${course.code}` : null,
     },
     update: {
       lecturer: parsed.lecturer,

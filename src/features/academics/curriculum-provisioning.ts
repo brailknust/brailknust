@@ -12,6 +12,21 @@ export function curriculumTermSlots(durationYears: number, termsPerYear: number)
 }
 export function provisionKey(curriculumId: string, level: AcademicLevel, term: SemesterTerm) { return `curriculum:${curriculumId}:${level}:${term}`; }
 
+type CurriculumRuleCourse = {
+  courseCode: string;
+  courseKind: "CORE" | "ELECTIVE";
+  replacesCourseCode: string | null;
+};
+
+export function curriculumCourseIdentityCodes(course: Pick<CurriculumRuleCourse, "courseCode" | "replacesCourseCode">) {
+  return [...new Set([course.courseCode, course.replacesCourseCode].filter((code): code is string => Boolean(code)))];
+}
+
+export function shouldAutoEnrollCurriculumCourse(course: CurriculumRuleCourse, excludedCodes: Set<string>) {
+  return course.courseKind === "CORE"
+    && curriculumCourseIdentityCodes(course).every((code) => !excludedCodes.has(code));
+}
+
 export function academicYearForLevel(academicYear: string, anchorLevel: AcademicLevel, targetLevel: AcademicLevel) {
   const match = academicYear.match(academicYearPattern);
   if (!match) throw new Error("Academic year must use the format 2025/2026.");
@@ -25,9 +40,10 @@ export function academicYearForLevel(academicYear: string, anchorLevel: Academic
 export async function ensureProgrammeCurriculum(input: { college: string; programme: string; department: string; version: string }) {
   const importedCurriculum = await prisma.programmeCurriculum.findFirst({
     where: { college: input.college, programme: input.programme, department: input.department, version: input.version, isPublished: true },
+    include: { importedFrom: { select: { id: true } } },
   });
-  if (importedCurriculum) return importedCurriculum;
   const definition = findProgrammeCurriculum(input);
+  if (importedCurriculum?.importedFrom || (!definition && importedCurriculum)) return importedCurriculum;
   if (!definition) throw new Error("No published curriculum version is available for this programme.");
   const curriculum = await prisma.programmeCurriculum.upsert({
     where: { college_programme_version: { college: input.college, programme: input.programme, version: input.version } },
@@ -36,7 +52,28 @@ export async function ensureProgrammeCurriculum(input: { college: string; progra
   for (const slot of curriculumTermSlots(definition.durationYears, definition.termsPerYear)) {
     const template = knustCurricula.find((item) => item.college === input.college && item.program === input.programme && item.department === input.department && item.version === input.version && item.level === slot.level && item.semester === slot.name);
     const term = await prisma.programmeCurriculumTerm.upsert({ where: { curriculumId_level_term: { curriculumId: curriculum.id, level: slot.level, term: slot.term } }, create: { curriculumId: curriculum.id, level: slot.level, term: slot.term, name: slot.name, source: template?.source }, update: {} });
-    for (const course of template?.courses ?? []) await prisma.programmeCurriculumCourse.upsert({ where: { curriculumTermId_courseCode: { curriculumTermId: term.id, courseCode: course.code } }, create: { curriculumTermId: term.id, courseCode: course.code, courseName: course.name, creditHours: course.creditHours, isApproved: true, source: template?.source }, update: {} });
+    for (const course of template?.courses ?? []) await prisma.programmeCurriculumCourse.upsert({
+      where: { curriculumTermId_courseCode: { curriculumTermId: term.id, courseCode: course.code } },
+      create: {
+        curriculumTermId: term.id,
+        courseCode: course.code,
+        courseName: course.name,
+        creditHours: course.creditHours,
+        courseKind: course.courseKind ?? "CORE",
+        electiveGroup: course.electiveGroup,
+        replacesCourseCode: course.replacesCourseCode,
+        isApproved: true,
+        source: template?.source,
+      },
+      update: {
+        courseName: course.name,
+        creditHours: course.creditHours,
+        courseKind: course.courseKind ?? "CORE",
+        electiveGroup: course.electiveGroup ?? null,
+        replacesCourseCode: course.replacesCourseCode ?? null,
+        source: template?.source,
+      },
+    });
   }
   return curriculum;
 }
@@ -56,8 +93,9 @@ export async function provisionStudentSemesters(input: { userId: string; curricu
     const semester = await prisma.semester.upsert({ where: { ownerId_provisionKey: { ownerId: input.userId, provisionKey: provisionKey(curriculum.id, term.level, term.term) } }, create: { ownerId: input.userId, level: term.level, term: term.term, name: term.name, academicYear: academicYearForLevel(input.academicYear, input.activeLevel, term.level), cwa: input.cwa, curriculumId: curriculum.id, curriculumTermId: term.id, provisionKey: provisionKey(curriculum.id, term.level, term.term) }, update: {} });
     await prisma.semesterProfile.upsert({ where: { userId_semesterId: { userId: input.userId, semesterId: semester.id } }, create: { userId: input.userId, semesterId: semester.id, level: term.level, cwa: input.cwa }, update: {} });
     const excluded = new Set((await prisma.studentCourseExclusion.findMany({ where: { userId: input.userId, semesterId: semester.id }, select: { courseCode: true } })).map((item) => item.courseCode));
-    for (const item of term.courses.filter((course) => course.isApproved && !excluded.has(course.courseCode))) {
+    for (const item of term.courses.filter((course) => course.isApproved)) {
       const course = await prisma.course.upsert({ where: { code: item.courseCode }, create: { code: item.courseCode, name: item.courseName, creditHours: item.creditHours, department: curriculum.department, level: term.level, approvalStatus: "OFFICIAL" }, update: {} });
+      if (!shouldAutoEnrollCurriculumCourse(item, excluded)) continue;
       await prisma.enrollment.upsert({ where: { userId_courseId_semesterId: { userId: input.userId, courseId: course.id, semesterId: semester.id } }, create: { userId: input.userId, courseId: course.id, semesterId: semester.id, origin: "CURRICULUM_DEFAULT", sourceKey: `curriculum-course:${term.id}:${item.courseCode}` }, update: {} });
     }
     semesters.push(semester);

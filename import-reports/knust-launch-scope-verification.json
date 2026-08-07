@@ -1,0 +1,19 @@
+{
+  "verifiedAt": "2026-08-07T11:38:49.407Z",
+  "scope": "Bundled, user-provided launch-scope declarations; external KNUST approval remains separately required.",
+  "programmeVersions": 1,
+  "declaredTerms": 8,
+  "storedTerms": 8,
+  "declaredCourses": 53,
+  "storedCourses": 53,
+  "electiveRules": 0,
+  "renamedCodeRules": 1,
+  "authoritativeImportsPreserved": 0,
+  "internallyComplete": true,
+  "materialImport": {
+    "verifiedAt": "2026-08-07T11:07:53.460Z",
+    "expectedApprovedFiles": 24,
+    "publishedFiles": 24,
+    "passed": true
+  }
+}

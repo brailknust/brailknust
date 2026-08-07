@@ -4,6 +4,9 @@ export type CurriculumCourse = {
   code: string;
   name: string;
   creditHours: number;
+  courseKind?: "CORE" | "ELECTIVE";
+  electiveGroup?: string;
+  replacesCourseCode?: string;
 };
 
 export type CurriculumTemplate = {

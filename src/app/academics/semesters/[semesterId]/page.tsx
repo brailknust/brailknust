@@ -59,6 +59,7 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
 
   const semester = data.semester;
   const isArchived = semester.isArchived;
+  const curriculumElectiveCodes = new Set(data.curriculumElectives.map((course) => course.courseCode));
 
   return (
     <AppShell
@@ -204,11 +205,17 @@ export default async function SemesterPage({ params }: SemesterPageProps) {
             <fieldset disabled={isArchived} className="mt-4 grid gap-3 disabled:opacity-60">
               <select name="courseId" required className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
                 <option value="">Select course</option>
-                {data.courses.map((course) => (
+                {data.curriculumElectives.length ? <optgroup label="Curriculum electives">
+                  {data.curriculumElectives.map((elective) => {
+                    const course = data.courses.find((item) => item.code === elective.courseCode);
+                    return course ? <option key={course.id} value={course.id}>{course.code} - {course.name}{elective.electiveGroup ? ` (${elective.electiveGroup})` : ""}</option> : null;
+                  })}
+                </optgroup> : null}
+                <optgroup label="All available courses">{data.courses.filter((course) => !curriculumElectiveCodes.has(course.code)).map((course) => (
                   <option key={course.id} value={course.id}>
                     {course.name}
                   </option>
-                ))}
+                ))}</optgroup>
               </select>
               <input
                 name="lecturer"

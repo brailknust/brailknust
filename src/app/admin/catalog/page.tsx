@@ -1,5 +1,8 @@
 import Link from "next/link";
-import { BookX, FileUp, RotateCcw, Search } from "lucide-react";
+import { BadgeCheck, BookX, FileUp, RotateCcw, Search } from "lucide-react";
+
+import materialManifest from "../../../../import-reports/coe-first-semester-import-manifest.json";
+import materialReport from "../../../../import-reports/coe-first-semester-import-verification.json";
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
@@ -14,6 +17,7 @@ import {
   rejectStudentCourse,
   removeProgrammeCourse,
   rollbackCurriculumImport,
+  syncBundledCurricula,
   restoreProgrammeCourse,
 } from "@/features/admin/actions";
 import {
@@ -22,6 +26,7 @@ import {
   type CatalogApprovalFilter,
   type CatalogAssignmentFilter,
 } from "@/features/admin/catalog-operations";
+import { verifyCurriculumTemplates, verifyMaterialImportReport } from "@/features/admin/curriculum-verification";
 import { requireAdmin } from "@/features/auth/queries";
 import { prisma } from "@/server/db";
 
@@ -45,7 +50,8 @@ const assignmentFilters = new Set(["ALL", "CONFIGURED", "UNASSIGNED"]);
 
 export default async function AdminProgrammeCatalogPage({ searchParams }: AdminProgrammeCatalogPageProps) {
   await requireAdmin();
-  const [rawSearchParams, exclusions, databaseCourses, curriculumImports] = await Promise.all([
+  const bundledDefinitions = [...new Map(knustCurricula.map((template) => [`${template.college}|${template.department}|${template.program}|${template.version}`, template])).values()];
+  const [rawSearchParams, exclusions, databaseCourses, curriculumImports, storedBundledCurricula] = await Promise.all([
     searchParams,
     prisma.programmeCourseExclusion.findMany({
       include: { removedBy: { select: { fullName: true } } },
@@ -75,6 +81,10 @@ export default async function AdminProgrammeCatalogPage({ searchParams }: AdminP
       orderBy: { createdAt: "desc" },
       take: 12,
     }),
+    prisma.programmeCurriculum.findMany({
+      where: { OR: bundledDefinitions.map((definition) => ({ college: definition.college, department: definition.department, programme: definition.program, version: definition.version })) },
+      select: { terms: { select: { courses: { select: { id: true } } } } },
+    }),
   ]);
   const selectedImportId = rawSearchParams.import;
   const excluded = new Map(exclusions.map((item) => [
@@ -93,6 +103,10 @@ export default async function AdminProgrammeCatalogPage({ searchParams }: AdminP
   };
   const filteredCourses = filterCatalogCourses(databaseCourses, filters, configuredCodes);
   const catalogPage = paginateCatalog(filteredCourses, Number(rawSearchParams.page ?? 1));
+  const launchVerification = verifyCurriculumTemplates(knustCurricula);
+  const materialVerification = verifyMaterialImportReport(materialManifest, materialReport, configuredCodes);
+  const storedTermCount = storedBundledCurricula.reduce((sum, curriculum) => sum + curriculum.terms.length, 0);
+  const storedCourseCount = storedBundledCurricula.reduce((sum, curriculum) => sum + curriculum.terms.reduce((termSum, term) => termSum + term.courses.length, 0), 0);
   function pageHref(page: number) {
     const params = new URLSearchParams();
     if (filters.query) params.set("q", filters.query);
@@ -111,6 +125,18 @@ export default async function AdminProgrammeCatalogPage({ searchParams }: AdminP
         <p className="mt-2 max-w-2xl text-sm leading-6 text-white/70">
           Removing a catalog course prevents it from being automatically added for future students in that programme. Existing student records are preserved.
         </p>
+      </section>
+
+      <section className="mt-6 rounded-2xl border border-border bg-white p-5">
+        <div className="flex items-start gap-3"><BadgeCheck className="mt-0.5 h-5 w-5 text-accent" /><div><h2 className="text-lg font-semibold">Launch-scope verification</h2><p className="mt-1 text-sm text-muted">Automated checks confirm declared curriculum structure and the recorded material import. External KNUST approval still depends on the cited source.</p></div></div>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-xl border border-border bg-surface p-4"><p className="text-xs font-semibold uppercase tracking-wide text-muted">Curriculum terms</p><p className="mt-2 text-2xl font-semibold">{storedTermCount}/{launchVerification.termCount}</p><p className="mt-1 text-xs text-muted">{launchVerification.internallyComplete ? "Internally complete" : `${launchVerification.issues.length} issues`}</p></div>
+          <div className="rounded-xl border border-border bg-surface p-4"><p className="text-xs font-semibold uppercase tracking-wide text-muted">Declared courses</p><p className="mt-2 text-2xl font-semibold">{storedCourseCount}/{launchVerification.courseCount}</p><p className="mt-1 text-xs text-muted">{launchVerification.electiveCount} electives · {launchVerification.renamedCodeCount} renamed-code rules</p></div>
+          <div className="rounded-xl border border-border bg-surface p-4"><p className="text-xs font-semibold uppercase tracking-wide text-muted">Imported materials</p><p className="mt-2 text-2xl font-semibold">{materialVerification.publishedFiles}/{materialVerification.approvedFiles}</p><p className="mt-1 text-xs text-muted">Across {materialVerification.coveredCourseCount} first-semester courses</p></div>
+          <div className="rounded-xl border border-border bg-surface p-4"><p className="text-xs font-semibold uppercase tracking-wide text-muted">Report status</p><p className="mt-2 text-2xl font-semibold">{materialVerification.complete ? "Pass" : "Review"}</p><p className="mt-1 text-xs text-muted">Verified {new Date(materialVerification.verifiedAt).toLocaleDateString("en-GH")}</p></div>
+        </div>
+        {launchVerification.issues.length || materialVerification.issues.length ? <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-muted">{[...launchVerification.issues.map((issue) => `${issue.scope}: ${issue.message}`), ...materialVerification.issues].map((issue) => <p key={issue}>{issue}</p>)}</div> : null}
+        <form action={syncBundledCurricula} className="mt-4"><PendingSubmitButton pendingLabel="Synchronizing..." className="h-10 rounded-lg border border-border px-4 text-sm font-semibold">Synchronize declared curriculum</PendingSubmitButton></form>
       </section>
 
       <section className="mt-6 rounded-2xl border border-border bg-white p-5">
@@ -171,7 +197,7 @@ export default async function AdminProgrammeCatalogPage({ searchParams }: AdminP
       <section className="mt-6 grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
         <form action={previewCurriculumImport} className="rounded-2xl border border-border bg-white p-5">
           <div className="flex items-center gap-3"><FileUp className="h-5 w-5 text-accent" /><h2 className="text-lg font-semibold">Curriculum import preview</h2></div>
-          <p className="mt-2 text-sm leading-6 text-muted">Create a private preview first. Required CSV headers: courseCode, courseName, creditHours, level, term.</p>
+          <p className="mt-2 text-sm leading-6 text-muted">Create a private preview first. Required CSV headers: courseCode, courseName, creditHours, level, term. Optional headers: courseType, electiveGroup, replacesCourseCode.</p>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             <input required name="college" placeholder="College" className="h-10 rounded-lg border border-border px-3 text-sm" />
             <input required name="department" placeholder="Department" className="h-10 rounded-lg border border-border px-3 text-sm" />
@@ -191,7 +217,7 @@ export default async function AdminProgrammeCatalogPage({ searchParams }: AdminP
             <p className="mt-2 text-sm text-muted">{selectedImport.programme} - {selectedImport.version} by {selectedImport.createdBy.fullName}</p>
             <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-muted">{selectedImport.status.toLowerCase()} - {selectedImport.rows.length} rows</p>
             <div className="mt-4 max-h-64 overflow-y-auto rounded-lg border border-border">
-              {selectedImport.rows.map((row) => <div key={row.id} className="border-b border-border px-3 py-2 text-xs last:border-b-0"><span className={row.status === "INVALID" ? "font-semibold text-red-600" : "font-semibold text-foreground"}>Row {row.rowNumber}</span>{" "}{row.courseCode ?? "No course code"} - {row.courseName ?? "No course name"}{row.error ? <p className="mt-1 text-red-600">{row.error}</p> : null}</div>)}
+              {selectedImport.rows.map((row) => <div key={row.id} className="border-b border-border px-3 py-2 text-xs last:border-b-0"><span className={row.status === "INVALID" ? "font-semibold text-red-600" : "font-semibold text-foreground"}>Row {row.rowNumber}</span>{" "}{row.courseCode ?? "No course code"} - {row.courseName ?? "No course name"}<span className="ml-1 text-muted">· {row.courseKind.toLowerCase()}{row.electiveGroup ? ` (${row.electiveGroup})` : ""}{row.replacesCourseCode ? ` · replaces ${row.replacesCourseCode}` : ""}</span>{row.error ? <p className="mt-1 text-red-600">{row.error}</p> : null}</div>)}
             </div>
             {selectedImport.status === "DRAFT" ? <form action={applyCurriculumImport} className="mt-4"><input type="hidden" name="importId" value={selectedImport.id} /><PendingSubmitButton pendingLabel="Applying..." className="h-10 rounded-lg bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Apply published curriculum</PendingSubmitButton></form> : null}
             {selectedImport.status === "APPLIED" ? <form action={rollbackCurriculumImport} className="mt-4"><input type="hidden" name="importId" value={selectedImport.id} /><ConfirmSubmitButton titleText="Rollback curriculum import" confirmLabel="Rollback" message="Rollback deletes this published curriculum only while no student semester uses it." className="h-10 rounded-lg border border-red-200 px-4 text-sm font-semibold text-red-600">Rollback import</ConfirmSubmitButton></form> : null}

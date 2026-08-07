@@ -132,6 +132,13 @@ export async function getSemesterDetail(userId: string, semesterId: string) {
       orderBy: [{ status: "asc" }, { scheduledStart: "asc" }],
     }),
   ]);
+  const curriculumElectives = semester?.curriculumTermId
+    ? await prisma.programmeCurriculumCourse.findMany({
+      where: { curriculumTermId: semester.curriculumTermId, isApproved: true, courseKind: "ELECTIVE" },
+      select: { courseCode: true, courseName: true, electiveGroup: true, creditHours: true },
+      orderBy: [{ electiveGroup: "asc" }, { courseCode: "asc" }],
+    })
+    : [];
 
   return {
     user,
@@ -142,6 +149,7 @@ export async function getSemesterDetail(userId: string, semesterId: string) {
     tasks: tasks.map((task) => withEffectiveTaskStatus(task)),
     studyItems,
     timetable,
+    curriculumElectives,
     isActiveForUser: user?.activeSemesterId === semesterId,
   };
 }

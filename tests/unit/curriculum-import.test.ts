@@ -19,4 +19,15 @@ describe("curriculum CSV import", () => {
     const rows = parseCurriculumCsv("courseCode,courseName,creditHours,level,term\nCENG 201,Circuit Theory,3,LEVEL_200,FIRST\nCENG 201,Circuit Theory II,3,LEVEL_200,FIRST");
     expect(rows[1].error).toContain("duplicate course in this term");
   });
+
+  it("parses elective groups and renamed course codes", () => {
+    const [row] = parseCurriculumCsv("courseCode,courseName,creditHours,level,term,courseType,electiveGroup,replacesCourseCode\nCOE 481,Advanced Systems,3,LEVEL_400,FIRST,ELECTIVE,Systems,COE 471");
+    expect(row).toMatchObject({ courseKind: "ELECTIVE", electiveGroup: "Systems", replacesCourseCode: "COE 471", error: null });
+  });
+
+  it("rejects incomplete electives and ambiguous rename mappings", () => {
+    const rows = parseCurriculumCsv("courseCode,courseName,creditHours,level,term,courseType,electiveGroup,replacesCourseCode\nCOE 481,Advanced Systems,3,LEVEL_400,FIRST,ELECTIVE,,COE 471\nCOE 471,Legacy Systems,3,LEVEL_400,SECOND,CORE,,");
+    expect(rows[0].error).toContain("elective group required");
+    expect(rows[0].error).toContain("replacement course code is also active");
+  });
 });

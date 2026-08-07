@@ -8,9 +8,10 @@ import { removeCourseMaterialFile } from "@/features/materials/storage";
 import { finalizeAccountDeletionCleanup } from "@/features/profile/account-deletion";
 import { prisma } from "@/server/db";
 import { z } from "zod";
-import { curriculumTermSlots } from "@/features/academics/curriculum-provisioning";
+import { curriculumTermSlots, ensureProgrammeCurriculum } from "@/features/academics/curriculum-provisioning";
 import { parseCurriculumCsv } from "@/features/admin/curriculum-import";
 import { createAdminContentAudit } from "@/features/admin/audit";
+import { knustCurricula } from "@/data/curricula";
 
 const adminUserSchema = z.object({ userId: z.string().uuid() });
 const courseApprovalSchema = z.object({ courseId: z.string().uuid() });
@@ -105,7 +106,17 @@ export async function applyCurriculumImport(formData: FormData) {
       });
       const courses = importRecord.rows.filter((row) => row.level === slot.level && row.term === slot.term);
       if (courses.length) await tx.programmeCurriculumCourse.createMany({
-        data: courses.map((row) => ({ curriculumTermId: term.id, courseCode: row.courseCode!, courseName: row.courseName!, creditHours: row.creditHours!, isApproved: true, source: importRecord.source })),
+        data: courses.map((row) => ({
+          curriculumTermId: term.id,
+          courseCode: row.courseCode!,
+          courseName: row.courseName!,
+          creditHours: row.creditHours!,
+          courseKind: row.courseKind,
+          electiveGroup: row.electiveGroup,
+          replacesCourseCode: row.replacesCourseCode,
+          isApproved: true,
+          source: importRecord.source,
+        })),
       });
     }
     await tx.curriculumImport.update({ where: { id: importRecord.id }, data: { status: "APPLIED", curriculumId: curriculum.id, appliedAt: new Date() } });
@@ -113,7 +124,13 @@ export async function applyCurriculumImport(formData: FormData) {
     await createAdminContentAudit(tx, {
       actorId: appUser.id, action: "CURRICULUM_IMPORT_APPLIED", targetType: "CATALOG",
       targetId: curriculum.id, targetLabel: `${importRecord.programme} ${importRecord.version}`,
-      metadata: { importId: importRecord.id, version: importRecord.version, rowCount: importRecord.rows.length },
+      metadata: {
+        importId: importRecord.id,
+        version: importRecord.version,
+        rowCount: importRecord.rows.length,
+        electiveCount: importRecord.rows.filter((row) => row.courseKind === "ELECTIVE").length,
+        renamedCodeCount: importRecord.rows.filter((row) => row.replacesCourseCode).length,
+      },
     });
   });
   revalidatePath("/admin/catalog");
@@ -134,6 +151,35 @@ export async function rollbackCurriculumImport(formData: FormData) {
       actorId: appUser.id, action: "CURRICULUM_IMPORT_ROLLED_BACK", targetType: "CATALOG",
       targetId: importRecord.curriculumId, targetLabel: `${importRecord.programme} ${importRecord.version}`,
       metadata: { importId: importRecord.id, version: importRecord.version },
+    });
+  });
+  revalidatePath("/admin/catalog");
+  revalidatePath("/onboarding");
+}
+
+export async function syncBundledCurricula() {
+  const { appUser } = await requireAdmin();
+  const definitions = [...new Map(knustCurricula.map((template) => [
+    `${template.college}|${template.department}|${template.program}|${template.version}`,
+    template,
+  ])).values()];
+  const curricula: Array<{ id: string }> = [];
+  for (const definition of definitions) {
+    curricula.push(await ensureProgrammeCurriculum({
+      college: definition.college,
+      department: definition.department,
+      programme: definition.program,
+      version: definition.version,
+    }));
+  }
+  await prisma.$transaction(async (tx) => {
+    await createAdminContentAudit(tx, {
+      actorId: appUser.id,
+      action: "BUNDLED_CURRICULA_SYNCED",
+      targetType: "CATALOG",
+      targetId: curricula.map((curriculum) => curriculum.id).join(","),
+      targetLabel: `${definitions.length} bundled curriculum version${definitions.length === 1 ? "" : "s"}`,
+      metadata: { programmeVersionCount: definitions.length, termCount: knustCurricula.length, courseCount: knustCurricula.reduce((sum, template) => sum + template.courses.length, 0) },
     });
   });
   revalidatePath("/admin/catalog");

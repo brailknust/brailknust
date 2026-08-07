@@ -16,7 +16,7 @@ export const computerEngineeringCurricula: CurriculumTemplate[] = [
       { name: "Engineering Technology", code: "COE 153", creditHours: 2 },
       { name: "Algebra", code: "MATH 151", creditHours: 4 },
       { name: "Basic Mechanics", code: "ME 161", creditHours: 3 },
-      { name: "Applied Electricity", code: "COE 181", creditHours: 3 },
+      { name: "Applied Electricity", code: "COE 181", creditHours: 3, replacesCourseCode: "EE 151" },
       { name: "Technical Drawing", code: "ME 159", creditHours: 2 },
       { name: "Environmental Studies", code: "CE 155", creditHours: 2 },
     ],
