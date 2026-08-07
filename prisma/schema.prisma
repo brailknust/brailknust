@@ -232,6 +232,14 @@ enum PlatformMaterialStatus {
   FAILED
 }
 
+enum MaterialPermissionBasis {
+  AUTHOR_PERMISSION
+  OPEN_LICENSE
+  PUBLIC_DOMAIN
+  INSTITUTIONAL_USE
+  UNKNOWN
+}
+
 enum SupportRequestStatus {
   OPEN
   IN_PROGRESS
@@ -1229,6 +1237,8 @@ model PlatformCourseMaterial {
   mimeType           String?                    @map("mime_type")
   fileSize           Int?                       @map("file_size")
   sourceUrl          String?                    @map("source_url")
+  permissionBasis    MaterialPermissionBasis    @default(UNKNOWN) @map("permission_basis")
+  permissionNote     String?                    @map("permission_note")
   contentHash        String?                    @map("content_hash")
   status             PlatformMaterialStatus     @default(PUBLISHED)
   errorMessage       String?                    @map("error_message")
@@ -1243,6 +1253,7 @@ model PlatformCourseMaterial {
 
   @@unique([courseId, contentHash])
   @@index([courseId, status, updatedAt])
+  @@index([permissionBasis, status])
   @@index([topicId])
   @@map("platform_course_materials")
 }

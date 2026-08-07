@@ -1,0 +1,12 @@
+{
+  "version": "2026-08-07",
+  "cases": [
+    { "courseCode": "CE 155", "topic": "Sustainability", "prompt": "Explain the waste hierarchy.", "groundedAnswer": "The hierarchy prioritizes prevention before reuse, recycling, recovery, and disposal [S1].", "diagnosticPrompt": "Which action has the highest priority in the waste hierarchy?", "references": ["S1"] },
+    { "courseCode": "COE 153", "topic": "Computer Hardware Assembly", "prompt": "Explain the purpose of RAM.", "groundedAnswer": "RAM temporarily holds data and instructions the processor is actively using [S1].", "diagnosticPrompt": "Which component temporarily stores data actively used by the processor?", "references": ["S1"] },
+    { "courseCode": "COE 181", "topic": "DC Circuit Analysis", "prompt": "Explain Kirchhoff's voltage law.", "groundedAnswer": "The algebraic sum of voltage changes around a closed loop is zero [S1].", "diagnosticPrompt": "What is the algebraic sum of voltage changes around a closed loop?", "references": ["S1"] },
+    { "courseCode": "ENGL 157", "topic": "Academic Writing", "prompt": "Explain the role of a thesis statement.", "groundedAnswer": "A thesis statement presents the central claim that guides the essay [S1].", "diagnosticPrompt": "Which sentence states the central claim of an academic essay?", "references": ["S1"] },
+    { "courseCode": "MATH 151", "topic": "Complex Numbers", "prompt": "Explain the modulus of a complex number.", "groundedAnswer": "For z = a + bi, the modulus is the distance from the origin, √(a² + b²) [S1].", "diagnosticPrompt": "What is the modulus of 3 + 4i?", "references": ["S1"] },
+    { "courseCode": "ME 159", "topic": "Orthographic Projection", "prompt": "Explain orthographic projection.", "groundedAnswer": "Orthographic projection represents an object with perpendicular views on principal planes [S1].", "diagnosticPrompt": "Which projection uses perpendicular views on principal planes?", "references": ["S1"] },
+    { "courseCode": "ME 161", "topic": "Forces and Equilibrium", "prompt": "Explain the condition for static equilibrium.", "groundedAnswer": "Static equilibrium requires both the resultant force and resultant moment to be zero [S1].", "diagnosticPrompt": "Which pair of conditions is required for static equilibrium?", "references": ["S1"] }
+  ]
+}

@@ -47,7 +47,7 @@ export function PracticeGenerator({ enrollments }: { enrollments: EnrollmentOpti
   }
 
   return (
-    <form onSubmit={generate} className="grid gap-4 rounded-lg border border-border bg-background p-5">
+    <form onSubmit={generate} className="grid min-w-0 gap-4 rounded-lg border border-border bg-background p-5">
       <div>
         <h2 className="text-lg font-semibold">Generate a topic diagnostic</h2>
         <p className="mt-1 text-sm text-muted">Questions are generated only from material saved under the selected topic.</p>
@@ -60,7 +60,7 @@ export function PracticeGenerator({ enrollments }: { enrollments: EnrollmentOpti
             setEnrollmentId(event.target.value);
             setTopicId("");
           }}
-          className="h-11 rounded-md border border-border bg-background px-3 font-normal"
+          className="h-11 min-w-0 w-full rounded-md border border-border bg-background px-3 font-normal"
         >
           {enrollments.map((enrollment) => (
             <option key={enrollment.id} value={enrollment.id}>
@@ -75,7 +75,7 @@ export function PracticeGenerator({ enrollments }: { enrollments: EnrollmentOpti
           required
           value={topicId}
           onChange={(event) => setTopicId(event.target.value)}
-          className="h-11 rounded-md border border-border bg-background px-3 font-normal"
+          className="h-11 min-w-0 w-full rounded-md border border-border bg-background px-3 font-normal"
         >
           <option value="">Select a topic</option>
           {(selectedEnrollment?.topics ?? []).map((topic) => (
@@ -90,7 +90,7 @@ export function PracticeGenerator({ enrollments }: { enrollments: EnrollmentOpti
         <select
           value={questionCount}
           onChange={(event) => setQuestionCount(Number(event.target.value))}
-          className="h-11 rounded-md border border-border bg-background px-3 font-normal"
+          className="h-11 min-w-0 w-full rounded-md border border-border bg-background px-3 font-normal"
         >
           {[4, 5, 6, 8, 10].map((count) => <option key={count} value={count}>{count}</option>)}
         </select>

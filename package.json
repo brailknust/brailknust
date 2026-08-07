@@ -14,9 +14,13 @@
     "test:components": "vitest run tests/components",
     "test:security": "vitest run tests/security",
     "test:e2e": "playwright test",
+    "test:e2e:mobile": "playwright test --project=mobile-accessibility",
     "test:e2e:install": "playwright install chromium",
     "db:test:migrate": "prisma migrate deploy",
     "curriculum:sync": "node --experimental-strip-types scripts/sync-bundled-curricula.mjs",
+    "evaluate:ai": "node --experimental-strip-types scripts/evaluate-ai-diagnostics.mjs",
+    "evaluate:ocr": "node --experimental-strip-types scripts/evaluate-timetable-ocr.mjs",
+    "verify:materials:provenance": "node scripts/verify-material-provenance.mjs",
     "security:database": "node scripts/verify-database-security.mjs"
   },
   "dependencies": {

@@ -1,0 +1,10 @@
+{
+  "version": "2026-08-07",
+  "cases": [
+    { "id": "inline-12-hour", "text": "Mon COE-201 Data Structures 9am - 11am ECR A1", "expected": [{ "courseCode": "COE 201", "dayOfWeek": "Monday", "startTime": "09:00", "endTime": "11:00" }] },
+    { "id": "inline-24-hour", "text": "Tuesday MATH 251 Linear Algebra 14:00 to 16:00 PB123", "expected": [{ "courseCode": "MATH 251", "dayOfWeek": "Tuesday", "startTime": "14:00", "endTime": "16:00" }] },
+    { "id": "table-block", "text": "Monday | 07:30 - 09:30 | 10:30 - 12:30\nCOE 251 | EE 271\nPB123 | ECR A1", "expected": [{ "courseCode": "COE 251", "dayOfWeek": "Monday", "startTime": "07:30", "endTime": "09:30" }, { "courseCode": "EE 271", "dayOfWeek": "Monday", "startTime": "10:30", "endTime": "12:30" }] },
+    { "id": "ocr-day-fragment", "text": "hursday 13:30 - 15:30 MATH-253 Engineering Mathematics ENG AUDIT", "expected": [{ "courseCode": "MATH 253", "dayOfWeek": "Thursday", "startTime": "13:30", "endTime": "15:30" }] },
+    { "id": "duplicate-lines", "text": "Wednesday EE 203 Signals 10:00 - 12:00 ENG AUDIT\nWednesday EE 203 Signals 10:00 - 12:00 ENG AUDIT", "expected": [{ "courseCode": "EE 203", "dayOfWeek": "Wednesday", "startTime": "10:00", "endTime": "12:00" }] }
+  ]
+}

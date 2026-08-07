@@ -65,8 +65,24 @@ export function PlatformUpload({
         </select>
       </div>
       <input name="sourceUrl" type="url" placeholder="Source or rights URL (optional)" className="h-11 rounded-md border border-border bg-background px-3 text-sm" />
+      <div className="grid gap-3 sm:grid-cols-2">
+        <label className="grid gap-1 text-xs font-semibold text-muted">
+          Permission basis
+          <select name="permissionBasis" required defaultValue="" className="h-11 rounded-md border border-border bg-background px-3 text-sm font-normal text-foreground">
+            <option value="" disabled>Select permission basis</option>
+            <option value="AUTHOR_PERMISSION">Author or rights-holder permission</option>
+            <option value="OPEN_LICENSE">Open licence</option>
+            <option value="PUBLIC_DOMAIN">Public domain</option>
+            <option value="INSTITUTIONAL_USE">Institutional educational permission</option>
+          </select>
+        </label>
+        <label className="grid gap-1 text-xs font-semibold text-muted">
+          Permission reference
+          <input name="permissionNote" required minLength={5} maxLength={1000} placeholder="Approval, licence, or repository reference" className="h-11 rounded-md border border-border bg-background px-3 text-sm font-normal text-foreground" />
+        </label>
+      </div>
       <input name="file" type="file" required accept=".pdf,.docx,.pptx,.txt,.md,.png,.jpg,.jpeg,.webp" className="min-h-11 rounded-md border border-border bg-surface px-3 py-2 text-sm file:mr-3 file:rounded-md file:border-0 file:bg-foreground file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-background" />
-      <p className="text-xs leading-5 text-muted">Files may be up to 50MB. Published immediately for every student enrolled in this course. Upload only material the platform has permission to use.</p>
+      <p className="text-xs leading-5 text-muted">Files may be up to 50MB. Published immediately for every student enrolled in this course. Open-licence and public-domain uploads require a source URL.</p>
       {message ? <p className={`text-sm font-medium ${error ? "text-red-600" : "text-accent"}`}>{message}</p> : null}
       <button disabled={pending || topics.length === 0} className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-foreground px-4 text-sm font-semibold text-background disabled:opacity-60">
         {pending ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <FileUp className="h-4 w-4" />}

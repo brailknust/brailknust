@@ -16,10 +16,21 @@ export default defineConfig({
   reporter: process.env.CI
     ? [["line"], ["html", { open: "never" }]]
     : [["list"], ["html", { open: "never" }]],
+  projects: [
+    {
+      name: "desktop-chrome",
+      testIgnore: "**/mobile-accessibility.spec.ts",
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "mobile-accessibility",
+      testMatch: "**/mobile-accessibility.spec.ts",
+      use: { ...devices["Pixel 7"] },
+    },
+  ],
   globalSetup: "./tests/e2e/support/global-setup.ts",
   globalTeardown: "./tests/e2e/support/global-teardown.ts",
   use: {
-    ...devices["Desktop Chrome"],
     baseURL,
     trace: "retain-on-failure",
     screenshot: "only-on-failure",

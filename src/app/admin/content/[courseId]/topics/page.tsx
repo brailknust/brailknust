@@ -15,6 +15,7 @@ import {
 } from "@/features/admin/actions";
 import { PlatformUpload } from "@/features/admin/platform-upload";
 import { requireAdmin } from "@/features/auth/queries";
+import { materialPermissionLabels } from "@/features/materials/provenance";
 import { prisma } from "@/server/db";
 
 export default async function AdminCourseTopicsPage({ params }: { params: Promise<{ courseId: string }> }) {
@@ -95,6 +96,11 @@ export default async function AdminCourseTopicsPage({ params }: { params: Promis
                       <p className="mt-1 text-xs text-muted">
                         {material.type.toLowerCase()} · {material.status.toLowerCase()} · {material._count.chunks} chunks
                       </p>
+                      <p className={`mt-1 text-xs ${material.permissionBasis === "UNKNOWN" ? "font-semibold text-amber-700" : "text-muted"}`}>
+                        {materialPermissionLabels[material.permissionBasis]}
+                        {material.permissionNote ? ` · ${material.permissionNote}` : ""}
+                      </p>
+                      {material.sourceUrl ? <Link href={material.sourceUrl} target="_blank" rel="noreferrer" className="mt-1 inline-block text-xs font-semibold text-accent">View source or rights record</Link> : null}
                       {material.errorMessage ? <p className="mt-1 text-xs text-red-600">{material.errorMessage}</p> : null}
                     </div>
                     <form action={deletePlatformMaterial}>

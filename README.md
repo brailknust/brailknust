@@ -32,6 +32,8 @@ npm run build
 
 Authenticated browser journeys and database migration replay use an isolated Supabase test environment. See [Testing BRAIL](docs/testing.md) for setup, commands, data-safety rules, and CI checks.
 
+Deterministic quality checks are available with `npm run evaluate:ai` and `npm run evaluate:ocr`. Development material provenance can be summarized with `npm run verify:materials:provenance`; see [Evaluation](docs/evaluation.md) for scope and remaining external evidence.
+
 ## Documentation
 
 - [Product context](docs/product-context.md)

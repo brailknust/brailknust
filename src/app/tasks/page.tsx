@@ -41,9 +41,9 @@ export default async function TasksPage() {
         <form action={createTask} className="rounded-2xl border border-border bg-white p-5">
           <h2 className="text-lg font-semibold">Add task</h2>
           <fieldset disabled={isArchived || !activeSemester} className="mt-5 grid gap-4 disabled:opacity-60">
-            <input name="title" required placeholder="Assignment title" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
-            <textarea name="description" placeholder="Details or notes" className="min-h-28 rounded-xl border border-border bg-white px-3 py-3 text-sm" />
-            <select name="courseId" className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
+            <input name="title" aria-label="Task title" required placeholder="Assignment title" className="h-11 rounded-xl border border-border bg-white px-3 text-sm" />
+            <textarea name="description" aria-label="Task description" placeholder="Details or notes" className="min-h-28 rounded-xl border border-border bg-white px-3 py-3 text-sm" />
+            <select name="courseId" aria-label="Task course" className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
               <option value="">No course</option>
               {courses.map((course) => (
                 <option key={course.id} value={course.id}>
@@ -54,12 +54,12 @@ export default async function TasksPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="grid gap-2 text-sm font-semibold">
                 Due date and time
-                <input name="dueAt" type="datetime-local" aria-describedby="task-due-date-help" className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal" />
+                <input name="dueAt" type="datetime-local" aria-label="Task due date" aria-describedby="task-due-date-help" className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal" />
                 <span id="task-due-date-help" className="text-xs font-normal text-muted">Enter when this task or assignment must be submitted.</span>
               </label>
               <label className="grid gap-2 text-sm font-semibold">
                 Reminder date and time (optional)
-                <input name="reminderAt" type="datetime-local" className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal" />
+                <input name="reminderAt" type="datetime-local" aria-label="Task reminder date" className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal" />
                 <span className="text-xs font-normal text-muted">BRAIL will notify you at this time.</span>
               </label>
             </div>
@@ -106,11 +106,11 @@ export default async function TasksPage() {
                     <summary className="cursor-pointer text-sm font-semibold text-accent">Edit task</summary>
                     <form action={updateTask} className="mt-3 grid gap-3">
                       <input type="hidden" name="id" value={task.id} />
-                      <input name="title" required minLength={2} maxLength={160} defaultValue={task.title} className="h-10 rounded-md border border-border bg-white px-3 text-sm" />
-                      <textarea name="description" maxLength={5000} defaultValue={task.description ?? ""} className="min-h-20 rounded-md border border-border bg-white px-3 py-2 text-sm" />
-                      <select name="courseId" defaultValue={task.courseId ?? ""} className="h-10 rounded-md border border-border bg-white px-3 text-sm"><option value="">No course</option>{courses.map((course) => <option key={course.id} value={course.id}>{course.name}</option>)}</select>
-                      <div className="grid gap-3 sm:grid-cols-2"><input name="dueAt" type="datetime-local" defaultValue={formatAccraDateTimeInput(task.dueAt)} className="h-10 rounded-md border border-border bg-white px-3 text-sm" /><input name="reminderAt" type="datetime-local" defaultValue={formatAccraDateTimeInput(task.reminderAt)} className="h-10 rounded-md border border-border bg-white px-3 text-sm" /></div>
-                      <select name="priority" defaultValue={task.priority} className="h-10 rounded-md border border-border bg-white px-3 text-sm">{priorities.map((priority) => <option key={priority}>{priority}</option>)}</select>
+                      <input name="title" aria-label="Edit task title" required minLength={2} maxLength={160} defaultValue={task.title} className="h-10 rounded-md border border-border bg-white px-3 text-sm" />
+                      <textarea name="description" aria-label="Edit task description" maxLength={5000} defaultValue={task.description ?? ""} className="min-h-20 rounded-md border border-border bg-white px-3 py-2 text-sm" />
+                      <select name="courseId" aria-label="Edit task course" defaultValue={task.courseId ?? ""} className="h-10 rounded-md border border-border bg-white px-3 text-sm"><option value="">No course</option>{courses.map((course) => <option key={course.id} value={course.id}>{course.name}</option>)}</select>
+                      <div className="grid gap-3 sm:grid-cols-2"><input name="dueAt" type="datetime-local" aria-label="Edit task due date" defaultValue={formatAccraDateTimeInput(task.dueAt)} className="h-10 rounded-md border border-border bg-white px-3 text-sm" /><input name="reminderAt" type="datetime-local" aria-label="Edit task reminder date" defaultValue={formatAccraDateTimeInput(task.reminderAt)} className="h-10 rounded-md border border-border bg-white px-3 text-sm" /></div>
+                      <select name="priority" aria-label="Edit task priority" defaultValue={task.priority} className="h-10 rounded-md border border-border bg-white px-3 text-sm">{priorities.map((priority) => <option key={priority}>{priority}</option>)}</select>
                       <PendingSubmitButton pendingLabel="Updating..." className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-border px-3 text-sm font-semibold text-muted">Save changes</PendingSubmitButton>
                     </form>
                   </details> : null}

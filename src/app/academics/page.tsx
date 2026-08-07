@@ -89,7 +89,7 @@ export default async function AcademicsPage() {
           </div>
           <div className="mt-5 grid gap-4">
             {availableSlots.length ? (
-              <select name="slot" required defaultValue={availableSlots[0] ? `${availableSlots[0].level}|${availableSlots[0].name}` : ""} className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
+              <select name="slot" aria-label="Semester slot" required defaultValue={availableSlots[0] ? `${availableSlots[0].level}|${availableSlots[0].name}` : ""} className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
                 {availableSlots.map((slot) => (
                   <option key={`${slot.level}|${slot.name}`} value={`${slot.level}|${slot.name}`}>
                     {formatLevel(slot.level)} - {slot.name}
@@ -102,6 +102,7 @@ export default async function AcademicsPage() {
             <p className="text-xs leading-5 text-muted">This is an exception record and is not part of your provisioned curriculum.</p>
             <select
               name="academicYear"
+              aria-label="Academic year"
               required
               defaultValue={defaultAcademicYear}
               className="h-11 rounded-xl border border-border bg-white px-3 text-sm"

@@ -33,7 +33,7 @@ function overlaps(start: string, end: string, block: UnavailableBlock) {
 
 export function UnavailableTimesGrid({ blocks, readOnly = false }: { blocks: UnavailableBlock[]; readOnly?: boolean }) {
   return (
-    <section className="rounded-2xl border border-border bg-white p-5">
+    <section className="min-w-0 rounded-2xl border border-border bg-white p-5">
       <h2 className="text-lg font-semibold">Weekly unavailable times</h2>
       <p className="mt-2 text-sm leading-6 text-muted">
         {readOnly

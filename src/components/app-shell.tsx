@@ -68,7 +68,7 @@ export async function AppShell({ children, eyebrow, fullBleed = false }: AppShel
           <div className="flex items-center gap-2">
             <NotificationBell />
             <form action={signOut}>
-              <button type="submit" className="inline-flex h-10 items-center gap-2 rounded-xl border border-border bg-white px-3 text-sm font-medium text-muted hover:border-accent hover:text-accent">
+              <button type="submit" aria-label="Sign out" className="inline-flex h-10 items-center gap-2 rounded-xl border border-border bg-white px-3 text-sm font-medium text-muted hover:border-accent hover:text-accent">
                 <LogOut className="h-4 w-4" />
                 <span className="hidden sm:inline">Sign out</span>
               </button>

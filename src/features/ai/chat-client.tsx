@@ -5,6 +5,7 @@ import { Bot, LockKeyhole, Send, Square, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { MarkdownMessage } from "@/features/ai/markdown-message";
+import type { GroundingSource } from "@/features/ai/grounding";
 import { ChatMaterialUpload } from "@/features/materials/chat-material-upload";
 
 type ChatMessage = {
@@ -12,6 +13,7 @@ type ChatMessage = {
   role: "USER" | "ASSISTANT";
   content: string;
   createdAt: string;
+  sources?: GroundingSource[];
 };
 
 type AiChatClientProps = {
@@ -98,6 +100,15 @@ export function AiChatClient({
 
       const returnedConversationId = response.headers.get("x-conversation-id");
       if (returnedConversationId) setCurrentConversationId(returnedConversationId);
+      const encodedSources = response.headers.get("x-material-sources");
+      if (encodedSources) {
+        try {
+          const sources = JSON.parse(decodeURIComponent(encodedSources)) as GroundingSource[];
+          setMessages((current) => current.map((item) => item.id === assistantId ? { ...item, sources } : item));
+        } catch {
+          // Source metadata is supplementary; the answer remains usable.
+        }
+      }
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
@@ -176,6 +187,19 @@ export function AiChatClient({
                       <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-muted [animation-delay:300ms]" />
                     </div>
                   )}
+                  {item.role === "ASSISTANT" && item.sources?.length ? (
+                    <div className="mt-3 border-t border-border pt-2" aria-label="Sources used">
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-muted">Sources used</p>
+                      <ul className="mt-1 grid gap-1 text-xs text-muted">
+                        {item.sources.map((source) => (
+                          <li key={`${item.id}-${source.reference}`}>
+                            <span className="font-semibold text-foreground">[{source.reference}]</span> {source.materialTitle}
+                            {source.topic ? ` · ${source.topic}` : ""}{source.pageLabel ? ` · ${source.pageLabel}` : ""}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
                 </div>
                 {item.role === "USER" ? (
                   <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border bg-background">

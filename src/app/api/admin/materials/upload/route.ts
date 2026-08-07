@@ -6,6 +6,7 @@ import { createAdminContentAudit } from "@/features/admin/audit";
 import { chunkMaterialText } from "@/features/materials/chunking";
 import { acceptedMaterialExtensions, extractCourseMaterialText, hasValidMaterialFileType, materialFileExtension } from "@/features/materials/extract";
 import { uploadCourseMaterialFile } from "@/features/materials/storage";
+import { materialPermissionBasisSchema, platformMaterialProvenanceSchema } from "@/features/materials/provenance";
 import { prisma } from "@/server/db";
 import { checkRateLimit, rateLimitResponse } from "@/server/rate-limit";
 
@@ -17,6 +18,8 @@ const fieldsSchema = z.object({
   topicIds: z.array(z.string().uuid()).min(1).max(20),
   title: z.string().trim().min(2).max(160),
   type: z.enum(["NOTE", "SLIDE", "PAST_QUESTION", "OTHER"]),
+  permissionBasis: materialPermissionBasisSchema,
+  permissionNote: z.string().trim().min(5).max(1000),
   sourceUrl: z.union([z.string().url().max(2000), z.literal("")]).optional(),
 });
 
@@ -40,10 +43,13 @@ export async function POST(request: Request) {
     topicIds: formData.getAll("topicIds"),
     title: formData.get("title"),
     type: formData.get("type"),
+    permissionBasis: formData.get("permissionBasis"),
+    permissionNote: formData.get("permissionNote"),
     sourceUrl: formData.get("sourceUrl") || "",
   });
-  if (!(file instanceof File) || !parsed.success) {
-    return NextResponse.json({ message: "Check the course, title, topic, and file." }, { status: 400 });
+  const provenance = parsed.success ? platformMaterialProvenanceSchema.safeParse(parsed.data) : null;
+  if (!(file instanceof File) || !parsed.success || !provenance?.success) {
+    return NextResponse.json({ message: provenance && !provenance.success ? provenance.error.issues[0]?.message : "Check the course, title, topic, provenance, and file." }, { status: 400 });
   }
   const extension = materialFileExtension(file.name);
   if (!acceptedMaterialExtensions.includes(extension)) {
@@ -71,6 +77,8 @@ export async function POST(request: Request) {
       title: parsed.data.title,
       type: parsed.data.type,
       sourceUrl: parsed.data.sourceUrl || null,
+      permissionBasis: parsed.data.permissionBasis,
+      permissionNote: parsed.data.permissionNote,
       originalFileName: file.name,
       mimeType: file.type || "application/octet-stream",
       fileSize: file.size,
@@ -107,7 +115,7 @@ export async function POST(request: Request) {
       await createAdminContentAudit(tx, {
         actorId: appUser.id, action: "MATERIAL_PUBLISHED", targetType: "MATERIAL",
         targetId: material.id, targetLabel: parsed.data.title,
-        metadata: { courseId: primaryTopic.courseId, topicIds: topics.map((topic) => topic.id), type: parsed.data.type, chunkCount: chunks.length, fileSize: file.size },
+        metadata: { courseId: primaryTopic.courseId, topicIds: topics.map((topic) => topic.id), type: parsed.data.type, permissionBasis: parsed.data.permissionBasis, chunkCount: chunks.length, fileSize: file.size },
       });
     });
     return NextResponse.json({ message: `Published ${chunks.length} searchable chunks.` });
@@ -119,7 +127,7 @@ export async function POST(request: Request) {
       await createAdminContentAudit(tx, {
         actorId: appUser.id, action: "MATERIAL_PROCESSING_FAILED", targetType: "MATERIAL",
         targetId: material.id, targetLabel: parsed.data.title,
-        metadata: { courseId: primaryTopic.courseId, type: parsed.data.type, fileSize: file.size },
+        metadata: { courseId: primaryTopic.courseId, type: parsed.data.type, permissionBasis: parsed.data.permissionBasis, fileSize: file.size },
       });
     });
     return NextResponse.json({ message }, { status: 422 });

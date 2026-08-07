@@ -69,7 +69,7 @@ Exit gate: passed locally on 2026-08-04. Authorization tests pass, costly routes
 
 Target: 5-7 days.
 
-Status: implementation complete locally. The local quality gate passes with 31 test files and 87 tests. GitHub Actions run #9 passed `Quality`; its browser job stopped at database security verification before the Support and Feedback RLS correction. That migration has been corrected and later local migrations add material de-duplication, semester archival, goal progress history, AI usage accounting, diagnostic feedback, immutable content auditing, correction requests, and curriculum course rules. Browser CI must be rerun after the current branch is pushed. Branch protection on `main` was explicitly deferred by the Founder on 2026-08-05. See [testing.md](./testing.md) for commands, isolation rules, and CI details.
+Status: implementation complete locally. The local quality gate passes with 35 test files and 101 tests. GitHub Actions run #9 passed `Quality`; its browser job stopped at database security verification before the Support and Feedback RLS correction. That migration has been corrected and later local migrations add material de-duplication, semester archival, goal progress history, AI usage accounting, diagnostic feedback, immutable content auditing, correction requests, curriculum course rules, and material provenance. Browser CI must be rerun after the current branch is pushed. Branch protection on `main` was explicitly deferred by the Founder on 2026-08-05. See [testing.md](./testing.md) for commands, isolation rules, and CI details.
 
 - [x] Add Vitest for schemas and business logic.
 - [x] Add React Testing Library for interactive components.
@@ -82,7 +82,7 @@ Status: implementation complete locally. The local quality gate passes with 31 t
 - [x] Confirm the first isolated GitHub browser run passes.
 - [ ] Require the `Quality` and `Browser journeys` checks in branch protection. Deferred by Founder decision on 2026-08-05.
 
-Exit gate: branch-protection activation is deferred, and browser CI still needs a rerun after the current pushed state. Local lint, TypeScript, 87 automated tests, Prisma validation, and the production build pass. `npm run test:e2e` is currently blocked locally because `.env.test.local` is not configured. The prior isolated browser run passed all 9 journeys without retries.
+Exit gate: branch-protection activation is deferred, and browser CI still needs a rerun after the current pushed state. Local lint, TypeScript, 101 automated tests, Prisma validation, and the production build pass. `npm run test:e2e` is currently blocked locally because `.env.test.local` is not configured. The prior isolated browser run passed all 9 journeys without retries.
 
 ## Phase 3: Complete product UX
 
@@ -96,7 +96,7 @@ Status: mostly complete on 2026-08-05. Support and Feedback now persist authenti
 - [x] Add pending submit states to onboarding, profile, goals, planner, notifications, tasks, support, and feedback.
 - [x] Standardize the critical empty, loading, error, read-only, and recovery states across student workflows.
 - [x] Prevent duplicate submissions on important mutation forms and confirm destructive actions consistently.
-- Complete mobile, keyboard, focus, label, landmark, contrast, and reduced-motion reviews.
+- [ ] Complete mobile, keyboard, focus, label, landmark, contrast, and reduced-motion reviews. Automated mobile overflow, main-landmark, and accessible-name checks are configured; manual review remains.
 - [x] Explain unavailable AI and OCR integrations clearly.
 - [x] Add bounded AI provider timeout and retry recovery for chat and diagnostics.
 
@@ -124,18 +124,18 @@ Exit gate: local implementation and tests pass. Remaining launch work is externa
 
 Target: 5-8 days.
 
-- Build a course-specific AI and diagnostic evaluation set.
-- Show materials or topics used to ground answers.
-- Prefer an explicit insufficient-material response over unsupported claims.
-- Add timeouts, retries, cancellation, and provider-failure recovery.
-- Track per-user AI usage, latency, failures, tokens, and cost.
-- Apply quotas across every generative endpoint.
-- Test academic-integrity and prompt-injection safeguards.
-- Add diagnostic validation and student quality feedback.
-- Add failed-ingestion reprocessing, duplicate handling, and content versioning.
-- Review source and permission metadata for platform materials.
+- [x] Build a course-specific AI and diagnostic evaluation set.
+- [x] Show materials or topics used to ground answers.
+- [x] Prefer an explicit insufficient-material response over unsupported claims.
+- [x] Add timeouts, retries, cancellation, and provider-failure recovery.
+- [x] Track per-user AI usage, latency, failures, tokens, and cost.
+- [x] Apply quotas across every generative endpoint.
+- [x] Test academic-integrity and prompt-injection safeguards.
+- [x] Add diagnostic validation and student quality feedback.
+- [x] Add failed-ingestion reprocessing, duplicate handling, and content versioning.
+- [ ] Review source and permission metadata for platform materials. Capture is enforced for new uploads; 25 existing development records remain safely marked unknown pending evidence.
 
-Progress on 2026-08-05: course material records now carry a SHA-256 content hash, repeated READY/PENDING uploads are rejected or ignored, and a FAILED upload with its stored original file can be reprocessed safely. Replacing a material archives the prior active version, preserves a version chain, and records each ingestion attempt. AI chat and diagnostics record token estimates, latency, failure state, model, and configurable estimated spend; daily per-user and global token quotas are enforced before provider calls. Students can rate completed diagnostics, and administrators can see AI and ingestion operational counts. A course-specific evaluation set remains.
+Progress through 2026-08-07: material de-duplication, failed-upload recovery, replacement history, AI usage accounting, quotas, and diagnostic feedback are implemented. Course-content questions without retrieved evidence now receive a saved insufficient-material response without a provider call, while grounded answers display material and topic references. The deterministic seven-course policy set passes 7/7 without provider quota. Shared uploads now require permission basis and evidence; existing records remain unknown until real rights evidence is available. Live-model factual review remains before the quality exit gate.
 
 Exit gate: quality thresholds are met, AI cost is bounded, and failed ingestion is recoverable.
 
@@ -160,13 +160,13 @@ Exit gate: advertised coverage is verified and administrator changes are attribu
 
 Target: 3-5 days.
 
-- Generate reminders in scheduled background jobs rather than browser activity.
-- Keep notification generation idempotent with stable source keys.
-- Cover tasks, study sessions, goals, peer answers, and group updates.
-- Define in-app, email, and push scope.
-- Add retention, cleanup, delivery-failure tracking, and preference tests.
+- [x] Generate reminders in a scheduler-ready background endpoint rather than relying only on browser activity.
+- [x] Keep notification generation idempotent with stable source keys.
+- [x] Cover tasks, study sessions, goals, peer answers, and group updates.
+- [x] Define the implemented channel scope as in-app only; email and push are outside the current implementation.
+- [x] Add retention, cleanup, per-user failure isolation, cursor, and preference tests.
 
-Progress on 2026-08-05: an authenticated scheduled notification endpoint now synchronizes up to 1,000 active users using the existing stable source keys and duplicate-safe inserts. A deployment scheduler and `CRON_SECRET` remain intentionally unconfigured until Phase 8 infrastructure approval.
+Progress through 2026-08-07: an authenticated scheduled endpoint processes active users in bounded 100-user cursor batches using stable source keys and duplicate-safe inserts. It excludes deleted accounts, isolates per-user failures, reports aggregate duration/failure/cleanup metrics, and removes only terminal records older than 180 days. A deployment scheduler and `CRON_SECRET` remain intentionally unconfigured until Phase 8 infrastructure approval.
 
 Exit gate: reminders work while users are offline, duplicates are prevented, and preferences suppress all relevant delivery paths.
 
@@ -204,7 +204,7 @@ Exit gate: no launch blocker remains, at least 90% of pilot users complete criti
 
 | Environment | Purpose | Data policy | Status |
 | --- | --- | --- | --- |
-| Development | Local implementation | Synthetic or developer-owned data only | Configured database verified at all 47 migrations on 2026-08-07 |
+| Development | Local implementation | Synthetic or developer-owned data only | Configured database verified at all 48 migrations on 2026-08-07 |
 | Staging | Release candidate verification | Synthetic pilot-like data; no production secrets | Not provisioned |
 | Production | Student use | Real student data under a published retention policy | Not provisioned |
 

@@ -214,14 +214,15 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
         </section>
       ) : null}
 
-      <section className="mt-6 grid gap-6 xl:grid-cols-[0.8fr_1.2fr]">
-        <div className="grid gap-6">
+      <section className="mt-6 grid min-w-0 gap-6 xl:grid-cols-[0.8fr_1.2fr]">
+        <div className="grid min-w-0 gap-6">
           <form action="/planner" className="rounded-2xl border border-border bg-white p-5">
             {selectedStudyPlan ? <input type="hidden" name="planId" value={selectedStudyPlan.id} /> : null}
             <h2 className="text-lg font-semibold">Course filter</h2>
             <div className="mt-4 grid gap-3">
               <select
                 name="courseId"
+                aria-label="Planner course filter"
                 defaultValue={selectedCourseId}
                 className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
               >
@@ -243,6 +244,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
             <fieldset disabled={isArchived} className="mt-4 grid gap-3 disabled:opacity-60">
               <input
                 name="title"
+                aria-label="Study plan title"
                 required
                 placeholder="e.g. Week 3 revision plan"
                 className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
@@ -277,7 +279,7 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
           /> : null}
         </div>
 
-        <div className="grid gap-6">
+        <div className="grid min-w-0 gap-6">
           <section className="rounded-2xl border border-border bg-white p-5">
             {planner.studyPlans.length > 1 ? (
               <form

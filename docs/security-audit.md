@@ -37,10 +37,10 @@ Status: Phase 1 implementation and development-environment verification are comp
 
 Completed against the configured development environment on 2026-08-04, with local application checks rerun on 2026-08-05:
 
-- All 32 Prisma migrations applied at the Phase 1 checkpoint; the current branch now contains 35 migrations and must be replayed in isolated staging before release.
+- All 32 Prisma migrations applied at the Phase 1 checkpoint; the configured development database now contains 48 migrations and they must be replayed in isolated staging before release.
 - Database verifier found zero public application tables without RLS and zero direct `anon` or `authenticated` table grants.
 - A temporary private object could not be listed or downloaded by either an anonymous client or a temporary ordinary authenticated client. The object and temporary Auth user were removed by the verifier.
-- Vitest suite: 19 files and 51 tests passed, including security regression coverage.
+- Current Vitest suite: 35 files and 101 tests pass, including security regression coverage.
 - ESLint and TypeScript validation passed.
 - `npm audit` reported zero vulnerabilities.
 

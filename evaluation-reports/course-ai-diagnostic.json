@@ -1,0 +1,75 @@
+{
+  "evaluatedAt": "2026-08-07T12:05:12.093Z",
+  "version": "2026-08-07",
+  "mode": "offline-policy-regression",
+  "note": "This verifies grounding and diagnostic-format controls without spending provider quota; live model quality still requires a controlled evaluation run.",
+  "courses": 7,
+  "caseCount": 7,
+  "passed": 7,
+  "passRate": 1,
+  "cases": [
+    {
+      "courseCode": "CE 155",
+      "topic": "Sustainability",
+      "groundingRequired": true,
+      "groundedAnswerPassed": true,
+      "insufficientMaterialPassed": true,
+      "diagnosticSelfContained": true,
+      "issues": []
+    },
+    {
+      "courseCode": "COE 153",
+      "topic": "Computer Hardware Assembly",
+      "groundingRequired": true,
+      "groundedAnswerPassed": true,
+      "insufficientMaterialPassed": true,
+      "diagnosticSelfContained": true,
+      "issues": []
+    },
+    {
+      "courseCode": "COE 181",
+      "topic": "DC Circuit Analysis",
+      "groundingRequired": true,
+      "groundedAnswerPassed": true,
+      "insufficientMaterialPassed": true,
+      "diagnosticSelfContained": true,
+      "issues": []
+    },
+    {
+      "courseCode": "ENGL 157",
+      "topic": "Academic Writing",
+      "groundingRequired": true,
+      "groundedAnswerPassed": true,
+      "insufficientMaterialPassed": true,
+      "diagnosticSelfContained": true,
+      "issues": []
+    },
+    {
+      "courseCode": "MATH 151",
+      "topic": "Complex Numbers",
+      "groundingRequired": true,
+      "groundedAnswerPassed": true,
+      "insufficientMaterialPassed": true,
+      "diagnosticSelfContained": true,
+      "issues": []
+    },
+    {
+      "courseCode": "ME 159",
+      "topic": "Orthographic Projection",
+      "groundingRequired": true,
+      "groundedAnswerPassed": true,
+      "insufficientMaterialPassed": true,
+      "diagnosticSelfContained": true,
+      "issues": []
+    },
+    {
+      "courseCode": "ME 161",
+      "topic": "Forces and Equilibrium",
+      "groundingRequired": true,
+      "groundedAnswerPassed": true,
+      "insufficientMaterialPassed": true,
+      "diagnosticSelfContained": true,
+      "issues": []
+    }
+  ]
+}

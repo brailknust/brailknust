@@ -1,0 +1,53 @@
+{
+  "evaluatedAt": "2026-08-07T12:05:13.754Z",
+  "version": "2026-08-07",
+  "mode": "representative-text-fixtures",
+  "note": "Text-fixture parsing is automated. Evaluation against real KNUST timetable images remains an external-input launch check.",
+  "caseCount": 5,
+  "expectedRows": 6,
+  "matchedRows": 6,
+  "recall": 1,
+  "exactCases": 5,
+  "cases": [
+    {
+      "id": "inline-12-hour",
+      "expectedRows": 1,
+      "parsedRows": 1,
+      "matchedRows": 1,
+      "recall": 1,
+      "exact": true
+    },
+    {
+      "id": "inline-24-hour",
+      "expectedRows": 1,
+      "parsedRows": 1,
+      "matchedRows": 1,
+      "recall": 1,
+      "exact": true
+    },
+    {
+      "id": "table-block",
+      "expectedRows": 2,
+      "parsedRows": 2,
+      "matchedRows": 2,
+      "recall": 1,
+      "exact": true
+    },
+    {
+      "id": "ocr-day-fragment",
+      "expectedRows": 1,
+      "parsedRows": 1,
+      "matchedRows": 1,
+      "recall": 1,
+      "exact": true
+    },
+    {
+      "id": "duplicate-lines",
+      "expectedRows": 1,
+      "parsedRows": 1,
+      "matchedRows": 1,
+      "recall": 1,
+      "exact": true
+    }
+  ]
+}

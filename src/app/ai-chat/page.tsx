@@ -19,6 +19,7 @@ import {
 } from "@/features/ai/actions";
 import { AiChatClient } from "@/features/ai/chat-client";
 import { getAiChatPageData } from "@/features/ai/queries";
+import { attachGroundingSources } from "@/features/ai/grounding";
 import { requireAppUser } from "@/features/auth/queries";
 
 type AiChatPageProps = {
@@ -57,6 +58,7 @@ export default async function AiChatPage({ searchParams }: AiChatPageProps) {
     ? `Level ${data.profile.level.replace("LEVEL_", "")}`
     : "Level not set";
   const selectedId = data.selectedConversation?.id ?? null;
+  const initialMessages = attachGroundingSources(data.selectedConversation?.messages ?? []);
 
   return (
     <AppShell title="AI Chat" eyebrow="AI Support" fullBleed>
@@ -210,11 +212,12 @@ export default async function AiChatPage({ searchParams }: AiChatPageProps) {
             conversationId={selectedId}
             enrollmentId={data.selectedConversation?.enrollmentId ?? null}
             courseLabel={data.selectedConversation?.enrollment.course.name ?? null}
-            initialMessages={(data.selectedConversation?.messages ?? []).map((message) => ({
+            initialMessages={initialMessages.map((message) => ({
               id: message.id,
               role: message.role,
               content: message.content,
               createdAt: message.createdAt.toISOString(),
+              sources: message.sources,
             }))}
             isConfigured={data.isConfigured}
             remainingMessages={Math.max(data.dailyLimit - data.usedToday, 0)}

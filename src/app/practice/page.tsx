@@ -80,7 +80,7 @@ export default async function PracticePage() {
         </p>
       </section>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+      <div className="mt-6 grid min-w-0 gap-6 lg:grid-cols-[0.8fr_1.2fr]">
         <PracticeGenerator
           enrollments={enrollments.map((enrollment) => ({
             id: enrollment.id,

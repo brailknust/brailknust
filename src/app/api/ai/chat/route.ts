@@ -17,6 +17,7 @@ import {
 import { checkAiUsageQuota, estimateMessageTokens, estimateTokenCount, recordAiUsage } from "@/features/ai/usage";
 import { sendAiMessageSchema } from "@/features/ai/schemas";
 import { formatUntrustedContent } from "@/features/ai/untrusted-content";
+import { insufficientMaterialResponse, requiresCourseMaterial } from "@/features/ai/grounding";
 import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
 import { retrieveCourseMaterialContext } from "@/features/materials/retrieval";
 import { prisma } from "@/server/db";
@@ -186,6 +187,23 @@ export async function POST(request: Request) {
     materialSources: materialContext.sources,
   };
 
+  if (requiresCourseMaterial(parsed.message) && materialContext.passages.length === 0) {
+    const response = insufficientMaterialResponse(scope);
+    await prisma.$transaction([
+      prisma.aiMessage.create({ data: { conversationId: conversation.id, role: "USER", content: parsed.message, contextUsed: messageContext } }),
+      prisma.aiMessage.create({ data: { conversationId: conversation.id, role: "ASSISTANT", content: response, model: "grounding-policy" } }),
+      prisma.aiConversation.update({ where: { id: conversation.id }, data: { updatedAt: new Date() } }),
+    ]);
+    return new Response(response, {
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-store",
+        "X-Conversation-Id": conversation.id,
+        "X-Grounding": "insufficient",
+      },
+    });
+  }
+
   const userMessage = await prisma.aiMessage.create({
     data: {
       conversationId: conversation.id,
@@ -264,6 +282,7 @@ export async function POST(request: Request) {
                 role: "ASSISTANT",
                 content: assistantText,
                 model: aiModel,
+                contextUsed: { materialSources: materialContext.sources },
               },
             }),
             prisma.aiConversation.update({
@@ -314,6 +333,13 @@ export async function POST(request: Request) {
       "Content-Type": "text/plain; charset=utf-8",
       "Cache-Control": "no-store",
       "X-Conversation-Id": conversation.id,
+      "X-Material-Sources": encodeURIComponent(JSON.stringify(materialContext.sources.map((source) => ({
+        reference: source.reference,
+        materialTitle: source.materialTitle,
+        sourceType: source.sourceType,
+        topic: source.topic,
+        pageLabel: source.pageLabel,
+      })))),
     },
   });
 }

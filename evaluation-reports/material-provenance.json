@@ -1,0 +1,16 @@
+{
+  "verifiedAt": "2026-08-07T12:07:12.004Z",
+  "publishedMaterials": 25,
+  "reviewedMaterials": 0,
+  "pendingReview": 25,
+  "publicRecordsWithoutUrl": 0,
+  "complete": false,
+  "byPermissionBasis": {
+    "AUTHOR_PERMISSION": 0,
+    "OPEN_LICENSE": 0,
+    "PUBLIC_DOMAIN": 0,
+    "INSTITUTIONAL_USE": 0,
+    "UNKNOWN": 25
+  },
+  "note": "UNKNOWN is a deliberate safe backfill and must not be interpreted as permission to distribute."
+}
