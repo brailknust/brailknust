@@ -8,6 +8,8 @@ const mocks = vi.hoisted(() => ({
   tasks: vi.fn(),
   studyItems: vi.fn(),
   assessments: vi.fn(),
+  masteries: vi.fn(),
+  attempts: vi.fn(),
 }));
 
 vi.mock("@/server/db", () => ({
@@ -19,6 +21,8 @@ vi.mock("@/server/db", () => ({
     task: { findMany: mocks.tasks },
     studyPlanItem: { findMany: mocks.studyItems },
     assessment: { findMany: mocks.assessments },
+    topicMastery: { findMany: mocks.masteries },
+    diagnosticAttempt: { findMany: mocks.attempts },
   },
 }));
 
@@ -66,6 +70,8 @@ describe("automatic goal progress", () => {
       { courseId: null, score: 8, maxScore: 10, assessedAt: new Date("2026-08-01T00:00:00.000Z"), createdAt: new Date("2026-08-01T00:00:00.000Z") },
       { courseId: null, score: 18, maxScore: 20, assessedAt: new Date("2026-08-02T00:00:00.000Z"), createdAt: new Date("2026-08-02T00:00:00.000Z") },
     ]);
+    mocks.masteries.mockResolvedValue([]);
+    mocks.attempts.mockResolvedValue([]);
   });
 
   afterEach(() => vi.useRealTimers());

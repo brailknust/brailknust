@@ -30,6 +30,7 @@ export async function AppShell({ children, eyebrow, fullBleed = false }: AppShel
       ? [
           { label: "Admin content", href: "/admin/content" },
           { label: "Programme catalog", href: "/admin/catalog" },
+          { label: "Content audit", href: "/admin/audit" },
           { label: "Admin access", href: "/admin/users" },
           { label: "Support and feedback", href: "/admin/feedback" },
         ]

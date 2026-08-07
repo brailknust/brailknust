@@ -1,16 +1,16 @@
 # Testing BRAIL
 
-Phase 2 and later workflow work uses a layered release gate: fast Vitest checks protect business rules and components, while Playwright drives authenticated journeys against an isolated Supabase environment. The local suite currently contains 59 tests across 22 files.
+Phase 2 and later workflow work uses a layered release gate: fast Vitest checks protect business rules and components, while Playwright drives authenticated journeys against an isolated Supabase environment. The local suite currently contains 75 tests across 28 files.
 
 ## Test layers
 
 | Layer | Command | Coverage |
 | --- | --- | --- |
-| Unit and integration | `npm test` | Schemas, Accra time, curriculum CSV validation, task expiry and transitions, planner collisions, timetable parsing, goals and progress snapshots, notifications, retrieval, AI context, material chunking, and cross-account scope rules |
+| Unit and integration | `npm test` | Schemas, Accra time, curriculum CSV validation, catalog filtering/pagination, privacy-minimized audit metadata, correction-request boundaries, task expiry and transitions, planner collisions, timetable parsing, goals and progress snapshots, notifications, retrieval, AI context, material chunking, and cross-account scope rules |
 | Component | `npm run test:components` | Authentication, onboarding controls, and destructive-action confirmation |
 | Coverage gate | `npm run test:coverage` | The complete `src/features` and `src/components` surface, including untested files |
 | Browser journeys | `npm run test:e2e` | Signup/onboarding, admin access, semesters, tasks, planner, private materials, diagnostics, peers, groups, and notifications |
-| Database security | `npm run security:database` | RLS, browser-role grants, private Storage behavior, and cross-account rejection |
+| Database security | `npm run security:database` | RLS, browser-role grants, immutable audit enforcement, private Storage behavior, and cross-account rejection |
 
 Run the fast local gate with:
 

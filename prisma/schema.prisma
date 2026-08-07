@@ -175,11 +175,13 @@ enum AttendanceStatus {
   CANCELLED
   EXCUSED
 }
+
 enum AttendanceSource {
   TIMETABLE_PROMPT
   SELF_REPORTED
   OCR_IMPORTED
 }
+
 enum StudySessionStatus {
   PLANNED
   ACTIVE
@@ -188,11 +190,13 @@ enum StudySessionStatus {
   CANCELLED
   EXPIRED
 }
+
 enum StudyCompletionSource {
   TIMER_TRACKED
   SELF_REPORTED
   AUTO_CLOSED
 }
+
 enum CwaEvidenceMode {
   OFFICIAL
   PROJECTED
@@ -259,68 +263,89 @@ enum CurriculumImportRowStatus {
   APPLIED
 }
 
+enum AdminContentTargetType {
+  CATALOG
+  TOPIC
+  MATERIAL
+}
+
+enum ContentCorrectionTargetType {
+  COURSE
+  TOPIC
+  MATERIAL
+}
+
+enum ContentCorrectionStatus {
+  SUBMITTED
+  IN_REVIEW
+  RESOLVED
+  REJECTED
+}
+
 model User {
-  id                        String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  authUserId                String                     @unique @map("auth_user_id") @db.Uuid
-  email                     String                     @unique
-  role                      UserRole                   @default(STUDENT)
-  fullName                  String                     @map("full_name")
-  studentId                 String?                    @unique @map("student_id")
-  college                   String?
-  programme                 String?
-  department                String?
-  level                     AcademicLevel?
-  cwa                       Decimal?                   @db.Decimal(5, 2)
-  activeSemesterId          String?                    @map("active_semester_id") @db.Uuid
-  avatarUrl                 String?                    @map("avatar_url")
-  createdAt                 DateTime                   @default(now()) @map("created_at")
-  updatedAt                 DateTime                   @updatedAt @map("updated_at")
-  deletedAt                 DateTime?                  @map("deleted_at")
-  deletionStoragePaths      Json?                      @map("deletion_storage_paths")
-  deletionStoragePending    Boolean                    @default(false) @map("deletion_storage_pending")
-  deletionAuthPending       Boolean                    @default(false) @map("deletion_auth_pending")
-  deletionAttempts          Int                        @default(0) @map("deletion_attempts")
-  deletionLastError         String?                    @map("deletion_last_error")
-  deletionCompletedAt       DateTime?                  @map("deletion_completed_at")
-  activeSemester            Semester?                  @relation("UserActiveSemester", fields: [activeSemesterId], references: [id])
-  aiConversations           AiConversation[]
-  aiUsageEvents             AiUsageEvent[]
-  assessments               Assessment[]
-  cwaSnapshots              CwaSnapshot[]
-  enrollments               Enrollment[]
-  goals                     Goal[]
-  goalProgressSnapshots     GoalProgressSnapshot[]
-  groupsOwned               StudyGroup[]               @relation("StudyGroupOwner")
-  memberships               StudyGroupMember[]
-  notifications             Notification[]
-  notificationPreference    NotificationPreference?
-  resources                 Resource[]
-  courseMaterials           CourseMaterial[]
-  diagnosticAttempts        DiagnosticAttempt[]
-  diagnosticFeedback        DiagnosticFeedback[]
-  diagnosticQuizzes         DiagnosticQuiz[]
-  topicMasteries            TopicMastery[]
-  semesterProfiles          SemesterProfile[]
-  semestersOwned            Semester[]                 @relation("UserSemesters")
-  studyPlans                StudyPlan[]
-  tasks                     Task[]
-  timetable                 TimetableBlock[]
-  weakAreas                 WeakArea[]
-  peerQuestions             PeerQuestion[]
-  peerAnswers               PeerAnswer[]
-  peerVotes                 PeerQuestionVote[]
-  platformMaterials         PlatformCourseMaterial[]
-  programmeCourseExclusions ProgrammeCourseExclusion[]
-  studentCourseExclusions   StudentCourseExclusion[]
-  adminRoleChangesMade      AdminRoleAudit[]           @relation("AdminRoleAuditActor")
-  adminRoleChangesReceived  AdminRoleAudit[]           @relation("AdminRoleAuditTarget")
-  coursesCreated            Course[]                   @relation("CourseCreator")
-  supportRequests           SupportRequest[]
-  feedback                  Feedback[]
-  attendanceRecords         AttendanceRecord[]
-  studySessions             StudySession[]
-  cwaEvidenceRecords        CwaEvidenceRecord[]
-  curriculumImports         CurriculumImport[]
+  id                         String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  authUserId                 String                     @unique @map("auth_user_id") @db.Uuid
+  email                      String                     @unique
+  role                       UserRole                   @default(STUDENT)
+  fullName                   String                     @map("full_name")
+  studentId                  String?                    @unique @map("student_id")
+  college                    String?
+  programme                  String?
+  department                 String?
+  level                      AcademicLevel?
+  cwa                        Decimal?                   @db.Decimal(5, 2)
+  activeSemesterId           String?                    @map("active_semester_id") @db.Uuid
+  avatarUrl                  String?                    @map("avatar_url")
+  createdAt                  DateTime                   @default(now()) @map("created_at")
+  updatedAt                  DateTime                   @updatedAt @map("updated_at")
+  deletedAt                  DateTime?                  @map("deleted_at")
+  deletionStoragePaths       Json?                      @map("deletion_storage_paths")
+  deletionStoragePending     Boolean                    @default(false) @map("deletion_storage_pending")
+  deletionAuthPending        Boolean                    @default(false) @map("deletion_auth_pending")
+  deletionAttempts           Int                        @default(0) @map("deletion_attempts")
+  deletionLastError          String?                    @map("deletion_last_error")
+  deletionCompletedAt        DateTime?                  @map("deletion_completed_at")
+  activeSemester             Semester?                  @relation("UserActiveSemester", fields: [activeSemesterId], references: [id])
+  aiConversations            AiConversation[]
+  aiUsageEvents              AiUsageEvent[]
+  assessments                Assessment[]
+  cwaSnapshots               CwaSnapshot[]
+  enrollments                Enrollment[]
+  goals                      Goal[]
+  goalProgressSnapshots      GoalProgressSnapshot[]
+  groupsOwned                StudyGroup[]               @relation("StudyGroupOwner")
+  memberships                StudyGroupMember[]
+  notifications              Notification[]
+  notificationPreference     NotificationPreference?
+  resources                  Resource[]
+  courseMaterials            CourseMaterial[]
+  diagnosticAttempts         DiagnosticAttempt[]
+  diagnosticFeedback         DiagnosticFeedback[]
+  diagnosticQuizzes          DiagnosticQuiz[]
+  topicMasteries             TopicMastery[]
+  semesterProfiles           SemesterProfile[]
+  semestersOwned             Semester[]                 @relation("UserSemesters")
+  studyPlans                 StudyPlan[]
+  tasks                      Task[]
+  timetable                  TimetableBlock[]
+  weakAreas                  WeakArea[]
+  peerQuestions              PeerQuestion[]
+  peerAnswers                PeerAnswer[]
+  peerVotes                  PeerQuestionVote[]
+  platformMaterials          PlatformCourseMaterial[]
+  programmeCourseExclusions  ProgrammeCourseExclusion[]
+  studentCourseExclusions    StudentCourseExclusion[]
+  adminRoleChangesMade       AdminRoleAudit[]           @relation("AdminRoleAuditActor")
+  adminRoleChangesReceived   AdminRoleAudit[]           @relation("AdminRoleAuditTarget")
+  coursesCreated             Course[]                   @relation("CourseCreator")
+  supportRequests            SupportRequest[]
+  feedback                   Feedback[]
+  attendanceRecords          AttendanceRecord[]
+  studySessions              StudySession[]
+  cwaEvidenceRecords         CwaEvidenceRecord[]
+  curriculumImports          CurriculumImport[]
+  contentCorrections         ContentCorrectionRequest[] @relation("ContentCorrectionRequester")
+  contentCorrectionsReviewed ContentCorrectionRequest[] @relation("ContentCorrectionReviewer")
 
   @@index([activeSemesterId])
   @@index([deletedAt])
@@ -370,32 +395,49 @@ model AdminRoleAudit {
   @@map("admin_role_audits")
 }
 
+model AdminContentAudit {
+  id          String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  actorId     String                 @map("actor_id") @db.Uuid
+  action      String
+  targetType  AdminContentTargetType @map("target_type")
+  targetId    String                 @map("target_id")
+  targetLabel String?                @map("target_label")
+  metadata    Json                   @default("{}")
+  createdAt   DateTime               @default(now()) @map("created_at")
+
+  @@index([targetType, targetId, createdAt])
+  @@index([actorId, createdAt])
+  @@index([createdAt])
+  @@map("admin_content_audits")
+}
+
 model Course {
-  id                String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  code              String                   @unique
-  name              String
-  creditHours       Int?                     @map("credit_hours")
-  department        String?
-  level             AcademicLevel?
-  description       String?
-  approvalStatus    CourseApprovalStatus     @default(PENDING) @map("approval_status")
-  createdById       String?                  @map("created_by_id") @db.Uuid
-  createdAt         DateTime                 @default(now()) @map("created_at")
-  createdBy         User?                    @relation("CourseCreator", fields: [createdById], references: [id], onDelete: SetNull)
-  assessments       Assessment[]
-  enrollments       Enrollment[]
-  goals             Goal[]
-  groups            StudyGroup[]
-  resources         Resource[]
-  studyItems        StudyPlanItem[]
-  tasks             Task[]
-  timetable         TimetableBlock[]
-  weakAreas         WeakArea[]
-  peerQuestions     PeerQuestion[]
-  platformMaterials PlatformCourseMaterial[]
-  platformTopics    PlatformCourseTopic[]
-  attendanceRecords AttendanceRecord[]
-  studySessions     StudySession[]
+  id                 String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  code               String                     @unique
+  name               String
+  creditHours        Int?                       @map("credit_hours")
+  department         String?
+  level              AcademicLevel?
+  description        String?
+  approvalStatus     CourseApprovalStatus       @default(PENDING) @map("approval_status")
+  createdById        String?                    @map("created_by_id") @db.Uuid
+  createdAt          DateTime                   @default(now()) @map("created_at")
+  createdBy          User?                      @relation("CourseCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  assessments        Assessment[]
+  enrollments        Enrollment[]
+  goals              Goal[]
+  groups             StudyGroup[]
+  resources          Resource[]
+  studyItems         StudyPlanItem[]
+  tasks              Task[]
+  timetable          TimetableBlock[]
+  weakAreas          WeakArea[]
+  peerQuestions      PeerQuestion[]
+  platformMaterials  PlatformCourseMaterial[]
+  platformTopics     PlatformCourseTopic[]
+  attendanceRecords  AttendanceRecord[]
+  studySessions      StudySession[]
+  contentCorrections ContentCorrectionRequest[]
 
   @@index([approvalStatus, createdById])
   @@map("courses")
@@ -439,9 +481,9 @@ model Semester {
   weakAreas             WeakArea[]
   peerQuestions         PeerQuestion[]
   notifications         Notification[]
-  attendanceRecords    AttendanceRecord[]
-  studySessions        StudySession[]
-  cwaEvidenceRecords   CwaEvidenceRecord[]
+  attendanceRecords     AttendanceRecord[]
+  studySessions         StudySession[]
+  cwaEvidenceRecords    CwaEvidenceRecord[]
 
   @@unique([ownerId, provisionKey])
   @@index([ownerId])
@@ -471,23 +513,23 @@ model ProgrammeCurriculum {
 }
 
 model CurriculumImport {
-  id             String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  createdById    String                  @map("created_by_id") @db.Uuid
-  college        String
-  department     String
-  programme      String
-  version        String
-  durationYears  Int                     @map("duration_years")
-  termsPerYear   Int                     @map("terms_per_year")
-  source         String?
-  status         CurriculumImportStatus  @default(DRAFT)
-  curriculumId   String?                 @unique @map("curriculum_id") @db.Uuid
-  createdAt      DateTime                @default(now()) @map("created_at")
-  appliedAt      DateTime?               @map("applied_at")
-  rolledBackAt   DateTime?               @map("rolled_back_at")
-  createdBy      User                    @relation(fields: [createdById], references: [id], onDelete: Restrict)
-  curriculum     ProgrammeCurriculum?    @relation(fields: [curriculumId], references: [id], onDelete: SetNull)
-  rows           CurriculumImportRow[]
+  id            String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdById   String                 @map("created_by_id") @db.Uuid
+  college       String
+  department    String
+  programme     String
+  version       String
+  durationYears Int                    @map("duration_years")
+  termsPerYear  Int                    @map("terms_per_year")
+  source        String?
+  status        CurriculumImportStatus @default(DRAFT)
+  curriculumId  String?                @unique @map("curriculum_id") @db.Uuid
+  createdAt     DateTime               @default(now()) @map("created_at")
+  appliedAt     DateTime?              @map("applied_at")
+  rolledBackAt  DateTime?              @map("rolled_back_at")
+  createdBy     User                   @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  curriculum    ProgrammeCurriculum?   @relation(fields: [curriculumId], references: [id], onDelete: SetNull)
+  rows          CurriculumImportRow[]
 
   @@index([status, createdAt])
   @@index([createdById, createdAt])
@@ -713,19 +755,19 @@ model Task {
 }
 
 model TimetableBlock {
-  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  userId     String   @map("user_id") @db.Uuid
-  courseId   String?  @map("course_id") @db.Uuid
-  semesterId String   @map("semester_id") @db.Uuid
-  dayOfWeek  Int      @map("day_of_week")
-  startTime  DateTime @map("start_time") @db.Time
-  endTime    DateTime @map("end_time") @db.Time
-  venue      String?
-  isBusy     Boolean  @default(true) @map("is_busy")
-  createdAt  DateTime @default(now()) @map("created_at")
-  course     Course?  @relation(fields: [courseId], references: [id])
-  semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId            String             @map("user_id") @db.Uuid
+  courseId          String?            @map("course_id") @db.Uuid
+  semesterId        String             @map("semester_id") @db.Uuid
+  dayOfWeek         Int                @map("day_of_week")
+  startTime         DateTime           @map("start_time") @db.Time
+  endTime           DateTime           @map("end_time") @db.Time
+  venue             String?
+  isBusy            Boolean            @default(true) @map("is_busy")
+  createdAt         DateTime           @default(now()) @map("created_at")
+  course            Course?            @relation(fields: [courseId], references: [id])
+  semester          Semester           @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   attendanceRecords AttendanceRecord[]
 
   @@index([userId, semesterId, dayOfWeek])
@@ -754,17 +796,17 @@ model StudyPlan {
 }
 
 model StudyPlanItem {
-  id              String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  studyPlanId     String     @map("study_plan_id") @db.Uuid
-  courseId        String?    @map("course_id") @db.Uuid
+  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  studyPlanId     String         @map("study_plan_id") @db.Uuid
+  courseId        String?        @map("course_id") @db.Uuid
   title           String
-  scheduledStart  DateTime?  @map("scheduled_start")
-  durationMinutes Int?       @map("duration_minutes")
-  status          TaskStatus @default(TODO)
-  aiReason        String?    @map("ai_reason")
-  createdAt       DateTime   @default(now()) @map("created_at")
-  course          Course?    @relation(fields: [courseId], references: [id])
-  studyPlan       StudyPlan  @relation(fields: [studyPlanId], references: [id], onDelete: Cascade)
+  scheduledStart  DateTime?      @map("scheduled_start")
+  durationMinutes Int?           @map("duration_minutes")
+  status          TaskStatus     @default(TODO)
+  aiReason        String?        @map("ai_reason")
+  createdAt       DateTime       @default(now()) @map("created_at")
+  course          Course?        @relation(fields: [courseId], references: [id])
+  studyPlan       StudyPlan      @relation(fields: [studyPlanId], references: [id], onDelete: Cascade)
   studySessions   StudySession[]
 
   @@index([studyPlanId])
@@ -789,30 +831,32 @@ model AttendanceRecord {
   semester         Semester         @relation(fields: [semesterId], references: [id], onDelete: Cascade)
   timetableBlock   TimetableBlock   @relation(fields: [timetableBlockId], references: [id], onDelete: Cascade)
   user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([userId, timetableBlockId, classDate])
   @@index([userId, semesterId, status])
   @@map("attendance_records")
 }
 
 model StudySession {
-  id              String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  userId          String                @map("user_id") @db.Uuid
-  semesterId      String                @map("semester_id") @db.Uuid
-  courseId        String?               @map("course_id") @db.Uuid
-  studyPlanItemId String?               @map("study_plan_item_id") @db.Uuid
-  plannedStart    DateTime?             @map("planned_start")
-  plannedEnd      DateTime?             @map("planned_end")
-  startedAt       DateTime?             @map("started_at")
-  endedAt         DateTime?             @map("ended_at")
-  durationMinutes Int                   @default(0) @map("duration_minutes")
-  status          StudySessionStatus    @default(PLANNED)
+  id               String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId           String                 @map("user_id") @db.Uuid
+  semesterId       String                 @map("semester_id") @db.Uuid
+  courseId         String?                @map("course_id") @db.Uuid
+  studyPlanItemId  String?                @map("study_plan_item_id") @db.Uuid
+  plannedStart     DateTime?              @map("planned_start")
+  plannedEnd       DateTime?              @map("planned_end")
+  startedAt        DateTime?              @map("started_at")
+  endedAt          DateTime?              @map("ended_at")
+  durationMinutes  Int                    @default(0) @map("duration_minutes")
+  status           StudySessionStatus     @default(PLANNED)
   completionSource StudyCompletionSource? @map("completion_source")
-  lastHeartbeatAt DateTime?             @map("last_heartbeat_at")
-  createdAt       DateTime              @default(now()) @map("created_at")
-  course          Course?               @relation(fields: [courseId], references: [id], onDelete: SetNull)
-  semester        Semester              @relation(fields: [semesterId], references: [id], onDelete: Cascade)
-  studyPlanItem   StudyPlanItem?        @relation(fields: [studyPlanItemId], references: [id], onDelete: SetNull)
-  user            User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lastHeartbeatAt  DateTime?              @map("last_heartbeat_at")
+  createdAt        DateTime               @default(now()) @map("created_at")
+  course           Course?                @relation(fields: [courseId], references: [id], onDelete: SetNull)
+  semester         Semester               @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  studyPlanItem    StudyPlanItem?         @relation(fields: [studyPlanItemId], references: [id], onDelete: SetNull)
+  user             User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@index([userId, semesterId, status])
   @@index([studyPlanItemId])
   @@map("study_sessions")
@@ -828,6 +872,7 @@ model CwaEvidenceRecord {
   createdAt  DateTime        @default(now()) @map("created_at")
   user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   semester   Semester        @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+
   @@index([userId, semesterId, mode, createdAt])
   @@map("cwa_evidence_records")
 }
@@ -1136,21 +1181,22 @@ model MaterialChunk {
 }
 
 model PlatformCourseTopic {
-  id                  String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  courseId            String                   @map("course_id") @db.Uuid
+  id                  String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  courseId            String                     @map("course_id") @db.Uuid
   title               String
   description         String?
-  learningOutcomes    String?                  @map("learning_outcomes")
-  sequence            Int                      @default(0)
-  isArchived          Boolean                  @default(false) @map("is_archived")
-  createdAt           DateTime                 @default(now()) @map("created_at")
-  updatedAt           DateTime                 @updatedAt @map("updated_at")
-  course              Course                   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  learningOutcomes    String?                    @map("learning_outcomes")
+  sequence            Int                        @default(0)
+  isArchived          Boolean                    @default(false) @map("is_archived")
+  createdAt           DateTime                   @default(now()) @map("created_at")
+  updatedAt           DateTime                   @updatedAt @map("updated_at")
+  course              Course                     @relation(fields: [courseId], references: [id], onDelete: Cascade)
   materials           PlatformCourseMaterial[]
   materialLinks       PlatformMaterialTopic[]
   chunks              PlatformMaterialChunk[]
   diagnosticQuestions DiagnosticQuestion[]
   topicMasteries      TopicMastery[]
+  contentCorrections  ContentCorrectionRequest[]
 
   @@unique([courseId, title])
   @@index([courseId, sequence])
@@ -1158,32 +1204,62 @@ model PlatformCourseTopic {
 }
 
 model PlatformCourseMaterial {
-  id               String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  courseId         String                  @map("course_id") @db.Uuid
-  topicId          String?                 @map("topic_id") @db.Uuid
-  uploadedBy       String                  @map("uploaded_by") @db.Uuid
-  title            String
-  type             ResourceType            @default(OTHER)
-  storagePath      String?                 @map("storage_path")
-  originalFileName String?                 @map("original_file_name")
-  mimeType         String?                 @map("mime_type")
-  fileSize         Int?                    @map("file_size")
-  sourceUrl        String?                 @map("source_url")
-  contentHash      String?                 @map("content_hash")
-  status           PlatformMaterialStatus  @default(PUBLISHED)
-  errorMessage     String?                 @map("error_message")
-  createdAt        DateTime                @default(now()) @map("created_at")
-  updatedAt        DateTime                @updatedAt @map("updated_at")
-  course           Course                  @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  topic            PlatformCourseTopic?    @relation(fields: [topicId], references: [id], onDelete: SetNull)
-  uploader         User                    @relation(fields: [uploadedBy], references: [id], onDelete: Restrict)
-  chunks           PlatformMaterialChunk[]
-  topicLinks       PlatformMaterialTopic[]
+  id                 String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  courseId           String                     @map("course_id") @db.Uuid
+  topicId            String?                    @map("topic_id") @db.Uuid
+  uploadedBy         String                     @map("uploaded_by") @db.Uuid
+  title              String
+  type               ResourceType               @default(OTHER)
+  storagePath        String?                    @map("storage_path")
+  originalFileName   String?                    @map("original_file_name")
+  mimeType           String?                    @map("mime_type")
+  fileSize           Int?                       @map("file_size")
+  sourceUrl          String?                    @map("source_url")
+  contentHash        String?                    @map("content_hash")
+  status             PlatformMaterialStatus     @default(PUBLISHED)
+  errorMessage       String?                    @map("error_message")
+  createdAt          DateTime                   @default(now()) @map("created_at")
+  updatedAt          DateTime                   @updatedAt @map("updated_at")
+  course             Course                     @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  topic              PlatformCourseTopic?       @relation(fields: [topicId], references: [id], onDelete: SetNull)
+  uploader           User                       @relation(fields: [uploadedBy], references: [id], onDelete: Restrict)
+  chunks             PlatformMaterialChunk[]
+  topicLinks         PlatformMaterialTopic[]
+  contentCorrections ContentCorrectionRequest[]
 
   @@unique([courseId, contentHash])
   @@index([courseId, status, updatedAt])
   @@index([topicId])
   @@map("platform_course_materials")
+}
+
+model ContentCorrectionRequest {
+  id             String                      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId         String                      @map("user_id") @db.Uuid
+  courseId       String                      @map("course_id") @db.Uuid
+  topicId        String?                     @map("topic_id") @db.Uuid
+  materialId     String?                     @map("material_id") @db.Uuid
+  targetType     ContentCorrectionTargetType @map("target_type")
+  details        String
+  status         ContentCorrectionStatus     @default(SUBMITTED)
+  resolutionNote String?                     @map("resolution_note")
+  reviewedById   String?                     @map("reviewed_by_id") @db.Uuid
+  reviewedAt     DateTime?                   @map("reviewed_at")
+  createdAt      DateTime                    @default(now()) @map("created_at")
+  updatedAt      DateTime                    @updatedAt @map("updated_at")
+  requester      User                        @relation("ContentCorrectionRequester", fields: [userId], references: [id], onDelete: Cascade)
+  reviewer       User?                       @relation("ContentCorrectionReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+  course         Course                      @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  topic          PlatformCourseTopic?        @relation(fields: [topicId], references: [id], onDelete: SetNull)
+  material       PlatformCourseMaterial?     @relation(fields: [materialId], references: [id], onDelete: SetNull)
+
+  @@index([status, createdAt])
+  @@index([userId, createdAt])
+  @@index([courseId, status])
+  @@index([topicId])
+  @@index([materialId])
+  @@index([reviewedById])
+  @@map("content_correction_requests")
 }
 
 model PlatformMaterialChunk {

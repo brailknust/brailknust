@@ -1,4 +1,5 @@
-import { BookX, FileUp, RotateCcw } from "lucide-react";
+import Link from "next/link";
+import { BookX, FileUp, RotateCcw, Search } from "lucide-react";
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
@@ -6,6 +7,7 @@ import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { knustCurricula } from "@/data/curricula";
 import {
   approveStudentCourse,
+  bulkCatalogCourses,
   deleteOrphanCatalogCourse,
   applyCurriculumImport,
   previewCurriculumImport,
@@ -14,6 +16,12 @@ import {
   rollbackCurriculumImport,
   restoreProgrammeCourse,
 } from "@/features/admin/actions";
+import {
+  filterCatalogCourses,
+  paginateCatalog,
+  type CatalogApprovalFilter,
+  type CatalogAssignmentFilter,
+} from "@/features/admin/catalog-operations";
 import { requireAdmin } from "@/features/auth/queries";
 import { prisma } from "@/server/db";
 
@@ -21,11 +29,23 @@ function levelLabel(level: string) {
   return level.replace("LEVEL_", "Level ");
 }
 
-type AdminProgrammeCatalogPageProps = { searchParams: Promise<{ import?: string }> };
+type AdminProgrammeCatalogPageProps = {
+  searchParams: Promise<{
+    import?: string;
+    q?: string;
+    status?: string;
+    assignment?: string;
+    level?: string;
+    page?: string;
+  }>;
+};
+
+const approvalFilters = new Set(["ALL", "OFFICIAL", "PENDING", "REJECTED"]);
+const assignmentFilters = new Set(["ALL", "CONFIGURED", "UNASSIGNED"]);
 
 export default async function AdminProgrammeCatalogPage({ searchParams }: AdminProgrammeCatalogPageProps) {
   await requireAdmin();
-  const [{ import: selectedImportId }, exclusions, databaseCourses, curriculumImports] = await Promise.all([
+  const [rawSearchParams, exclusions, databaseCourses, curriculumImports] = await Promise.all([
     searchParams,
     prisma.programmeCourseExclusion.findMany({
       include: { removedBy: { select: { fullName: true } } },
@@ -56,6 +76,7 @@ export default async function AdminProgrammeCatalogPage({ searchParams }: AdminP
       take: 12,
     }),
   ]);
+  const selectedImportId = rawSearchParams.import;
   const excluded = new Map(exclusions.map((item) => [
     `${item.programme}|${item.level}|${item.semester}|${item.courseCode}`,
     item,
@@ -64,6 +85,23 @@ export default async function AdminProgrammeCatalogPage({ searchParams }: AdminP
   const unassignedCourses = databaseCourses.filter((course) => course.approvalStatus === "OFFICIAL" && !configuredCodes.has(course.code));
   const pendingCourses = databaseCourses.filter((course) => course.approvalStatus === "PENDING");
   const selectedImport = curriculumImports.find((item) => item.id === selectedImportId) ?? curriculumImports.find((item) => item.status === "DRAFT");
+  const filters = {
+    query: (rawSearchParams.q ?? "").slice(0, 80),
+    approval: (approvalFilters.has(rawSearchParams.status ?? "") ? rawSearchParams.status : "ALL") as CatalogApprovalFilter,
+    assignment: (assignmentFilters.has(rawSearchParams.assignment ?? "") ? rawSearchParams.assignment : "ALL") as CatalogAssignmentFilter,
+    level: /^LEVEL_[1-6]00$/.test(rawSearchParams.level ?? "") ? rawSearchParams.level! : "",
+  };
+  const filteredCourses = filterCatalogCourses(databaseCourses, filters, configuredCodes);
+  const catalogPage = paginateCatalog(filteredCourses, Number(rawSearchParams.page ?? 1));
+  function pageHref(page: number) {
+    const params = new URLSearchParams();
+    if (filters.query) params.set("q", filters.query);
+    if (filters.approval !== "ALL") params.set("status", filters.approval);
+    if (filters.assignment !== "ALL") params.set("assignment", filters.assignment);
+    if (filters.level) params.set("level", filters.level);
+    params.set("page", String(page));
+    return `/admin/catalog?${params}`;
+  }
 
   return (
     <AppShell title="Programme course catalog" eyebrow="Administration">
@@ -73,6 +111,61 @@ export default async function AdminProgrammeCatalogPage({ searchParams }: AdminP
         <p className="mt-2 max-w-2xl text-sm leading-6 text-white/70">
           Removing a catalog course prevents it from being automatically added for future students in that programme. Existing student records are preserved.
         </p>
+      </section>
+
+      <section className="mt-6 rounded-2xl border border-border bg-white p-5">
+        <div className="flex items-start gap-3">
+          <Search className="mt-0.5 h-5 w-5 text-accent" />
+          <div>
+            <h2 className="text-lg font-semibold">Catalog operations</h2>
+            <p className="mt-1 text-sm text-muted">Search and filter stored course records, then apply an operation to selected rows.</p>
+          </div>
+        </div>
+        <form method="get" className="mt-5 grid gap-3 md:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))_auto]">
+          <input name="q" defaultValue={filters.query} maxLength={80} placeholder="Search code, name, or department" className="h-10 rounded-lg border border-border px-3 text-sm" />
+          <select name="status" defaultValue={filters.approval} className="h-10 rounded-lg border border-border bg-white px-3 text-sm">
+            <option value="ALL">All statuses</option><option value="OFFICIAL">Official</option><option value="PENDING">Pending</option><option value="REJECTED">Rejected</option>
+          </select>
+          <select name="assignment" defaultValue={filters.assignment} className="h-10 rounded-lg border border-border bg-white px-3 text-sm">
+            <option value="ALL">All assignments</option><option value="CONFIGURED">Configured</option><option value="UNASSIGNED">Unassigned</option>
+          </select>
+          <select name="level" defaultValue={filters.level} className="h-10 rounded-lg border border-border bg-white px-3 text-sm">
+            <option value="">All levels</option>{[100, 200, 300, 400, 500, 600].map((level) => <option key={level} value={`LEVEL_${level}`}>Level {level}</option>)}
+          </select>
+          <button className="h-10 rounded-lg bg-foreground px-4 text-sm font-semibold text-background">Filter</button>
+        </form>
+
+        <form action={bulkCatalogCourses} className="mt-5">
+          <div className="flex flex-col gap-3 border-y border-border py-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-muted">{catalogPage.total} matching records · page {catalogPage.page} of {catalogPage.pageCount}</p>
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <select name="operation" required defaultValue="APPROVE" className="h-10 rounded-lg border border-border bg-white px-3 text-sm">
+                <option value="APPROVE">Approve selected</option>
+                <option value="REJECT">Reject selected pending submissions</option>
+                <option value="DELETE_ORPHANS">Delete selected unused records</option>
+              </select>
+              <PendingSubmitButton pendingLabel="Applying..." className="h-10 rounded-lg bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Apply to selected</PendingSubmitButton>
+            </div>
+          </div>
+          <div className="mt-3 grid gap-2">
+            {catalogPage.items.map((course) => {
+              const configured = configuredCodes.has(course.code);
+              const references = course._count.enrollments + course._count.platformMaterials + course._count.platformTopics;
+              return <label key={course.id} className="flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-surface p-3">
+                <input type="checkbox" name="courseIds" value={course.id} className="mt-1 h-4 w-4" />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-sm font-semibold">{course.code} - {course.name}</span>
+                  <span className="mt-1 block text-xs text-muted">{course.approvalStatus.toLowerCase()} · {configured ? "configured" : "unassigned"}{course.level ? ` · ${levelLabel(course.level)}` : ""}{course.department ? ` · ${course.department}` : ""} · {references} core references</span>
+                </span>
+              </label>;
+            })}
+            {!catalogPage.items.length ? <p className="rounded-xl bg-surface p-4 text-sm text-muted">No catalog records match these filters.</p> : null}
+          </div>
+        </form>
+        {catalogPage.pageCount > 1 ? <nav aria-label="Catalog pages" className="mt-4 flex items-center justify-between">
+          {catalogPage.page > 1 ? <Link href={pageHref(catalogPage.page - 1)} className="rounded-lg border border-border px-3 py-2 text-sm font-semibold">Previous</Link> : <span />}
+          {catalogPage.page < catalogPage.pageCount ? <Link href={pageHref(catalogPage.page + 1)} className="rounded-lg border border-border px-3 py-2 text-sm font-semibold">Next</Link> : <span />}
+        </nav> : null}
       </section>
 
       <section className="mt-6 grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">

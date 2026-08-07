@@ -170,7 +170,7 @@ export async function getCourseAnalytics(userId: string, semesterId: string, cou
   if (!enrollment) return null;
   const resolvedCourseId = enrollment.courseId;
 
-  const [tasks, studyItems, weakAreas, timetable, assessments, materials, topics] = await Promise.all([
+  const [tasks, studyItems, weakAreas, timetable, assessments, materials, topics, platformTopics, contentCorrections] = await Promise.all([
     prisma.task.findMany({
       where: { userId, semesterId, courseId: resolvedCourseId },
       orderBy: [{ status: "asc" }, { dueAt: "asc" }, { createdAt: "desc" }],
@@ -215,6 +215,29 @@ export async function getCourseAnalytics(userId: string, semesterId: string, cou
       where: { enrollmentId: enrollment.id },
       orderBy: [{ sequence: "asc" }, { title: "asc" }],
     }),
+    prisma.platformCourseTopic.findMany({
+      where: { courseId: resolvedCourseId, isArchived: false },
+      select: {
+        id: true,
+        title: true,
+        materialLinks: {
+          where: { material: { status: "PUBLISHED" } },
+          select: { material: { select: { id: true, title: true } } },
+          orderBy: { material: { title: "asc" } },
+        },
+      },
+      orderBy: [{ sequence: "asc" }, { title: "asc" }],
+    }),
+    prisma.contentCorrectionRequest.findMany({
+      where: { userId, courseId: resolvedCourseId },
+      select: {
+        id: true, targetType: true, details: true, status: true, resolutionNote: true, createdAt: true,
+        topic: { select: { title: true } },
+        material: { select: { title: true } },
+      },
+      orderBy: { createdAt: "desc" },
+      take: 10,
+    }),
   ]);
 
   return {
@@ -226,6 +249,8 @@ export async function getCourseAnalytics(userId: string, semesterId: string, cou
     assessments,
     materials,
     topics,
+    platformTopics,
+    contentCorrections,
     completedTaskCount: tasks.filter((task) => task.status === "DONE").length,
     openTaskCount: tasks.filter(
       (task) => task.status === "TODO" && (!task.dueAt || task.dueAt >= new Date()),

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import { requireAdmin } from "@/features/auth/queries";
+import { createAdminContentAudit } from "@/features/admin/audit";
 import { chunkMaterialText } from "@/features/materials/chunking";
 import { acceptedMaterialExtensions, extractCourseMaterialText, hasValidMaterialFileType, materialFileExtension } from "@/features/materials/extract";
 import { uploadCourseMaterialFile } from "@/features/materials/storage";
@@ -85,8 +86,8 @@ export async function POST(request: Request) {
     const chunks = chunkMaterialText(text);
     if (!chunks.length || text.length < 40) throw new Error("The file did not contain enough extractable text.");
 
-    await prisma.$transaction([
-      prisma.platformMaterialChunk.createMany({
+    await prisma.$transaction(async (tx) => {
+      await tx.platformMaterialChunk.createMany({
         data: chunks.map((content, chunkIndex) => ({
           materialId: material.id,
           topicId: primaryTopic.id,
@@ -94,23 +95,32 @@ export async function POST(request: Request) {
           content,
           charCount: content.length,
         })),
-      }),
-      prisma.platformCourseMaterial.update({
+      });
+      await tx.platformCourseMaterial.update({
         where: { id: material.id },
         data: { storagePath, status: "PUBLISHED", errorMessage: null },
-      }),
-      prisma.platformMaterialTopic.createMany({
+      });
+      await tx.platformMaterialTopic.createMany({
         data: topics.map((topic) => ({ materialId: material.id, topicId: topic.id })),
         skipDuplicates: true,
-      }),
-    ]);
+      });
+      await createAdminContentAudit(tx, {
+        actorId: appUser.id, action: "MATERIAL_PUBLISHED", targetType: "MATERIAL",
+        targetId: material.id, targetLabel: parsed.data.title,
+        metadata: { courseId: primaryTopic.courseId, topicIds: topics.map((topic) => topic.id), type: parsed.data.type, chunkCount: chunks.length, fileSize: file.size },
+      });
+    });
     return NextResponse.json({ message: `Published ${chunks.length} searchable chunks.` });
   } catch (error) {
     console.error("Platform material processing failed", error);
     const message = "The material could not be processed. Check the file and try again.";
-    await prisma.platformCourseMaterial.update({
-      where: { id: material.id },
-      data: { storagePath, status: "FAILED", errorMessage: message.slice(0, 500) },
+    await prisma.$transaction(async (tx) => {
+      await tx.platformCourseMaterial.update({ where: { id: material.id }, data: { storagePath, status: "FAILED", errorMessage: message.slice(0, 500) } });
+      await createAdminContentAudit(tx, {
+        actorId: appUser.id, action: "MATERIAL_PROCESSING_FAILED", targetType: "MATERIAL",
+        targetId: material.id, targetLabel: parsed.data.title,
+        metadata: { courseId: primaryTopic.courseId, type: parsed.data.type, fileSize: file.size },
+      });
     });
     return NextResponse.json({ message }, { status: 422 });
   }

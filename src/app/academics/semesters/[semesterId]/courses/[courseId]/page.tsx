@@ -10,6 +10,7 @@ import { deleteWeakArea, saveWeakArea, updateEnrollmentPerformance } from "@/fea
 import { deleteAssessment, saveAssessment } from "@/features/assessments/actions";
 import { getCourseAnalytics } from "@/features/academics/queries";
 import { requireAppUser } from "@/features/auth/queries";
+import { submitContentCorrection } from "@/features/corrections/actions";
 import { deleteCourseMaterial, retryCourseMaterialProcessing, saveCourseMaterial } from "@/features/materials/actions";
 import { MaterialUpload } from "@/features/materials/material-upload";
 import { createTask } from "@/features/tasks/actions";
@@ -133,6 +134,39 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
           </p>
         </section>
       ) : null}
+
+      <section className="mt-6 rounded-2xl border border-border bg-white p-5">
+        <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <h2 className="text-lg font-semibold">Report a content correction</h2>
+            <p className="mt-2 text-sm leading-6 text-muted">Flag an incorrect course title, official topic, or shared platform material. Include the expected correction and enough context for an administrator to verify it.</p>
+            <form action={submitContentCorrection} className="mt-4 grid gap-3">
+              <input type="hidden" name="semesterId" value={semesterId} />
+              <input type="hidden" name="courseId" value={enrollment.courseId} />
+              <select name="target" required defaultValue={`COURSE:${enrollment.courseId}`} className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
+                <option value={`COURSE:${enrollment.courseId}`}>Course: {enrollment.course.code} - {enrollment.course.name}</option>
+                {analytics.platformTopics.map((topic) => [
+                  <option key={`topic-${topic.id}`} value={`TOPIC:${topic.id}`}>Topic: {topic.title}</option>,
+                  ...topic.materialLinks.map(({ material }) => <option key={`material-${material.id}`} value={`MATERIAL:${material.id}`}>Material: {material.title}</option>),
+                ])}
+              </select>
+              <textarea name="details" required minLength={20} maxLength={2000} rows={4} placeholder="What is incorrect, and what should it say instead?" className="rounded-xl border border-border bg-white p-3 text-sm" />
+              <PendingSubmitButton pendingLabel="Submitting..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Submit correction request</PendingSubmitButton>
+            </form>
+          </div>
+          <div className="rounded-xl border border-border bg-surface p-4">
+            <h3 className="font-semibold">Your recent requests</h3>
+            <div className="mt-3 grid gap-3">
+              {analytics.contentCorrections.map((request) => <article key={request.id} className="rounded-lg border border-border bg-white p-3">
+                <div className="flex items-start justify-between gap-3"><p className="text-sm font-semibold">{request.material?.title ?? request.topic?.title ?? enrollment.course.name}</p><span className="rounded-md bg-surface px-2 py-1 text-[10px] font-semibold uppercase text-muted">{request.status.replaceAll("_", " ")}</span></div>
+                <p className="mt-2 line-clamp-3 text-xs leading-5 text-muted">{request.details}</p>
+                {request.resolutionNote ? <p className="mt-2 border-t border-border pt-2 text-xs leading-5"><span className="font-semibold">Administrator response:</span> {request.resolutionNote}</p> : null}
+              </article>)}
+              {!analytics.contentCorrections.length ? <p className="text-sm text-muted">No correction requests submitted for this course.</p> : null}
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="mt-6 grid gap-6 xl:grid-cols-[0.72fr_1.28fr]">
         <div className="grid gap-6">
