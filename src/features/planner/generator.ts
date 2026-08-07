@@ -169,10 +169,8 @@ export function generateStudySessions({
         if (placed) break;
 
         const dayBlocks = [...(busyBlocks.get(day) ?? []), ...plannedBlocksForDay(day)];
-        const timeOffset = (courseIndex % 3) * 30;
-
         for (
-          let start = startWindow + timeOffset;
+          let start = startWindow;
           start + sessionLength <= endWindow;
           start += 30
         ) {

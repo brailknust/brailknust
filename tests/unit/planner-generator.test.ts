@@ -71,6 +71,18 @@ describe("study-plan generation", () => {
     expect(sessions.filter((session) => session.subject.startsWith("MATH 251"))).toHaveLength(1);
   });
 
+  it("covers every course in a single two-hour evening slot per day", () => {
+    const sessions = generateStudySessions({
+      rows: [],
+      courses: Array.from({ length: 7 }, (_, index) => ({ courseCode: `COURSE ${index + 1}`, courseName: `Course ${index + 1}`, creditHours: 2 })),
+      busyBlocks: new Map(),
+      preferences: { sessionLength: 120, preferredStart: "19:00", preferredEnd: "21:00", intensity: "intense" },
+      idFactory: () => crypto.randomUUID(),
+    });
+    expect(new Set(sessions.map((session) => session.subject))).toHaveLength(7);
+    expect(sessions.every((session) => session.startTime === "19:00" && session.endTime === "21:00")).toBe(true);
+  });
+
   it("validates timetable rows and clamps credit-hour targets", () => {
     const validRow = {
       id: "row-1",

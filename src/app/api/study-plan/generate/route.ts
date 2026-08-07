@@ -380,7 +380,12 @@ export async function POST(request: Request) {
     courseName: enrollment.course.name,
     creditHours: enrollment.course.creditHours ?? 2,
   }));
-  const courses = [...(rowCourses.length ? rowCourses : enrolledCourses)].sort(
+  // OCR is optional context. It must never remove enrolled courses that were
+  // absent from, or incorrectly read from, an uploaded timetable.
+  const courses = [...new Map<string, CourseSource>([
+    ...enrolledCourses.map((course): [string, CourseSource] => [normalizeCourseCode(course.courseCode), course]),
+    ...rowCourses.map((course): [string, CourseSource] => [normalizeCourseCode(course.courseCode), course]),
+  ]).values()].sort(
     (a, b) => b.creditHours - a.creditHours || a.courseCode.localeCompare(b.courseCode),
   );
 
