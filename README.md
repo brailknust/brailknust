@@ -41,5 +41,6 @@ Deterministic quality checks are available with `npm run evaluate:ai` and `npm r
 - [Completion roadmap](docs/migration-roadmap.md)
 - [Security audit](docs/security-audit.md)
 - [Testing](docs/testing.md)
+- [Deployment](docs/deployment.md)
 
 Use separate Supabase projects and credentials for development, staging, and production. Never commit `.env.local`, database credentials, service-role keys, or AI keys.
