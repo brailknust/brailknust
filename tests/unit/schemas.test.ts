@@ -5,7 +5,7 @@ import { calculateAssessmentAverage } from "@/features/academics/calculations";
 import { assessmentSchema } from "@/features/assessments/schemas";
 import { generatedQuestionSetSchema } from "@/features/diagnostics/schemas";
 import { feedbackSchema } from "@/features/feedback/schemas";
-import { createStudyPlanItemSchema } from "@/features/planner/schemas";
+import { createStudyPlanItemSchema, plannerPreferencesSchema } from "@/features/planner/schemas";
 import { supportRequestSchema } from "@/features/support/schemas";
 
 const uuid = "00000000-0000-4000-8000-000000000001";
@@ -69,6 +69,21 @@ describe("business input schemas", () => {
     expect(generatedQuestionSetSchema.safeParse({
       questions: Array.from({ length: 4 }, () => ({ ...validQuestion, options: ["Queue", "Stack"] })),
     }).success).toBe(false);
+  });
+
+  it("rejects malformed or impossible study-plan generation preferences", () => {
+    const valid = { sessionLength: 60, preferredStart: "08:00", preferredEnd: "21:00", intensity: "balanced" };
+    expect(plannerPreferencesSchema.safeParse(valid).success).toBe(true);
+    // Garbled/missing time strings must not silently reach the generator.
+    expect(plannerPreferencesSchema.safeParse({ ...valid, preferredStart: "not-a-time" }).success).toBe(false);
+    expect(plannerPreferencesSchema.safeParse({ ...valid, preferredStart: "" }).success).toBe(false);
+    // An inverted window (end before start).
+    expect(plannerPreferencesSchema.safeParse({ ...valid, preferredStart: "20:00", preferredEnd: "08:00" }).success).toBe(false);
+    // A window narrower than the requested session length.
+    expect(plannerPreferencesSchema.safeParse({ ...valid, sessionLength: 90, preferredStart: "08:00", preferredEnd: "09:00" }).success).toBe(false);
+    // Out-of-range session length and an unknown intensity value.
+    expect(plannerPreferencesSchema.safeParse({ ...valid, sessionLength: 15 }).success).toBe(false);
+    expect(plannerPreferencesSchema.safeParse({ ...valid, intensity: "extreme" }).success).toBe(false);
   });
 
   it("bounds support requests and product feedback", () => {

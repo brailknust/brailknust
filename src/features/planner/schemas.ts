@@ -40,3 +40,32 @@ export const deleteStudyPlanItemSchema = z.object({
 });
 
 export const studyPlanItemStatusSchema = z.enum(["TODO", "IN_PROGRESS", "DONE", "ARCHIVED"]);
+
+const timeOfDayField = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, "Enter a time as HH:MM.");
+
+// Validated independently of the client: a crafted or malformed request body
+// (missing fields, an inverted window, a window narrower than the session
+// length) must never reach the generator, where it would silently produce
+// zero sessions instead of a clear error.
+export const plannerPreferencesSchema = z
+  .object({
+    sessionLength: z.coerce.number().int().min(30, "Session length must be at least 30 minutes.").max(120, "Session length must be at most 120 minutes."),
+    preferredStart: timeOfDayField,
+    preferredEnd: timeOfDayField,
+    intensity: z.enum(["light", "balanced", "intense"]),
+  })
+  .refine((value) => value.preferredEnd > value.preferredStart, {
+    message: "Preferred end time must be after preferred start time.",
+    path: ["preferredEnd"],
+  })
+  .refine(
+    (value) => {
+      const [startHours, startMinutes] = value.preferredStart.split(":").map(Number);
+      const [endHours, endMinutes] = value.preferredEnd.split(":").map(Number);
+      return endHours * 60 + endMinutes - (startHours * 60 + startMinutes) >= value.sessionLength;
+    },
+    {
+      message: "Widen your preferred study window so it can fit at least one session of your chosen length.",
+      path: ["preferredEnd"],
+    },
+  );

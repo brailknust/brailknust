@@ -35,8 +35,17 @@ type GenerateSummary = {
   plannedHours: number;
 };
 
+type UnscheduledCourse = {
+  courseCode: string;
+  courseName: string;
+  missingCount: number;
+  reason: string;
+};
+
 type StudyPlanResponse = {
   sessions?: GeneratedSession[];
+  unscheduled?: UnscheduledCourse[];
+  warnings?: string[];
   summary?: GenerateSummary | null;
   message?: string;
 };
@@ -76,6 +85,8 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
   const [extractedRows, setExtractedRows] = useState<TimetableRow[]>(initialRows);
   const [rawOcrText, setRawOcrText] = useState("");
   const [generatedSessions, setGeneratedSessions] = useState<GeneratedSession[]>([]);
+  const [unscheduled, setUnscheduled] = useState<UnscheduledCourse[]>([]);
+  const [warnings, setWarnings] = useState<string[]>([]);
   const [summary, setSummary] = useState<GenerateSummary | null>(null);
   const [statusMessage, setStatusMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -162,35 +173,71 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
     }
   }
 
+  async function requestGeneratedPlan(signal: AbortSignal) {
+    const response = await fetch("/api/study-plan/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        rows: extractedRows,
+        preferences,
+      }),
+      signal,
+    });
+    const data = (await response.json().catch(() => null)) as StudyPlanResponse | null;
+    return { response, data };
+  }
+
   async function handleGeneratePlan() {
     setErrorMessage("");
     setStatusMessage("");
+    setUnscheduled([]);
+    setWarnings([]);
     setIsGenerating(true);
 
+    // Generation is idempotent (it replaces the same saved plan), so a
+    // single retry after a purely network-level failure is safe and
+    // recovers most transient connectivity blips without the student
+    // having to notice and click again.
+    const attempts = 2;
+
     try {
-      const response = await fetch("/api/study-plan/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          rows: extractedRows,
-          preferences,
-        }),
-      });
-      const data = (await response.json().catch(() => null)) as StudyPlanResponse | null;
+      for (let attempt = 1; attempt <= attempts; attempt += 1) {
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 30_000);
 
-      if (!response.ok || !data?.sessions) {
-        setErrorMessage(data?.message ?? "Could not generate a study plan.");
-        return;
+        try {
+          const { response, data } = await requestGeneratedPlan(controller.signal);
+
+          if (!response.ok || !data?.sessions) {
+            setErrorMessage(data?.message ?? "Could not generate a study plan.");
+            return;
+          }
+
+          setGeneratedSessions(data.sessions);
+          setUnscheduled(data.unscheduled ?? []);
+          setWarnings(data.warnings ?? []);
+          setSummary(data.summary ?? null);
+          setStatusMessage(
+            data.unscheduled?.length
+              ? "Study timetable generated and saved, but some sessions could not fit — see the notes below."
+              : "Personal study timetable generated and saved. Your reviewed class rows remain available for regeneration.",
+          );
+          router.refresh();
+          return;
+        } catch (error) {
+          const isTimeout = error instanceof DOMException && error.name === "AbortError";
+          if (attempt < attempts) continue; // one silent retry on a network-level failure
+          setErrorMessage(
+            isTimeout
+              ? "Generating your study plan timed out. Try again — your class rows and preferences are unchanged."
+              : "Could not reach the server to generate a study plan. Check your connection and try again.",
+          );
+        } finally {
+          window.clearTimeout(timeout);
+        }
       }
-
-      setGeneratedSessions(data.sessions);
-      setSummary(data.summary ?? null);
-      setStatusMessage("Personal study timetable generated and saved. Your reviewed class rows remain available for regeneration.");
-      router.refresh();
-    } catch {
-      setErrorMessage("Could not generate a study plan.");
     } finally {
       setIsGenerating(false);
     }
@@ -418,6 +465,31 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Planned hours</p>
             <p className="mt-2 font-semibold">{summary.plannedHours}</p>
           </div>
+        </div>
+      ) : null}
+
+      {unscheduled.length ? (
+        <div className="mt-5 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
+          <p className="font-semibold">Some sessions could not be fit in</p>
+          <ul className="mt-2 grid gap-1">
+            {unscheduled.map((item) => (
+              <li key={item.courseCode}>
+                {item.courseCode}: {item.missingCount} session{item.missingCount === 1 ? "" : "s"} unscheduled — {item.reason}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-2">Widen your preferred hours, lower the intensity, or free up busy blocks, then regenerate.</p>
+        </div>
+      ) : null}
+
+      {warnings.length ? (
+        <div className="mt-5 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
+          <p className="font-semibold">Notes on this plan</p>
+          <ul className="mt-2 grid gap-1">
+            {warnings.map((warning) => (
+              <li key={warning}>{warning}</li>
+            ))}
+          </ul>
         </div>
       ) : null}
 

@@ -14,9 +14,29 @@ import {
   type GeneratedSession,
   type PlannerPreferences,
   type TimetableRow,
+  type UnscheduledCourse,
 } from "@/features/planner/generator";
+import { plannerPreferencesSchema } from "@/features/planner/schemas";
 import { prisma } from "@/server/db";
 import { checkRateLimit, rateLimitResponse } from "@/server/rate-limit";
+
+const defaultPreferences: PlannerPreferences = {
+  sessionLength: 60,
+  preferredStart: "08:00",
+  preferredEnd: "21:00",
+  intensity: "balanced",
+};
+
+// A regular server database round trip during study-plan generation. Any
+// single call comfortably fits inside this; it exists to fail fast instead
+// of hanging the request indefinitely if the database is unreachable.
+const dbCallTimeoutMs = 8_000;
+
+// Generous headroom for the multi-statement save transaction below, which
+// scales with enrolled-course count. The Prisma default (5s) is tight
+// against a pooled remote connection once a semester has several courses
+// with new, not-yet-enrolled codes to resolve.
+const savePlanTransactionTimeoutMs = 20_000;
 
 const generatedPlanTitle = "Generated Study Timetable";
 
@@ -52,6 +72,33 @@ function formatStoredTime(value: Date) {
 
 function timeOfDay(value: string) {
   return new Date(`1970-01-01T${value}:00.000Z`);
+}
+
+async function loadPlannerContext(userId: string, semesterId: string) {
+  const [activeEnrollments, savedBusyBlocks] = await Promise.all([
+    prisma.enrollment.findMany({
+      where: { userId, semesterId },
+      include: { course: true },
+      orderBy: { course: { code: "asc" } },
+    }),
+    prisma.timetableBlock.findMany({
+      where: { userId, semesterId, isBusy: true },
+      select: { dayOfWeek: true, startTime: true, endTime: true },
+    }),
+  ]);
+  return { activeEnrollments, savedBusyBlocks };
+}
+
+async function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+  let timer!: ReturnType<typeof setTimeout>;
+  const timeout = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`${label} took too long. Try again in a moment.`)), ms);
+  });
+  try {
+    return await Promise.race([promise, timeout]);
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 async function buildSavedSessions(userId: string, semesterId: string): Promise<GeneratedSession[]> {
@@ -112,56 +159,72 @@ async function savePlanForUser(
   sourceCourses: CourseSource[],
   sessions: GeneratedSession[],
 ) {
-  return prisma.$transaction(async (tx) => {
+  return prisma.$transaction(
+    async (tx) => {
     const { startDate, endDate } = getWeekBounds();
     const courseRecords = new Map<string, { id: string }>();
+    const warnings: string[] = [];
     const courses = Array.from(new Map(sourceCourses.map((course) => [course.courseCode, course])).values());
 
     for (const course of courses) {
-    if (course.id) {
-      courseRecords.set(course.courseCode, { id: course.id });
-      continue;
+      if (course.id) courseRecords.set(course.courseCode, { id: course.id });
     }
 
-    const existingCourse = await tx.course.findUnique({
-      where: { code: course.courseCode },
-      select: { id: true, approvalStatus: true, createdById: true },
-    });
-    if (
-      existingCourse
-      && existingCourse.approvalStatus !== "OFFICIAL"
-      && existingCourse.createdById !== userId
-    ) {
-      throw new Error(`${course.courseCode} is awaiting administrator review for another student.`);
+    // Courses without a known id come from OCR/manual rows that don't match
+    // an existing enrollment. Resolve them in a single batched lookup rather
+    // than one round trip per course, so generation for a full semester's
+    // worth of courses stays comfortably inside the transaction timeout.
+    const unresolvedCourses = courses.filter((course) => !course.id);
+
+    if (unresolvedCourses.length) {
+      const existingCourses = await tx.course.findMany({
+        where: { code: { in: unresolvedCourses.map((course) => course.courseCode) } },
+        select: { id: true, code: true, approvalStatus: true, createdById: true },
+      });
+      const existingByCode = new Map(existingCourses.map((course) => [course.code, course]));
+      const toCreate: CourseSource[] = [];
+
+      for (const course of unresolvedCourses) {
+        const existingCourse = existingByCode.get(course.courseCode);
+        if (!existingCourse) {
+          toCreate.push(course);
+          continue;
+        }
+        if (existingCourse.approvalStatus !== "OFFICIAL" && existingCourse.createdById !== userId) {
+          // One course pending review under another student must not sink
+          // the rest of an otherwise valid plan. The session for this
+          // course still gets scheduled below, just without a course link.
+          warnings.push(`${course.courseCode} is awaiting administrator review for another student, so it was scheduled without a linked course record.`);
+          continue;
+        }
+        courseRecords.set(course.courseCode, { id: existingCourse.id });
+      }
+
+      if (toCreate.length) {
+        const created = await tx.course.createManyAndReturn({
+          data: toCreate.map((course) => ({
+            code: course.courseCode,
+            name: course.courseName || course.courseCode,
+            approvalStatus: "PENDING" as const,
+            createdById: userId,
+          })),
+          select: { id: true, code: true },
+        });
+        for (const record of created) courseRecords.set(record.code, { id: record.id });
+      }
+
+      // Only newly resolved courses need a fresh enrollment; courses that
+      // already had a known id came from an existing enrollment.
+      const newlyResolvedIds = unresolvedCourses
+        .map((course) => courseRecords.get(course.courseCode)?.id)
+        .filter((id): id is string => Boolean(id));
+      if (newlyResolvedIds.length) {
+        await tx.enrollment.createMany({
+          data: newlyResolvedIds.map((courseId) => ({ userId, courseId, semesterId: activeSemesterId })),
+          skipDuplicates: true,
+        });
+      }
     }
-    const record = existingCourse ?? await tx.course.create({
-      data: {
-        code: course.courseCode,
-        name: course.courseName || course.courseCode,
-        approvalStatus: "PENDING",
-        createdById: userId,
-      },
-      select: { id: true },
-    });
-
-    courseRecords.set(course.courseCode, record);
-
-    await tx.enrollment.upsert({
-      where: {
-        userId_courseId_semesterId: {
-          userId,
-          courseId: record.id,
-          semesterId: activeSemesterId,
-        },
-      },
-      create: {
-        userId,
-        courseId: record.id,
-        semesterId: activeSemesterId,
-      },
-      update: {},
-    });
-  }
 
     const courseIds = Array.from(courseRecords.values()).map((course) => course.id);
 
@@ -254,8 +317,10 @@ async function savePlanForUser(
     }),
   });
 
-    return plan.id;
-  });
+    return { planId: plan.id, warnings };
+  },
+    { timeout: savePlanTransactionTimeoutMs },
+  );
 }
 
 export async function GET() {
@@ -331,28 +396,21 @@ export async function POST(request: Request) {
   }
   const rows = submittedRows;
 
-  const activeEnrollments = await prisma.enrollment.findMany({
-    where: {
-      userId: appUser.id,
-      semesterId: appUser.activeSemesterId,
-    },
-    include: { course: true },
-    orderBy: {
-      course: { code: "asc" },
-    },
-  });
-  const savedBusyBlocks = await prisma.timetableBlock.findMany({
-    where: {
-      userId: appUser.id,
-      semesterId: appUser.activeSemesterId,
-      isBusy: true,
-    },
-    select: {
-      dayOfWeek: true,
-      startTime: true,
-      endTime: true,
-    },
-  });
+  let plannerContext: Awaited<ReturnType<typeof loadPlannerContext>>;
+  try {
+    plannerContext = await withTimeout(
+      loadPlannerContext(appUser.id, appUser.activeSemesterId),
+      dbCallTimeoutMs,
+      "Loading your courses and timetable",
+    );
+  } catch (error) {
+    console.error("Could not load planner data for study-plan generation", error);
+    return NextResponse.json(
+      { message: "Could not reach the database to build your study plan. Try again in a moment." },
+      { status: 503 },
+    );
+  }
+  const { activeEnrollments, savedBusyBlocks } = plannerContext;
 
   const rowCourses: CourseSource[] = Array.from(
     new Map(
@@ -396,12 +454,21 @@ export async function POST(request: Request) {
     );
   }
 
-  const preferences: PlannerPreferences = {
-    sessionLength: Math.min(Math.max(Number(body?.preferences?.sessionLength) || 60, 30), 120),
-    preferredStart: body?.preferences?.preferredStart || "08:00",
-    preferredEnd: body?.preferences?.preferredEnd || "21:00",
-    intensity: body?.preferences?.intensity || "balanced",
-  };
+  // Merge over defaults so an omitted field falls back sensibly, but once
+  // merged the whole window is validated: a malformed or out-of-range value
+  // must be rejected here rather than silently reaching the generator, where
+  // it would produce a plan with zero sessions and no explanation.
+  const preferencesResult = plannerPreferencesSchema.safeParse({
+    ...defaultPreferences,
+    ...body?.preferences,
+  });
+  if (!preferencesResult.success) {
+    return NextResponse.json(
+      { message: preferencesResult.error.issues[0]?.message ?? "Check your study preferences and try again." },
+      { status: 400 },
+    );
+  }
+  const preferences: PlannerPreferences = preferencesResult.data;
 
   const dayBusyBlocks = new Map<string, BusyBlock[]>();
 
@@ -429,17 +496,45 @@ export async function POST(request: Request) {
     dayBusyBlocks.set(row.dayOfWeek, blocks);
   }
 
-  const sessions = generateStudySessions({
-    rows,
-    courses,
-    busyBlocks: dayBusyBlocks,
-    preferences,
-  });
-  const planId = await savePlanForUser(appUser.id, appUser.activeSemesterId, rows, courses, sessions);
+  let sessions: GeneratedSession[];
+  let unscheduled: UnscheduledCourse[];
+  try {
+    ({ sessions, unscheduled } = generateStudySessions({
+      rows,
+      courses,
+      busyBlocks: dayBusyBlocks,
+      preferences,
+    }));
+  } catch (error) {
+    console.error("Study session generation failed", error);
+    return NextResponse.json(
+      { message: "Could not build study sessions from your timetable and preferences. Try adjusting your preferred hours." },
+      { status: 422 },
+    );
+  }
+
+  let planId: string;
+  let warnings: string[];
+  try {
+    ({ planId, warnings } = await savePlanForUser(appUser.id, appUser.activeSemesterId, rows, courses, sessions));
+  } catch (error) {
+    console.error("Could not save generated study plan", error);
+    return NextResponse.json(
+      {
+        message:
+          error instanceof Error
+            ? error.message
+            : "Could not save the generated study plan. Try again in a moment.",
+      },
+      { status: 409 },
+    );
+  }
 
   return NextResponse.json({
     planId,
     sessions,
+    unscheduled,
+    warnings,
     summary: {
       classCount: rows.length,
       courseCount: courses.length,
