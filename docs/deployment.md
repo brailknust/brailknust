@@ -18,19 +18,21 @@ Collect these values from the project dashboard:
 | `anon` `public` key | Settings → API | `NEXT_PUBLIC_SUPABASE_ANON_KEY` |
 | `service_role` key | Settings → API | `SUPABASE_SERVICE_ROLE_KEY` |
 | Transaction pooler connection string (port 6543) | Settings → Database | `DATABASE_URL` |
-| Direct connection string (port 5432) | Settings → Database | `DIRECT_URL` |
+| Session pooler connection string (port 5432) | Settings → Database | `DIRECT_URL` |
 
 `prisma/schema.prisma` splits these deliberately:
 
 ```prisma
 datasource db {
   provider  = "postgresql"
-  url       = env("DATABASE_URL")   // pooled — used by the running app
-  directUrl = env("DIRECT_URL")     // direct — used by Prisma Migrate
+  url       = env("DATABASE_URL")   // transaction pooler — used by the running app
+  directUrl = env("DIRECT_URL")     // session pooler — used by Prisma Migrate
 }
 ```
 
-The pooled connection can't take the advisory locks `prisma migrate deploy` needs, so both are required.
+The transaction pooler can't take the advisory locks `prisma migrate deploy` needs, so both are required.
+
+**Use the Session pooler for `DIRECT_URL`, not the raw "Direct connection" host** (`db.<ref>.supabase.co:5432`). That host is IPv6-only unless the project has Supabase's IPv4 add-on, and Vercel's build containers have no IPv6 egress — `migrate deploy` fails there with `P1001: Can't reach database server`. The Session pooler is the same hostname as `DATABASE_URL` (`aws-*.pooler.supabase.com`), just on port `5432` instead of `6543`, and is IPv4-reachable.
 
 ### Storage bucket
 
@@ -57,7 +59,7 @@ Supabase rejects any OAuth/magic-link redirect target that isn't on this allow-l
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes | Supabase Settings → API |
 | `SUPABASE_SERVICE_ROLE_KEY` | Yes | Supabase Settings → API |
 | `DATABASE_URL` | Yes | Supabase Settings → Database (pooled, 6543) |
-| `DIRECT_URL` | Yes | Supabase Settings → Database (direct, 5432) |
+| `DIRECT_URL` | Yes | Supabase Settings → Database (Session pooler, 5432 — not the raw direct-connection host, see above) |
 | `GROQ_API_KEY` | For AI features | groq.com console |
 | `AI_MODEL` | For AI features | e.g. `openai/gpt-oss-20b` |
 | `ADMIN_EMAILS` | For admin access | comma-separated emails |
