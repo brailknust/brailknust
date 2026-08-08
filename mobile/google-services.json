@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "995174231299",
+    "project_id": "brailknust-898cc",
+    "storage_bucket": "brailknust-898cc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995174231299:android:011b0611d641c15ac18d36",
+        "android_client_info": {
+          "package_name": "com.brailknust.brailmobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQq7ueG1XL1JPI3HENFBZ1fmaYU4u8mVU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

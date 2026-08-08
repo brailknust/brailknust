@@ -18,6 +18,12 @@ expo-env.d.ts
 *.key
 *.mobileprovision
 
+# Firebase admin SDK private key (uploaded directly to EAS via
+# `eas credentials`, must never live in the repo). google-services.json is
+# fine to commit — it's public client config, not a secret.
+*firebase-adminsdk*.json
+*service-account*.json
+
 # Metro
 .metro-health-check*
 
