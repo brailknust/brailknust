@@ -46,7 +46,16 @@ PWA can't reliably do this on iOS, so this roadmap targets a native app.
 - [ ] Notifications inbox
 
 ### Phase 3 — Push notifications
-- [ ] `expo-notifications` integrated, permission flow
+- [x] `expo-notifications` integrated, permission flow
+- [x] `expo-dev-client` + `eas.json` (`development`/`preview`/`android apk`
+      profiles) added. **Required**: Expo Go does not support remote push
+      notifications on Android from SDK 53 onward (local/in-app
+      notifications still work there, but not background push), so testing
+      the actual push feature needs a dev-client build, not Expo Go. Build
+      one with `eas login` (one-time, your own Expo account) then
+      `eas build --profile development --platform android` from `mobile/`;
+      install the resulting APK on a device, then run
+      `npm run start:dev-client`.
 - [ ] `DeviceToken` Prisma model + registration API route
 - [ ] Vercel Cron reminder job extended to send Expo push alongside existing
       channel(s)
