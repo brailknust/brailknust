@@ -69,8 +69,15 @@ export async function completeProfile(formData: FormData) {
   });
 
   if (!parsed.curriculumVersion) throw new Error("A curriculum version is required before BRAIL can provision semesters.");
-  const curriculum = await ensureProgrammeCurriculum({ college: parsed.college, programme: parsed.programme, department: programme.department, version: parsed.curriculumVersion });
-  const semesters = await provisionStudentSemesters({ userId: appUser.id, curriculumId: curriculum.id, academicYear: parsed.academicYear, activeLevel: parsed.level, cwa: parsed.cwa });
+  let curriculum: Awaited<ReturnType<typeof ensureProgrammeCurriculum>>;
+  let semesters: Awaited<ReturnType<typeof provisionStudentSemesters>>;
+  try {
+    curriculum = await ensureProgrammeCurriculum({ college: parsed.college, programme: parsed.programme, department: programme.department, version: parsed.curriculumVersion });
+    semesters = await provisionStudentSemesters({ userId: appUser.id, curriculumId: curriculum.id, academicYear: parsed.academicYear, activeLevel: parsed.level, cwa: parsed.cwa });
+  } catch (error) {
+    console.error("Curriculum provisioning failed during onboarding", error);
+    throw new Error("BRAIL could not set up your semesters and courses. Your profile was saved — try submitting this step again in a moment.");
+  }
   const term = parsed.semesterName === "First Semester" ? "FIRST" : "SECOND";
   const activeSemester = semesters.find((semester) => semester.level === parsed.level && semester.term === term);
   if (!activeSemester) throw new Error("That semester is not available in the selected curriculum.");
