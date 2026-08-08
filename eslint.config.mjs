@@ -17,6 +17,8 @@ const eslintConfig = defineConfig([
     "test-results/**",
     // Local OCR tools and their Python virtual environment.
     "tmp/**",
+    // Separate Expo/React Native app with its own tooling — see mobile/AGENTS.md.
+    "mobile/**",
   ]),
 ]);
 
