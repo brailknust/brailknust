@@ -331,6 +331,7 @@ model User {
   memberships                StudyGroupMember[]
   notifications              Notification[]
   notificationPreference     NotificationPreference?
+  deviceTokens               DeviceToken[]
   resources                  Resource[]
   courseMaterials            CourseMaterial[]
   diagnosticAttempts         DiagnosticAttempt[]
@@ -1352,6 +1353,7 @@ model Notification {
   status       NotificationStatus  @default(PENDING)
   channel      NotificationChannel @default(IN_APP)
   attemptCount Int                 @default(0) @map("attempt_count")
+  pushedAt     DateTime?           @map("pushed_at")
   createdAt    DateTime            @default(now()) @map("created_at")
   semester     Semester?           @relation(fields: [semesterId], references: [id], onDelete: Cascade)
   user         User                @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -1359,6 +1361,7 @@ model Notification {
   @@unique([userId, sourceKey])
   @@index([userId, isRead, createdAt])
   @@index([userId, status, scheduledFor])
+  @@index([pushedAt])
   @@index([status, expiresAt])
   @@index([semesterId])
   @@map("notifications")
@@ -1378,6 +1381,23 @@ model NotificationPreference {
   user                        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("notification_preferences")
+}
+
+// Expo push tokens registered by the BRAIL mobile app (see mobile/ and
+// docs/mobile-roadmap.md). One row per installed device; a user may have
+// several (multiple phones, or a reinstalled app before the old token
+// expires).
+model DeviceToken {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId     String   @map("user_id") @db.Uuid
+  token      String   @unique
+  platform   String
+  lastSeenAt DateTime @default(now()) @map("last_seen_at")
+  createdAt  DateTime @default(now()) @map("created_at")
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("device_tokens")
 }
 
 model AiConversation {

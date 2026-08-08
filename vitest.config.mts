@@ -16,7 +16,7 @@ export default defineConfig({
     clearMocks: true,
     maxWorkers: 1,
     setupFiles: ["./tests/setup.ts"],
-    exclude: ["tests/e2e/**", "node_modules/**"],
+    exclude: ["tests/e2e/**", "node_modules/**", "mobile/**"],
     coverage: {
       provider: "v8",
       reporter: ["text", "json-summary", "html"],

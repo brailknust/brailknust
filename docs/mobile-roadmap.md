@@ -25,25 +25,41 @@ PWA can't reliably do this on iOS, so this roadmap targets a native app.
 ### Phase 1 — Scaffold & Auth
 - [x] `mobile/` Expo TS app created (`create-expo-app`)
 - [x] Supabase Auth client wired up (`@supabase/supabase-js`)
-- [ ] Login/signup screens reusing existing KNUST auth flow
-- [ ] **Backend: add Bearer-token auth to `app/api/*`.** Verified that the
-      existing API is cookie-session only (`src/proxy.ts` +
-      `src/lib/supabase/server.ts` read the Supabase session from cookies).
-      A mobile app authenticates with a Supabase access token, not a
-      browser cookie jar, so API routes the app calls need to also accept
-      `Authorization: Bearer <access_token>` (verify via
-      `supabase.auth.getUser(token)` server-side) before any mobile screen
-      can hit real data. Until this lands, `mobile/src/lib/api.ts` sends the
-      bearer token but the server will not recognize it.
+- [ ] Login/signup screens reusing existing KNUST auth flow (login screen
+      exists; needs live end-to-end testing against a real account)
+- [x] **Backend: Bearer-token auth for `app/api/*`.**
+      `src/lib/supabase/api-auth.ts` (`getSupabaseUserFromRequest`) accepts
+      `Authorization: Bearer <access_token>` and falls back to the existing
+      cookie session, so the same route works from both the mobile app and
+      the web app. Only wired into the mobile-facing route so far
+      (`/api/mobile/device-token`) — **each existing `app/api/*` route the
+      mobile app needs to call still has to be switched from
+      `getSupabaseUser()` to `getSupabaseUserFromRequest(request)`** one by
+      one as mobile screens are built (see Phase 2).
 
 ### Phase 2 — Core screens
-- [ ] Dashboard/Today
-- [ ] Courses
-- [ ] Tasks/Deadlines
-- [ ] Timetable
-- [ ] Goals
-- [ ] AI Chat
-- [ ] Notifications inbox
+**Important scope correction**: most of the web app's data (courses, tasks,
+timetable, goals, dashboard, performance, peers) is fetched via Next.js
+Server Components and mutated via Server Actions, not JSON API routes —
+`app/api/*` currently only has ~10 routes (AI chat, notifications, materials
+upload/download, diagnostics, study-plan/timetable generation, cron). There
+is **no existing REST/JSON surface for most mobile screens below**; each one
+needs a new thin `app/api/mobile/*` (or similar) route added, calling into
+the same `src/features/<area>/queries.ts` / `actions.ts` functions the web
+app's Server Components/Actions already use (business logic is reusable,
+just not yet exposed as JSON). Use `getSupabaseUserFromRequest` (Phase 1)
+for auth in each new route.
+
+- [ ] Dashboard/Today — new API route(s) + screen
+- [ ] Courses — new API route(s) + screen
+- [ ] Tasks/Deadlines — new API route(s) + screen
+- [ ] Timetable — new API route(s) + screen
+- [ ] Goals — new API route(s) + screen
+- [ ] AI Chat — `/api/ai/chat` already exists as a route; needs
+      `getSupabaseUserFromRequest` swap + screen
+- [ ] Notifications inbox — `/api/notifications/poll` and
+      `/api/notifications/[notificationId]` already exist; need
+      `getSupabaseUserFromRequest` swap + screen
 
 ### Phase 3 — Push notifications
 - [x] `expo-notifications` integrated, permission flow
@@ -56,9 +72,16 @@ PWA can't reliably do this on iOS, so this roadmap targets a native app.
       `eas build --profile development --platform android` from `mobile/`;
       install the resulting APK on a device, then run
       `npm run start:dev-client`.
-- [ ] `DeviceToken` Prisma model + registration API route
-- [ ] Vercel Cron reminder job extended to send Expo push alongside existing
-      channel(s)
+- [x] `DeviceToken` Prisma model + `POST /api/mobile/device-token`
+      registration route (migration
+      `20260808200905_mobile_push_device_tokens`)
+- [x] Cron reminder job (`src/features/notifications/cron.ts`) extended:
+      `src/features/notifications/push.ts` sends Expo push to every
+      registered device for a user's unpushed reminders, marks them
+      `pushedAt`, and prunes tokens Expo reports as
+      `DeviceNotRegistered`. Not yet tested against a real device — do that
+      once a dev-client build is installed (see below) and a device token is
+      registered via login.
 - [ ] Deep-linking from push tap into the relevant screen
 
 ### Phase 4 — Reliability & offline

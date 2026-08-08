@@ -7,7 +7,16 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { serverEnv } from "@/lib/env";
 import { prisma } from "@/server/db";
 
-export const getSupabaseUser = cache(async function getSupabaseUser() {
+export type SupabaseAuthUser = {
+  id: string;
+  email?: string;
+  user_metadata: {
+    full_name?: string;
+    avatar_url?: string;
+  };
+};
+
+export const getSupabaseUser = cache(async function getSupabaseUser(): Promise<SupabaseAuthUser | null> {
   const supabase = await createSupabaseServerClient();
   const { data } = await supabase.auth.getClaims();
   const claims = data?.claims;
