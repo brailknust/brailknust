@@ -8,3 +8,8 @@ node_modules
 coverage
 playwright-report
 test-results
+
+# Local OCR benchmarking tools and their Python virtual environment.
+# (Previously only excluded via the machine-local .git/info/exclude, which
+# tools other than git itself — e.g. EAS Build's archiver — don't read.)
+tmp/

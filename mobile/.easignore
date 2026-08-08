@@ -1,0 +1,9 @@
+# Belt-and-suspenders alongside the root .gitignore fix (tmp/ was only
+# excluded via the machine-local .git/info/exclude, which EAS's archiver
+# doesn't read). .easignore patterns are gitignore-style and only reach
+# within this directory, so this covers mobile/'s own tree; the actual fix
+# for the outer repo's tmp/ (1.7GB Python venv) is in the root .gitignore.
+node_modules
+.expo
+.git
+*.log
