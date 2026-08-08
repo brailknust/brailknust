@@ -76,5 +76,5 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 - Visit the deployment: sign up a real test account, complete onboarding, add a course, generate a study plan.
 - Confirm the build log showed a clean `prisma migrate deploy` run against a fresh database.
-- Vercel's Hobby plan has historically limited cron job frequency; `vercel.json` schedules `/api/cron/notifications` every 5 minutes — confirm the project's plan actually supports that cadence, or reduce it. This only affects background reminder generation, not the rest of the app.
+- Vercel's Hobby plan only allows cron jobs to run once per day. `vercel.json` schedules `/api/cron/notifications` at `0 6 * * *` (06:00 UTC daily) to fit that limit — background reminders are generated once a day rather than near-real-time. Upgrade the Vercel project to Pro and tighten the schedule (e.g. back to every 5 minutes) once more frequent reminder delivery matters; this only affects background notification generation, not the rest of the app.
 - Optionally re-run `npm run security:database` against the new project to confirm RLS and Storage lockdown survived the fresh migration replay. The script reads `.env.local` directly (not configurable), so this means temporarily pointing a local `.env.local` at the new project's credentials.
