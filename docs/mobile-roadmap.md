@@ -1,6 +1,7 @@
 # BRAIL Mobile App — Roadmap
 
-Status: Phase 0 (kickoff). Branch: `feature/mobile-app`.
+Status: Phase 1 auth verified, Phase 3 core push loop verified end-to-end on
+a real device (Aug 9, 2026). Branch: `feature/mobile-app`.
 
 ## Why
 
@@ -25,8 +26,9 @@ PWA can't reliably do this on iOS, so this roadmap targets a native app.
 ### Phase 1 — Scaffold & Auth
 - [x] `mobile/` Expo TS app created (`create-expo-app`)
 - [x] Supabase Auth client wired up (`@supabase/supabase-js`)
-- [ ] Login/signup screens reusing existing KNUST auth flow (login screen
-      exists; needs live end-to-end testing against a real account)
+- [x] Login/signup screens reusing existing KNUST auth flow — verified live
+      on a physical Android device against a real dev-environment account.
+      Signup screen still TODO (login only so far).
 - [x] **Backend: Bearer-token auth for `app/api/*`.**
       `src/lib/supabase/api-auth.ts` (`getSupabaseUserFromRequest`) accepts
       `Authorization: Bearer <access_token>` and falls back to the existing
@@ -78,10 +80,15 @@ for auth in each new route.
 - [x] Cron reminder job (`src/features/notifications/cron.ts`) extended:
       `src/features/notifications/push.ts` sends Expo push to every
       registered device for a user's unpushed reminders, marks them
-      `pushedAt`, and prunes tokens Expo reports as
-      `DeviceNotRegistered`. Not yet tested against a real device — do that
-      once a dev-client build is installed (see below) and a device token is
-      registered via login.
+      `pushedAt`, and prunes tokens Expo reports as `DeviceNotRegistered`.
+- [x] **Verified end-to-end on a physical Android device**: FCM credentials
+      configured (Firebase project `brailknust-898cc`), dev-client build
+      installed, real login → device token registered in `device_tokens` →
+      manual push via Expo's API delivered and displayed on-device with the
+      app fully closed. The full "delivered even when closed" requirement is
+      confirmed working. (Cron-triggered delivery specifically, as opposed
+      to this manual test, is still unexercised — same code path, but worth
+      a real run once there's a live reminder to trigger on.)
 - [ ] Deep-linking from push tap into the relevant screen
 
 ### Phase 4 — Reliability & offline
@@ -94,6 +101,34 @@ for auth in each new route.
 - [ ] Internal distribution (TestFlight / Android internal testing)
 - [ ] Join the existing 2-week student pilot (`docs/migration-roadmap.md`)
 - [ ] App Store / Play Store submission
+
+## Local dev environment notes
+
+Getting a physical device connected during this build-out surfaced a few
+recurring gotchas on the campus Wi-Fi network — worth knowing before
+re-debugging them from scratch next time:
+
+- **The dev machine's Wi-Fi IP changes frequently** (observed 3 different
+  addresses in one session). `mobile/.env`'s `EXPO_PUBLIC_API_BASE_URL` and
+  any `EXPO_PACKAGER_PROXY_URL` you export need to match the *current* IP —
+  check with `ipconfig` (look at the `Wireless LAN adapter Wi-Fi` block,
+  not `Ethernet 3`, which is a VirtualBox host-only adapter on this machine
+  and gets wrongly auto-advertised by Metro if not overridden).
+- **The campus network appears to block phone↔PC direct connections**
+  (`host unreachable` even with the correct IP and firewall rules already
+  permitting Node) **and** blocks/throttles `expo start --tunnel`'s ngrok
+  handshake (`ngrok tunnel took too long to connect`, reproduced 3× with
+  general internet connectivity confirmed working). Workaround: put both
+  devices on a phone personal hotspot instead — different subnet, isolation
+  goes away, LAN mode (`expo start --dev-client` + `EXPO_PACKAGER_PROXY_URL`
+  pointed at the PC's hotspot IP) works normally.
+- **Android push requires real FCM credentials** (Expo dropped shared
+  default push credentials as of SDK 53) — see Phase 3. `google-services.json`
+  lives at `mobile/google-services.json` (safe to commit); the FCM V1
+  service account private key was uploaded directly to EAS via
+  `eas credentials` and never touches the repo.
+- A dev-client build (not Expo Go) is required for any push-notification
+  testing — see Phase 3.
 
 ## Open questions / follow-ups
 
