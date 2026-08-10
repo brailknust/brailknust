@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { cache } from "react";
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { serverEnv } from "@/lib/env";
+import { isConfiguredAdminEmail } from "@/features/auth/admin";
 import { prisma } from "@/server/db";
 
 export type SupabaseAuthUser = {
@@ -80,13 +80,7 @@ export async function requireAppUser() {
 
 export async function requireAdmin() {
   const { authUser, appUser } = await requireAppUser();
-  const configuredAdmins = new Set(
-    (serverEnv.ADMIN_EMAILS ?? "")
-      .split(",")
-      .map((email) => email.trim().toLowerCase())
-      .filter(Boolean),
-  );
-  const isConfiguredAdmin = configuredAdmins.has(appUser.email.toLowerCase());
+  const isConfiguredAdmin = isConfiguredAdminEmail(appUser.email);
 
   if (appUser.role === "ADMIN") return { authUser, appUser };
 

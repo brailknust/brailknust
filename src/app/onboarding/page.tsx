@@ -3,7 +3,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { knustAcademicHierarchy } from "@/data/knust-academic-hierarchy";
-import { completeProfile } from "@/features/profile/actions";
+import { isConfiguredAdminEmail } from "@/features/auth/admin";
+import { completeProfileForm } from "@/features/profile/actions";
 import { getAppUserByAuthId, requireSupabaseUser } from "@/features/auth/queries";
 import { OnboardingForm } from "@/app/onboarding/onboarding-form";
 import { prisma } from "@/server/db";
@@ -11,6 +12,7 @@ import { prisma } from "@/server/db";
 export default async function OnboardingPage() {
   const authUser = await requireSupabaseUser();
   const appUser = await getAppUserByAuthId(authUser.id);
+  const isConfiguredAdmin = isConfiguredAdminEmail(authUser.email);
 
   if (appUser) {
     redirect("/dashboard");
@@ -40,10 +42,11 @@ export default async function OnboardingPage() {
         </p>
 
         <OnboardingForm
-          action={completeProfile}
+          action={completeProfileForm}
           hierarchy={knustAcademicHierarchy}
           defaultFullName={authUser.user_metadata.full_name ?? authUser.email ?? ""}
           importedCurricula={importedCurricula}
+          isConfiguredAdmin={isConfiguredAdmin}
         />
         </div>
       </section>

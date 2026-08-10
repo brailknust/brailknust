@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useActionState, useMemo, useState } from "react";
 
 import { getKnustProgrammesForCollege, type KnustCollege } from "@/data/knust-academic-hierarchy";
 import { getCurriculumVersions } from "@/data/curricula";
 import { PendingSubmitButton } from "@/components/pending-submit-button";
+import type { OnboardingFormState } from "@/features/profile/actions";
 
 const levels = [
   ["LEVEL_100", "Level 100"],
@@ -26,15 +27,18 @@ const academicYearOptions = Array.from({ length: 7 }, (_, index) => {
 const fieldClassName =
   "h-11 rounded-xl border border-border bg-white px-3 text-sm text-foreground outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 disabled:cursor-not-allowed disabled:bg-surface disabled:text-muted";
 const labelClassName = "grid gap-2 text-sm font-semibold text-foreground";
+const initialFormState: OnboardingFormState = { message: null };
 
 type OnboardingFormProps = {
-  action: (formData: FormData) => void;
+  action: (previousState: OnboardingFormState, formData: FormData) => Promise<OnboardingFormState>;
   hierarchy: KnustCollege[];
   defaultFullName: string;
   importedCurricula?: Array<{ college: string; programme: string; version: string }>;
+  isConfiguredAdmin?: boolean;
 };
 
-export function OnboardingForm({ action, hierarchy, defaultFullName, importedCurricula = [] }: OnboardingFormProps) {
+export function OnboardingForm({ action, hierarchy, defaultFullName, importedCurricula = [], isConfiguredAdmin = false }: OnboardingFormProps) {
+  const [formState, formAction] = useActionState(action, initialFormState);
   const [selectedCollege, setSelectedCollege] = useState("");
   const [selectedProgramme, setSelectedProgramme] = useState("");
 
@@ -56,7 +60,7 @@ export function OnboardingForm({ action, hierarchy, defaultFullName, importedCur
   }, [importedCurricula, selectedCollege, selectedProgramme]);
 
   return (
-    <form action={action} className="mt-8 grid gap-5">
+    <form action={formAction} className="mt-8 grid gap-5">
       <div className="rounded-xl border border-border bg-white p-5">
         <h2 className="text-base font-semibold">Personal details</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -70,15 +74,21 @@ export function OnboardingForm({ action, hierarchy, defaultFullName, importedCur
             />
           </label>
 
-          <label className={labelClassName}>
-            Student ID
+          <div className={labelClassName}>
+            <label htmlFor="studentId">Student ID</label>
             <input
+              id="studentId"
               name="studentId"
-              required
+              required={!isConfiguredAdmin}
               placeholder="e.g. 12345678"
               className={fieldClassName}
             />
-          </label>
+            {isConfiguredAdmin ? (
+              <span className="text-xs font-normal text-muted">
+                Optional for configured admin accounts.
+              </span>
+            ) : null}
+          </div>
         </div>
       </div>
 
@@ -210,6 +220,12 @@ export function OnboardingForm({ action, hierarchy, defaultFullName, importedCur
       >
         Create profile
       </PendingSubmitButton>
+
+      {formState.message ? (
+        <p role="alert" className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {formState.message}
+        </p>
+      ) : null}
     </form>
   );
 }

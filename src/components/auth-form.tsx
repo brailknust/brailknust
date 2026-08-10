@@ -99,7 +99,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         }
 
         if (!data.session) {
-          setMessage("Account created. Email confirmation is still enabled in Supabase, so check your email or turn it off in Auth settings.");
+          setMessage("Account created. Log in to continue, then BRAIL will take you to onboarding.");
           setIsPending(false);
           return;
         }

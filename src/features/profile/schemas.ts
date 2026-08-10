@@ -6,11 +6,16 @@ const knustCollegeNames = new Set(knustAcademicHierarchy.map((college) => colleg
 const knustProgrammePairs = new Set(
   knustProgrammes.map((programme) => `${programme.college}::${programme.name}`),
 );
+const optionalStudentId = z
+  .string()
+  .trim()
+  .transform((value) => value || undefined)
+  .pipe(z.string().min(3, "Enter your student ID.").optional());
 
 export const profileSchema = z
   .object({
     fullName: z.string().trim().min(2, "Enter your full name."),
-    studentId: z.string().trim().min(3, "Enter your student ID."),
+    studentId: optionalStudentId,
     college: z
       .string()
       .trim()

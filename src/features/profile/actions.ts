@@ -1,9 +1,11 @@
 "use server";
 
+import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { redirect, unstable_rethrow } from "next/navigation";
 
 import { ensureDefaultGoals, ensureProgrammeCurriculum, getPublishedCurriculumVersions, provisionStudentSemesters } from "@/features/academics/curriculum-provisioning";
+import { isConfiguredAdminEmail } from "@/features/auth/admin";
 import { syncNotificationsForUser } from "@/features/notifications/service";
 import { findKnustProgramme } from "@/data/knust-academic-hierarchy";
 import { requireAppUser, requireSupabaseUser } from "@/features/auth/queries";
@@ -17,8 +19,41 @@ function normalizeProgrammeName(programme: FormDataEntryValue | null) {
   return programme === "BSc Computer Engineering" ? "Computer Engineering" : programme;
 }
 
+export type OnboardingFormState = {
+  message: string | null;
+};
+
+const initialOnboardingFormState: OnboardingFormState = { message: null };
+
+function getErrorMessage(error: unknown) {
+  return error instanceof Error ? error.message : "BRAIL could not create your profile. Please try again.";
+}
+
+function isDuplicateStudentIdError(error: unknown) {
+  if (!(error instanceof Prisma.PrismaClientKnownRequestError)) return false;
+  if (error.code !== "P2002") return false;
+
+  const target = error.meta?.target;
+  return Array.isArray(target) && target.includes("student_id");
+}
+
+export async function completeProfileForm(
+  previousState: OnboardingFormState = initialOnboardingFormState,
+  formData: FormData,
+): Promise<OnboardingFormState> {
+  void previousState;
+  try {
+    await completeProfile(formData);
+    return initialOnboardingFormState;
+  } catch (error) {
+    unstable_rethrow(error);
+    return { message: getErrorMessage(error) };
+  }
+}
+
 export async function completeProfile(formData: FormData) {
   const authUser = await requireSupabaseUser();
+  const isConfiguredAdmin = isConfiguredAdminEmail(authUser.email);
   const deletedAccount = await prisma.user.findFirst({
     where: { authUserId: authUser.id, deletedAt: { not: null } },
     select: { id: true },
@@ -36,37 +71,51 @@ export async function completeProfile(formData: FormData) {
     level: formData.get("level"),
     cwa: formData.get("cwa") || undefined,
   });
+  if (!isConfiguredAdmin && !parsed.studentId) throw new Error("Enter your student ID.");
+
   const programme = findKnustProgramme(parsed.college, parsed.programme);
   if (!programme) throw new Error("Select a valid KNUST programme.");
   const versions = await getPublishedCurriculumVersions({ college: parsed.college, programme: parsed.programme, department: programme.department });
   if (versions.length && (!parsed.curriculumVersion || !versions.includes(parsed.curriculumVersion))) throw new Error("Select a published curriculum version for this programme.");
+  const studentId = parsed.studentId ?? null;
+  const configuredAdminRole = isConfiguredAdmin ? ({ role: "ADMIN" } as const) : {};
 
-  const appUser = await prisma.user.upsert({
-    where: { authUserId: authUser.id },
-    create: {
-      authUserId: authUser.id,
-      email: authUser.email ?? "",
-      fullName: parsed.fullName,
-      studentId: parsed.studentId,
-      college: parsed.college,
-      programme: parsed.programme,
-      department: programme.department,
-      level: parsed.level,
-      cwa: parsed.cwa,
-      avatarUrl: authUser.user_metadata.avatar_url,
-    },
-    update: {
-      email: authUser.email ?? "",
-      fullName: parsed.fullName,
-      studentId: parsed.studentId,
-      college: parsed.college,
-      programme: parsed.programme,
-      department: programme.department,
-      level: parsed.level,
-      cwa: parsed.cwa,
-      avatarUrl: authUser.user_metadata.avatar_url,
-    },
-  });
+  let appUser: Awaited<ReturnType<typeof prisma.user.upsert>>;
+  try {
+    appUser = await prisma.user.upsert({
+      where: { authUserId: authUser.id },
+      create: {
+        authUserId: authUser.id,
+        email: authUser.email ?? "",
+        fullName: parsed.fullName,
+        studentId,
+        college: parsed.college,
+        programme: parsed.programme,
+        department: programme.department,
+        level: parsed.level,
+        cwa: parsed.cwa,
+        avatarUrl: authUser.user_metadata.avatar_url,
+        ...configuredAdminRole,
+      },
+      update: {
+        email: authUser.email ?? "",
+        fullName: parsed.fullName,
+        studentId,
+        college: parsed.college,
+        programme: parsed.programme,
+        department: programme.department,
+        level: parsed.level,
+        cwa: parsed.cwa,
+        avatarUrl: authUser.user_metadata.avatar_url,
+        ...configuredAdminRole,
+      },
+    });
+  } catch (error) {
+    if (isDuplicateStudentIdError(error)) {
+      throw new Error("That student ID is already linked to another account.");
+    }
+    throw error;
+  }
 
   if (!parsed.curriculumVersion) throw new Error("A curriculum version is required before BRAIL can provision semesters.");
   let curriculum: Awaited<ReturnType<typeof ensureProgrammeCurriculum>>;
