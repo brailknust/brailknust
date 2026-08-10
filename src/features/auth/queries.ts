@@ -90,11 +90,7 @@ export async function requireAdmin() {
 
   if (appUser.role === "ADMIN") return { authUser, appUser };
 
-  const adminCount = isConfiguredAdmin
-    ? await prisma.user.count({ where: { role: "ADMIN" } })
-    : 1;
-
-  if (isConfiguredAdmin && adminCount === 0) {
+  if (isConfiguredAdmin) {
     const promoted = await prisma.$transaction(async (tx) => {
       const user = await tx.user.update({
         where: { id: appUser.id },
