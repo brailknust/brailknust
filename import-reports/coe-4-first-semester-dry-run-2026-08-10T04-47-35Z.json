@@ -1,0 +1,1607 @@
+{
+  "generatedAt": "2026-08-10T04:47:05.220Z",
+  "source": "C:\\Users\\jpaap\\OneDrive\\Desktop\\CoE\\CoE 4\\1. First Semester",
+  "mode": "DRY_RUN",
+  "termSlug": "coe-4-first-semester",
+  "reportTitle": "Computer Engineering - Year 4, First Semester import dry run",
+  "rules": {
+    "maxFileSizeMB": 50,
+    "skippedExtensions": [
+      ".ppt",
+      ".pptm"
+    ],
+    "folderPrefixesIgnored": true,
+    "supportsGeneralAndMultipleTopics": true
+  },
+  "courses": [
+    {
+      "code": "COE 485",
+      "name": "Computer Architecture",
+      "sourceFolder": "Computer Architecture and Organization",
+      "files": [
+        {
+          "name": "caoBatch 2.zip",
+          "extension": ".zip",
+          "sizeMB": 6.36,
+          "sha256": "1f3a7a4f700d6495091b4219a9cffa8b3a3da8358c8aee76f8c462b75db5ed90",
+          "status": "SKIPPED",
+          "warning": "Unsupported extension .zip."
+        },
+        {
+          "name": "caoBatch1.zip",
+          "extension": ".zip",
+          "sizeMB": 14.7,
+          "sha256": "d5db6826335c37ce8c8196519d41d2083d34868d200a1aa244479dc80e24950f",
+          "status": "SKIPPED",
+          "warning": "Unsupported extension .zip."
+        },
+        {
+          "name": "MIDSEM.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.23,
+          "sha256": "575fb96b3006e29baabc015d601c3cb3244ae502a7f8fc47973ee34a262e7620",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 7531,
+          "proposedTopics": [
+            "Computer Architecture Fundamentals",
+            "Instruction Set Architecture",
+            "Processor Datapath and Control",
+            "Input/Output Systems"
+          ]
+        },
+        {
+          "name": "MK.Computer.Architecture.5th.Edition.www.EBooksWorld.ir.pdf",
+          "extension": ".pdf",
+          "sizeMB": 7.23,
+          "sha256": "212a46939eaa5da621405d5097f3465270d55bf39a6bbf307d12f7c79194167b",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 2278139,
+          "proposedTopics": [
+            "Computer Architecture Fundamentals",
+            "Instruction Set Architecture",
+            "Processor Datapath and Control",
+            "Memory Hierarchy",
+            "Input/Output Systems"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 475",
+      "name": "Computer Networking",
+      "sourceFolder": "Computer Networking",
+      "files": [
+        {
+          "name": "Andrew S. Tanenbaum - Computer Networks.pdf",
+          "extension": ".pdf",
+          "sizeMB": 6.58,
+          "sha256": "5b4b3d33bc501106a1530e08c784eead8ed1ed151ad93fb63822b77ece33ca5f",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 2453384,
+          "proposedTopics": [
+            "Computer Networking Fundamentals",
+            "OSI and TCP/IP Models",
+            "Data Link Layer and LANs",
+            "IP Addressing and Routing",
+            "Transport Protocols"
+          ]
+        },
+        {
+          "name": "lecture 1.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.23,
+          "sha256": "88415e6690bd8cf3f34ab1872231005f6c0f18f5c5a31427c1d3872e6beba1cd",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 23661,
+          "proposedTopics": [
+            "Computer Networking Fundamentals",
+            "OSI and TCP/IP Models",
+            "Data Link Layer and LANs",
+            "IP Addressing and Routing",
+            "Transport Protocols"
+          ]
+        },
+        {
+          "name": "Lecture 2.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.84,
+          "sha256": "691a9794aa6452e2a85ecb860fa3235eb871e44c9e18db9677d3f3bf0c62ed81",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 34302,
+          "proposedTopics": [
+            "Computer Networking Fundamentals",
+            "OSI and TCP/IP Models",
+            "Data Link Layer and LANs",
+            "IP Addressing and Routing",
+            "Transport Protocols"
+          ]
+        },
+        {
+          "name": "Lecture 3.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.08,
+          "sha256": "ca1a66273d266e41c97ad0000a45c54d4a083d852c8fc348fd418afd2eea2af1",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 14155,
+          "proposedTopics": [
+            "Computer Networking Fundamentals",
+            "OSI and TCP/IP Models",
+            "Data Link Layer and LANs",
+            "IP Addressing and Routing",
+            "Transport Protocols"
+          ]
+        },
+        {
+          "name": "Lecture 4",
+          "extension": "",
+          "sizeMB": 2.34,
+          "sha256": "5e4a8f298d3f31079c505efceef8c5b43d57131174400bcccb419f065b624543",
+          "status": "SKIPPED",
+          "warning": "Unsupported extension (none)."
+        },
+        {
+          "name": "Lecture 4.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.34,
+          "sha256": "5e4a8f298d3f31079c505efceef8c5b43d57131174400bcccb419f065b624543",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 10971,
+          "proposedTopics": [
+            "Computer Networking Fundamentals",
+            "OSI and TCP/IP Models",
+            "Data Link Layer and LANs",
+            "IP Addressing and Routing",
+            "Transport Protocols"
+          ]
+        },
+        {
+          "name": "Lecture 5.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.28,
+          "sha256": "812a679663ea62334e10073e0a8f91db619cb04c2f32881e2a2e20a593970185",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 22864,
+          "proposedTopics": [
+            "Computer Networking Fundamentals",
+            "OSI and TCP/IP Models",
+            "Data Link Layer and LANs",
+            "IP Addressing and Routing",
+            "Transport Protocols"
+          ]
+        },
+        {
+          "name": "Lecture 6.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2,
+          "sha256": "ff218a47ac5263d62c01a3e244471f609e58d238901da03bc8b4515e31fe6d60",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 13185,
+          "proposedTopics": [
+            "Computer Networking Fundamentals",
+            "OSI and TCP/IP Models",
+            "Data Link Layer and LANs",
+            "IP Addressing and Routing",
+            "Network Security and Management"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 453",
+      "name": "Distributed Computing",
+      "sourceFolder": "Distributed Computing",
+      "files": [
+        {
+          "name": "2026 - Introduction to COE 453 Distributed Computing Course Requirements and Grading Structure .pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.12,
+          "sha256": "15d995d98d2e4ae8d37931d4badb45b16ea8505aa46ef8c77aaf83561837c2ca",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 12891,
+          "proposedTopics": [
+            "Distributed Computing Fundamentals",
+            "Cloud Computing",
+            "Distributed Coordination",
+            "Distributed Storage and Replication",
+            "Mock Exams and Assessment"
+          ]
+        },
+        {
+          "name": "Mock Exam 1.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.32,
+          "sha256": "037f7081dcfbcbffa05c707f172eaaaec51f969edd6361e5e0d409f3f9f58fca",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 753,
+          "proposedTopics": [
+            "Mock Exams and Assessment"
+          ]
+        },
+        {
+          "name": "Mock Exam 1.zip",
+          "extension": ".zip",
+          "sizeMB": 1.89,
+          "sha256": "fe3436ef888002114ee08394fc8b4ac0cc87fcf861fce35f1149f961710bf5f4",
+          "status": "SKIPPED",
+          "warning": "Unsupported extension .zip."
+        }
+      ]
+    },
+    {
+      "code": "ME 491",
+      "name": "Engineering Economics and Management",
+      "sourceFolder": "Engineering Economics and Management",
+      "files": [
+        {
+          "name": "1 Principles of Management.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.57,
+          "sha256": "b9d7baf295601eefac07f65772f77a9868425a284a686adcecc029c5e4278e0e",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 8629,
+          "proposedTopics": [
+            "Management Principles",
+            "Decision Making",
+            "Project Management",
+            "Engineering Economy Fundamentals",
+            "Interest Rates and Factors"
+          ]
+        },
+        {
+          "name": "10 Project Management (2).pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.93,
+          "sha256": "c084883bc8af2bdbb0c49a3cb33df93b4ac51cd53db70b13e8c522d9bd16bda9",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 6562,
+          "proposedTopics": [
+            "Management Principles",
+            "Decision Making",
+            "Project Management"
+          ]
+        },
+        {
+          "name": "11 ME 491_ENGINEERING ECONOMY, 2.pdf",
+          "extension": ".pdf",
+          "sizeMB": 4.41,
+          "sha256": "10be9ddd82dce3a31b8ed53e602c228e2432609f8a2acc6fd114b786354d9bf1",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 12440,
+          "proposedTopics": [
+            "Decision Making",
+            "Engineering Economy Fundamentals",
+            "Interest Rates and Factors"
+          ]
+        },
+        {
+          "name": "12 8.2 Nominal and effective interest rates.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.3,
+          "sha256": "b6caf13f2f091da4d7bb5a380b96864873ad22707f08688ce4d76c0d82d58727",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 7310,
+          "proposedTopics": [
+            "Engineering Economy Fundamentals",
+            "Interest Rates and Factors"
+          ]
+        },
+        {
+          "name": "13 ME 491_Factors and their use.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.26,
+          "sha256": "3f6734f542230433e41db121eb640a236b4f81cca8decbd1376c2181b9b7e0f8",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 6751,
+          "proposedTopics": [
+            "Engineering Economy Fundamentals",
+            "Interest Rates and Factors"
+          ]
+        },
+        {
+          "name": "13 ME 491_Factors and their use.ppt",
+          "extension": ".ppt",
+          "sizeMB": 2.82,
+          "sha256": "d92849309da762b5806b8f351aaa1d5549a6b0167fc2dc4148c8bc0cf878737f",
+          "status": "SKIPPED",
+          "warning": "Legacy .ppt is intentionally skipped."
+        },
+        {
+          "name": "2 PLANNING.pdf",
+          "extension": ".pdf",
+          "sizeMB": 3.26,
+          "sha256": "16188974e9ee7e71810692e79ace9e4edbcf46ee67e54d8763fb5330c15d523c",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 13215,
+          "proposedTopics": [
+            "Management Principles",
+            "Decision Making",
+            "Engineering Economy Fundamentals",
+            "Interest Rates and Factors"
+          ]
+        },
+        {
+          "name": "2025 BUSINESS RATIOS.docx",
+          "extension": ".docx",
+          "sizeMB": 0.02,
+          "sha256": "8941e4e393e85c86983f2aefafdf989c6290edd2686cd53b0b27e43475f44dec",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 1430,
+          "proposedTopics": [
+            "Accounting and Business Ratios"
+          ]
+        },
+        {
+          "name": "3 Decision Making.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.6,
+          "sha256": "cd5f804de92e7b9cfd9fc4b71f2381908fc0af0487d294228cb3d74ad4c7f58b",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 8887,
+          "proposedTopics": [
+            "Management Principles",
+            "Decision Making",
+            "Engineering Economy Fundamentals",
+            "Interest Rates and Factors"
+          ]
+        },
+        {
+          "name": "4 ORGANIZING.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.27,
+          "sha256": "fb416a21f5e87e219e466e21f1b1c4e14134500a8a7d8fd55c611fe767522575",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 8307,
+          "proposedTopics": [
+            "Management Principles",
+            "Decision Making"
+          ]
+        },
+        {
+          "name": "5 Leading.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.21,
+          "sha256": "8a802e9f77b4fb243e63b0fa8b4c52c276624d477b8d1fa03aea5a26fab32ab8",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 13705,
+          "proposedTopics": [
+            "Management Principles",
+            "Decision Making",
+            "Engineering Economy Fundamentals",
+            "Interest Rates and Factors"
+          ]
+        },
+        {
+          "name": "6 Controlling.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.49,
+          "sha256": "37a653cdfecfe5c72f5f6843b80de4d7a1f0468de794633c0f7d74a2d6868521",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 12296,
+          "proposedTopics": [
+            "Management Principles",
+            "Decision Making",
+            "Project Management",
+            "Engineering Economy Fundamentals",
+            "Accounting and Business Ratios"
+          ]
+        },
+        {
+          "name": "7 ME 491 6 ACCOUNTING1.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.6,
+          "sha256": "d0165882445acf3463460f0ce1f4d8b99575902b8e4ca898c7c58429c578fbc1",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 20852,
+          "proposedTopics": [
+            "Management Principles",
+            "Decision Making",
+            "Engineering Economy Fundamentals",
+            "Interest Rates and Factors",
+            "Accounting and Business Ratios"
+          ]
+        },
+        {
+          "name": "8 ME 491 6 ACCOUNTING2.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.85,
+          "sha256": "01f062b98d8a38fd03fd160a6e88fd7d45d38e40ed3232cfabf2dcf1f1ba9e8f",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 22722,
+          "proposedTopics": [
+            "Management Principles",
+            "Decision Making",
+            "Engineering Economy Fundamentals",
+            "Interest Rates and Factors",
+            "Accounting and Business Ratios"
+          ]
+        },
+        {
+          "name": "9 PROJECT MANAGEMENT SLIDES (1).pdf",
+          "extension": ".pdf",
+          "sizeMB": 4.64,
+          "sha256": "d2ce471cf22fe3d9dd97eba56029dd7864122a52a246fe0826b5f6212608b6e1",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 6243,
+          "proposedTopics": [
+            "General resources",
+            "Management Principles",
+            "Decision Making",
+            "Project Management",
+            "Engineering Economy Fundamentals"
+          ]
+        },
+        {
+          "name": "ACCOUNTING.docx",
+          "extension": ".docx",
+          "sizeMB": 0.06,
+          "sha256": "4a1885e5144db32ba51ddafe0be5246de24201e9d7dead3855f4dfeb80ed97a2",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 48086,
+          "proposedTopics": [
+            "Management Principles",
+            "Decision Making",
+            "Engineering Economy Fundamentals",
+            "Interest Rates and Factors",
+            "Accounting and Business Ratios"
+          ]
+        },
+        {
+          "name": "ENG ECONOMY LECTURE 1 (1).pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.47,
+          "sha256": "635b9d3656cb99b5fe07aaf5439f32ed23900fcd598cf6c86598b837276281b9",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 8350,
+          "proposedTopics": [
+            "Management Principles",
+            "Decision Making",
+            "Engineering Economy Fundamentals",
+            "Interest Rates and Factors",
+            "Accounting and Business Ratios"
+          ]
+        },
+        {
+          "name": "Factor Tables_220510_235728.pdf",
+          "extension": ".pdf",
+          "sizeMB": 4.95,
+          "sha256": "cf86ad27db9a8e15b31cd8380e62c8857bfeb9f982a8630c8ace4d8380035938",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 28,
+          "warning": "Very little text was extracted; review before import.",
+          "proposedTopics": [
+            "Interest Rates and Factors"
+          ]
+        },
+        {
+          "name": "ME 491 6 ACCOUNTING1.pptx",
+          "extension": ".pptx",
+          "sizeMB": 0.49,
+          "sha256": "f1e67d30278950b1e652c829a2ed0e1e452f8e543ddf237fa82dce5bf436a734",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 20502,
+          "proposedTopics": [
+            "Management Principles",
+            "Decision Making",
+            "Engineering Economy Fundamentals",
+            "Interest Rates and Factors",
+            "Accounting and Business Ratios"
+          ]
+        },
+        {
+          "name": "ME 491 6 ACCOUNTING2.pptx",
+          "extension": ".pptx",
+          "sizeMB": 1,
+          "sha256": "098bb9ccc590cb809531371c270f3a5d90c9f03b04b0e78ef1e2ca6adbd5226d",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 22202,
+          "proposedTopics": [
+            "Management Principles",
+            "Decision Making",
+            "Engineering Economy Fundamentals",
+            "Interest Rates and Factors",
+            "Accounting and Business Ratios"
+          ]
+        },
+        {
+          "name": "Project Management (2).pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.93,
+          "sha256": "c084883bc8af2bdbb0c49a3cb33df93b4ac51cd53db70b13e8c522d9bd16bda9",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 6562,
+          "proposedTopics": [
+            "Management Principles",
+            "Decision Making",
+            "Project Management"
+          ]
+        },
+        {
+          "name": "PROJECT MANAGEMENT SLIDES (1).pdf",
+          "extension": ".pdf",
+          "sizeMB": 4.64,
+          "sha256": "d2ce471cf22fe3d9dd97eba56029dd7864122a52a246fe0826b5f6212608b6e1",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 6243,
+          "proposedTopics": [
+            "General resources",
+            "Management Principles",
+            "Decision Making",
+            "Project Management",
+            "Engineering Economy Fundamentals"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 497",
+      "name": "Project I",
+      "sourceFolder": "FYP",
+      "files": [
+        {
+          "name": "Abstract.docx",
+          "extension": ".docx",
+          "sizeMB": 0.02,
+          "sha256": "7605ec20a1f92bb5f1f7a0558d4d534ecc7ff81c3e2f87d5f9a774e70f693db7",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 6673,
+          "proposedTopics": [
+            "Project Proposal and Synopsis",
+            "Research and Literature Review",
+            "Project Design and Implementation",
+            "Final Report Writing"
+          ]
+        },
+        {
+          "name": "AI ASSISTED ACADEMIC PLANNER 1.pptx",
+          "extension": ".pptx",
+          "sizeMB": 0.05,
+          "sha256": "619fc6e1a5c0ce02ea4cf9bb63a89475905956861de5eb129621636880422cac",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 1470,
+          "proposedTopics": [
+            "Project Design and Implementation",
+            "Project Presentation and Defense"
+          ]
+        },
+        {
+          "name": "AI ASSISTED ACADEMIC PLANNER.pptx",
+          "extension": ".pptx",
+          "sizeMB": 0.04,
+          "sha256": "c58ac6d543183513cb208efeb496f47cf01dbf4c7ea3c3d2de6e98bd79fd9e15",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 676,
+          "proposedTopics": [
+            "Project Design and Implementation",
+            "Project Presentation and Defense"
+          ]
+        },
+        {
+          "name": "AI_Assisted_Academic_Planner_Presentation.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.19,
+          "sha256": "f03cb61be82ce884c2f27f28c0c65607bec2e8de303f73e5cb2c47439cd4febe",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 1758,
+          "proposedTopics": [
+            "Project Design and Implementation",
+            "Project Presentation and Defense",
+            "Final Report Writing"
+          ]
+        },
+        {
+          "name": "AI_Assisted_Academic_Planner_Presentation.pptx",
+          "extension": ".pptx",
+          "sizeMB": 2.04,
+          "sha256": "11ed87bc6f89b4cf2b4e3d637afc717543226e1d035d79d2a77efe7d4706a7e3",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 1645,
+          "proposedTopics": [
+            "Project Design and Implementation",
+            "Project Presentation and Defense",
+            "Final Report Writing"
+          ]
+        },
+        {
+          "name": "BRAIL.pptx",
+          "extension": ".pptx",
+          "sizeMB": 10.89,
+          "sha256": "a858f21646e7b5f0d826391fe04ff8fc4cc61b84667e5d86982be18a381a83cc",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 2065,
+          "proposedTopics": [
+            "Project Proposal and Synopsis",
+            "Research and Literature Review",
+            "Project Design and Implementation",
+            "Project Presentation and Defense",
+            "Final Report Writing"
+          ]
+        },
+        {
+          "name": "Coming from SHS.docx",
+          "extension": ".docx",
+          "sizeMB": 0.01,
+          "sha256": "2ef639894f46067ecaf8e1e6ca4b7ac463d87b0bd6de265b9d8c4d6a6b3a5a46",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 1261,
+          "proposedTopics": [
+            "Project Design and Implementation"
+          ]
+        },
+        {
+          "name": "Features.docx",
+          "extension": ".docx",
+          "sizeMB": 0.01,
+          "sha256": "2f275836060229889f777abae8b2dddfd18bec0b011f9bd91ebf854014853f1b",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 941,
+          "proposedTopics": [
+            "Project Design and Implementation"
+          ]
+        },
+        {
+          "name": "KNUST_Disabled_Shuttle_Problem_Solution_Impact (1).docx",
+          "extension": ".docx",
+          "sizeMB": 0.04,
+          "sha256": "8e5771ba4d2bbaf0c613fc1a654d5bc673d217c4224aab316c87e15996021fc3",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 2762,
+          "proposedTopics": [
+            "Project Proposal and Synopsis",
+            "Project Design and Implementation"
+          ]
+        },
+        {
+          "name": "Predicting_the_Student_Performance_via_Machine_Leaning_Techniques.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.95,
+          "sha256": "be15e3daa4c57e92ab64b8b2c0e4927361c40128420c751215193f1f002ddc64",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 23683,
+          "proposedTopics": [
+            "Project Proposal and Synopsis",
+            "Research and Literature Review",
+            "Project Design and Implementation",
+            "Final Report Writing"
+          ]
+        },
+        {
+          "name": "report1.docx",
+          "extension": ".docx",
+          "sizeMB": 0.14,
+          "sha256": "e88bac526f93fd0d17cd64c6d4f5c22f81d28952a7a44f9081055d369ae93a8d",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 33020,
+          "proposedTopics": [
+            "Project Proposal and Synopsis",
+            "Requirements and SRS",
+            "Research and Literature Review",
+            "Project Design and Implementation",
+            "Project Presentation and Defense"
+          ]
+        },
+        {
+          "name": "synopsis 2.docx",
+          "extension": ".docx",
+          "sizeMB": 0.02,
+          "sha256": "6a7efe6c7e1534267223db75a737bd36e2345a7ea5d74f359682b4021cd5d59e",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 5576,
+          "proposedTopics": [
+            "Project Proposal and Synopsis",
+            "Research and Literature Review",
+            "Project Design and Implementation",
+            "Final Report Writing"
+          ]
+        },
+        {
+          "name": "Synopsis.docx",
+          "extension": ".docx",
+          "sizeMB": 0.04,
+          "sha256": "251dbb7705304b5a905ca6d0621d0efb4286b6dd396f7a8e08ac4dc4e1e6b31b",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 6608,
+          "proposedTopics": [
+            "Project Proposal and Synopsis",
+            "Research and Literature Review",
+            "Project Design and Implementation",
+            "Final Report Writing"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 499",
+      "name": "Vacation Training",
+      "sourceFolder": "Vacation Training",
+      "files": [
+        {
+          "name": "82558394.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.07,
+          "sha256": "5daad416bd74f91cbdb3dd3509d3c0309280a3a5eaca4382886207f7ab7935df",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Appraisal form for Vacation Training 2025.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.19,
+          "sha256": "4a82f0ce05f3d621df4e07d119fdbdbce44bd55f56229284acc1616d3e4d52d3",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 1742,
+          "proposedTopics": [
+            "Vacation Training Guidelines",
+            "Workplace Documentation",
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "Guidlines_internship.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.2,
+          "sha256": "c68b6d171c8100f0bf4bd0d8a5d6cde084ded996133e6374498c0a0951f2f922",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 6306,
+          "proposedTopics": [
+            "Vacation Training Guidelines",
+            "Industrial Training Reports",
+            "Technical Laboratory Reports",
+            "Workplace Documentation",
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "IT_Internship_Essay_Report.docx",
+          "extension": ".docx",
+          "sizeMB": 0.04,
+          "sha256": "c93a90cbcf3ab21507755987f61435742414b039b05762acd54f937553fd7f50",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 5014,
+          "proposedTopics": [
+            "Vacation Training Guidelines",
+            "Industrial Training Reports",
+            "Workplace Documentation",
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "IT_Internship_Report.docx",
+          "extension": ".docx",
+          "sizeMB": 0.04,
+          "sha256": "06455f72252bb1c20a4449d039b7814c66afb2a5de5bc18d67a0aa95df736ad9",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 2617,
+          "proposedTopics": [
+            "Vacation Training Guidelines",
+            "Industrial Training Reports",
+            "Workplace Documentation",
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "KWAME NKRUMAH UNIVERSITY OF SCIENCE AND TECHNOLOGY.docx",
+          "extension": ".docx",
+          "sizeMB": 0.1,
+          "sha256": "6a8ecaeea333b886c2121a03f92de3e1ffb125d7a14fc45bc8304fe997b173c6",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 33900,
+          "proposedTopics": [
+            "Vacation Training Guidelines",
+            "Industrial Training Reports",
+            "Workplace Documentation",
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "Lab report (2).docx",
+          "extension": ".docx",
+          "sizeMB": 1.08,
+          "sha256": "bddb2e42654bab286486cd33bb34b1d029df498e941aadd74aae19e2bc906cc1",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 53291,
+          "proposedTopics": [
+            "Vacation Training Guidelines",
+            "Industrial Training Reports",
+            "Technical Laboratory Reports",
+            "Workplace Documentation",
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "Lab report (2).pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.39,
+          "sha256": "e53433539667bdc36902737a1bf280da077a1d25f4fea3f38812e084466d23e9",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 60471,
+          "proposedTopics": [
+            "Vacation Training Guidelines",
+            "Industrial Training Reports",
+            "Technical Laboratory Reports",
+            "Workplace Documentation",
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "log sheet for vacation training 2025.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.16,
+          "sha256": "20547f76944eb05be69952eabcfcaa13788af59384da662fb2e61b82c290cc82",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 1614,
+          "proposedTopics": [
+            "Vacation Training Guidelines",
+            "Workplace Documentation",
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "my intern report.docx",
+          "extension": ".docx",
+          "sizeMB": 2.45,
+          "sha256": "0e58024edc3e04175302add00fbbc02f74051afdc97f1a0c709ebe2030d0a53d",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 33717,
+          "proposedTopics": [
+            "Vacation Training Guidelines",
+            "Industrial Training Reports",
+            "Workplace Documentation",
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_10_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.16,
+          "sha256": "1bd38b1eabc7285bbc26dfeb74029aeb8c445263ce861b7af24b439dda5fa53d",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_11_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.15,
+          "sha256": "1fe90558d1410b412ee2f57db3ac284255f8b75d106124e22ae7aef36e436751",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_12_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.05,
+          "sha256": "c93f0a78c091b08bfba2ec9739c06be5854dc90cfec8712c05ad62e52363c85c",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_13_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.05,
+          "sha256": "c93f0a78c091b08bfba2ec9739c06be5854dc90cfec8712c05ad62e52363c85c",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_14_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.16,
+          "sha256": "9190c6ada61fd51be8387f151761149c9400bfe2e7728b46ce0dea2ccb2cf145",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_15_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.05,
+          "sha256": "185c55f0ab945b254d212382092d539699b00d4846d2e6a68cc3ccd32c2c8cfe",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_16_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.18,
+          "sha256": "9152875fe72ecfc6352fa4aec5999ca38d0dc833f189fa2c9000ddce2bf8f230",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_17_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.15,
+          "sha256": "091fbc2baa5572efe921fff8fc17ec42b067478f74729d2c2f37c5670771ce15",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_18_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.05,
+          "sha256": "3cd86970f1bc285aa3395378d39d1df740f054f81405141cb76c744f15e846e6",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_1_2026-01-13_12-20-55.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.32,
+          "sha256": "5e62ffed781882bcf158418064ba36c17345cf2c8370de27c02ee9db5f5db197",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_1_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.17,
+          "sha256": "f99ed36d6f22a7eceb5df01cad49d02ad0786657846b25183e411b450c68315d",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_2_2026-01-13_12-20-55.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.33,
+          "sha256": "ea1c2947994c4cd73ee058dc3e7d49a8842be600c0e626dd885cf830e04914c7",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_2_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.06,
+          "sha256": "262ca176a014f586b5d52dab01c8ed4811513b99a4a712fbedbb006c5cc16412",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_3_2026-01-13_12-20-55.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.18,
+          "sha256": "d36c7acf18b600d1e62c87b61da47b8b3bd9dc9b1753794ea695a110354f8840",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_3_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.15,
+          "sha256": "aef828cc6499741e4d13fba91e2b974b4e9582ded73de33379b974572ed21368",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_4_2026-01-13_12-20-55.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.13,
+          "sha256": "772b870a579c6cd143bdc4126edfd395f2a3786684b78cdd8a4e567adfd495c4",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_4_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.06,
+          "sha256": "a2e162c920b7c2d92ceac072dcf489a3575021ce77114362c3ed3fe8520aaa1b",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_5_2026-01-13_12-20-55.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.18,
+          "sha256": "5a5511e255478c9e7031c7bfbd0bc116e0488a7f38df4511cc0253ecbbb39a78",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_5_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.05,
+          "sha256": "43642c351570885d5d029810c8250dfcc957b9801531cc7d2a444b866a1a6cf9",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_6_2026-01-13_12-20-55.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.18,
+          "sha256": "45ee84185e51e0f59376e064b854424896cf92a519d39684ab8ab86a8453758c",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_6_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.16,
+          "sha256": "656beefc376517a41934582846997e98df1a692a96c4eeb9df00a9fb0ca4e18e",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_7_2026-01-13_12-20-55.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.12,
+          "sha256": "f1ad5c627cf112dca15e1eebdf3d1cf21f0c749f4483e2dcc541e2bf5cab5b10",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_7_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.15,
+          "sha256": "8e8af6af521b21e300025ac3ef3d58bea1ae73a0dba1eca1f453661858841e76",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_8_2026-01-13_12-20-55.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.16,
+          "sha256": "003e17dc635566911aab011b4c3d603f583e43994de49ad38583e9187ee2c9d3",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_8_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.05,
+          "sha256": "d4f13b1c4f60f91a4a29bb1ddc647de2cee5d9b923fa691a78825e06cc218e67",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_9_2026-01-13_12-20-55.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.1,
+          "sha256": "28ff02e932816c621bcb83877f0504c3a6e0d1c13fe6177eb7fb25b7f835cf33",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "photo_9_2026-02-15_16-53-20.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.05,
+          "sha256": "73a5e1b5fd751362a1960c49dabfd65ca5472c9578030c733e6e1ea98b993eed",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "Picture1.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.03,
+          "sha256": "9d23553c1f7fbe33b23d5f2d18864f3e8282cb86d2ae2e4603e1a4653f9aec65",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture10.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.03,
+          "sha256": "b584d5341505e99645802de429fae6decabcfc430f7ccecc79464c737ac6052d",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture11.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.05,
+          "sha256": "1875eff011ba710820660863068ecb29a5db6f8eb9daae8ad33a498581a1a577",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture12.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.01,
+          "sha256": "ed5b9091c95c3a8bae092fc4ca7facd1e5dbd12d75f7de1fa8bdda9b4a0ebb6a",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture13.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.03,
+          "sha256": "241861b990f050554336f9e9ad43cda800a7ab90586cfe6a286187f3628488ba",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture14.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.05,
+          "sha256": "3b9f6eaf037705e5b94faa08a164e444a357c524283465e38adce2ce994e97ba",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture15.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.04,
+          "sha256": "174013b943c0b7de72a02819a2b74f098f671879d247a84a03ab8bf46a56f7c8",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture16.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.03,
+          "sha256": "5f0e846cf5351ee3f023aba3eb099e8ad9d23c6f8d530a3ecd7e108bcc81d954",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture17.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.03,
+          "sha256": "4f0b95fcbd3cdf4b9fecc0c789afc5992780ca2aeb77a31533ce882df7ed0c5b",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture18.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.03,
+          "sha256": "f2da5ed79023a4b4c210a2f79bce9e5d815e8fec5c0b0a00979a078e3c667e06",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture19.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.02,
+          "sha256": "be4c0914bb68ba285496dca8a8feb4ce4ea92c615c77b4d3ac51a61606dbd4a1",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture2.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.01,
+          "sha256": "2c1727726f6378554e7747fa90e0383b9eb018bb241b764ee77e4bd6fc94fc18",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture21.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.03,
+          "sha256": "dafbfaab22dcc9b45cf2c6311ed0d3b6b4be3156d12492fcf6cf7cdf2927cc01",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture3.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.06,
+          "sha256": "f0fc4ce8fd9b227ab06d6bb4460d8c65bc26176a1012e1f83a393907613eb6bd",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture4.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.05,
+          "sha256": "8013ac1a24f06240ff6986e54078582cf907079ec6554f4928d1bdeb088aadfc",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture5.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.04,
+          "sha256": "f0ab9231af3e07be8f52798f2fb1ca1b7a3ee9dbbf6f51f93a6569b6eb83e125",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture6.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.03,
+          "sha256": "251c5a22f3702df8100dde9fd1e0fc026a2cb012675ad4291ca1e77c76a49fab",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture7.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.06,
+          "sha256": "186a596fcf9c1ddda2754e70a6aba4a0f69666eca0aea60bd05648bbb9f9249e",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture8.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.04,
+          "sha256": "c4eb7a090889c1e92a4a39a567fd384e3c26203b77bfc5e90e4f3e7162114745",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Picture9.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.03,
+          "sha256": "e24e7027b372551c611623bd0535768f73fd6461777a3c600645eabb53679ae1",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "UEB0913819_INTERNSHIP REPORT.docx",
+          "extension": ".docx",
+          "sizeMB": 3.39,
+          "sha256": "903a1f2374a782b07106c623442f994be6f7f6c31e0190952a5b054455c818ae",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 30962,
+          "proposedTopics": [
+            "Vacation Training Guidelines",
+            "Industrial Training Reports",
+            "Workplace Documentation",
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "UEB0913819_INTERNSHIP REPORT.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.53,
+          "sha256": "8aa7a8f974cc2e360506eb72c818f446682ed569c696046cb985c034cd84afd7",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 43240,
+          "proposedTopics": [
+            "Vacation Training Guidelines",
+            "Industrial Training Reports",
+            "Workplace Documentation",
+            "Training Evidence and Appraisal"
+          ]
+        },
+        {
+          "name": "WhatsApp Image 2025-11-07 at 18.01.25_2531da0b.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.06,
+          "sha256": "5313714080d87e9527ed70141a67e0b895eefe00be6a151c6e1be5252dc0b19f",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "WhatsApp Image 2025-11-07 at 18.01.25_9371fe02.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.05,
+          "sha256": "29da9d373be45dff123f3afcdad447be81064db23c3fec093718da40349edc20",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "WhatsApp Image 2025-11-07 at 18.01.25_c3e8ce8e.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.06,
+          "sha256": "b9bb4d664476327cf3e9aa52d52388f1fc34e6a249cc37a9a1c448967ca33c6d",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "WhatsApp Image 2025-11-07 at 18.01.26_10deb044.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.05,
+          "sha256": "7ef743675830e20463bfee0e25e06d2c7c170d3adb50978ae20f2b74581e42b0",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "WhatsApp Image 2025-11-07 at 18.01.26_2c7e70d7.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.06,
+          "sha256": "181d6bd668ac1b72e20525bcd2cd170a507d879583f98425cd6056e2989d2651",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        }
+      ]
+    }
+  ],
+  "unmatchedFolders": [
+    "Artificial Intelligence"
+  ],
+  "duplicateGroups": [
+    {
+      "sha256": "5e4a8f298d3f31079c505efceef8c5b43d57131174400bcccb419f065b624543",
+      "files": [
+        "Computer Networking\\Lecture 4",
+        "Computer Networking\\Lecture 4.pdf"
+      ]
+    },
+    {
+      "sha256": "c084883bc8af2bdbb0c49a3cb33df93b4ac51cd53db70b13e8c522d9bd16bda9",
+      "files": [
+        "Engineering Economics and Management\\10 Project Management (2).pdf",
+        "Engineering Economics and Management\\Project Management (2).pdf"
+      ]
+    },
+    {
+      "sha256": "d2ce471cf22fe3d9dd97eba56029dd7864122a52a246fe0826b5f6212608b6e1",
+      "files": [
+        "Engineering Economics and Management\\9 PROJECT MANAGEMENT SLIDES (1).pdf",
+        "Engineering Economics and Management\\PROJECT MANAGEMENT SLIDES (1).pdf"
+      ]
+    },
+    {
+      "sha256": "c93f0a78c091b08bfba2ec9739c06be5854dc90cfec8712c05ad62e52363c85c",
+      "files": [
+        "Vacation Training\\photo_12_2026-02-15_16-53-20.jpg",
+        "Vacation Training\\photo_13_2026-02-15_16-53-20.jpg"
+      ]
+    }
+  ],
+  "summary": {
+    "discovered": 114,
+    "ready": 109,
+    "skipped": 5,
+    "warnings": 6,
+    "readySizeMB": 98.86
+  }
+}

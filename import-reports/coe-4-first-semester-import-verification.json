@@ -1,0 +1,87 @@
+{
+  "verifiedAt": "2026-08-10T04:55:55.136Z",
+  "expectedApprovedFiles": 53,
+  "publishedFiles": 53,
+  "missingHashes": [],
+  "materialsWithoutStorage": [],
+  "materialsWithoutChunks": [],
+  "materialsWithoutTopics": [],
+  "courses": [
+    {
+      "code": "COE 453",
+      "topics": [
+        "Distributed Computing Fundamentals",
+        "Cloud Computing",
+        "Distributed Coordination",
+        "Distributed Storage and Replication",
+        "Mock Exams and Assessment"
+      ],
+      "importedMaterials": 2,
+      "searchableChunks": 10
+    },
+    {
+      "code": "COE 475",
+      "topics": [
+        "Computer Networking Fundamentals",
+        "OSI and TCP/IP Models",
+        "Data Link Layer and LANs",
+        "IP Addressing and Routing",
+        "Transport Protocols",
+        "Network Security and Management"
+      ],
+      "importedMaterials": 7,
+      "searchableChunks": 1817
+    },
+    {
+      "code": "COE 485",
+      "topics": [
+        "Computer Architecture Fundamentals",
+        "Instruction Set Architecture",
+        "Processor Datapath and Control",
+        "Input/Output Systems",
+        "Memory Hierarchy"
+      ],
+      "importedMaterials": 2,
+      "searchableChunks": 1613
+    },
+    {
+      "code": "COE 497",
+      "topics": [
+        "Project Proposal and Synopsis",
+        "Research and Literature Review",
+        "Project Design and Implementation",
+        "Final Report Writing",
+        "Project Presentation and Defense",
+        "Requirements and SRS"
+      ],
+      "importedMaterials": 13,
+      "searchableChunks": 67
+    },
+    {
+      "code": "COE 499",
+      "topics": [
+        "Vacation Training Guidelines",
+        "Workplace Documentation",
+        "Training Evidence and Appraisal",
+        "Industrial Training Reports",
+        "Technical Laboratory Reports"
+      ],
+      "importedMaterials": 11,
+      "searchableChunks": 197
+    },
+    {
+      "code": "ME 491",
+      "topics": [
+        "Management Principles",
+        "Decision Making",
+        "Project Management",
+        "Engineering Economy Fundamentals",
+        "Interest Rates and Factors",
+        "Accounting and Business Ratios",
+        "General resources"
+      ],
+      "importedMaterials": 18,
+      "searchableChunks": 181
+    }
+  ]
+}
