@@ -41,17 +41,6 @@ function formatDate(value: Date | null) {
   }).format(value);
 }
 
-function formatDateTime(value: Date | null) {
-  if (!value) {
-    return "No scheduled time";
-  }
-
-  return new Intl.DateTimeFormat("en-GH", {
-    dateStyle: "medium",
-    timeStyle: "short",
-  }).format(value);
-}
-
 function formatTime(value: Date) {
   return value.toISOString().slice(11, 16);
 }
@@ -110,9 +99,6 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
   const isArchived = Boolean(planner.activeSemester?.isArchived);
 
   const courseOptions = planner.activeEnrollments.map((enrollment) => enrollment.course);
-  const filteredTasks = selectedCourseId
-    ? planner.openTasks.filter((task) => task.courseId === selectedCourseId)
-    : planner.openTasks;
   const filteredPlanItems = selectedCourseId
     ? selectedStudyPlan?.items.filter((item) => item.courseId === selectedCourseId) ?? []
     : selectedStudyPlan?.items ?? [];
@@ -507,30 +493,6 @@ export default async function PlannerPage({ searchParams }: PlannerPageProps) {
           </section>
 
           <UnavailableTimesGrid blocks={unavailableBlocks} readOnly={isArchived} />
-
-          <section>
-            <div className="rounded-2xl border border-border bg-white p-5">
-              <h2 className="text-lg font-semibold">Open tasks</h2>
-              <div className="mt-4 grid gap-3">
-                {filteredTasks.length ? (
-                  filteredTasks.slice(0, 8).map((task) => (
-                    <article key={task.id} className="rounded-xl border border-border bg-surface p-4">
-                      <p className="font-semibold">{task.title}</p>
-                      <p className="mt-1 text-sm text-muted">
-                        {task.course ? `${task.course.name} - ` : ""}
-                        {formatDateTime(task.dueAt)}
-                      </p>
-                    </article>
-                  ))
-                ) : (
-                  <p className="rounded-xl border border-border bg-surface p-4 text-sm text-muted">
-                    No open tasks match this view.
-                  </p>
-                )}
-              </div>
-            </div>
-
-          </section>
         </div>
       </section>
     </AppShell>

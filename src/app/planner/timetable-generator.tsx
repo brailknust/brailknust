@@ -88,8 +88,10 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
   const [unscheduled, setUnscheduled] = useState<UnscheduledCourse[]>([]);
   const [warnings, setWarnings] = useState<string[]>([]);
   const [summary, setSummary] = useState<GenerateSummary | null>(null);
-  const [statusMessage, setStatusMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [extractStatusMessage, setExtractStatusMessage] = useState("");
+  const [extractErrorMessage, setExtractErrorMessage] = useState("");
+  const [generateStatusMessage, setGenerateStatusMessage] = useState("");
+  const [generateErrorMessage, setGenerateErrorMessage] = useState("");
   const [isExtracting, setIsExtracting] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [preferences, setPreferences] = useState<PlannerPreferences>({
@@ -115,24 +117,26 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
 
   async function handleExtractTimetable(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setErrorMessage("");
-    setStatusMessage("");
+    setExtractErrorMessage("");
+    setExtractStatusMessage("");
+    setGenerateErrorMessage("");
+    setGenerateStatusMessage("");
     setRawOcrText("");
 
     if (!timetableImage) {
-      setErrorMessage("Upload a timetable image first.");
+      setExtractErrorMessage("Upload a timetable image first.");
       return;
     }
 
     if (timetableImage.size > 6 * 1024 * 1024) {
-      setErrorMessage("This image is too large for local OCR. Upload a screenshot under 6MB.");
+      setExtractErrorMessage("This image is too large for local OCR. Upload a screenshot under 6MB.");
       return;
     }
 
     const formData = new FormData();
     formData.append("image", timetableImage);
     setIsExtracting(true);
-    setStatusMessage("Reading timetable image. This can take up to 45 seconds for large photos.");
+    setExtractStatusMessage("Reading timetable image. This can take up to 45 seconds for large photos.");
 
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), 60_000);
@@ -150,8 +154,8 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
       } | null;
 
       if (!response.ok || !data?.rows) {
-        setErrorMessage(data?.message ?? "Could not extract the timetable image.");
-        setStatusMessage("");
+        setExtractErrorMessage(data?.message ?? "Could not extract the timetable image.");
+        setExtractStatusMessage("");
         return;
       }
 
@@ -159,10 +163,10 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
       setRawOcrText(data.rawText ?? "");
       setGeneratedSessions([]);
       setSummary(null);
-      setStatusMessage(data.message ?? "Timetable rows extracted. Review them before generating your plan.");
+      setExtractStatusMessage(data.message ?? "Timetable rows extracted. Review them before generating your plan.");
     } catch (error) {
-      setStatusMessage("");
-      setErrorMessage(
+      setExtractStatusMessage("");
+      setExtractErrorMessage(
         error instanceof DOMException && error.name === "AbortError"
           ? "Extraction timed out. Try a smaller, clearer screenshot or add classes manually."
           : "Could not extract the timetable image.",
@@ -190,8 +194,8 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
   }
 
   async function handleGeneratePlan() {
-    setErrorMessage("");
-    setStatusMessage("");
+    setGenerateErrorMessage("");
+    setGenerateStatusMessage("");
     setUnscheduled([]);
     setWarnings([]);
     setIsGenerating(true);
@@ -211,7 +215,7 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
           const { response, data } = await requestGeneratedPlan(controller.signal);
 
           if (!response.ok || !data?.sessions) {
-            setErrorMessage(data?.message ?? "Could not generate a study plan.");
+            setGenerateErrorMessage(data?.message ?? "Could not generate a study plan.");
             return;
           }
 
@@ -219,7 +223,7 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
           setUnscheduled(data.unscheduled ?? []);
           setWarnings(data.warnings ?? []);
           setSummary(data.summary ?? null);
-          setStatusMessage(
+          setGenerateStatusMessage(
             data.unscheduled?.length
               ? "Study timetable generated and saved, but some sessions could not fit — see the notes below."
               : "Personal study timetable generated and saved. Your reviewed class rows remain available for regeneration.",
@@ -229,7 +233,7 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
         } catch (error) {
           const isTimeout = error instanceof DOMException && error.name === "AbortError";
           if (attempt < attempts) continue; // one silent retry on a network-level failure
-          setErrorMessage(
+          setGenerateErrorMessage(
             isTimeout
               ? "Generating your study plan timed out. Try again — your class rows and preferences are unchanged."
               : "Could not reach the server to generate a study plan. Check your connection and try again.",
@@ -273,14 +277,14 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
         </button>
       </form>
 
-      {statusMessage ? (
+      {extractStatusMessage ? (
         <p className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-800">
-          {statusMessage}
+          {extractStatusMessage}
         </p>
       ) : null}
-      {errorMessage ? (
+      {extractErrorMessage ? (
         <p className="mt-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800">
-          {errorMessage}
+          {extractErrorMessage}
         </p>
       ) : null}
 
@@ -449,6 +453,16 @@ export function TimetableGenerator({ activeCourseCount, initialRows }: Timetable
           <Sparkles className="h-4 w-4" />
           {isGenerating ? "Generating..." : extractedRows.length ? "Generate around class times" : "Generate from enrolled courses"}
         </button>
+        {generateStatusMessage ? (
+          <p className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-800">
+            {generateStatusMessage}
+          </p>
+        ) : null}
+        {generateErrorMessage ? (
+          <p className="mt-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800">
+            {generateErrorMessage}
+          </p>
+        ) : null}
       </div>
 
       {summary ? (
