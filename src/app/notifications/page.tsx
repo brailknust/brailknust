@@ -26,6 +26,7 @@ import {
   updateNotificationReadState,
 } from "@/features/notifications/actions";
 import { getNotificationCenterData, getStudySessionPanelData } from "@/features/notifications/queries";
+import { syncNotificationsForUser } from "@/features/notifications/service";
 import { respondToAttendance } from "@/features/tracking/actions";
 import { reconcileAcademicTracking } from "@/features/tracking/service";
 
@@ -143,6 +144,12 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
   if (appUser.activeSemesterId) {
     await reconcileAcademicTracking(appUser.id, appUser.activeSemesterId);
   }
+  // Not forced: this is throttled to once per 5 minutes internally, so it's
+  // safe to call on every page load. This is what actually surfaces "starting
+  // soon" reminders (deadlines, study sessions, goals, groups) close to their
+  // time — nothing else refreshes them between the sparse action-triggered
+  // syncs and the once-daily cron.
+  await syncNotificationsForUser(appUser.id);
 
   const [data, studySessionData] = await Promise.all([
     getNotificationCenterData(appUser.id, view),
