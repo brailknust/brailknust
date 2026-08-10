@@ -184,7 +184,7 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
         </div>
       </section>
 
-      <div className="mt-6">
+      <div id="study-session" className="mt-6 scroll-mt-6">
         <StudySessionPanel
           active={studySessionData.active}
           upcoming={studySessionData.upcoming}

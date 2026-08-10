@@ -72,7 +72,9 @@ export async function reconcileAcademicTracking(userId: string, semesterId: stri
           `attendance:${block.id}:${today.toISOString().slice(0, 10)}`,
           now,
           {
-            expiresAt: new Date(now.getTime() + 48 * 3600_000),
+            // Clear from the bell at the end of the class's own day, not a rolling
+            // 48h window — `today` is already that day's midnight-UTC anchor.
+            expiresAt: new Date(today.getTime() + 24 * 3600_000),
             type: "ATTENDANCE",
             actionUrl: conversationId ? `/ai-chat?conversation=${conversationId}` : "/academics",
           },

@@ -28,10 +28,6 @@ function nextWeeklyOccurrence(template: Date, now: Date) {
   return occurrence;
 }
 
-function plannerUrl(planId: string, occurrence: Date) {
-  return `/planner?planId=${planId}&day=${mondayBasedDay(occurrence)}#study-timetable`;
-}
-
 export async function syncNotificationsForUser(userId: string, force = false) {
   const now = new Date();
   // A delivered reminder is active only until its expiry. It remains in history afterwards.
@@ -107,7 +103,6 @@ export async function syncNotificationsForUser(userId: string, force = false) {
             title: true,
             scheduledStart: true,
             course: { select: { name: true } },
-            studyPlan: { select: { id: true } },
           },
         })
       : [],
@@ -167,7 +162,10 @@ export async function syncNotificationsForUser(userId: string, force = false) {
       title: "Study session starting soon",
       message: `${item.course?.name ? `${item.course.name}: ` : ""}${item.title.split("||")[0]?.trim() ?? "Study session"} starts in ${Math.max(1, Math.ceil((occurrence.getTime() - now.getTime()) / 60_000))} minutes.`,
       type: "STUDY_PLAN" as const,
-      actionUrl: plannerUrl(item.studyPlan.id, occurrence),
+      // The only place a student can actually start a session is the Notifications
+      // page's StudySessionPanel — link there directly instead of the planner, which
+      // has no start control at all.
+      actionUrl: "/notifications#study-session",
       sourceKey: `study-session-close:${item.id}:${occurrence.toISOString()}`,
       scheduledFor: occurrence,
       expiresAt: new Date(occurrence.getTime() + 60 * 60 * 1000),

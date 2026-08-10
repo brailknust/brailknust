@@ -80,6 +80,9 @@ describe("reconcileAcademicTracking — attendance notices", () => {
       type: "ATTENDANCE",
       actionUrl: "/ai-chat?conversation=conversation-1",
       sourceKey: expect.stringMatching(/^attendance:block-1:2026-08-05$/),
+      // Clears from the bell at the end of the class's own day (UTC midnight),
+      // not a rolling 48h window from whenever the notice happened to be created.
+      expiresAt: new Date("2026-08-06T00:00:00.000Z"),
     });
   });
 

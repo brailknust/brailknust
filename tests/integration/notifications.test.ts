@@ -103,6 +103,14 @@ describe("notification synchronization", () => {
     });
   });
 
+  it("points the study-session notification at the panel that can actually start it", async () => {
+    await syncNotificationsForUser("user-1", true);
+
+    const call = mocks.createNotifications.mock.calls[0][0];
+    const studyNotice = call.data.find((item: { type: string }) => item.type === "STUDY_PLAN");
+    expect(studyNotice.actionUrl).toBe("/notifications#study-session");
+  });
+
   it("uses the one-minute throttle unless synchronization is forced", async () => {
     mocks.preferenceFind.mockResolvedValue({
       ...preference,
