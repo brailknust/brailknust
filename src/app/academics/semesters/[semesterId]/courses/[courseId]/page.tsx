@@ -110,10 +110,21 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
             </div>
             <div className="rounded-xl border border-background/15 bg-white/10 p-4">
               <CalendarDays className="h-5 w-5 text-white/75" />
-              <p className="mt-5 text-2xl font-semibold">{formatPercent(enrollment.attendance)}</p>
+              <p className="mt-5 text-2xl font-semibold">
+                {analytics.confirmedAttendance ? `${analytics.confirmedAttendance.percentage}%` : formatPercent(enrollment.attendance)}
+              </p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
                 Attendance
               </p>
+              {analytics.confirmedAttendance ? (
+                <p className="mt-1 text-[11px] text-white/70">
+                  {analytics.confirmedAttendance.attended}/{analytics.confirmedAttendance.total} confirmed classes
+                </p>
+              ) : (
+                <p className="mt-1 text-[11px] text-white/70">
+                  No confirmed classes yet — respond to an attendance check in Notifications
+                </p>
+              )}
             </div>
             <div className="rounded-xl border border-background/15 bg-white/10 p-4">
               <ListChecks className="h-5 w-5 text-white/75" />
@@ -224,12 +235,18 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
             <h2 className="text-lg font-semibold">Performance indicators</h2>
             <div className="mt-5 grid gap-5">
               {[
-                ["Attendance", enrollment.attendance],
-                ["Confidence", enrollment.confidenceScore],
-              ].map(([label, value]) => (
-                <div key={label?.toString()}>
+                [
+                  "Attendance",
+                  analytics.confirmedAttendance ? analytics.confirmedAttendance.percentage : enrollment.attendance,
+                  analytics.confirmedAttendance
+                    ? `${analytics.confirmedAttendance.attended}/${analytics.confirmedAttendance.total} confirmed classes`
+                    : null,
+                ] as const,
+                ["Confidence", enrollment.confidenceScore, null] as const,
+              ].map(([label, value, note]) => (
+                <div key={label}>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="font-semibold">{label?.toString()}</span>
+                    <span className="font-semibold">{label}</span>
                     <span className="text-muted">{formatPercent(value)}</span>
                   </div>
                   <div className="mt-2 h-3 overflow-hidden rounded-full bg-white">
@@ -238,6 +255,7 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
                       style={{ width: `${percentageBar(value)}%` }}
                     />
                   </div>
+                  {note ? <p className="mt-1 text-xs text-muted">{note}</p> : null}
                 </div>
               ))}
             </div>
@@ -245,7 +263,7 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
         </div>
 
         <div className="grid gap-6">
-          <section className="grid gap-4 md:grid-cols-3">
+          <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div className="rounded-2xl border border-border bg-white p-5">
               <p className="text-sm font-semibold uppercase tracking-[0.14em] text-muted">
                 Tasks done
@@ -260,6 +278,16 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
               </p>
               <p className="mt-3 text-3xl font-semibold">
                 {analytics.completedStudyItemCount}/{analytics.studyItems.length}
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border bg-white p-5">
+              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-muted">
+                Attendance
+              </p>
+              <p className="mt-3 text-3xl font-semibold">
+                {analytics.confirmedAttendance
+                  ? `${analytics.confirmedAttendance.attended}/${analytics.confirmedAttendance.total}`
+                  : "—"}
               </p>
             </div>
             <div className="rounded-2xl border border-border bg-white p-5">

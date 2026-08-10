@@ -1,6 +1,7 @@
 import "server-only";
 
 import { prisma } from "@/server/db";
+import { calculateConfirmedAttendance } from "@/features/academics/calculations";
 import { withEffectiveTaskStatus } from "@/features/tasks/status";
 
 export async function getAcademicSetup(userId: string) {
@@ -178,7 +179,7 @@ export async function getCourseAnalytics(userId: string, semesterId: string, cou
   if (!enrollment) return null;
   const resolvedCourseId = enrollment.courseId;
 
-  const [tasks, studyItems, weakAreas, timetable, assessments, materials, topics, platformTopics, contentCorrections] = await Promise.all([
+  const [tasks, studyItems, weakAreas, timetable, assessments, materials, topics, platformTopics, contentCorrections, attendanceRecords] = await Promise.all([
     prisma.task.findMany({
       where: { userId, semesterId, courseId: resolvedCourseId },
       orderBy: [{ status: "asc" }, { dueAt: "asc" }, { createdAt: "desc" }],
@@ -246,7 +247,13 @@ export async function getCourseAnalytics(userId: string, semesterId: string, cou
       orderBy: { createdAt: "desc" },
       take: 10,
     }),
+    prisma.attendanceRecord.findMany({
+      where: { userId, semesterId, courseId: resolvedCourseId },
+      select: { status: true },
+    }),
   ]);
+
+  const confirmedAttendance = calculateConfirmedAttendance(attendanceRecords);
 
   return {
     enrollment,
@@ -259,6 +266,7 @@ export async function getCourseAnalytics(userId: string, semesterId: string, cou
     topics,
     platformTopics,
     contentCorrections,
+    confirmedAttendance,
     completedTaskCount: tasks.filter((task) => task.status === "DONE").length,
     openTaskCount: tasks.filter(
       (task) => task.status === "TODO" && (!task.dueAt || task.dueAt >= new Date()),

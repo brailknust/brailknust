@@ -25,3 +25,21 @@ export function calculateAssessmentAverage(items: AssessmentForAverage[]) {
 
   return valid.reduce((sum, item) => sum + (Number(item.score) / Number(item.maxScore)) * 100, 0) / valid.length;
 }
+
+export type AttendanceRecordForSummary = {
+  status: "ATTENDED" | "MISSED" | "CANCELLED" | "EXCUSED" | "UNCONFIRMED";
+};
+
+// Only confirmed classes count: CANCELLED/EXCUSED are neither the student's
+// attendance nor absence, and UNCONFIRMED hasn't been answered yet.
+export function calculateConfirmedAttendance(records: AttendanceRecordForSummary[]) {
+  const confirmed = records.filter((record) => record.status === "ATTENDED" || record.status === "MISSED");
+  if (!confirmed.length) return null;
+
+  const attended = confirmed.filter((record) => record.status === "ATTENDED").length;
+  return {
+    attended,
+    total: confirmed.length,
+    percentage: Math.round((attended / confirmed.length) * 100),
+  };
+}
