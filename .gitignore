@@ -13,3 +13,4 @@ test-results
 # (Previously only excluded via the machine-local .git/info/exclude, which
 # tools other than git itself — e.g. EAS Build's archiver — don't read.)
 tmp/
+.vercel
