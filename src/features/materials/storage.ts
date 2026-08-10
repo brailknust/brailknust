@@ -62,6 +62,18 @@ export async function removeCourseMaterialFile(storagePath: string) {
   await removeCourseMaterialFiles([storagePath]);
 }
 
+/**
+ * Copies a stored material to a new path (used when reassigning a material to a different
+ * course, since storage paths embed the course id). Only copies — the caller is responsible for
+ * updating the database to point at `newPath` and, only after that succeeds, removing `oldPath`.
+ */
+export async function moveCourseMaterialFile(oldPath: string, newPath: string, contentType: string) {
+  if (oldPath === newPath) return;
+  const blob = await downloadCourseMaterialFile(oldPath);
+  const bytes = Buffer.from(await blob.arrayBuffer());
+  await uploadCourseMaterialFile(newPath, bytes, contentType);
+}
+
 export async function downloadCourseMaterialFile(storagePath: string) {
   const supabase = createSupabaseServiceClient();
   const { data, error } = await supabase.storage.from(courseMaterialBucket).download(storagePath);

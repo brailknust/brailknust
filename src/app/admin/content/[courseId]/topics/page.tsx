@@ -14,6 +14,7 @@ import {
   updatePlatformTopic,
 } from "@/features/admin/actions";
 import { PlatformUpload } from "@/features/admin/platform-upload";
+import { ReassignMaterial } from "@/features/admin/reassign-material";
 import { requireAdmin } from "@/features/auth/queries";
 import { materialPermissionLabels } from "@/features/materials/provenance";
 import { prisma } from "@/server/db";
@@ -90,28 +91,33 @@ export default async function AdminCourseTopicsPage({ params }: { params: Promis
               <p className="text-xs font-semibold uppercase tracking-wide text-muted">Topic materials</p>
               <div className="mt-2 grid gap-2">
                 {topic.materialLinks.length ? topic.materialLinks.map(({ material }) => (
-                  <div key={material.id} className="flex items-start justify-between gap-3 rounded-xl bg-surface p-3">
-                    <div>
-                      <p className="text-sm font-semibold">{material.title}</p>
-                      <p className="mt-1 text-xs text-muted">
-                        {material.type.toLowerCase()} · {material.status.toLowerCase()} · {material._count.chunks} chunks
-                      </p>
-                      <p className={`mt-1 text-xs ${material.permissionBasis === "UNKNOWN" ? "font-semibold text-amber-700" : "text-muted"}`}>
-                        {materialPermissionLabels[material.permissionBasis]}
-                        {material.permissionNote ? ` · ${material.permissionNote}` : ""}
-                      </p>
-                      {material.sourceUrl ? <Link href={material.sourceUrl} target="_blank" rel="noreferrer" className="mt-1 inline-block text-xs font-semibold text-accent">View source or rights record</Link> : null}
-                      {material.errorMessage ? <p className="mt-1 text-xs text-red-600">{material.errorMessage}</p> : null}
+                  <div key={material.id} className="rounded-xl bg-surface p-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-semibold">{material.title}</p>
+                        <p className="mt-1 text-xs text-muted">
+                          {material.type.toLowerCase()} · {material.status.toLowerCase()} · {material._count.chunks} chunks
+                        </p>
+                        <p className={`mt-1 text-xs ${material.permissionBasis === "UNKNOWN" ? "font-semibold text-amber-700" : "text-muted"}`}>
+                          {materialPermissionLabels[material.permissionBasis]}
+                          {material.permissionNote ? ` · ${material.permissionNote}` : ""}
+                        </p>
+                        {material.sourceUrl ? <Link href={material.sourceUrl} target="_blank" rel="noreferrer" className="mt-1 inline-block text-xs font-semibold text-accent">View source or rights record</Link> : null}
+                        {material.errorMessage ? <p className="mt-1 text-xs text-red-600">{material.errorMessage}</p> : null}
+                      </div>
+                      <form action={deletePlatformMaterial}>
+                        <input type="hidden" name="id" value={material.id} />
+                        <ConfirmSubmitButton
+                          message={`Delete "${material.title}"?`}
+                          className="rounded-xl border border-border bg-white px-2.5 py-1.5 text-xs font-semibold text-muted"
+                        >
+                          Delete
+                        </ConfirmSubmitButton>
+                      </form>
                     </div>
-                    <form action={deletePlatformMaterial}>
-                      <input type="hidden" name="id" value={material.id} />
-                      <ConfirmSubmitButton
-                        message={`Delete "${material.title}"?`}
-                        className="rounded-xl border border-border bg-white px-2.5 py-1.5 text-xs font-semibold text-muted"
-                      >
-                        Delete
-                      </ConfirmSubmitButton>
-                    </form>
+                    <div className="mt-2">
+                      <ReassignMaterial material={{ id: material.id, title: material.title }} />
+                    </div>
                   </div>
                 )) : <p className="text-xs text-muted">No material uploaded under this topic.</p>}
               </div>

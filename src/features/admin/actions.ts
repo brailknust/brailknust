@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/features/auth/queries";
-import { removeCourseMaterialFile } from "@/features/materials/storage";
+import { moveCourseMaterialFile, removeCourseMaterialFile } from "@/features/materials/storage";
 import { finalizeAccountDeletionCleanup } from "@/features/profile/account-deletion";
 import { prisma } from "@/server/db";
 import { z } from "zod";
@@ -348,6 +348,12 @@ export async function deletePlatformMaterial(formData: FormData) {
   revalidatePath(`/admin/content/${material.courseId}/topics`);
 }
 
+const reassignMaterialSchema = z.object({
+  materialId: z.string().uuid(),
+  targetCourseId: z.string().uuid(),
+  targetTopicIds: z.array(z.string().uuid()).min(1).max(20),
+});
+
 const topicSchema = z.object({
   courseId: z.string().uuid(),
   title: z.string().trim().min(2).max(120),
@@ -601,5 +607,105 @@ export async function mergePlatformTopics(formData: FormData) {
     await createAdminContentAudit(tx, { actorId: appUser.id, action: "TOPICS_MERGED", targetType: "TOPIC", targetId: sourceId, targetLabel: source.title, metadata: { courseId, destinationTopicId: targetId, destinationTopicTitle: target.title } });
   });
   revalidatePath(`/admin/content/${courseId}/topics`);
+  revalidatePath("/practice");
+}
+
+export async function getReassignableCourses() {
+  await requireAdmin();
+  const courses = await prisma.course.findMany({
+    where: { approvalStatus: "OFFICIAL" },
+    select: {
+      id: true,
+      code: true,
+      name: true,
+      platformTopics: {
+        where: { isArchived: false },
+        select: { id: true, title: true },
+        orderBy: [{ sequence: "asc" }, { title: "asc" }],
+      },
+    },
+    orderBy: { code: "asc" },
+  });
+  return courses.map((course) => ({
+    id: course.id,
+    code: course.code,
+    name: course.name,
+    topics: course.platformTopics,
+  }));
+}
+
+export async function reassignPlatformMaterial(formData: FormData) {
+  const { appUser } = await requireAdmin();
+  const parsed = reassignMaterialSchema.safeParse({
+    materialId: formData.get("materialId"),
+    targetCourseId: formData.get("targetCourseId"),
+    targetTopicIds: formData.getAll("targetTopicIds").map(String),
+  });
+  if (!parsed.success) throw new Error("Check the destination course and topics.");
+  const { materialId, targetCourseId, targetTopicIds } = parsed.data;
+
+  const material = await prisma.platformCourseMaterial.findUnique({
+    where: { id: materialId },
+    select: { id: true, courseId: true, topicId: true, title: true, contentHash: true, storagePath: true, mimeType: true },
+  });
+  if (!material) throw new Error("Material not found.");
+
+  const targetTopics = await prisma.platformCourseTopic.findMany({
+    where: { id: { in: targetTopicIds }, courseId: targetCourseId },
+    select: { id: true },
+  });
+  if (targetTopics.length !== targetTopicIds.length) throw new Error("Choose topics that belong to the destination course.");
+
+  const isCrossCourse = targetCourseId !== material.courseId;
+  if (isCrossCourse && material.contentHash) {
+    const collision = await prisma.platformCourseMaterial.findUnique({
+      where: { courseId_contentHash: { courseId: targetCourseId, contentHash: material.contentHash } },
+      select: { id: true, title: true },
+    });
+    if (collision) {
+      throw new Error(`A material with identical content ("${collision.title}") already exists in the destination course. Delete one of them first — automatic merging isn't supported.`);
+    }
+  }
+
+  // Storage objects are keyed by courseId in their path (platform/${courseId}/${materialId}/...).
+  // Copy to the new path before touching the database so a failed upload never leaves the DB
+  // pointing at a path that doesn't exist; the old object is removed only after the DB commits.
+  let newStoragePath = material.storagePath;
+  if (isCrossCourse && material.storagePath) {
+    const fileName = material.storagePath.split("/").pop() ?? materialId;
+    newStoragePath = `platform/${targetCourseId}/${materialId}/${fileName}`;
+    await moveCourseMaterialFile(material.storagePath, newStoragePath, material.mimeType ?? "application/octet-stream");
+  }
+
+  const previousCourseId = material.courseId;
+
+  await prisma.$transaction(async (tx) => {
+    await tx.platformCourseMaterial.update({
+      where: { id: materialId },
+      data: { courseId: targetCourseId, topicId: targetTopicIds[0], storagePath: newStoragePath },
+    });
+    await tx.platformMaterialTopic.deleteMany({ where: { materialId } });
+    await tx.platformMaterialTopic.createMany({
+      data: targetTopicIds.map((topicId) => ({ materialId, topicId })),
+      skipDuplicates: true,
+    });
+    await tx.platformMaterialChunk.updateMany({ where: { materialId }, data: { topicId: targetTopicIds[0] } });
+    await createAdminContentAudit(tx, {
+      actorId: appUser.id,
+      action: "MATERIAL_REASSIGNED",
+      targetType: "MATERIAL",
+      targetId: materialId,
+      targetLabel: material.title,
+      metadata: { fromCourseId: previousCourseId, toCourseId: targetCourseId, fromTopicId: material.topicId, toTopicIds: targetTopicIds },
+    });
+  });
+
+  if (isCrossCourse && material.storagePath && newStoragePath !== material.storagePath) {
+    await removeCourseMaterialFile(material.storagePath).catch(() => {});
+  }
+
+  revalidatePath(`/admin/content/${previousCourseId}/topics`);
+  if (isCrossCourse) revalidatePath(`/admin/content/${targetCourseId}/topics`);
+  revalidatePath("/admin/content");
   revalidatePath("/practice");
 }
