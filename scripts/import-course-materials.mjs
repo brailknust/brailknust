@@ -48,8 +48,26 @@ function mimeType(extension) {
   }[extension] ?? "application/octet-stream";
 }
 
+function stripInvalidUtf16(input) {
+  let output = "";
+  for (let index = 0; index < input.length; index += 1) {
+    const code = input.charCodeAt(index);
+    if (code >= 0xd800 && code <= 0xdbff) {
+      const next = input.charCodeAt(index + 1);
+      if (next >= 0xdc00 && next <= 0xdfff) {
+        output += input[index] + input[index + 1];
+        index += 1;
+      }
+      continue;
+    }
+    if (code >= 0xdc00 && code <= 0xdfff) continue;
+    output += input[index];
+  }
+  return output;
+}
+
 function chunksFromText(input) {
-  const text = input
+  const text = stripInvalidUtf16(input)
     .replace(/\u0000/g, "")
     .replace(/\r\n/g, "\n")
     .replace(/[ \t]+/g, " ")
@@ -62,7 +80,7 @@ function chunksFromText(input) {
       const boundary = Math.max(text.lastIndexOf("\n", end), text.lastIndexOf(". ", end), text.lastIndexOf(" ", end));
       if (boundary > start + 800) end = boundary + 1;
     }
-    const chunk = text.slice(start, end).trim();
+    const chunk = stripInvalidUtf16(text.slice(start, end)).trim();
     if (chunk) chunks.push(chunk);
     if (end >= text.length) break;
     start = Math.max(end - 180, start + 1);

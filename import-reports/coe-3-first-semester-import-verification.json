@@ -1,0 +1,86 @@
+{
+  "verifiedAt": "2026-08-10T04:34:07.016Z",
+  "expectedApprovedFiles": 57,
+  "publishedFiles": 57,
+  "missingHashes": [],
+  "materialsWithoutStorage": [],
+  "materialsWithoutChunks": [],
+  "materialsWithoutTopics": [],
+  "courses": [
+    {
+      "code": "COE 363",
+      "topics": [
+        "Algorithm Analysis",
+        "Linear Data Structures",
+        "Trees and Non-Linear Structures",
+        "Searching Algorithms",
+        "Sorting Algorithms"
+      ],
+      "importedMaterials": 10,
+      "searchableChunks": 62
+    },
+    {
+      "code": "COE 381",
+      "topics": [
+        "Microprocessor Fundamentals",
+        "Instruction Sets and Assembly",
+        "Memory and Bus Systems",
+        "Input/Output and Peripheral Interfacing",
+        "PCB and Embedded Hardware",
+        "Interrupts and Timers"
+      ],
+      "importedMaterials": 10,
+      "searchableChunks": 55
+    },
+    {
+      "code": "COE 387",
+      "topics": [
+        "Control Systems Fundamentals",
+        "Stability Analysis",
+        "Frequency-Domain Analysis",
+        "Control Systems Reference",
+        "Block Diagrams and Signal Flow Graphs",
+        "Time-Domain Analysis",
+        "Steady-State Error"
+      ],
+      "importedMaterials": 11,
+      "searchableChunks": 3309
+    },
+    {
+      "code": "MATH 351",
+      "topics": [
+        "Linear Systems and Gaussian Elimination",
+        "Interpolation",
+        "Numerical Analysis Reference",
+        "Iterative Methods",
+        "Numerical Integration"
+      ],
+      "importedMaterials": 14,
+      "searchableChunks": 1778
+    },
+    {
+      "code": "STAT 253",
+      "topics": [
+        "Past Questions",
+        "Probability Fundamentals",
+        "Random Variables and Distributions",
+        "Descriptive Statistics"
+      ],
+      "importedMaterials": 5,
+      "searchableChunks": 63
+    },
+    {
+      "code": "TE 385",
+      "topics": [
+        "Signals and Systems Fundamentals",
+        "Fourier Series and Fourier Transform",
+        "Laplace Transform",
+        "Sampling and Discrete-Time Signals",
+        "Time-Domain Signal Analysis",
+        "Past Questions"
+      ],
+      "importedMaterials": 7,
+      "searchableChunks": 36
+    }
+  ]
+}

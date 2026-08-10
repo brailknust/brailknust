@@ -1,0 +1,1305 @@
+{
+  "version": 1,
+  "createdAt": "2026-08-10T04:25:29.463Z",
+  "sourceRoot": "C:\\Users\\jpaap\\OneDrive\\Desktop\\CoE\\CoE 3\\First Semester",
+  "termSlug": "coe-3-first-semester",
+  "mode": "APPROVED_PLAN_NO_UPLOAD",
+  "rules": {
+    "maximumFileSizeMB": 50,
+    "skipLegacyPowerPoint": true,
+    "allowGeneralResourcesTopic": true,
+    "allowMultipleTopicsPerMaterial": true,
+    "duplicateIdentity": "sha256"
+  },
+  "summary": {
+    "approved": 57,
+    "skipped": 28,
+    "approvedSizeMB": 117.97
+  },
+  "files": [
+    {
+      "sourceRelativePath": "Classical Control Systems\\Charles Alexander, Matthew Sadiku - Fundamentals of Electric Circuits (2020, McGraw Hill) - libgen.li.pdf",
+      "courseCode": "COE 387",
+      "courseName": "Classical Control Systems",
+      "title": "Charles Alexander, Matthew Sadiku - Fundamentals of Electric Circuits (2020, McGraw Hill) - libgen.li",
+      "materialType": "NOTE",
+      "topics": [
+        "Control Systems Fundamentals",
+        "Stability Analysis",
+        "Frequency-Domain Analysis",
+        "Control Systems Reference"
+      ],
+      "sizeMB": 11.5,
+      "sha256": "63598a0d93727bf22b9e8996d4bcb688cd436a26de2b01ae5a3a5812cbb7f056",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Classical Control Systems\\Control Systems Engineering by NISE 6th edn solultion manual_proper - Copy.pdf",
+      "courseCode": "COE 387",
+      "courseName": "Classical Control Systems",
+      "title": "Control Systems Engineering by NISE 6th edn solultion manual_proper - Copy",
+      "materialType": "NOTE",
+      "topics": [
+        "Control Systems Fundamentals",
+        "Block Diagrams and Signal Flow Graphs",
+        "Time-Domain Analysis",
+        "Stability Analysis",
+        "Steady-State Error"
+      ],
+      "sizeMB": 13.03,
+      "sha256": "7d8433336f9b1e4a0d16b51a9815e3b36c73d6d2ae7a8e95fc68c31b4f6376de",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Classical Control Systems\\Control Systems Engineering.pdf",
+      "courseCode": "COE 387",
+      "courseName": "Classical Control Systems",
+      "title": "Control Systems Engineering",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 52.28,
+      "sha256": "5befa9cb04e47c551fe345e6f2705321f65d4077c8546ddc3f2722fa6a305516",
+      "status": "SKIPPED",
+      "reason": "File exceeds the 50MB limit."
+    },
+    {
+      "sourceRelativePath": "Classical Control Systems\\CONTROL SYSTEMS MID SEM.pdf",
+      "courseCode": "COE 387",
+      "courseName": "Classical Control Systems",
+      "title": "CONTROL SYSTEMS MID SEM",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 0.16,
+      "sha256": "03673a0fabbea0d1732ca2f6fc11931bbb5b486532b3caea583bdbca842ff8b0",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Classical Control Systems\\Lect-7-Steady-State-Error.pptx",
+      "courseCode": "COE 387",
+      "courseName": "Classical Control Systems",
+      "title": "Lect-7-Steady-State-Error",
+      "materialType": "SLIDE",
+      "topics": [
+        "Control Systems Fundamentals",
+        "Time-Domain Analysis",
+        "Stability Analysis",
+        "Steady-State Error"
+      ],
+      "sizeMB": 1.73,
+      "sha256": "8d4f426835c36299112bf12979e346e9284c8287daf6f762b961dd122bbf32d8",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Classical Control Systems\\Lecture 01-Intro. cont..pdf",
+      "courseCode": "COE 387",
+      "courseName": "Classical Control Systems",
+      "title": "Lecture 01-Intro. cont.",
+      "materialType": "SLIDE",
+      "topics": [
+        "Control Systems Fundamentals",
+        "Block Diagrams and Signal Flow Graphs",
+        "Time-Domain Analysis",
+        "Stability Analysis"
+      ],
+      "sizeMB": 0.32,
+      "sha256": "fdb0f42a3e906de514632259b5f655f11bbd11a92c67da31654759d3b4a142ba",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Classical Control Systems\\Lecture 03-Block Diagrams.pdf",
+      "courseCode": "COE 387",
+      "courseName": "Classical Control Systems",
+      "title": "Lecture 03-Block Diagrams",
+      "materialType": "SLIDE",
+      "topics": [
+        "Control Systems Fundamentals",
+        "Block Diagrams and Signal Flow Graphs"
+      ],
+      "sizeMB": 0.2,
+      "sha256": "a202177b54e8714e799990c7a663d0651dea2c0a682213da40e985960acdd8fb",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Classical Control Systems\\Lecture 04-1st and 2nd Order systems.pdf",
+      "courseCode": "COE 387",
+      "courseName": "Classical Control Systems",
+      "title": "Lecture 04-1st and 2nd Order systems",
+      "materialType": "SLIDE",
+      "topics": [
+        "Control Systems Fundamentals",
+        "Block Diagrams and Signal Flow Graphs",
+        "Time-Domain Analysis",
+        "Stability Analysis",
+        "Steady-State Error"
+      ],
+      "sizeMB": 1.9,
+      "sha256": "20b240e0b82888e78ae45057db449ec9931f6cbb6e46d7ff37ff6f3fc32e6a60",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Classical Control Systems\\Lecture 04-Stability.pdf",
+      "courseCode": "COE 387",
+      "courseName": "Classical Control Systems",
+      "title": "Lecture 04-Stability",
+      "materialType": "SLIDE",
+      "topics": [
+        "Control Systems Fundamentals",
+        "Time-Domain Analysis",
+        "Stability Analysis",
+        "Steady-State Error"
+      ],
+      "sizeMB": 0.55,
+      "sha256": "61302c3aba5890da2232a2bb132bfb23f5dead5d8b077f77650c66bf71be42b1",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Classical Control Systems\\Lecture 04-Time Response.pdf",
+      "courseCode": "COE 387",
+      "courseName": "Classical Control Systems",
+      "title": "Lecture 04-Time Response",
+      "materialType": "SLIDE",
+      "topics": [
+        "Control Systems Fundamentals",
+        "Time-Domain Analysis",
+        "Stability Analysis"
+      ],
+      "sizeMB": 1.6,
+      "sha256": "5b4eea59cd35f0d561e4922f089f25fd922f0a6e9657794d1c0253e268236b9a",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Classical Control Systems\\Richard C. Dorf, Robert H. Bishop - Modern Control Systems, 13th Ed.-Pearson (2017).pdf",
+      "courseCode": "COE 387",
+      "courseName": "Classical Control Systems",
+      "title": "Richard C. Dorf, Robert H. Bishop - Modern Control Systems, 13th Ed.-Pearson (2017)",
+      "materialType": "NOTE",
+      "topics": [
+        "Control Systems Fundamentals",
+        "Block Diagrams and Signal Flow Graphs",
+        "Time-Domain Analysis",
+        "Stability Analysis",
+        "Steady-State Error"
+      ],
+      "sizeMB": 25.06,
+      "sha256": "37a1d3cc15ced1532bc41f6cd44d5d5d4b53a77b6625ed48389183d4f0eb1c7c",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Classical Control Systems\\Time_Domain_Analysis_of_2nd_order_systems.pdf",
+      "courseCode": "COE 387",
+      "courseName": "Classical Control Systems",
+      "title": "Time_Domain_Analysis_of_2nd_order_systems",
+      "materialType": "NOTE",
+      "topics": [
+        "Control Systems Fundamentals",
+        "Block Diagrams and Signal Flow Graphs",
+        "Time-Domain Analysis",
+        "Stability Analysis"
+      ],
+      "sizeMB": 1.88,
+      "sha256": "07dc5480d247922c77acfa7724b3f68d33c4a22b2cb926543ee03fcbddcda6d7",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Classical Control Systems\\Unit 00-Introduction.pdf",
+      "courseCode": "COE 387",
+      "courseName": "Classical Control Systems",
+      "title": "Unit 00-Introduction",
+      "materialType": "NOTE",
+      "topics": [
+        "Control Systems Fundamentals",
+        "Block Diagrams and Signal Flow Graphs",
+        "Time-Domain Analysis",
+        "Stability Analysis",
+        "Frequency-Domain Analysis"
+      ],
+      "sizeMB": 1.26,
+      "sha256": "de45404c9ae3ca76f571fcf4cef8a3bd76b32bc2c7a6c538e571b539b4bd2cdc",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Data Structures and Algorithms\\01 Introduction.pdf",
+      "courseCode": "COE 363",
+      "courseName": "Data Structures and Algorithms",
+      "title": "01 Introduction",
+      "materialType": "NOTE",
+      "topics": [
+        "Algorithm Analysis",
+        "Linear Data Structures",
+        "Trees and Non-Linear Structures"
+      ],
+      "sizeMB": 8.99,
+      "sha256": "a14df2d74e14ad48ad54869a42caf3f0289fdccb62b153ca70b695b8ba08f916",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Data Structures and Algorithms\\02 Algorithm Analysis.pdf",
+      "courseCode": "COE 363",
+      "courseName": "Data Structures and Algorithms",
+      "title": "02 Algorithm Analysis",
+      "materialType": "NOTE",
+      "topics": [
+        "Algorithm Analysis",
+        "Linear Data Structures",
+        "Trees and Non-Linear Structures",
+        "Searching Algorithms",
+        "Sorting Algorithms"
+      ],
+      "sizeMB": 0.46,
+      "sha256": "0c6c64f1d4e56549552c5863179a0187ed7215c04909cb20f5642228774ae1ee",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Data Structures and Algorithms\\03 Linear Data Structures I.pdf",
+      "courseCode": "COE 363",
+      "courseName": "Data Structures and Algorithms",
+      "title": "03 Linear Data Structures I",
+      "materialType": "NOTE",
+      "topics": [
+        "Algorithm Analysis",
+        "Linear Data Structures",
+        "Trees and Non-Linear Structures",
+        "Searching Algorithms"
+      ],
+      "sizeMB": 0.46,
+      "sha256": "a6128309eec18c1b879435770d563564afdd372102d2386b226262a58323da36",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Data Structures and Algorithms\\04 Linear Data Structures II.pdf",
+      "courseCode": "COE 363",
+      "courseName": "Data Structures and Algorithms",
+      "title": "04 Linear Data Structures II",
+      "materialType": "NOTE",
+      "topics": [
+        "Algorithm Analysis",
+        "Linear Data Structures",
+        "Trees and Non-Linear Structures"
+      ],
+      "sizeMB": 0.5,
+      "sha256": "c189e434af2d5de800c2b04d35c0a91101efb01c8f4801d0b4bb63e5fd0c527e",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Data Structures and Algorithms\\05 Non-Linear Data Structures I.pdf",
+      "courseCode": "COE 363",
+      "courseName": "Data Structures and Algorithms",
+      "title": "05 Non-Linear Data Structures I",
+      "materialType": "NOTE",
+      "topics": [
+        "Algorithm Analysis",
+        "Linear Data Structures",
+        "Trees and Non-Linear Structures",
+        "Searching Algorithms"
+      ],
+      "sizeMB": 0.43,
+      "sha256": "67efed566db97d98059730b58af8e39b694b867f0c5ef4592482f4660b077679",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Data Structures and Algorithms\\06 Non-Linear Data Structures II.pdf",
+      "courseCode": "COE 363",
+      "courseName": "Data Structures and Algorithms",
+      "title": "06 Non-Linear Data Structures II",
+      "materialType": "NOTE",
+      "topics": [
+        "Algorithm Analysis",
+        "Linear Data Structures",
+        "Trees and Non-Linear Structures",
+        "Searching Algorithms"
+      ],
+      "sizeMB": 0.44,
+      "sha256": "9ec560a10b0c60ae78cb34b3082292eb6ffe2c9a6483514bda16cdefa811291b",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Data Structures and Algorithms\\07 Searching Algorithms.pdf",
+      "courseCode": "COE 363",
+      "courseName": "Data Structures and Algorithms",
+      "title": "07 Searching Algorithms",
+      "materialType": "NOTE",
+      "topics": [
+        "Algorithm Analysis",
+        "Linear Data Structures",
+        "Trees and Non-Linear Structures",
+        "Searching Algorithms"
+      ],
+      "sizeMB": 0.56,
+      "sha256": "d119391f378b6cee53abab869ec98849e8843013178a096f8c588e72d791adc3",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Data Structures and Algorithms\\08 String Algorithms.pdf",
+      "courseCode": "COE 363",
+      "courseName": "Data Structures and Algorithms",
+      "title": "08 String Algorithms",
+      "materialType": "NOTE",
+      "topics": [
+        "Algorithm Analysis",
+        "Linear Data Structures",
+        "Trees and Non-Linear Structures",
+        "Searching Algorithms",
+        "Sorting Algorithms"
+      ],
+      "sizeMB": 0.59,
+      "sha256": "ee2bfb9ab8121acae70afae5b04a6f288908b728ed67e100ddb1a218e8bd8a2a",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Data Structures and Algorithms\\09 Sorting Algorithms.pdf",
+      "courseCode": "COE 363",
+      "courseName": "Data Structures and Algorithms",
+      "title": "09 Sorting Algorithms",
+      "materialType": "NOTE",
+      "topics": [
+        "Algorithm Analysis",
+        "Linear Data Structures",
+        "Trees and Non-Linear Structures",
+        "Sorting Algorithms"
+      ],
+      "sizeMB": 0.55,
+      "sha256": "ff3f02d2261df5d65301968293bb06898aa995b37c8912594808bac4c4dc7cfa",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Data Structures and Algorithms\\Introduction.pdf",
+      "courseCode": "COE 363",
+      "courseName": "Data Structures and Algorithms",
+      "title": "Introduction",
+      "materialType": "NOTE",
+      "topics": [
+        "Linear Data Structures",
+        "Trees and Non-Linear Structures"
+      ],
+      "sizeMB": 1.01,
+      "sha256": "1bed96e985cf09254ef267dafa462df7ecc2eb97a7e969c78b5209489facd64e",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Linear Electronic Circuits\\20250327142515.pdf",
+      "courseCode": "COE 371",
+      "courseName": "Linear Electronic Circuits",
+      "title": "20250327142515",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 0.3,
+      "sha256": "34c8abc62bebb5ce4e461b8acbcc81214021dbdcfac7ca17d1edf7a62b99232a",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Linear Electronic Circuits\\CHEWABLES -linear electronics .pdf",
+      "courseCode": "COE 371",
+      "courseName": "Linear Electronic Circuits",
+      "title": "CHEWABLES -linear electronics ",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 1.17,
+      "sha256": "138cb3ccd596e35164d742b6f7be89b131e19d2df7944022a50e741fc4a029fe",
+      "status": "SKIPPED",
+      "reason": "Exact duplicate of Linear Electronics 2022.pdf and too little extractable text; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Linear Electronic Circuits\\Linear Electronics 2021-2022.pdf",
+      "courseCode": "COE 371",
+      "courseName": "Linear Electronic Circuits",
+      "title": "Linear Electronics 2021-2022",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 3.2,
+      "sha256": "f8b7c8d3a665dca5e7a6132ada5d3a8a9fbdae93480766c658adba865225db7f",
+      "status": "SKIPPED",
+      "reason": "Exact duplicate of Scanned_20240420_123850.pdf and too little extractable text; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Linear Electronic Circuits\\Linear Electronics 2022.pdf",
+      "courseCode": "COE 371",
+      "courseName": "Linear Electronic Circuits",
+      "title": "Linear Electronics 2022",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 1.17,
+      "sha256": "138cb3ccd596e35164d742b6f7be89b131e19d2df7944022a50e741fc4a029fe",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Linear Electronic Circuits\\Linear Electronics-20250113T120504Z-001.zip",
+      "courseCode": "COE 371",
+      "courseName": "Linear Electronic Circuits",
+      "title": "Linear Electronics-20250113T120504Z-001",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 2.44,
+      "sha256": "18a50f1ab200f550e5846c6de4929e579241713570aed3451244e6ff80a0dff5",
+      "status": "SKIPPED",
+      "reason": "Unsupported extension .zip."
+    },
+    {
+      "sourceRelativePath": "Linear Electronic Circuits\\Linear Midsem 2022 (2).pdf",
+      "courseCode": "COE 371",
+      "courseName": "Linear Electronic Circuits",
+      "title": "Linear Midsem 2022 (2)",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 0.79,
+      "sha256": "2dba060f3d0c237f897f582d56f8ec2dd11d2c4920009479fa5bf3c0d0667573",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Linear Electronic Circuits\\Linear Midsem 2022.pdf",
+      "courseCode": "COE 371",
+      "courseName": "Linear Electronic Circuits",
+      "title": "Linear Midsem 2022",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 0.83,
+      "sha256": "de86aaaca89b00c8a0d285f113387030ee47b53949437419fc17cbf4a53c9ee1",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Linear Electronic Circuits\\Microelectronic Circuits 7ed.pdf",
+      "courseCode": "COE 371",
+      "courseName": "Linear Electronic Circuits",
+      "title": "Microelectronic Circuits 7ed",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 69.07,
+      "sha256": "890eba6ba94a36fde7dfa9010e68bbba1537ce68d07c0a26e5b82552e57876cd",
+      "status": "SKIPPED",
+      "reason": "File exceeds the 50MB limit."
+    },
+    {
+      "sourceRelativePath": "Linear Electronic Circuits\\Q19.pdf",
+      "courseCode": "COE 371",
+      "courseName": "Linear Electronic Circuits",
+      "title": "Q19",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 0.08,
+      "sha256": "dce59b09074145c606006e41838e3610a90ea8b89b4a3a3fa66a5c50e8d52cce",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Linear Electronic Circuits\\Q1_Q7.pdf",
+      "courseCode": "COE 371",
+      "courseName": "Linear Electronic Circuits",
+      "title": "Q1_Q7",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 0.28,
+      "sha256": "a69171112cf8980333b453da2b2c8c13230bd2b41bff3dce9d2504b8c80b9d77",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Linear Electronic Circuits\\Q8_Q9.pdf",
+      "courseCode": "COE 371",
+      "courseName": "Linear Electronic Circuits",
+      "title": "Q8_Q9",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 0.08,
+      "sha256": "0ddb8d74a8ac77995947f199a12a63ed08e5f958f7b7329b2501fc937cea3d8e",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Linear Electronic Circuits\\Scanned_20240404_175112.pdf",
+      "courseCode": "COE 371",
+      "courseName": "Linear Electronic Circuits",
+      "title": "Scanned_20240404_175112",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 1.31,
+      "sha256": "53625fa737ff7a652e1b6be81da6d7fd387f7cd8cc2bb135f3913a6da49d443e",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Linear Electronic Circuits\\Scanned_20240420_123850.pdf",
+      "courseCode": "COE 371",
+      "courseName": "Linear Electronic Circuits",
+      "title": "Scanned_20240420_123850",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 3.2,
+      "sha256": "f8b7c8d3a665dca5e7a6132ada5d3a8a9fbdae93480766c658adba865225db7f",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Linear Electronic Circuits\\Scanned_20240420_124511.pdf",
+      "courseCode": "COE 371",
+      "courseName": "Linear Electronic Circuits",
+      "title": "Scanned_20240420_124511",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 5.96,
+      "sha256": "497171934b1cecba4c6fc2654bfb990964333ba3473a8d5c8498ac3bbecdb68e",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "MicroProcessors\\Assignment 1 Comparative Analysis of Microprocessors.pdf",
+      "courseCode": "COE 381",
+      "courseName": "Microprocessors",
+      "title": "Assignment 1 Comparative Analysis of Microprocessors",
+      "materialType": "NOTE",
+      "topics": [
+        "Microprocessor Fundamentals",
+        "Instruction Sets and Assembly",
+        "Memory and Bus Systems"
+      ],
+      "sizeMB": 0.03,
+      "sha256": "6c16c899629d4ae6aea28d7cf0b7e317148cf878e312c79f1b31973b46a2a258",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "MicroProcessors\\h.pdf",
+      "courseCode": "COE 381",
+      "courseName": "Microprocessors",
+      "title": "h",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 2.78,
+      "sha256": "fea8658e7501ce2d40f54fee5a70cb2cb579d14d3e04fb01b6ad17dd5e890dd3",
+      "status": "SKIPPED",
+      "reason": "Exact duplicate of Midsem.pdf and too little extractable text; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "MicroProcessors\\LAB 03_ DETERMINING THE LAYERS OF A PCB (2).docx",
+      "courseCode": "COE 381",
+      "courseName": "Microprocessors",
+      "title": "LAB 03_ DETERMINING THE LAYERS OF A PCB (2)",
+      "materialType": "NOTE",
+      "topics": [
+        "Microprocessor Fundamentals",
+        "Memory and Bus Systems",
+        "Input/Output and Peripheral Interfacing",
+        "PCB and Embedded Hardware"
+      ],
+      "sizeMB": 0.39,
+      "sha256": "31e9708c609a83fb8def9c2294dc67339c112b6d69c96476cbaba6ba36236a9d",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "MicroProcessors\\MicroP (2).pdf",
+      "courseCode": "COE 381",
+      "courseName": "Microprocessors",
+      "title": "MicroP (2)",
+      "materialType": "NOTE",
+      "topics": [
+        "Microprocessor Fundamentals",
+        "Instruction Sets and Assembly",
+        "Memory and Bus Systems",
+        "Input/Output and Peripheral Interfacing",
+        "Interrupts and Timers"
+      ],
+      "sizeMB": 1.42,
+      "sha256": "94c184e0937ea83c9a280090fcaf9f26593cb83c34f1093755f5dadfd31572b4",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "MicroProcessors\\Midsem.pdf",
+      "courseCode": "COE 381",
+      "courseName": "Microprocessors",
+      "title": "Midsem",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 2.78,
+      "sha256": "fea8658e7501ce2d40f54fee5a70cb2cb579d14d3e04fb01b6ad17dd5e890dd3",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "MicroProcessors\\New -  Lecture 1.pdf",
+      "courseCode": "COE 381",
+      "courseName": "Microprocessors",
+      "title": "New -  Lecture 1",
+      "materialType": "SLIDE",
+      "topics": [
+        "Microprocessor Fundamentals",
+        "Instruction Sets and Assembly",
+        "Memory and Bus Systems",
+        "Interrupts and Timers",
+        "PCB and Embedded Hardware"
+      ],
+      "sizeMB": 1.91,
+      "sha256": "cb76d428d9751b3cf8db81887efcb56252f1dee5427b3bd82c4d135115b76935",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "MicroProcessors\\New -  Lecture 2.pdf",
+      "courseCode": "COE 381",
+      "courseName": "Microprocessors",
+      "title": "New -  Lecture 2",
+      "materialType": "SLIDE",
+      "topics": [
+        "Microprocessor Fundamentals",
+        "Instruction Sets and Assembly",
+        "Memory and Bus Systems",
+        "Input/Output and Peripheral Interfacing",
+        "PCB and Embedded Hardware"
+      ],
+      "sizeMB": 1.61,
+      "sha256": "b112a2d38889bc8fd355c040461b90c29a1e5ee4ed298b202e4ccecf07b24a43",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "MicroProcessors\\New -  Lecture 3.pdf",
+      "courseCode": "COE 381",
+      "courseName": "Microprocessors",
+      "title": "New -  Lecture 3",
+      "materialType": "SLIDE",
+      "topics": [
+        "Microprocessor Fundamentals",
+        "Instruction Sets and Assembly",
+        "Memory and Bus Systems",
+        "Input/Output and Peripheral Interfacing",
+        "Interrupts and Timers"
+      ],
+      "sizeMB": 0.87,
+      "sha256": "70a24da1a76aa31d69d1cedf91b4f7d2af7f066be5c0fd8269411ed274c9b219",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "MicroProcessors\\New -  Lecture 4.pdf",
+      "courseCode": "COE 381",
+      "courseName": "Microprocessors",
+      "title": "New -  Lecture 4",
+      "materialType": "SLIDE",
+      "topics": [
+        "Microprocessor Fundamentals",
+        "Instruction Sets and Assembly",
+        "Memory and Bus Systems",
+        "Input/Output and Peripheral Interfacing",
+        "Interrupts and Timers"
+      ],
+      "sizeMB": 0.91,
+      "sha256": "7846f6711fc5e175d2c6b83f0ade7263ab93cf0c56b8cb5480d3b4fbb3fb5390",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "MicroProcessors\\New -  Lecture 5.pdf",
+      "courseCode": "COE 381",
+      "courseName": "Microprocessors",
+      "title": "New -  Lecture 5",
+      "materialType": "SLIDE",
+      "topics": [
+        "Microprocessor Fundamentals",
+        "Memory and Bus Systems",
+        "Input/Output and Peripheral Interfacing"
+      ],
+      "sizeMB": 1.54,
+      "sha256": "245ef9e218e78534d8c59c65c0d0edd05129fe7beec210561a5fa0a8c792b369",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "MicroProcessors\\New -  Lecture 6.pdf",
+      "courseCode": "COE 381",
+      "courseName": "Microprocessors",
+      "title": "New -  Lecture 6",
+      "materialType": "SLIDE",
+      "topics": [
+        "Microprocessor Fundamentals",
+        "Instruction Sets and Assembly",
+        "Memory and Bus Systems",
+        "PCB and Embedded Hardware"
+      ],
+      "sizeMB": 0.68,
+      "sha256": "5805b5264394b66dfb96f09ef985cc3e2be4adace48904bcae6a5cbd88a6166b",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "MicroProcessors\\New -  Lecture 8.pdf",
+      "courseCode": "COE 381",
+      "courseName": "Microprocessors",
+      "title": "New -  Lecture 8",
+      "materialType": "SLIDE",
+      "topics": [
+        "Microprocessor Fundamentals",
+        "Memory and Bus Systems",
+        "Input/Output and Peripheral Interfacing",
+        "Interrupts and Timers"
+      ],
+      "sizeMB": 0.47,
+      "sha256": "fd39ab3158c6fcd5fe43bad657d05bdf0ed0da32fba3bedac068acbed6de1ff7",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "MicroProcessors\\SCH_Phone-Charger_2025-03-02.json",
+      "courseCode": "COE 381",
+      "courseName": "Microprocessors",
+      "title": "SCH_Phone-Charger_2025-03-02",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.02,
+      "sha256": "a97d525057338588eef9f6f19b072d7d25d3fa67a3d7543c6117fdf2cc87afec",
+      "status": "SKIPPED",
+      "reason": "Unsupported extension .json."
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\1.1.Naive_gaussian_elimination.pdf",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "1.1.Naive_gaussian_elimination",
+      "materialType": "NOTE",
+      "topics": [
+        "Linear Systems and Gaussian Elimination",
+        "Interpolation",
+        "Numerical Analysis Reference"
+      ],
+      "sizeMB": 0.38,
+      "sha256": "690f75c54703fafecd13f148988590d1a688e0e7f9fe971753231c321c724a84",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\1.2.gaussian_elimination_with_pivoting.pdf",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "1.2.gaussian_elimination_with_pivoting",
+      "materialType": "NOTE",
+      "topics": [
+        "Linear Systems and Gaussian Elimination",
+        "Numerical Analysis Reference"
+      ],
+      "sizeMB": 0.31,
+      "sha256": "0315ba624ae79fefa8b291d1afead3eb1429428e99b6c010a491a39c99a5d373",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\1.3.lu_decomposition.pdf",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "1.3.lu_decomposition",
+      "materialType": "NOTE",
+      "topics": [
+        "Linear Systems and Gaussian Elimination",
+        "Numerical Analysis Reference"
+      ],
+      "sizeMB": 0.79,
+      "sha256": "c0b05eb31f33d59b019b7dd871e9af9768b99d5451220acc7bcdc68808403b9f",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\1.4.special_systems.pdf",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "1.4.special_systems",
+      "materialType": "NOTE",
+      "topics": [
+        "Linear Systems and Gaussian Elimination",
+        "Numerical Analysis Reference"
+      ],
+      "sizeMB": 0.73,
+      "sha256": "a5a4e9c3559b27d909bc462f89939730d413fa89d4ec1257ff55b15f85eb9132",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\2.1.linear_iterative_methods.pdf",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "2.1.linear_iterative_methods",
+      "materialType": "NOTE",
+      "topics": [
+        "Linear Systems and Gaussian Elimination",
+        "Iterative Methods",
+        "Numerical Analysis Reference"
+      ],
+      "sizeMB": 0.68,
+      "sha256": "136a223832505b1434e072433029d0939c05bad0b822cc235482d7ee2cc90d66",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\2.2.non_linear_iterative_methods.pdf",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "2.2.non_linear_iterative_methods",
+      "materialType": "NOTE",
+      "topics": [
+        "Linear Systems and Gaussian Elimination",
+        "Iterative Methods",
+        "Numerical Analysis Reference"
+      ],
+      "sizeMB": 0.74,
+      "sha256": "a7dc15e74b5f6a0807c8f9b01d1df15d50764291fbc572d97547de612e33cb79",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\3.1.interpolation_by_direct_method.pdf",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "3.1.interpolation_by_direct_method",
+      "materialType": "NOTE",
+      "topics": [
+        "Iterative Methods",
+        "Interpolation",
+        "Numerical Analysis Reference"
+      ],
+      "sizeMB": 0.56,
+      "sha256": "339a09d0a6fdfb0d47ed9566d118c0e4fccf63db7348ee7627e6b758efa9a2a8",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\3.2.interpolation_lagrange.pdf",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "3.2.interpolation_lagrange",
+      "materialType": "NOTE",
+      "topics": [
+        "Iterative Methods",
+        "Interpolation",
+        "Numerical Analysis Reference"
+      ],
+      "sizeMB": 0.58,
+      "sha256": "2caf0ceb8a4ce3f9a80d657323f2066421a3b3a3b585ebe756fb2bdfcd138a21",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\3.3.interpolation_by_newtons_divided_method.pdf",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "3.3.interpolation_by_newtons_divided_method",
+      "materialType": "NOTE",
+      "topics": [
+        "Iterative Methods",
+        "Interpolation",
+        "Numerical Analysis Reference"
+      ],
+      "sizeMB": 0.94,
+      "sha256": "b9b381977d6deda3628a949a899a6be650407e5fb7581f494c682f84a359be1e",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\4.1.numerical_integration_trapezium_rule.pdf",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "4.1.numerical_integration_trapezium_rule",
+      "materialType": "NOTE",
+      "topics": [
+        "Iterative Methods",
+        "Interpolation",
+        "Numerical Integration",
+        "Numerical Analysis Reference"
+      ],
+      "sizeMB": 0.68,
+      "sha256": "b33e1451e4904d584492bfdd7a2cc285c6ff07ed7bd54b66edf3d1ce47ceac82",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\4.2.numerical_integration_simpson1by3.pdf",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "4.2.numerical_integration_simpson1by3",
+      "materialType": "NOTE",
+      "topics": [
+        "Iterative Methods",
+        "Interpolation",
+        "Numerical Integration",
+        "Numerical Analysis Reference"
+      ],
+      "sizeMB": 0.89,
+      "sha256": "6d621eb57eabb2ab4c6026d65b33fa1e11c95760a00156f6d331cea4c9bb5610",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\4.3.numerical_integration_simpson3by8.pdf",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "4.3.numerical_integration_simpson3by8",
+      "materialType": "NOTE",
+      "topics": [
+        "Interpolation",
+        "Numerical Integration",
+        "Numerical Analysis Reference"
+      ],
+      "sizeMB": 0.54,
+      "sha256": "f281767fb42bf233b2575e93d0e9e6154c83e8128e6272640aa96af1e94214fd",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\Numerical Analysis-20250113T120507Z-001.zip",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "Numerical Analysis-20250113T120507Z-001",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 46.32,
+      "sha256": "7e981b1d619af8021cb9de6d95eda5641c276985364d6648bcc36c03f7222cff",
+      "status": "SKIPPED",
+      "reason": "Unsupported extension .zip."
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\Numerical Analysis.pdf",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "Numerical Analysis",
+      "materialType": "NOTE",
+      "topics": [
+        "Linear Systems and Gaussian Elimination",
+        "Iterative Methods",
+        "Interpolation",
+        "Numerical Integration",
+        "Numerical Analysis Reference"
+      ],
+      "sizeMB": 0.08,
+      "sha256": "b3482c5b2269d93c9d007cad8b97046387032c5cd0f6146ee33bff1dc633ea72",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\numerical_analysis_9th.pdf",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "numerical_analysis_9th",
+      "materialType": "NOTE",
+      "topics": [
+        "Linear Systems and Gaussian Elimination",
+        "Iterative Methods",
+        "Interpolation",
+        "Numerical Integration",
+        "Numerical Analysis Reference"
+      ],
+      "sizeMB": 14.53,
+      "sha256": "c5af17c41cc4049f9b3f028ad513182d316d6d1c7a1d683250fb18bda2e48d6d",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Numerical Analysis\\NUMERICAL_ANALYSIS_COMPUTER_BASED_EXAMS_QUESTIONS_BY_ABC.pdf",
+      "courseCode": "MATH 351",
+      "courseName": "Numerical Analysis",
+      "title": "NUMERICAL_ANALYSIS_COMPUTER_BASED_EXAMS_QUESTIONS_BY_ABC",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 1.76,
+      "sha256": "c1fea1f4f369faa3784454d8253883ed08f489902d4740b23fa0b9cd44dc743c",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Probability and Statistics\\stat questions.pdf",
+      "courseCode": "STAT 253",
+      "courseName": "Probability and Statistics",
+      "title": "stat questions",
+      "materialType": "NOTE",
+      "topics": [
+        "Past Questions"
+      ],
+      "sizeMB": 2.81,
+      "sha256": "201552bbd40d9126f73460e03a11dd7033ac764170f054ec9ec7f7849d05c66c",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Probability and Statistics\\STATISTICS AND PROBABILITY_ STAT 253.pdf",
+      "courseCode": "STAT 253",
+      "courseName": "Probability and Statistics",
+      "title": "STATISTICS AND PROBABILITY_ STAT 253",
+      "materialType": "NOTE",
+      "topics": [
+        "Probability Fundamentals",
+        "Random Variables and Distributions",
+        "Past Questions"
+      ],
+      "sizeMB": 0.66,
+      "sha256": "8f89a1a0e8c0c52c39b6118ea16c8d219222a0fb0d4eef7e02a698983bc3db52",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Probability and Statistics\\Statistics-20250113T120512Z-001.zip",
+      "courseCode": "STAT 253",
+      "courseName": "Probability and Statistics",
+      "title": "Statistics-20250113T120512Z-001",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 30.27,
+      "sha256": "e731f00d25dc504866c0ec758ef62a9b5d5720fdf093c2fbac0cc97f284a1f39",
+      "status": "SKIPPED",
+      "reason": "Unsupported extension .zip."
+    },
+    {
+      "sourceRelativePath": "Probability and Statistics\\STAT_253_PART_A_ (1).pdf",
+      "courseCode": "STAT 253",
+      "courseName": "Probability and Statistics",
+      "title": "STAT_253_PART_A_ (1)",
+      "materialType": "NOTE",
+      "topics": [
+        "Descriptive Statistics",
+        "Probability Fundamentals",
+        "Random Variables and Distributions",
+        "Past Questions"
+      ],
+      "sizeMB": 0.56,
+      "sha256": "e350a4372d4362f38ad466efbb57dec3346ce1cf81a2c13e53dfca6ccf06335f",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Probability and Statistics\\STAT_253___PART_1.pdf",
+      "courseCode": "STAT 253",
+      "courseName": "Probability and Statistics",
+      "title": "STAT_253___PART_1",
+      "materialType": "NOTE",
+      "topics": [
+        "Descriptive Statistics",
+        "Probability Fundamentals",
+        "Random Variables and Distributions",
+        "Past Questions"
+      ],
+      "sizeMB": 0.75,
+      "sha256": "0c4cf0c7ab3538aeb9a51d5f0cb640ee3bc13c92c4411bdb9c8b27ad3681cc46",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Probability and Statistics\\Unit 3.pdf",
+      "courseCode": "STAT 253",
+      "courseName": "Probability and Statistics",
+      "title": "Unit 3",
+      "materialType": "NOTE",
+      "topics": [
+        "Descriptive Statistics",
+        "Probability Fundamentals",
+        "Random Variables and Distributions",
+        "Past Questions"
+      ],
+      "sizeMB": 0.96,
+      "sha256": "325b30a5e403facc6844591cc1cf9743ce29ff473f51c6d641f795eafee59502",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Signals and Systems\\Lecture1.pdf",
+      "courseCode": "TE 385",
+      "courseName": "Signals and Systems",
+      "title": "Lecture1",
+      "materialType": "SLIDE",
+      "topics": [
+        "Signals and Systems Fundamentals",
+        "Fourier Series and Fourier Transform",
+        "Laplace Transform",
+        "Sampling and Discrete-Time Signals"
+      ],
+      "sizeMB": 0.88,
+      "sha256": "82e77765a516604fcc61d575dff975b01de51c824e2b7857853a499af3a0b4b7",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Signals and Systems\\Lecture2.pdf",
+      "courseCode": "TE 385",
+      "courseName": "Signals and Systems",
+      "title": "Lecture2",
+      "materialType": "SLIDE",
+      "topics": [
+        "Signals and Systems Fundamentals"
+      ],
+      "sizeMB": 0.76,
+      "sha256": "7ffef444d6e7817d845ecbb881ad169671a10d5582fc9331866c2271d24d88aa",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Signals and Systems\\Lecture3.pdf",
+      "courseCode": "TE 385",
+      "courseName": "Signals and Systems",
+      "title": "Lecture3",
+      "materialType": "SLIDE",
+      "topics": [
+        "Signals and Systems Fundamentals",
+        "Fourier Series and Fourier Transform"
+      ],
+      "sizeMB": 1.22,
+      "sha256": "53d62a14576d7e9004c01379fcaad31432edde293c0e1b3bf4794e3572eef7ff",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Signals and Systems\\Lecture4.pdf",
+      "courseCode": "TE 385",
+      "courseName": "Signals and Systems",
+      "title": "Lecture4",
+      "materialType": "SLIDE",
+      "topics": [
+        "Signals and Systems Fundamentals",
+        "Time-Domain Signal Analysis",
+        "Fourier Series and Fourier Transform"
+      ],
+      "sizeMB": 1.15,
+      "sha256": "31c6493b2fecc6a1d0e26ac97e81e15039838adccaeaa3e1b4c74bf59eea5a1a",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Signals and Systems\\Lecture5.pdf",
+      "courseCode": "TE 385",
+      "courseName": "Signals and Systems",
+      "title": "Lecture5",
+      "materialType": "SLIDE",
+      "topics": [
+        "Signals and Systems Fundamentals",
+        "Time-Domain Signal Analysis",
+        "Laplace Transform"
+      ],
+      "sizeMB": 1,
+      "sha256": "6d030459ace7229d79e7edae15b07fb4c6786c8c0698d73269681a66eed6d9a4",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Signals and Systems\\Lecture5c.pdf",
+      "courseCode": "TE 385",
+      "courseName": "Signals and Systems",
+      "title": "Lecture5c",
+      "materialType": "SLIDE",
+      "topics": [
+        "Signals and Systems Fundamentals",
+        "Time-Domain Signal Analysis",
+        "Laplace Transform",
+        "Past Questions"
+      ],
+      "sizeMB": 0.82,
+      "sha256": "d230410a17b043df025b14104cd0e999f97475467fbf2a4f654020c90433b572",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Signals and Systems\\Lecture6.pdf",
+      "courseCode": "TE 385",
+      "courseName": "Signals and Systems",
+      "title": "Lecture6",
+      "materialType": "SLIDE",
+      "topics": [
+        "Signals and Systems Fundamentals",
+        "Laplace Transform",
+        "Sampling and Discrete-Time Signals"
+      ],
+      "sizeMB": 1.12,
+      "sha256": "ef5e5c25b5661ba66091b0c1f9745152a7a971cdc406aa64789b06070ecfa874",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Signals and Systems\\Questions-20240301T073341Z-001.zip",
+      "courseCode": "TE 385",
+      "courseName": "Signals and Systems",
+      "title": "Questions-20240301T073341Z-001",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.94,
+      "sha256": "6d597b1e57708adc8f651cbfb0022763bec3ed59062ad8be8f0e297789945a5b",
+      "status": "SKIPPED",
+      "reason": "Unsupported extension .zip."
+    },
+    {
+      "sourceRelativePath": "Signals and Systems\\Signals And Systems 2021 and 2022.pdf",
+      "courseCode": "TE 385",
+      "courseName": "Signals and Systems",
+      "title": "Signals And Systems 2021 and 2022",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 1.41,
+      "sha256": "15edc6bf72cf0840a0491738818a2955dde6745748612ee3a4ee92ea3357c6e7",
+      "status": "SKIPPED",
+      "reason": "Exact duplicate of Signals pasco.pdf and too little extractable text; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Signals and Systems\\Signals And Systems Midsems.pdf",
+      "courseCode": "TE 385",
+      "courseName": "Signals and Systems",
+      "title": "Signals And Systems Midsems",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 0.22,
+      "sha256": "2fca2270d93ea56105fc2cfc149f235ec00764c0792da772ed55ccced7abe4fd",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with no extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Signals and Systems\\signals pasco ans.pdf",
+      "courseCode": "TE 385",
+      "courseName": "Signals and Systems",
+      "title": "signals pasco ans",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 3.19,
+      "sha256": "1e5ea147215edfa212fa953411ac52f3010f03997abb07f3ab26b3566f84aa1d",
+      "status": "SKIPPED",
+      "reason": "Exact duplicate of Solutions.pdf and too little extractable text; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Signals and Systems\\Signals pasco.pdf",
+      "courseCode": "TE 385",
+      "courseName": "Signals and Systems",
+      "title": "Signals pasco",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 1.41,
+      "sha256": "15edc6bf72cf0840a0491738818a2955dde6745748612ee3a4ee92ea3357c6e7",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Signals and Systems\\Solutions.pdf",
+      "courseCode": "TE 385",
+      "courseName": "Signals and Systems",
+      "title": "Solutions",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 3.19,
+      "sha256": "1e5ea147215edfa212fa953411ac52f3010f03997abb07f3ab26b3566f84aa1d",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    }
+  ]
+}

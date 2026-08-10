@@ -1,0 +1,96 @@
+{
+  "termSlug": "coe-3-first-semester",
+  "reportTitle": "Computer Engineering - Year 3, First Semester import dry run",
+  "courseMappings": [
+    { "folderIncludes": "Classical Control Systems", "code": "COE 387", "name": "Classical Control Systems" },
+    { "folderIncludes": "Data Structures and Algorithms", "code": "COE 363", "name": "Data Structures and Algorithms" },
+    { "folderIncludes": "Linear Electronic Circuits", "code": "COE 371", "name": "Linear Electronic Circuits" },
+    { "folderIncludes": "MicroProcessors", "code": "COE 381", "name": "Microprocessors" },
+    { "folderIncludes": "Numerical Analysis", "code": "MATH 351", "name": "Numerical Analysis" },
+    { "folderIncludes": "Probability and Statistics", "code": "STAT 253", "name": "Probability and Statistics" },
+    { "folderIncludes": "Signals and Systems", "code": "TE 385", "name": "Signals and Systems" }
+  ],
+  "topicRules": {
+    "COE 387": [
+      ["Control Systems Fundamentals", ["control system", "feedback", "open loop", "closed loop", "transfer function"]],
+      ["Block Diagrams and Signal Flow Graphs", ["block diagram", "signal flow", "mason", "reduction"]],
+      ["Time-Domain Analysis", ["time response", "transient response", "second order", "rise time", "settling time"]],
+      ["Stability Analysis", ["stability", "routh", "hurwitz", "root locus", "stable"]],
+      ["Steady-State Error", ["steady-state error", "steady state error", "error constant", "static error"]],
+      ["Frequency-Domain Analysis", ["frequency response", "bode", "nyquist", "gain margin", "phase margin"]],
+      ["Control Systems Reference", ["dorf", "bishop", "nise", "sadiku"]]
+    ],
+    "COE 363": [
+      ["Algorithm Analysis", ["algorithm analysis", "complexity", "big o", "asymptotic", "running time"]],
+      ["Linear Data Structures", ["linear data", "array", "linked list", "stack", "queue"]],
+      ["Trees and Non-Linear Structures", ["tree", "binary tree", "heap", "non-linear", "graph"]],
+      ["Searching Algorithms", ["searching", "binary search", "linear search", "hashing"]],
+      ["Sorting Algorithms", ["sorting", "quick sort", "merge sort", "insertion sort", "selection sort"]],
+      ["String Algorithms", ["string algorithm", "pattern matching", "substring", "kmp"]]
+    ],
+    "COE 371": [
+      ["Linear Electronics Fundamentals", ["linear electronics", "microelectronic", "electronic circuit"]],
+      ["Diodes and Rectifiers", ["diode", "rectifier", "pn junction", "zener"]],
+      ["BJT Amplifiers", ["bjt", "bipolar", "common emitter", "transistor amplifier"]],
+      ["FET and MOSFET Amplifiers", ["fet", "mosfet", "field-effect", "jfet"]],
+      ["Operational Amplifiers", ["operational amplifier", "op amp", "op-amp", "feedback amplifier"]],
+      ["Frequency Response", ["frequency response", "bandwidth", "bode", "low frequency", "high frequency"]],
+      ["Past Questions", ["past question", "midsem", "mid semester", "exam", "q1", "q8", "q19"]]
+    ],
+    "COE 381": [
+      ["Microprocessor Fundamentals", ["microprocessor", "microcontroller", "cpu", "architecture"]],
+      ["Instruction Sets and Assembly", ["instruction set", "assembly", "opcode", "addressing mode"]],
+      ["Memory and Bus Systems", ["memory", "bus", "address bus", "data bus", "interfacing"]],
+      ["Input/Output and Peripheral Interfacing", ["input/output", "i/o", "peripheral", "interface", "uart", "gpio"]],
+      ["Interrupts and Timers", ["interrupt", "timer", "counter", "delay"]],
+      ["PCB and Embedded Hardware", ["pcb", "printed circuit board", "embedded", "phone charger"]]
+    ],
+    "MATH 351": [
+      ["Linear Systems and Gaussian Elimination", ["gaussian elimination", "pivoting", "linear system", "lu decomposition"]],
+      ["Iterative Methods", ["iterative method", "jacobi", "gauss-seidel", "nonlinear", "newton"]],
+      ["Interpolation", ["interpolation", "lagrange", "newton divided", "polynomial"]],
+      ["Numerical Integration", ["numerical integration", "trapezium", "trapezoidal", "simpson"]],
+      ["Numerical Analysis Reference", ["numerical analysis", "burden", "faires", "computer based exam"]]
+    ],
+    "STAT 253": [
+      ["Descriptive Statistics", ["descriptive statistics", "mean", "median", "variance", "standard deviation"]],
+      ["Probability Fundamentals", ["probability", "sample space", "event", "conditional probability"]],
+      ["Random Variables and Distributions", ["random variable", "distribution", "binomial", "poisson", "normal distribution"]],
+      ["Estimation and Confidence Intervals", ["estimation", "confidence interval", "estimator"]],
+      ["Hypothesis Testing", ["hypothesis", "test statistic", "p-value", "significance"]],
+      ["Past Questions", ["past question", "stat questions", "midsem", "exam"]]
+    ],
+    "TE 385": [
+      ["Signals and Systems Fundamentals", ["signals and systems", "signal", "system", "continuous time", "discrete time"]],
+      ["Time-Domain Signal Analysis", ["time domain", "convolution", "impulse response", "step response"]],
+      ["Fourier Series and Fourier Transform", ["fourier series", "fourier transform", "frequency spectrum"]],
+      ["Laplace Transform", ["laplace", "s-domain", "transfer function"]],
+      ["Sampling and Discrete-Time Signals", ["sampling", "discrete-time", "z-transform", "aliasing"]],
+      ["Past Questions", ["past question", "passco", "pasco", "midsem", "solutions"]]
+    ]
+  },
+  "topicOverrides": [],
+  "skipRules": [
+    { "courseCode": "COE 387", "fileName": "CONTROL SYSTEMS MID SEM.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 371", "fileName": "20250327142515.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 371", "fileName": "CHEWABLES -linear electronics .pdf", "reason": "Exact duplicate of Linear Electronics 2022.pdf and too little extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 371", "fileName": "Linear Electronics 2021-2022.pdf", "reason": "Exact duplicate of Scanned_20240420_123850.pdf and too little extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 371", "fileName": "Linear Electronics 2022.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 371", "fileName": "Linear Midsem 2022 (2).pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 371", "fileName": "Linear Midsem 2022.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 371", "fileName": "Q19.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 371", "fileName": "Q1_Q7.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 371", "fileName": "Q8_Q9.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 371", "fileName": "Scanned_20240404_175112.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 371", "fileName": "Scanned_20240420_123850.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 371", "fileName": "Scanned_20240420_124511.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 381", "fileName": "h.pdf", "reason": "Exact duplicate of Midsem.pdf and too little extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 381", "fileName": "Midsem.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "MATH 351", "fileName": "NUMERICAL_ANALYSIS_COMPUTER_BASED_EXAMS_QUESTIONS_BY_ABC.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "TE 385", "fileName": "Signals And Systems 2021 and 2022.pdf", "reason": "Exact duplicate of Signals pasco.pdf and too little extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "TE 385", "fileName": "Signals And Systems Midsems.pdf", "reason": "Scanned/low-text PDF with no extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "TE 385", "fileName": "signals pasco ans.pdf", "reason": "Exact duplicate of Solutions.pdf and too little extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "TE 385", "fileName": "Signals pasco.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "TE 385", "fileName": "Solutions.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." }
+  ]
+}
