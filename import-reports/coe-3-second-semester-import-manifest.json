@@ -1,0 +1,729 @@
+{
+  "version": 1,
+  "createdAt": "2026-08-10T04:39:23.201Z",
+  "sourceRoot": "C:\\Users\\jpaap\\OneDrive\\Desktop\\CoE\\CoE 3\\Second Semester",
+  "termSlug": "coe-3-second-semester",
+  "mode": "APPROVED_PLAN_NO_UPLOAD",
+  "rules": {
+    "maximumFileSizeMB": 50,
+    "skipLegacyPowerPoint": true,
+    "allowGeneralResourcesTopic": true,
+    "allowMultipleTopicsPerMaterial": true,
+    "duplicateIdentity": "sha256"
+  },
+  "summary": {
+    "approved": 31,
+    "skipped": 14,
+    "approvedSizeMB": 83.44
+  },
+  "files": [
+    {
+      "sourceRelativePath": "Autotronics\\Automotive diagnostic systems.pdf",
+      "courseCode": "COE 392",
+      "courseName": "Autotronic Laboratory",
+      "title": "Automotive diagnostic systems",
+      "materialType": "NOTE",
+      "topics": [
+        "Automotive Diagnostic Systems",
+        "Automotive Sensors",
+        "Engine Performance Diagnosis"
+      ],
+      "sizeMB": 0.44,
+      "sha256": "7c76a2aa5222124019d0bc21c996189316f495cd0b2f82e98fcec96cc0fdada1",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Autotronics\\AUTOMOTIVE SENSORS.pdf",
+      "courseCode": "COE 392",
+      "courseName": "Autotronic Laboratory",
+      "title": "AUTOMOTIVE SENSORS",
+      "materialType": "NOTE",
+      "topics": [
+        "Automotive Sensors",
+        "Engine Performance Diagnosis"
+      ],
+      "sizeMB": 0.45,
+      "sha256": "8356dd9cbf2660d04d18f706000c7b3701983c6351bdc5e981627b9c2324a911",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Autotronics\\SCAN TOOL AND ENGINE PERFORMANCE DIAGNOSIS-1.pdf",
+      "courseCode": "COE 392",
+      "courseName": "Autotronic Laboratory",
+      "title": "SCAN TOOL AND ENGINE PERFORMANCE DIAGNOSIS-1",
+      "materialType": "NOTE",
+      "topics": [
+        "Automotive Diagnostic Systems",
+        "Automotive Sensors",
+        "Engine Performance Diagnosis"
+      ],
+      "sizeMB": 0.33,
+      "sha256": "862595d2d015011bfd82dc6aa605d159b586da25055ae69bd66d48e977ed0635",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Autotronics\\slide 1.pdf",
+      "courseCode": "COE 392",
+      "courseName": "Autotronic Laboratory",
+      "title": "slide 1",
+      "materialType": "SLIDE",
+      "topics": [
+        "Automotive Diagnostic Systems",
+        "Automotive Sensors",
+        "Engine Performance Diagnosis",
+        "Autotronic Systems Fundamentals"
+      ],
+      "sizeMB": 0.15,
+      "sha256": "6daa1f56d62623e4c43e30558a6de1e68f9db47191bfdea3c501a8abff662edc",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Autotronics\\slide 2.pdf",
+      "courseCode": "COE 392",
+      "courseName": "Autotronic Laboratory",
+      "title": "slide 2",
+      "materialType": "SLIDE",
+      "topics": [
+        "Automotive Diagnostic Systems",
+        "Automotive Sensors",
+        "Engine Performance Diagnosis"
+      ],
+      "sizeMB": 0.43,
+      "sha256": "581be32a5b41f041254e6dc12dd82160a9e4b87467cf07f544a069efb97918df",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Autotronics\\slide 3.pdf",
+      "courseCode": "COE 392",
+      "courseName": "Autotronic Laboratory",
+      "title": "slide 3",
+      "materialType": "SLIDE",
+      "topics": [
+        "Automotive Diagnostic Systems",
+        "Automotive Sensors",
+        "Engine Performance Diagnosis"
+      ],
+      "sizeMB": 0.32,
+      "sha256": "d964b651a23092a5aa639751865fdd81a5daa73b09f715cf8d6920410528e49b",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Database Management\\Database Pasco.pdf",
+      "courseCode": "COE 368",
+      "courseName": "Database and Information Retrieval",
+      "title": "Database Pasco",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 5.13,
+      "sha256": "59718a839c6d6208bd4160a96692173d7dde07103ab32fb4783b094cf8e32821",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Database Management\\dbPasscoSolved.pdf",
+      "courseCode": "COE 368",
+      "courseName": "Database and Information Retrieval",
+      "title": "dbPasscoSolved",
+      "materialType": "PAST_QUESTION",
+      "topics": [],
+      "sizeMB": 5.19,
+      "sha256": "4fb0a62743574ca4fce84c5596372c7b8bd6dafc90e40ed4b7f026c666c54bdf",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Database Management\\Lecture  3.pdf",
+      "courseCode": "COE 368",
+      "courseName": "Database and Information Retrieval",
+      "title": "Lecture  3",
+      "materialType": "SLIDE",
+      "topics": [
+        "Database Fundamentals",
+        "Relational Model and SQL",
+        "Entity-Relationship Modeling",
+        "Transactions and Concurrency",
+        "Information Retrieval"
+      ],
+      "sizeMB": 1.18,
+      "sha256": "a058e8196534b28f7d786468f0775ecabd2500f235525956e6291289c09a9aad",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Database Management\\Lecture 06.pdf",
+      "courseCode": "COE 368",
+      "courseName": "Database and Information Retrieval",
+      "title": "Lecture 06",
+      "materialType": "SLIDE",
+      "topics": [
+        "Database Fundamentals",
+        "Relational Model and SQL",
+        "Transactions and Concurrency",
+        "Information Retrieval",
+        "Past Questions"
+      ],
+      "sizeMB": 0.34,
+      "sha256": "41cca7420d4d28ce454200e74de3fbe25d96d15ca041618b7c1798812f163efb",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Database Management\\Lecture 1.pdf",
+      "courseCode": "COE 368",
+      "courseName": "Database and Information Retrieval",
+      "title": "Lecture 1",
+      "materialType": "SLIDE",
+      "topics": [
+        "Database Fundamentals",
+        "Relational Model and SQL",
+        "Entity-Relationship Modeling",
+        "Transactions and Concurrency",
+        "Information Retrieval"
+      ],
+      "sizeMB": 2.99,
+      "sha256": "bf7fb19212f74811559da83e860a693135cd99d9ecd12008e20994f3768d685e",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Database Management\\Lecture 2.pdf",
+      "courseCode": "COE 368",
+      "courseName": "Database and Information Retrieval",
+      "title": "Lecture 2",
+      "materialType": "SLIDE",
+      "topics": [
+        "Database Fundamentals",
+        "Relational Model and SQL",
+        "Entity-Relationship Modeling",
+        "Normalization",
+        "Information Retrieval"
+      ],
+      "sizeMB": 2.05,
+      "sha256": "62b1053df77b9875a2eb6a9249698bf4da6f9b6842e70a371271adb3765cfdff",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Database Management\\Lecture 4.pdf",
+      "courseCode": "COE 368",
+      "courseName": "Database and Information Retrieval",
+      "title": "Lecture 4",
+      "materialType": "SLIDE",
+      "topics": [
+        "Database Fundamentals",
+        "Relational Model and SQL",
+        "Normalization",
+        "Information Retrieval",
+        "Past Questions"
+      ],
+      "sizeMB": 0.23,
+      "sha256": "2cab0d51bebf481830ed1369a08e5bbe283cf05df736264ce931aab684239067",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Database Management\\Lecture 5.pdf",
+      "courseCode": "COE 368",
+      "courseName": "Database and Information Retrieval",
+      "title": "Lecture 5",
+      "materialType": "SLIDE",
+      "topics": [
+        "Database Fundamentals",
+        "Relational Model and SQL",
+        "Transactions and Concurrency",
+        "Information Retrieval",
+        "Past Questions"
+      ],
+      "sizeMB": 0.23,
+      "sha256": "4d3d8c94e394cd496db8a48c0be298d08a4ced052ba70693d619ef490eb08488",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Database Management\\Lecture 6 5.pdf",
+      "courseCode": "COE 368",
+      "courseName": "Database and Information Retrieval",
+      "title": "Lecture 6 5",
+      "materialType": "SLIDE",
+      "topics": [
+        "Database Fundamentals",
+        "Relational Model and SQL",
+        "Entity-Relationship Modeling",
+        "Information Retrieval",
+        "Past Questions"
+      ],
+      "sizeMB": 0.32,
+      "sha256": "d94c0d90b0361a229b4fa949977b76ded88989673849083cc48520eb09fc6fbf",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Database Management\\Lecture 7.pdf",
+      "courseCode": "COE 368",
+      "courseName": "Database and Information Retrieval",
+      "title": "Lecture 7",
+      "materialType": "SLIDE",
+      "topics": [
+        "Database Fundamentals",
+        "Relational Model and SQL",
+        "Entity-Relationship Modeling",
+        "Transactions and Concurrency",
+        "Information Retrieval"
+      ],
+      "sizeMB": 0.37,
+      "sha256": "c5813a05abc09087875fccb4d2078feb95a0655fdcefe55ecbf8d5d1eaf586f9",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Database Management\\PASCO 2023.pdf",
+      "courseCode": "COE 368",
+      "courseName": "Database and Information Retrieval",
+      "title": "PASCO 2023",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 2.48,
+      "sha256": "014b0eb9878f1a9a06a21a8b2e673ae13495a997c5da89d2a4caa303edfab5e3",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Database Management\\PASSCO 2023 MIDSEM.pdf",
+      "courseCode": "COE 368",
+      "courseName": "Database and Information Retrieval",
+      "title": "PASSCO 2023 MIDSEM",
+      "materialType": "PAST_QUESTION",
+      "topics": [],
+      "sizeMB": 2.48,
+      "sha256": "b819a584bbc7ca70d4b4098e8b9634a3e934cb27f987b1c0e9c5b76f9045feb9",
+      "status": "SKIPPED",
+      "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Digital Systems 2\\batch 4.zip",
+      "courseCode": "COE 372",
+      "courseName": "Digital Systems Design II",
+      "title": "batch 4",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 3.13,
+      "sha256": "d4a461362fd4d3a35814596ee645cd909ca456a49fc8c33ed4f11f31a6614221",
+      "status": "SKIPPED",
+      "reason": "Unsupported extension .zip."
+    },
+    {
+      "sourceRelativePath": "Digital Systems 2\\Digital Systems Design Projects.docx",
+      "courseCode": "COE 372",
+      "courseName": "Digital Systems Design II",
+      "title": "Digital Systems Design Projects",
+      "materialType": "NOTE",
+      "topics": [
+        "Digital Systems Design II Fundamentals",
+        "Finite State Machines",
+        "Sequential System Design",
+        "UART and Serial Communication",
+        "Digital Design Projects"
+      ],
+      "sizeMB": 0.02,
+      "sha256": "00131aafd806c3c340be28f87df751fd528a1fa16e8b25c08e037c7ad1bbb631",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Digital Systems 2\\Digital Systems Design Projects.pdf",
+      "courseCode": "COE 372",
+      "courseName": "Digital Systems Design II",
+      "title": "Digital Systems Design Projects",
+      "materialType": "NOTE",
+      "topics": [
+        "Digital Systems Design II Fundamentals",
+        "Finite State Machines",
+        "Sequential System Design",
+        "UART and Serial Communication",
+        "Digital Design Projects"
+      ],
+      "sizeMB": 0.2,
+      "sha256": "02a3f27c91df760062543c5837340a022c8cb97995c29589f8e875faf941769c",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Digital Systems 2\\Free_Range_VHDL.pdf",
+      "courseCode": "COE 372",
+      "courseName": "Digital Systems Design II",
+      "title": "Free_Range_VHDL",
+      "materialType": "NOTE",
+      "topics": [
+        "Digital Systems Design II Fundamentals",
+        "Hardware Description Languages",
+        "Finite State Machines",
+        "Sequential System Design",
+        "UART and Serial Communication"
+      ],
+      "sizeMB": 2.27,
+      "sha256": "27302a09a630be51bafde2dd81cce34d4f37d9b922039a7b440802ec664865d6",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Digital Systems 2\\preparing for COE 372 Exam25.docx",
+      "courseCode": "COE 372",
+      "courseName": "Digital Systems Design II",
+      "title": "preparing for COE 372 Exam25",
+      "materialType": "NOTE",
+      "topics": [
+        "Digital Systems Design II Fundamentals",
+        "Finite State Machines",
+        "Sequential System Design"
+      ],
+      "sizeMB": 0.02,
+      "sha256": "48ce4a870a620752baa714ba5f50dde6a75d15701f1d57c00a548aace6962f16",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Digital Systems 2\\UART Transmitter",
+      "courseCode": "COE 372",
+      "courseName": "Digital Systems Design II",
+      "title": "UART Transmitter",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0,
+      "sha256": "ac71a1c844b52d0beccf8497bfe6138bc45e7dfe4cc79591a5a0086f2ea48288",
+      "status": "SKIPPED",
+      "reason": "Unsupported extension (none)."
+    },
+    {
+      "sourceRelativePath": "Digital Systems 2\\UART Transmitter-Revised",
+      "courseCode": "COE 372",
+      "courseName": "Digital Systems Design II",
+      "title": "UART Transmitter-Revised",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0,
+      "sha256": "ba89f9e0cf1c2c0db44e2d6ecba4a3bd5b3dc8ee72dcf7fc0bc9ac494ba890c0",
+      "status": "SKIPPED",
+      "reason": "Unsupported extension (none)."
+    },
+    {
+      "sourceRelativePath": "Digital Systems 2\\UART Transmitter-Revised-Copy1",
+      "courseCode": "COE 372",
+      "courseName": "Digital Systems Design II",
+      "title": "UART Transmitter-Revised-Copy1",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0,
+      "sha256": "a82181d0f56a722da765ea60d010a0cd4114aed4cbc5dd84247fc40c221da5c4",
+      "status": "SKIPPED",
+      "reason": "Unsupported extension (none)."
+    },
+    {
+      "sourceRelativePath": "Digital Systems 2\\UART.txt",
+      "courseCode": "COE 372",
+      "courseName": "Digital Systems Design II",
+      "title": "UART",
+      "materialType": "NOTE",
+      "topics": [
+        "Sequential System Design",
+        "UART and Serial Communication"
+      ],
+      "sizeMB": 0,
+      "sha256": "505a5c86d1c51b78c31f7e7e76872ac646c4cc48612c22a7892da7e8f020e676",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Operating Systems\\os-coe354-slides.pdf",
+      "courseCode": "COE 354",
+      "courseName": "Operating Systems",
+      "title": "os-coe354-slides",
+      "materialType": "SLIDE",
+      "topics": [
+        "General resources",
+        "Operating Systems Fundamentals",
+        "Processes and Threads",
+        "Memory Management",
+        "File Systems",
+        "Concurrency and Synchronization"
+      ],
+      "sizeMB": 14.41,
+      "sha256": "996f2d2d50ce7be0ecc51cd06c8ee663189e48798f62672eec51fcc48e017b0c",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Operating systems and Embedded System\\0-Please read before you proceed.txt",
+      "courseCode": "COE 358",
+      "courseName": "Embedded Systems",
+      "title": "0-Please read before you proceed",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 0,
+      "sha256": "df6b03c7464ede6dd46cff099ac207e36cdb48f91e9e3dd83800d2d7a603ca3e",
+      "status": "SKIPPED",
+      "reason": "Operational readme rather than course material; skipped for this import."
+    },
+    {
+      "sourceRelativePath": "Operating systems and Embedded System\\Andrew S Tanenbaum - Modern Operating Systems.pdf",
+      "courseCode": "COE 358",
+      "courseName": "Embedded Systems",
+      "title": "Andrew S Tanenbaum - Modern Operating Systems",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 5.74,
+      "sha256": "4a016521372e447e5dd6d0f466b0a42030b96f731f2d7c608cc8a8abcdfd10f0",
+      "status": "SKIPPED",
+      "reason": "Operating Systems reference found in the mixed OS/Embedded folder; skipped to avoid misfiling under Embedded Systems."
+    },
+    {
+      "sourceRelativePath": "Operating systems and Embedded System\\Embedded slide.pdf",
+      "courseCode": "COE 358",
+      "courseName": "Embedded Systems",
+      "title": "Embedded slide",
+      "materialType": "SLIDE",
+      "topics": [
+        "Embedded Systems Fundamentals",
+        "Microcontroller Programming",
+        "Embedded Interfaces and Peripherals",
+        "Embedded Projects",
+        "Real-Time and Operating-System Concepts"
+      ],
+      "sizeMB": 17.48,
+      "sha256": "ef35e2aba0378147fb8c6f39cf20ac8c34eeda3e699d50652517caa44b28854c",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Operating systems and Embedded System\\Microcontroller Projects in C for the 8051 ( PDFDrive.com ).pdf",
+      "courseCode": "COE 358",
+      "courseName": "Embedded Systems",
+      "title": "Microcontroller Projects in C for the 8051 ( PDFDrive.com )",
+      "materialType": "NOTE",
+      "topics": [
+        "Embedded Systems Fundamentals",
+        "Microcontroller Programming",
+        "Embedded Interfaces and Peripherals",
+        "Embedded Projects",
+        "Real-Time and Operating-System Concepts"
+      ],
+      "sizeMB": 0.95,
+      "sha256": "51156f32d46dc3c1593ce79dd3fb2dde8079fc03799df6767f17c6aa911ee7f6",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Operating systems and Embedded System\\Os slide1.pdf",
+      "courseCode": "COE 358",
+      "courseName": "Embedded Systems",
+      "title": "Os slide1",
+      "materialType": "SLIDE",
+      "topics": [],
+      "sizeMB": 14.38,
+      "sha256": "ea2593c4ac5e88115c70cc21532539dd533286ee9342849d418b2f8ce80316bd",
+      "status": "SKIPPED",
+      "reason": "Operating Systems slide found in the mixed OS/Embedded folder; skipped to avoid misfiling under Embedded Systems."
+    },
+    {
+      "sourceRelativePath": "Operating systems and Embedded System\\WhatsApp Image 2025-08-23 at 21.54.38_bd0186e0.jpg",
+      "courseCode": "COE 358",
+      "courseName": "Embedded Systems",
+      "title": "WhatsApp Image 2025-08-23 at 21.54.38_bd0186e0",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 0.19,
+      "sha256": "7d613de050e858d7f14d1b869f3a120c450baf8b711f7e02a16db6affb0f62bc",
+      "status": "SKIPPED",
+      "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Operating systems and Embedded System\\WhatsApp Image 2025-08-23 at 21.54.38_c7540c62.jpg",
+      "courseCode": "COE 358",
+      "courseName": "Embedded Systems",
+      "title": "WhatsApp Image 2025-08-23 at 21.54.38_c7540c62",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 0.2,
+      "sha256": "b8e0e73de73d240b96bb4d85a301cc20f5147e23b776fa19367574d74fe7221c",
+      "status": "SKIPPED",
+      "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "Operating systems and Embedded System\\WhatsApp Image 2025-08-23 at 21.54.39_24778895.jpg",
+      "courseCode": "COE 358",
+      "courseName": "Embedded Systems",
+      "title": "WhatsApp Image 2025-08-23 at 21.54.39_24778895",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 0.06,
+      "sha256": "9bf36b875c89e1f7d74d4d071cb5edda9d0d7f979170d9c5c0e9d8618c10560e",
+      "status": "SKIPPED",
+      "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "software engineering\\01 Software  Software Eng.PDF",
+      "courseCode": "COE 356",
+      "courseName": "Introduction to Software Engineering",
+      "title": "01 Software  Software Eng",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Fundamentals",
+        "Software Design",
+        "Project Management",
+        "Software Testing and Validation"
+      ],
+      "sizeMB": 0.24,
+      "sha256": "09dfc9e787f0e55622dc2a815e4693908d6d1e5e65c6241af8a5d8b14f5fff6e",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "software engineering\\02 Software Process Models.PDF",
+      "courseCode": "COE 356",
+      "courseName": "Introduction to Software Engineering",
+      "title": "02 Software Process Models",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Fundamentals",
+        "Software Process Models",
+        "Agile Development",
+        "Software Requirements",
+        "Project Management"
+      ],
+      "sizeMB": 2.04,
+      "sha256": "f72f84fa1bad8fbf5625e99e97bfacec9ca2a3e98fe235f58e9b874cde5d7cce",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "software engineering\\03 Agile Development.PDF",
+      "courseCode": "COE 356",
+      "courseName": "Introduction to Software Engineering",
+      "title": "03 Agile Development",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Fundamentals",
+        "Software Process Models",
+        "Agile Development",
+        "Software Requirements",
+        "Software Design"
+      ],
+      "sizeMB": 0.39,
+      "sha256": "55a19e2725b6e057c3281888b896b2962d68a6e8d7f55d8ab3edba2b93d7221f",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "software engineering\\04 Principles that Guide Practice.PDF",
+      "courseCode": "COE 356",
+      "courseName": "Introduction to Software Engineering",
+      "title": "04 Principles that Guide Practice",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Fundamentals",
+        "Agile Development",
+        "Software Requirements",
+        "Software Design",
+        "Project Management"
+      ],
+      "sizeMB": 0.22,
+      "sha256": "a04340d27453b72fdf8c7e261cecbc16b5beac98853eac1c6ae32f392253482b",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "software engineering\\05 Software Requirements.PDF",
+      "courseCode": "COE 356",
+      "courseName": "Introduction to Software Engineering",
+      "title": "05 Software Requirements",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Fundamentals",
+        "Agile Development",
+        "Software Requirements",
+        "Project Management",
+        "Software Testing and Validation"
+      ],
+      "sizeMB": 1.8,
+      "sha256": "e7479813631a1743a844a281166d7e18ecc33440d4d261c3ba0326ce95598e73",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "software engineering\\06 Software Design.PDF",
+      "courseCode": "COE 356",
+      "courseName": "Introduction to Software Engineering",
+      "title": "06 Software Design",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Fundamentals",
+        "Software Process Models",
+        "Agile Development",
+        "Software Requirements",
+        "Software Design"
+      ],
+      "sizeMB": 0.76,
+      "sha256": "049089bd46a963f5eb3e6e13d32673a67d721e45735322a76c948520484d53ee",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "software engineering\\07 Software Project Management.PDF",
+      "courseCode": "COE 356",
+      "courseName": "Introduction to Software Engineering",
+      "title": "07 Software Project Management",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Fundamentals",
+        "Agile Development",
+        "Software Requirements",
+        "Project Management",
+        "Software Testing and Validation"
+      ],
+      "sizeMB": 1.98,
+      "sha256": "108ac88637609d821bef3c8a845efc4b3857368b396d7141bf18a0f858d71695",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "software engineering\\08 Software Testing and Validation.PDF",
+      "courseCode": "COE 356",
+      "courseName": "Introduction to Software Engineering",
+      "title": "08 Software Testing and Validation",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Fundamentals",
+        "Agile Development",
+        "Software Requirements",
+        "Software Testing and Validation"
+      ],
+      "sizeMB": 0.21,
+      "sha256": "b348599f9c981851ece456fc10b15fb3c0917777925b25828cf598b3afaf7637",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "software engineering\\Book.pdf",
+      "courseCode": "COE 356",
+      "courseName": "Introduction to Software Engineering",
+      "title": "Book",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Fundamentals",
+        "Software Process Models",
+        "Agile Development",
+        "Software Requirements",
+        "Software Design"
+      ],
+      "sizeMB": 30.62,
+      "sha256": "321ef1ad587d80d3a55934a8d6f7bb3d4f1b4687681c78ce4303ba5d2bac5706",
+      "status": "APPROVED",
+      "reason": null
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "termSlug": "coe-3-second-semester",
+  "reportTitle": "Computer Engineering - Year 3, Second Semester import dry run",
+  "courseMappings": [
+    { "folderIncludes": "Autotronics", "code": "COE 392", "name": "Autotronic Laboratory" },
+    { "folderIncludes": "Database Management", "code": "COE 368", "name": "Database and Information Retrieval" },
+    { "folderIncludes": "Digital Systems 2", "code": "COE 372", "name": "Digital Systems Design II" },
+    { "folderIncludes": "Operating Systems", "code": "COE 354", "name": "Operating Systems" },
+    { "folderIncludes": "Operating systems and Embedded System", "code": "COE 358", "name": "Embedded Systems" },
+    { "folderIncludes": "software engineering", "code": "COE 356", "name": "Introduction to Software Engineering" }
+  ],
+  "topicRules": {
+    "COE 392": [
+      ["Automotive Diagnostic Systems", ["automotive diagnostic", "diagnostic system", "scan tool", "diagnosis"]],
+      ["Automotive Sensors", ["automotive sensor", "sensor", "actuator", "engine sensor"]],
+      ["Engine Performance Diagnosis", ["engine performance", "engine diagnosis", "fault", "obd"]],
+      ["Autotronic Systems Fundamentals", ["autotronic", "automotive electronics", "electronic control"]]
+    ],
+    "COE 368": [
+      ["Database Fundamentals", ["database", "dbms", "data model", "database system"]],
+      ["Relational Model and SQL", ["relational", "sql", "query", "table", "relation"]],
+      ["Entity-Relationship Modeling", ["entity relationship", "er diagram", "erd", "entity", "relationship"]],
+      ["Normalization", ["normalization", "normal form", "functional dependency"]],
+      ["Transactions and Concurrency", ["transaction", "concurrency", "acid", "serializability"]],
+      ["Information Retrieval", ["information retrieval", "indexing", "search", "retrieval"]],
+      ["Past Questions", ["pasco", "passco", "past question", "midsem", "exam"]]
+    ],
+    "COE 372": [
+      ["Digital Systems Design II Fundamentals", ["digital system", "digital systems design", "logic design"]],
+      ["Hardware Description Languages", ["vhdl", "verilog", "hardware description", "free range vhdl"]],
+      ["Finite State Machines", ["finite state", "fsm", "state machine", "state diagram"]],
+      ["Sequential System Design", ["sequential", "flip flop", "register", "counter"]],
+      ["UART and Serial Communication", ["uart", "serial communication", "transmitter", "receiver"]],
+      ["Digital Design Projects", ["project", "design project", "implementation"]]
+    ],
+    "COE 354": [
+      ["Operating Systems Fundamentals", ["operating system", "os", "kernel", "modern operating systems"]],
+      ["Processes and Threads", ["process", "thread", "scheduling", "context switch"]],
+      ["Memory Management", ["memory management", "virtual memory", "paging", "segmentation"]],
+      ["File Systems", ["file system", "directory", "disk", "storage"]],
+      ["Concurrency and Synchronization", ["concurrency", "synchronization", "mutex", "semaphore", "deadlock"]]
+    ],
+    "COE 358": [
+      ["Embedded Systems Fundamentals", ["embedded system", "microcontroller", "8051", "firmware"]],
+      ["Microcontroller Programming", ["microcontroller", "assembly", "c programming", "8051"]],
+      ["Embedded Interfaces and Peripherals", ["interface", "peripheral", "gpio", "timer", "uart"]],
+      ["Embedded Projects", ["project", "microcontroller project", "embedded project"]],
+      ["Real-Time and Operating-System Concepts", ["real-time", "rtos", "operating system", "scheduler"]]
+    ],
+    "COE 356": [
+      ["Software Engineering Fundamentals", ["software engineering", "software", "software process"]],
+      ["Software Process Models", ["process model", "waterfall", "spiral", "incremental"]],
+      ["Agile Development", ["agile", "scrum", "xp", "iteration"]],
+      ["Software Requirements", ["requirement", "requirements engineering", "use case"]],
+      ["Software Design", ["software design", "architecture", "design pattern"]],
+      ["Project Management", ["project management", "estimation", "risk", "schedule"]],
+      ["Software Testing and Validation", ["testing", "validation", "verification", "test case"]]
+    ]
+  },
+  "topicOverrides": [],
+  "skipRules": [
+    { "courseCode": "COE 368", "fileName": "Database Pasco.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 368", "fileName": "dbPasscoSolved.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 368", "fileName": "PASCO 2023.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 368", "fileName": "PASSCO 2023 MIDSEM.pdf", "reason": "Scanned/low-text PDF with negligible extractable content; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 358", "fileName": "0-Please read before you proceed.txt", "reason": "Operational readme rather than course material; skipped for this import." },
+    { "courseCode": "COE 358", "fileName": "Andrew S Tanenbaum - Modern Operating Systems.pdf", "reason": "Operating Systems reference found in the mixed OS/Embedded folder; skipped to avoid misfiling under Embedded Systems." },
+    { "courseCode": "COE 358", "fileName": "Os slide1.pdf", "reason": "Operating Systems slide found in the mixed OS/Embedded folder; skipped to avoid misfiling under Embedded Systems." },
+    { "courseCode": "COE 358", "fileName": "WhatsApp Image 2025-08-23 at 21.54.38_bd0186e0.jpg", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 358", "fileName": "WhatsApp Image 2025-08-23 at 21.54.38_c7540c62.jpg", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 358", "fileName": "WhatsApp Image 2025-08-23 at 21.54.39_24778895.jpg", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." }
+  ]
+}

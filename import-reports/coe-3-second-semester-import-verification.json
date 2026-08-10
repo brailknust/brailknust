@@ -1,0 +1,88 @@
+{
+  "verifiedAt": "2026-08-10T04:41:51.959Z",
+  "expectedApprovedFiles": 31,
+  "publishedFiles": 31,
+  "missingHashes": [],
+  "materialsWithoutStorage": [],
+  "materialsWithoutChunks": [],
+  "materialsWithoutTopics": [],
+  "courses": [
+    {
+      "code": "COE 354",
+      "topics": [
+        "General resources",
+        "Operating Systems Fundamentals",
+        "Processes and Threads",
+        "Memory Management",
+        "File Systems",
+        "Concurrency and Synchronization"
+      ],
+      "importedMaterials": 1,
+      "searchableChunks": 122
+    },
+    {
+      "code": "COE 356",
+      "topics": [
+        "Software Engineering Fundamentals",
+        "Software Design",
+        "Project Management",
+        "Software Testing and Validation",
+        "Software Process Models",
+        "Agile Development",
+        "Software Requirements"
+      ],
+      "importedMaterials": 9,
+      "searchableChunks": 1919
+    },
+    {
+      "code": "COE 358",
+      "topics": [
+        "Embedded Systems Fundamentals",
+        "Microcontroller Programming",
+        "Embedded Interfaces and Peripherals",
+        "Embedded Projects",
+        "Real-Time and Operating-System Concepts"
+      ],
+      "importedMaterials": 2,
+      "searchableChunks": 284
+    },
+    {
+      "code": "COE 368",
+      "topics": [
+        "Database Fundamentals",
+        "Relational Model and SQL",
+        "Entity-Relationship Modeling",
+        "Transactions and Concurrency",
+        "Information Retrieval",
+        "Past Questions",
+        "Normalization"
+      ],
+      "importedMaterials": 8,
+      "searchableChunks": 94
+    },
+    {
+      "code": "COE 372",
+      "topics": [
+        "Digital Systems Design II Fundamentals",
+        "Finite State Machines",
+        "Sequential System Design",
+        "UART and Serial Communication",
+        "Digital Design Projects",
+        "Hardware Description Languages"
+      ],
+      "importedMaterials": 5,
+      "searchableChunks": 256
+    },
+    {
+      "code": "COE 392",
+      "topics": [
+        "Automotive Diagnostic Systems",
+        "Automotive Sensors",
+        "Engine Performance Diagnosis",
+        "Autotronic Systems Fundamentals"
+      ],
+      "importedMaterials": 6,
+      "searchableChunks": 67
+    }
+  ]
+}

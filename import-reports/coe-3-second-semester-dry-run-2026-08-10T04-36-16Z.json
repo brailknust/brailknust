@@ -1,0 +1,718 @@
+{
+  "generatedAt": "2026-08-10T04:35:45.651Z",
+  "source": "C:\\Users\\jpaap\\OneDrive\\Desktop\\CoE\\CoE 3\\Second Semester",
+  "mode": "DRY_RUN",
+  "termSlug": "coe-3-second-semester",
+  "reportTitle": "Computer Engineering - Year 3, Second Semester import dry run",
+  "rules": {
+    "maxFileSizeMB": 50,
+    "skippedExtensions": [
+      ".ppt",
+      ".pptm"
+    ],
+    "folderPrefixesIgnored": true,
+    "supportsGeneralAndMultipleTopics": true
+  },
+  "courses": [
+    {
+      "code": "COE 392",
+      "name": "Autotronic Laboratory",
+      "sourceFolder": "Autotronics",
+      "files": [
+        {
+          "name": "Automotive diagnostic systems.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.44,
+          "sha256": "7c76a2aa5222124019d0bc21c996189316f495cd0b2f82e98fcec96cc0fdada1",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 17508,
+          "proposedTopics": [
+            "Automotive Diagnostic Systems",
+            "Automotive Sensors",
+            "Engine Performance Diagnosis"
+          ]
+        },
+        {
+          "name": "AUTOMOTIVE SENSORS.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.45,
+          "sha256": "8356dd9cbf2660d04d18f706000c7b3701983c6351bdc5e981627b9c2324a911",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 15123,
+          "proposedTopics": [
+            "Automotive Sensors",
+            "Engine Performance Diagnosis"
+          ]
+        },
+        {
+          "name": "SCAN TOOL AND ENGINE PERFORMANCE DIAGNOSIS-1.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.33,
+          "sha256": "862595d2d015011bfd82dc6aa605d159b586da25055ae69bd66d48e977ed0635",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 11133,
+          "proposedTopics": [
+            "Automotive Diagnostic Systems",
+            "Automotive Sensors",
+            "Engine Performance Diagnosis"
+          ]
+        },
+        {
+          "name": "slide 1.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.15,
+          "sha256": "6daa1f56d62623e4c43e30558a6de1e68f9db47191bfdea3c501a8abff662edc",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 19365,
+          "proposedTopics": [
+            "Automotive Diagnostic Systems",
+            "Automotive Sensors",
+            "Engine Performance Diagnosis",
+            "Autotronic Systems Fundamentals"
+          ]
+        },
+        {
+          "name": "slide 2.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.43,
+          "sha256": "581be32a5b41f041254e6dc12dd82160a9e4b87467cf07f544a069efb97918df",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 17508,
+          "proposedTopics": [
+            "Automotive Diagnostic Systems",
+            "Automotive Sensors",
+            "Engine Performance Diagnosis"
+          ]
+        },
+        {
+          "name": "slide 3.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.32,
+          "sha256": "d964b651a23092a5aa639751865fdd81a5daa73b09f715cf8d6920410528e49b",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 11133,
+          "proposedTopics": [
+            "Automotive Diagnostic Systems",
+            "Automotive Sensors",
+            "Engine Performance Diagnosis"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 368",
+      "name": "Database and Information Retrieval",
+      "sourceFolder": "Database Management",
+      "files": [
+        {
+          "name": "Database Pasco.pdf",
+          "extension": ".pdf",
+          "sizeMB": 5.13,
+          "sha256": "59718a839c6d6208bd4160a96692173d7dde07103ab32fb4783b094cf8e32821",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 23,
+          "warning": "Very little text was extracted; review before import.",
+          "proposedTopics": [
+            "Database Fundamentals",
+            "Past Questions"
+          ]
+        },
+        {
+          "name": "dbPasscoSolved.pdf",
+          "extension": ".pdf",
+          "sizeMB": 5.19,
+          "sha256": "4fb0a62743574ca4fce84c5596372c7b8bd6dafc90e40ed4b7f026c666c54bdf",
+          "status": "READY",
+          "materialType": "PAST_QUESTION",
+          "extractedCharacters": 23,
+          "warning": "Very little text was extracted; review before import.",
+          "proposedTopics": [
+            "General resources",
+            "Past Questions"
+          ]
+        },
+        {
+          "name": "Lecture  3.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.18,
+          "sha256": "a058e8196534b28f7d786468f0775ecabd2500f235525956e6291289c09a9aad",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 9569,
+          "proposedTopics": [
+            "Database Fundamentals",
+            "Relational Model and SQL",
+            "Entity-Relationship Modeling",
+            "Transactions and Concurrency",
+            "Information Retrieval"
+          ]
+        },
+        {
+          "name": "Lecture 06.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.34,
+          "sha256": "41cca7420d4d28ce454200e74de3fbe25d96d15ca041618b7c1798812f163efb",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 27403,
+          "proposedTopics": [
+            "Database Fundamentals",
+            "Relational Model and SQL",
+            "Transactions and Concurrency",
+            "Information Retrieval",
+            "Past Questions"
+          ]
+        },
+        {
+          "name": "Lecture 1.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.99,
+          "sha256": "bf7fb19212f74811559da83e860a693135cd99d9ecd12008e20994f3768d685e",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 20161,
+          "proposedTopics": [
+            "Database Fundamentals",
+            "Relational Model and SQL",
+            "Entity-Relationship Modeling",
+            "Transactions and Concurrency",
+            "Information Retrieval"
+          ]
+        },
+        {
+          "name": "Lecture 2.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.05,
+          "sha256": "62b1053df77b9875a2eb6a9249698bf4da6f9b6842e70a371271adb3765cfdff",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 8151,
+          "proposedTopics": [
+            "Database Fundamentals",
+            "Relational Model and SQL",
+            "Entity-Relationship Modeling",
+            "Normalization",
+            "Information Retrieval"
+          ]
+        },
+        {
+          "name": "Lecture 4.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.23,
+          "sha256": "2cab0d51bebf481830ed1369a08e5bbe283cf05df736264ce931aab684239067",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 6354,
+          "proposedTopics": [
+            "Database Fundamentals",
+            "Relational Model and SQL",
+            "Normalization",
+            "Information Retrieval",
+            "Past Questions"
+          ]
+        },
+        {
+          "name": "Lecture 5.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.23,
+          "sha256": "4d3d8c94e394cd496db8a48c0be298d08a4ced052ba70693d619ef490eb08488",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 10084,
+          "proposedTopics": [
+            "Database Fundamentals",
+            "Relational Model and SQL",
+            "Transactions and Concurrency",
+            "Information Retrieval",
+            "Past Questions"
+          ]
+        },
+        {
+          "name": "Lecture 6 5.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.32,
+          "sha256": "d94c0d90b0361a229b4fa949977b76ded88989673849083cc48520eb09fc6fbf",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 23608,
+          "proposedTopics": [
+            "Database Fundamentals",
+            "Relational Model and SQL",
+            "Entity-Relationship Modeling",
+            "Information Retrieval",
+            "Past Questions"
+          ]
+        },
+        {
+          "name": "Lecture 7.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.37,
+          "sha256": "c5813a05abc09087875fccb4d2078feb95a0655fdcefe55ecbf8d5d1eaf586f9",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 24075,
+          "proposedTopics": [
+            "Database Fundamentals",
+            "Relational Model and SQL",
+            "Entity-Relationship Modeling",
+            "Transactions and Concurrency",
+            "Information Retrieval"
+          ]
+        },
+        {
+          "name": "PASCO 2023.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.48,
+          "sha256": "014b0eb9878f1a9a06a21a8b2e673ae13495a997c5da89d2a4caa303edfab5e3",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 7,
+          "warning": "Very little text was extracted; review before import.",
+          "proposedTopics": [
+            "Past Questions"
+          ]
+        },
+        {
+          "name": "PASSCO 2023 MIDSEM.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.48,
+          "sha256": "b819a584bbc7ca70d4b4098e8b9634a3e934cb27f987b1c0e9c5b76f9045feb9",
+          "status": "READY",
+          "materialType": "PAST_QUESTION",
+          "extractedCharacters": 7,
+          "warning": "Very little text was extracted; review before import.",
+          "proposedTopics": [
+            "General resources",
+            "Past Questions"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 372",
+      "name": "Digital Systems Design II",
+      "sourceFolder": "Digital Systems 2",
+      "files": [
+        {
+          "name": "batch 4.zip",
+          "extension": ".zip",
+          "sizeMB": 3.13,
+          "sha256": "d4a461362fd4d3a35814596ee645cd909ca456a49fc8c33ed4f11f31a6614221",
+          "status": "SKIPPED",
+          "warning": "Unsupported extension .zip."
+        },
+        {
+          "name": "Digital Systems Design Projects.docx",
+          "extension": ".docx",
+          "sizeMB": 0.02,
+          "sha256": "00131aafd806c3c340be28f87df751fd528a1fa16e8b25c08e037c7ad1bbb631",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 11533,
+          "proposedTopics": [
+            "Digital Systems Design II Fundamentals",
+            "Finite State Machines",
+            "Sequential System Design",
+            "UART and Serial Communication",
+            "Digital Design Projects"
+          ]
+        },
+        {
+          "name": "Digital Systems Design Projects.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.2,
+          "sha256": "02a3f27c91df760062543c5837340a022c8cb97995c29589f8e875faf941769c",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 11729,
+          "proposedTopics": [
+            "Digital Systems Design II Fundamentals",
+            "Finite State Machines",
+            "Sequential System Design",
+            "UART and Serial Communication",
+            "Digital Design Projects"
+          ]
+        },
+        {
+          "name": "Free_Range_VHDL.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.27,
+          "sha256": "27302a09a630be51bafde2dd81cce34d4f37d9b922039a7b440802ec664865d6",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 333869,
+          "proposedTopics": [
+            "Digital Systems Design II Fundamentals",
+            "Hardware Description Languages",
+            "Finite State Machines",
+            "Sequential System Design",
+            "UART and Serial Communication"
+          ]
+        },
+        {
+          "name": "preparing for COE 372 Exam25.docx",
+          "extension": ".docx",
+          "sizeMB": 0.02,
+          "sha256": "48ce4a870a620752baa714ba5f50dde6a75d15701f1d57c00a548aace6962f16",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 1200,
+          "proposedTopics": [
+            "Digital Systems Design II Fundamentals",
+            "Finite State Machines",
+            "Sequential System Design"
+          ]
+        },
+        {
+          "name": "UART Transmitter",
+          "extension": "",
+          "sizeMB": 0,
+          "sha256": "ac71a1c844b52d0beccf8497bfe6138bc45e7dfe4cc79591a5a0086f2ea48288",
+          "status": "SKIPPED",
+          "warning": "Unsupported extension (none)."
+        },
+        {
+          "name": "UART Transmitter-Revised",
+          "extension": "",
+          "sizeMB": 0,
+          "sha256": "ba89f9e0cf1c2c0db44e2d6ecba4a3bd5b3dc8ee72dcf7fc0bc9ac494ba890c0",
+          "status": "SKIPPED",
+          "warning": "Unsupported extension (none)."
+        },
+        {
+          "name": "UART Transmitter-Revised-Copy1",
+          "extension": "",
+          "sizeMB": 0,
+          "sha256": "a82181d0f56a722da765ea60d010a0cd4114aed4cbc5dd84247fc40c221da5c4",
+          "status": "SKIPPED",
+          "warning": "Unsupported extension (none)."
+        },
+        {
+          "name": "UART.txt",
+          "extension": ".txt",
+          "sizeMB": 0,
+          "sha256": "505a5c86d1c51b78c31f7e7e76872ac646c4cc48612c22a7892da7e8f020e676",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 2956,
+          "proposedTopics": [
+            "Sequential System Design",
+            "UART and Serial Communication"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 354",
+      "name": "Operating Systems",
+      "sourceFolder": "Operating Systems",
+      "files": [
+        {
+          "name": "os-coe354-slides.pdf",
+          "extension": ".pdf",
+          "sizeMB": 14.41,
+          "sha256": "996f2d2d50ce7be0ecc51cd06c8ee663189e48798f62672eec51fcc48e017b0c",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 172327,
+          "proposedTopics": [
+            "General resources",
+            "Operating Systems Fundamentals",
+            "Processes and Threads",
+            "Memory Management",
+            "File Systems",
+            "Concurrency and Synchronization"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 358",
+      "name": "Embedded Systems",
+      "sourceFolder": "Operating systems and Embedded System",
+      "files": [
+        {
+          "name": "0-Please read before you proceed.txt",
+          "extension": ".txt",
+          "sizeMB": 0,
+          "sha256": "df6b03c7464ede6dd46cff099ac207e36cdb48f91e9e3dd83800d2d7a603ca3e",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 932,
+          "proposedTopics": [
+            "Embedded Systems Fundamentals",
+            "Microcontroller Programming",
+            "Embedded Projects"
+          ]
+        },
+        {
+          "name": "Andrew S Tanenbaum - Modern Operating Systems.pdf",
+          "extension": ".pdf",
+          "sizeMB": 5.74,
+          "sha256": "4a016521372e447e5dd6d0f466b0a42030b96f731f2d7c608cc8a8abcdfd10f0",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 2930491,
+          "proposedTopics": [
+            "Embedded Systems Fundamentals",
+            "Microcontroller Programming",
+            "Embedded Interfaces and Peripherals",
+            "Embedded Projects",
+            "Real-Time and Operating-System Concepts"
+          ]
+        },
+        {
+          "name": "Embedded slide.pdf",
+          "extension": ".pdf",
+          "sizeMB": 17.48,
+          "sha256": "ef35e2aba0378147fb8c6f39cf20ac8c34eeda3e699d50652517caa44b28854c",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 172176,
+          "proposedTopics": [
+            "Embedded Systems Fundamentals",
+            "Microcontroller Programming",
+            "Embedded Interfaces and Peripherals",
+            "Embedded Projects",
+            "Real-Time and Operating-System Concepts"
+          ]
+        },
+        {
+          "name": "Microcontroller Projects in C for the 8051 ( PDFDrive.com ).pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.95,
+          "sha256": "51156f32d46dc3c1593ce79dd3fb2dde8079fc03799df6767f17c6aa911ee7f6",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 228613,
+          "proposedTopics": [
+            "Embedded Systems Fundamentals",
+            "Microcontroller Programming",
+            "Embedded Interfaces and Peripherals",
+            "Embedded Projects",
+            "Real-Time and Operating-System Concepts"
+          ]
+        },
+        {
+          "name": "Os slide1.pdf",
+          "extension": ".pdf",
+          "sizeMB": 14.38,
+          "sha256": "ea2593c4ac5e88115c70cc21532539dd533286ee9342849d418b2f8ce80316bd",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 172327,
+          "proposedTopics": [
+            "Embedded Systems Fundamentals",
+            "Embedded Interfaces and Peripherals",
+            "Embedded Projects",
+            "Real-Time and Operating-System Concepts"
+          ]
+        },
+        {
+          "name": "WhatsApp Image 2025-08-23 at 21.54.38_bd0186e0.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.19,
+          "sha256": "7d613de050e858d7f14d1b869f3a120c450baf8b711f7e02a16db6affb0f62bc",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "WhatsApp Image 2025-08-23 at 21.54.38_c7540c62.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.2,
+          "sha256": "b8e0e73de73d240b96bb4d85a301cc20f5147e23b776fa19367574d74fe7221c",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "WhatsApp Image 2025-08-23 at 21.54.39_24778895.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.06,
+          "sha256": "9bf36b875c89e1f7d74d4d071cb5edda9d0d7f979170d9c5c0e9d8618c10560e",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 356",
+      "name": "Introduction to Software Engineering",
+      "sourceFolder": "software engineering",
+      "files": [
+        {
+          "name": "01 Software  Software Eng.PDF",
+          "extension": ".pdf",
+          "sizeMB": 0.24,
+          "sha256": "09dfc9e787f0e55622dc2a815e4693908d6d1e5e65c6241af8a5d8b14f5fff6e",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 9875,
+          "proposedTopics": [
+            "Software Engineering Fundamentals",
+            "Software Design",
+            "Project Management",
+            "Software Testing and Validation"
+          ]
+        },
+        {
+          "name": "02 Software Process Models.PDF",
+          "extension": ".pdf",
+          "sizeMB": 2.04,
+          "sha256": "f72f84fa1bad8fbf5625e99e97bfacec9ca2a3e98fe235f58e9b874cde5d7cce",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 12443,
+          "proposedTopics": [
+            "Software Engineering Fundamentals",
+            "Software Process Models",
+            "Agile Development",
+            "Software Requirements",
+            "Project Management"
+          ]
+        },
+        {
+          "name": "03 Agile Development.PDF",
+          "extension": ".pdf",
+          "sizeMB": 0.39,
+          "sha256": "55a19e2725b6e057c3281888b896b2962d68a6e8d7f55d8ab3edba2b93d7221f",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 8855,
+          "proposedTopics": [
+            "Software Engineering Fundamentals",
+            "Software Process Models",
+            "Agile Development",
+            "Software Requirements",
+            "Software Design"
+          ]
+        },
+        {
+          "name": "04 Principles that Guide Practice.PDF",
+          "extension": ".pdf",
+          "sizeMB": 0.22,
+          "sha256": "a04340d27453b72fdf8c7e261cecbc16b5beac98853eac1c6ae32f392253482b",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 8069,
+          "proposedTopics": [
+            "Software Engineering Fundamentals",
+            "Agile Development",
+            "Software Requirements",
+            "Software Design",
+            "Project Management"
+          ]
+        },
+        {
+          "name": "05 Software Requirements.PDF",
+          "extension": ".pdf",
+          "sizeMB": 1.8,
+          "sha256": "e7479813631a1743a844a281166d7e18ecc33440d4d261c3ba0326ce95598e73",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 12014,
+          "proposedTopics": [
+            "Software Engineering Fundamentals",
+            "Agile Development",
+            "Software Requirements",
+            "Project Management",
+            "Software Testing and Validation"
+          ]
+        },
+        {
+          "name": "06 Software Design.PDF",
+          "extension": ".pdf",
+          "sizeMB": 0.76,
+          "sha256": "049089bd46a963f5eb3e6e13d32673a67d721e45735322a76c948520484d53ee",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 9721,
+          "proposedTopics": [
+            "Software Engineering Fundamentals",
+            "Software Process Models",
+            "Agile Development",
+            "Software Requirements",
+            "Software Design"
+          ]
+        },
+        {
+          "name": "07 Software Project Management.PDF",
+          "extension": ".pdf",
+          "sizeMB": 1.98,
+          "sha256": "108ac88637609d821bef3c8a845efc4b3857368b396d7141bf18a0f858d71695",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 6644,
+          "proposedTopics": [
+            "Software Engineering Fundamentals",
+            "Agile Development",
+            "Software Requirements",
+            "Project Management",
+            "Software Testing and Validation"
+          ]
+        },
+        {
+          "name": "08 Software Testing and Validation.PDF",
+          "extension": ".pdf",
+          "sizeMB": 0.21,
+          "sha256": "b348599f9c981851ece456fc10b15fb3c0917777925b25828cf598b3afaf7637",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 11080,
+          "proposedTopics": [
+            "Software Engineering Fundamentals",
+            "Agile Development",
+            "Software Requirements",
+            "Software Testing and Validation"
+          ]
+        },
+        {
+          "name": "Book.pdf",
+          "extension": ".pdf",
+          "sizeMB": 30.62,
+          "sha256": "321ef1ad587d80d3a55934a8d6f7bb3d4f1b4687681c78ce4303ba5d2bac5706",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 2637703,
+          "proposedTopics": [
+            "Software Engineering Fundamentals",
+            "Software Process Models",
+            "Agile Development",
+            "Software Requirements",
+            "Software Design"
+          ]
+        }
+      ]
+    }
+  ],
+  "unmatchedFolders": [
+    "Digital System Design II",
+    "flip"
+  ],
+  "duplicateGroups": [],
+  "summary": {
+    "discovered": 45,
+    "ready": 41,
+    "skipped": 4,
+    "warnings": 8,
+    "readySizeMB": 119.29
+  }
+}
