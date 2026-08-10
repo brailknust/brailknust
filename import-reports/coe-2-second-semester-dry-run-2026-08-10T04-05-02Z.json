@@ -1,0 +1,1121 @@
+{
+  "generatedAt": "2026-08-10T04:04:40.483Z",
+  "source": "C:\\Users\\jpaap\\OneDrive\\Desktop\\CoE\\CoE 2\\Second Semester",
+  "mode": "DRY_RUN",
+  "termSlug": "coe-2-second-semester",
+  "reportTitle": "Computer Engineering - Year 2, Second Semester import dry run",
+  "rules": {
+    "maxFileSizeMB": 50,
+    "skippedExtensions": [
+      ".ppt",
+      ".pptm"
+    ],
+    "folderPrefixesIgnored": true,
+    "supportsGeneralAndMultipleTopics": true
+  },
+  "courses": [
+    {
+      "code": "COE 288",
+      "name": "Circuit Theory",
+      "sourceFolder": "Circuit Theory         2",
+      "files": [
+        {
+          "name": "Lect 1.pptx",
+          "extension": ".pptx",
+          "sizeMB": 10.87,
+          "sha256": "7769a5722baadd0a47d3c2862a40f579f38b08bf1b9c8d77cdac6f463bfd487b",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 7273,
+          "proposedTopics": [
+            "Circuit Theory Fundamentals",
+            "DC Circuit Analysis",
+            "AC Circuit Analysis",
+            "Network Theorems"
+          ]
+        },
+        {
+          "name": "Lect 2.pptx",
+          "extension": ".pptx",
+          "sizeMB": 9,
+          "sha256": "71f4992bacc0f1fe8cb25dce42db994ee6945c5aa14d11a45e4849c349d3bf66",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 5867,
+          "proposedTopics": [
+            "Circuit Theory Fundamentals",
+            "DC Circuit Analysis",
+            "Network Theorems"
+          ]
+        },
+        {
+          "name": "Lect 3.pptx",
+          "extension": ".pptx",
+          "sizeMB": 10.4,
+          "sha256": "4ca5b8f17babc6574d9459ad35d7b5d88ba24b689e117dbc978c42c25a7dfa19",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 7980,
+          "proposedTopics": [
+            "Circuit Theory Fundamentals",
+            "DC Circuit Analysis"
+          ]
+        },
+        {
+          "name": "Lect 4.pptx",
+          "extension": ".pptx",
+          "sizeMB": 12.39,
+          "sha256": "d0d90fb9f2c175a89ca87efe9ed8462b4ca16eda7a6c43c876591508c854f162",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 8574,
+          "proposedTopics": [
+            "Circuit Theory Fundamentals",
+            "DC Circuit Analysis"
+          ]
+        },
+        {
+          "name": "Lect 5.pptx",
+          "extension": ".pptx",
+          "sizeMB": 11.86,
+          "sha256": "121397711f84e492db758f99f2b568430cd68ce1802ab73b54c92f461653d4cf",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 14371,
+          "proposedTopics": [
+            "Circuit Theory Fundamentals",
+            "DC Circuit Analysis",
+            "Network Theorems"
+          ]
+        },
+        {
+          "name": "Lect 6.pptx",
+          "extension": ".pptx",
+          "sizeMB": 9.47,
+          "sha256": "1f8b798e40e443f0bfd2700985911d5f29eea0431f73531fffd50d0807f6b4b9",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 8129,
+          "proposedTopics": [
+            "Circuit Theory Fundamentals",
+            "DC Circuit Analysis"
+          ]
+        },
+        {
+          "name": "Lecture6.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.1,
+          "sha256": "d7b5ebf838b205c14fcaf39f78be80e3722e9a61afb478c3c91d965138a50e25",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 11857,
+          "proposedTopics": [
+            "Circuit Theory Fundamentals",
+            "DC Circuit Analysis",
+            "AC Circuit Analysis",
+            "Transient Response"
+          ]
+        },
+        {
+          "name": "Lecture7.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.4,
+          "sha256": "b82d10d49bd23eb1bcaeb48c118468b53b6e9c1699c08f3ad1759d0ef55ce88e",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 6401,
+          "proposedTopics": [
+            "Circuit Theory Fundamentals",
+            "DC Circuit Analysis",
+            "Transient Response",
+            "Frequency Response and Filters"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 272",
+      "name": "Digital Systems Design I",
+      "sourceFolder": "Digital System Design        3",
+      "files": [
+        {
+          "name": "Lect01.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.67,
+          "sha256": "397c43b1da357947b30799f33fc34ee0138c4c8a6d2e4c9d39f616a8303b46d9",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 5530,
+          "proposedTopics": [
+            "Digital Logic Fundamentals",
+            "Boolean Algebra and Simplification",
+            "Combinational Logic Circuits",
+            "Sequential Logic Circuits",
+            "Finite State Machines"
+          ]
+        },
+        {
+          "name": "Lect02.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.56,
+          "sha256": "ba9bfc9a7713be04bf1ee0432d426ffc02a09d9e0911852953c7a5ff13a08f77",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 10400,
+          "proposedTopics": [
+            "Digital Logic Fundamentals",
+            "Boolean Algebra and Simplification"
+          ]
+        },
+        {
+          "name": "Lect03.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.26,
+          "sha256": "2e0508d224aef18a8492468ffffdf704001445e753eb04912edc46d682d7aa7f",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 6329,
+          "proposedTopics": [
+            "Digital Logic Fundamentals",
+            "Boolean Algebra and Simplification"
+          ]
+        },
+        {
+          "name": "Lect04.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.29,
+          "sha256": "0898365af5fa4575a58de51581a42a9ca931dac938b7ce52364b244f8565c38f",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 723,
+          "proposedTopics": [
+            "Digital Logic Fundamentals",
+            "Digital System Implementation"
+          ]
+        },
+        {
+          "name": "Lect05.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.21,
+          "sha256": "24d6ad931a8c89367339bfa96d792d489539663dce01ecaba40886e75d10f3d3",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 8908,
+          "proposedTopics": [
+            "Digital Logic Fundamentals",
+            "Boolean Algebra and Simplification",
+            "Combinational Logic Circuits"
+          ]
+        },
+        {
+          "name": "Lect06.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.13,
+          "sha256": "38cc446e566e42c449cfc2a8f7cc4f1cfbce2d61aae05832d3b3c5df6e099a82",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 9271,
+          "proposedTopics": [
+            "Digital Logic Fundamentals",
+            "Boolean Algebra and Simplification",
+            "Combinational Logic Circuits",
+            "Digital System Implementation"
+          ]
+        },
+        {
+          "name": "Lect07.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.61,
+          "sha256": "714e17f6ce91e7f5951f1b0181aa1b83994fac26649799e5ed2bcd9e54f06156",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 8515,
+          "proposedTopics": [
+            "Combinational Logic Circuits",
+            "Sequential Logic Circuits"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "ECON 152",
+      "name": "Introduction to Economics II",
+      "sourceFolder": "Economics 2            2",
+      "files": [
+        {
+          "name": "ECON 152 LECTURE1.ppt",
+          "extension": ".ppt",
+          "sizeMB": 1.08,
+          "sha256": "45c80b206248f60c6f2b0da3eb01a4efd601e51b2ca7fb342bb9bc9f912a529e",
+          "status": "SKIPPED",
+          "warning": "Legacy .ppt is intentionally skipped."
+        },
+        {
+          "name": "ECON 152 LECTURE2A.ppt",
+          "extension": ".ppt",
+          "sizeMB": 1.68,
+          "sha256": "46a847621a3cb2a2295c1fea988728cb7981d87cea37d172c220f189e18a1d6e",
+          "status": "SKIPPED",
+          "warning": "Legacy .ppt is intentionally skipped."
+        },
+        {
+          "name": "ECON 152 LECTURE2B.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.85,
+          "sha256": "aed17d8a6ad8679882f1567e601b810633a5ea644688ebfbe664efcaa6aa767b",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 17299,
+          "proposedTopics": [
+            "Macroeconomic Foundations",
+            "Money and Banking",
+            "Inflation and Unemployment",
+            "Fiscal and Monetary Policy",
+            "International Trade and Finance"
+          ]
+        },
+        {
+          "name": "ECON 152 LECTURE2B.ppt",
+          "extension": ".ppt",
+          "sizeMB": 0.88,
+          "sha256": "6845088a4af9e7878431d3be417f977fb781950020d1b2507578a397776b0273",
+          "status": "SKIPPED",
+          "warning": "Legacy .ppt is intentionally skipped."
+        },
+        {
+          "name": "ECON 152 LECTURE3.ppt",
+          "extension": ".ppt",
+          "sizeMB": 1.89,
+          "sha256": "d50067da80f67763727978a5771c5e3486e83eb0db2cd3b2917585d34fab35e5",
+          "status": "SKIPPED",
+          "warning": "Legacy .ppt is intentionally skipped."
+        },
+        {
+          "name": "ECON 152 LECTURE4.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.5,
+          "sha256": "53da5f7da7ebe90534d2bdaadc4a819e52163653cab4c68d76692745007f09d2",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 17355,
+          "proposedTopics": [
+            "Macroeconomic Foundations",
+            "Money and Banking",
+            "Inflation and Unemployment",
+            "Fiscal and Monetary Policy",
+            "International Trade and Finance"
+          ]
+        },
+        {
+          "name": "ECON 152 LECTURE4.ppt",
+          "extension": ".ppt",
+          "sizeMB": 1.19,
+          "sha256": "3d715341e5363842f2f00f1cfb69bf7b7621a12f951b5481a82698d1764a6fc8",
+          "status": "SKIPPED",
+          "warning": "Legacy .ppt is intentionally skipped."
+        },
+        {
+          "name": "ECON 152 SAMPLE QUESTIONS.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.7,
+          "sha256": "fb01e64d4c853ebf020ed0ca67298a1a2b6bda2df10f6579fc4ab5c3ec1d6cae",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 24985,
+          "proposedTopics": [
+            "Macroeconomic Foundations",
+            "Money and Banking",
+            "Inflation and Unemployment",
+            "Fiscal and Monetary Policy",
+            "International Trade and Finance"
+          ]
+        },
+        {
+          "name": "ECON 152 TRIAL QUESTION.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.19,
+          "sha256": "bfc678d375c4753eb82d59cf1d6ffb6e57e4ae2b41b1a49ccdc184703e9d95d1",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 12226,
+          "proposedTopics": [
+            "Macroeconomic Foundations",
+            "Money and Banking",
+            "Inflation and Unemployment",
+            "Fiscal and Monetary Policy",
+            "International Trade and Finance"
+          ]
+        },
+        {
+          "name": "ECON 152 _Trial Questions.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.16,
+          "sha256": "b479388953f29d14de84b5cb1e1772f3b5eecfadf8dbc7b25701649e38727005",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 11005,
+          "proposedTopics": [
+            "Macroeconomic Foundations",
+            "Money and Banking",
+            "Inflation and Unemployment",
+            "Fiscal and Monetary Policy"
+          ]
+        },
+        {
+          "name": "econs 152_trial questions.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.25,
+          "sha256": "40bbbea489ef57b84a42a17492906b88a3780a38fd973da9017405431ef044e6",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "ECON_152__Trial_Questions[1].pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.2,
+          "sha256": "27432a3063a2eb5d150aa86fcd976ec4c7e626a1a9bdb600e8f5574300532189",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 11005,
+          "proposedTopics": [
+            "Macroeconomic Foundations",
+            "Money and Banking",
+            "Inflation and Unemployment",
+            "Fiscal and Monetary Policy"
+          ]
+        },
+        {
+          "name": "Tutorial 2- ECON 152.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.23,
+          "sha256": "96b960b427fe3e7a8c7c117b2c416e2ee5479fb95a833d1e23e638f6bbdfc406",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 13334,
+          "proposedTopics": [
+            "Macroeconomic Foundations",
+            "Money and Banking",
+            "Inflation and Unemployment",
+            "Fiscal and Monetary Policy",
+            "Economic Development"
+          ]
+        },
+        {
+          "name": "𝐄𝐂𝐎𝐍𝐎𝐌𝐈𝐂𝐒 𝐏À𝐒𝐓 𝐐𝐔𝐄𝐒𝐓𝐈𝐎𝐍𝐒 2.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.78,
+          "sha256": "894f2632b28d9573263f58cf567dfbe045368678d59fad4b726f47e8a353431c",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 98,
+          "proposedTopics": [
+            "General resources"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "EE 288",
+      "name": "Electrical Measurement and Instrumentation",
+      "sourceFolder": "Electrical Measurements and Instrumentation   3",
+      "files": [
+        {
+          "name": "Lecture01_intro.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.63,
+          "sha256": "6109dfcb84309759197431a1dc8fb0ece1ba2351ed33a11857c9a817ba724420",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 9464,
+          "proposedTopics": [
+            "Measurement Fundamentals",
+            "Measurement Errors and Uncertainty",
+            "Electrical Measuring Instruments",
+            "Sensors and Transducers",
+            "Data Acquisition and Signal Conditioning"
+          ]
+        },
+        {
+          "name": "Lecture02 measurement error.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.6,
+          "sha256": "45011fdabf743f14d0e541594fc94944fb796d220f7b39d397dd461643584c71",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 6862,
+          "proposedTopics": [
+            "Measurement Fundamentals",
+            "Measurement Errors and Uncertainty",
+            "Electrical Measuring Instruments"
+          ]
+        },
+        {
+          "name": "Prithwiraj Purkait - Electrical and Electronics Measurements and Instrumentation (2013).pdf",
+          "extension": ".pdf",
+          "sizeMB": 18.28,
+          "sha256": "a3989452a584638d9ff13c76ec4bcd74060797dba7948446f17a04eb352dd934",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 1084184,
+          "proposedTopics": [
+            "Measurement Fundamentals",
+            "Measurement Errors and Uncertainty",
+            "Electrical Measuring Instruments",
+            "Sensors and Transducers",
+            "Data Acquisition and Signal Conditioning"
+          ]
+        },
+        {
+          "name": "SCADA.pptx",
+          "extension": ".pptx",
+          "sizeMB": 1.61,
+          "sha256": "4e4f47a20b0862ac11dc218fda4a76257e3168972fe828cc695f873ad4f0a849",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 47,
+          "proposedTopics": [
+            "SCADA and Industrial Instrumentation"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "TE 262",
+      "name": "Electromagnetic Fields",
+      "sourceFolder": "Electromagnetic Fields          2",
+      "files": [
+        {
+          "name": "Lecture1.pptx",
+          "extension": ".pptx",
+          "sizeMB": 8.61,
+          "sha256": "0d3d62ab1d65a140484cd2b4e18cddaea4fd331b35f4389d7fbfb19369a4c5bb",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 8928,
+          "proposedTopics": [
+            "Vector Analysis",
+            "Electrostatics",
+            "Magnetostatics",
+            "Maxwell's Equations"
+          ]
+        },
+        {
+          "name": "Lecture2.pptx",
+          "extension": ".pptx",
+          "sizeMB": 10.05,
+          "sha256": "5404ccf72484ac79e5a5108077d473b68725188892d1e0437efd43df4904833a",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 1126,
+          "proposedTopics": [
+            "Vector Analysis",
+            "Magnetostatics"
+          ]
+        },
+        {
+          "name": "Lecture3.pptx",
+          "extension": ".pptx",
+          "sizeMB": 10.99,
+          "sha256": "1d5bfc6b9040dfd8eb492c7ba2d2d9a868d2d10936c868d63252ee153a49a352",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 3259,
+          "proposedTopics": [
+            "Vector Analysis",
+            "Electrostatics",
+            "Magnetostatics"
+          ]
+        },
+        {
+          "name": "Lecture4.pptx",
+          "extension": ".pptx",
+          "sizeMB": 10.6,
+          "sha256": "d7a3a4dc8cba4632a718073f7407ba519a8ec2a768a43d52d71ed48980075e76",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 2146,
+          "proposedTopics": [
+            "Vector Analysis",
+            "Electrostatics",
+            "Magnetostatics"
+          ]
+        },
+        {
+          "name": "Lecture5 (1).pptx",
+          "extension": ".pptx",
+          "sizeMB": 11.96,
+          "sha256": "521893b5c688f2af5c521f5f2fc148685721bcf8f772895dedcf9619d8cc0d08",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 2702,
+          "proposedTopics": [
+            "Electrostatics",
+            "Magnetostatics"
+          ]
+        },
+        {
+          "name": "Lecture6.pptx",
+          "extension": ".pptx",
+          "sizeMB": 10.44,
+          "sha256": "077097c8927b0488dffe7fc1553cc628801397c640176a02f16c9030adda7629",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 4691,
+          "proposedTopics": [
+            "Vector Analysis",
+            "Electrostatics",
+            "Magnetostatics",
+            "Maxwell's Equations"
+          ]
+        },
+        {
+          "name": "Lecture7.pptx",
+          "extension": ".pptx",
+          "sizeMB": 12.95,
+          "sha256": "b6be7c43d5a6d7b98239599626830b370b7af0d98eb8c71425c37f81bc7ea31b",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 7649,
+          "proposedTopics": [
+            "Vector Analysis",
+            "Electrostatics",
+            "Magnetostatics",
+            "Maxwell's Equations",
+            "Electromagnetic Waves"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "MATH 252",
+      "name": "Calculus With Several Variables",
+      "sourceFolder": "Multivariable Calculus                4",
+      "files": [
+        {
+          "name": "Lecture 1.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.89,
+          "sha256": "b2af8b19c8b905c1480f9afdaf3eb7ad9e4355af2026b09b093a13203da6a16b",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 29913,
+          "proposedTopics": [
+            "Vectors and Coordinate Geometry",
+            "Partial Derivatives"
+          ]
+        },
+        {
+          "name": "Lecture 10.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.18,
+          "sha256": "7feabbe82c6a573008e7e96a1083acc9d86d540656e5968a5af46aedab336199",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 5823,
+          "proposedTopics": [
+            "Applications of Multivariable Calculus"
+          ]
+        },
+        {
+          "name": "Lecture 11.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.47,
+          "sha256": "620e2528bcb46020e809a7204734c442c3174380bcb1b9e7ce272959e4c25234",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 14531,
+          "proposedTopics": [
+            "Vectors and Coordinate Geometry",
+            "Partial Derivatives"
+          ]
+        },
+        {
+          "name": "Lecture 12.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.29,
+          "sha256": "3887cb5deff6f44602f78edcbe7612fb80ced5133ccce5a5612bb0f178c42aa9",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 12595,
+          "proposedTopics": [
+            "Vectors and Coordinate Geometry",
+            "Vector Calculus",
+            "Parametric Surfaces"
+          ]
+        },
+        {
+          "name": "Lecture 2.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.45,
+          "sha256": "7cbe10a69fb412469fa04ed5f143737947ce71fd024bf1f842d5c920e30829b3",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 21076,
+          "proposedTopics": [
+            "Vectors and Coordinate Geometry",
+            "Applications of Multivariable Calculus"
+          ]
+        },
+        {
+          "name": "Lecture 3.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.37,
+          "sha256": "b8fb8a5ba623872dd3b529a0297c5b7c144c5ae991ea41465d405d35ee7811a9",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 23406,
+          "proposedTopics": [
+            "Partial Derivatives"
+          ]
+        },
+        {
+          "name": "Lecture 4.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.4,
+          "sha256": "a63c1692be7261a7bb5b205cbd0ebbb30f8e57baeec41ef989d356b63b3af956",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 23912,
+          "proposedTopics": [
+            "Vectors and Coordinate Geometry",
+            "Partial Derivatives"
+          ]
+        },
+        {
+          "name": "Lecture 5.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.35,
+          "sha256": "5176b2888fdc1098bfd107a67c2a13ec792a1b545b9073aa8116bc3286d3814d",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 21974,
+          "proposedTopics": [
+            "Vectors and Coordinate Geometry",
+            "Partial Derivatives",
+            "Parametric Surfaces",
+            "Applications of Multivariable Calculus"
+          ]
+        },
+        {
+          "name": "Lecture 6.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.41,
+          "sha256": "f108db800fd537babda579829c403955a91ae46dc30f2ab59a21ae33e9e3f563",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 17380,
+          "proposedTopics": [
+            "Vectors and Coordinate Geometry",
+            "Multiple Integrals",
+            "Parametric Surfaces"
+          ]
+        },
+        {
+          "name": "Lecture 7.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.04,
+          "sha256": "ed63448bc22437c8cbf5f3354b62e512b3366c32a6989d82378a58efb60f04dd",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 18531,
+          "proposedTopics": [
+            "Vectors and Coordinate Geometry",
+            "Multiple Integrals",
+            "Parametric Surfaces"
+          ]
+        },
+        {
+          "name": "Lecture 8.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.51,
+          "sha256": "62b53d4d1c9d5a1a44822b8eb11a57303591cabf84f35bbcf30a0bcf549f1d4b",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 19971,
+          "proposedTopics": [
+            "Vectors and Coordinate Geometry",
+            "Multiple Integrals",
+            "Parametric Surfaces",
+            "Applications of Multivariable Calculus"
+          ]
+        },
+        {
+          "name": "Lecture 9.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.38,
+          "sha256": "a1ccc5e60104bac6ef53b79bf8451e5aa28de0e6eeef2a77a9df26d427bd80a3",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 14076,
+          "proposedTopics": [
+            "Vectors and Coordinate Geometry",
+            "Partial Derivatives",
+            "Multiple Integrals",
+            "Applications of Multivariable Calculus"
+          ]
+        },
+        {
+          "name": "Parametric Surfaces( Multivariable Calculus_Group 3_Computer Engineering_Year 2_2024).pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.4,
+          "sha256": "c5a3a13a48cb554319000c4bff9e781a002521e3b1eab727f4a25081d8f4f507",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 7040,
+          "proposedTopics": [
+            "Vectors and Coordinate Geometry",
+            "Parametric Surfaces"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 254",
+      "name": "Object-Oriented Programming",
+      "sourceFolder": "Object Oriented Programming       3",
+      "files": [
+        {
+          "name": "00 Introduction.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.14,
+          "sha256": "06efd79ae3c9421dc22db351721e535bbd4107f466982e28e83beebf5544ddff",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 1747,
+          "proposedTopics": [
+            "C++ Programming Basics",
+            "Object-Oriented Thinking",
+            "Classes and Objects",
+            "Encapsulation and Data Hiding",
+            "Inheritance and Polymorphism"
+          ]
+        },
+        {
+          "name": "01 C++ Programming Basics.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.59,
+          "sha256": "134929a6f8bc2fe49ca5de0867fe77012f705470b67518d7515c2ef7fcca9932",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 12095,
+          "proposedTopics": [
+            "C++ Programming Basics",
+            "Control Flow and Functions",
+            "Object-Oriented Thinking",
+            "Classes and Objects",
+            "Pointers and Memory"
+          ]
+        },
+        {
+          "name": "02 Flow of Control.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.63,
+          "sha256": "490cd05c33db17d59770778411cda88c7e5d51ce97a53e83f8f74cfb6187d760",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 4384,
+          "proposedTopics": [
+            "C++ Programming Basics",
+            "Control Flow and Functions",
+            "Object-Oriented Thinking",
+            "Classes and Objects",
+            "Operator Overloading"
+          ]
+        },
+        {
+          "name": "03 Functions.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.86,
+          "sha256": "237b7a322844b023dd6dc46d2a8c6f378b5a4a23f320ad929a2033c2d618c1cf",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 10318,
+          "proposedTopics": [
+            "Control Flow and Functions",
+            "Object-Oriented Thinking",
+            "Classes and Objects",
+            "Pointers and Memory",
+            "Operator Overloading"
+          ]
+        },
+        {
+          "name": "04 OO Thinking.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.27,
+          "sha256": "0e0fad02cca9e0deb322d3d8a8effc92aa48017f095a9e90b3797f81078155ca",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 14010,
+          "proposedTopics": [
+            "C++ Programming Basics",
+            "Control Flow and Functions",
+            "Object-Oriented Thinking",
+            "Classes and Objects",
+            "Encapsulation and Data Hiding"
+          ]
+        },
+        {
+          "name": "05 Classes and Objects.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.98,
+          "sha256": "a157d128ba576081245cacb263b67f5599fa0596d5f37c5fa2d4ca7024e9d748",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 16347,
+          "proposedTopics": [
+            "C++ Programming Basics",
+            "Control Flow and Functions",
+            "Object-Oriented Thinking",
+            "Classes and Objects",
+            "Encapsulation and Data Hiding"
+          ]
+        },
+        {
+          "name": "06 Encapsulation and Data Hiding.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.28,
+          "sha256": "a1277e727d50ebfe1159c76270d847a14bed55cd146b42fc5786bc1752bc121a",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 7398,
+          "proposedTopics": [
+            "C++ Programming Basics",
+            "Control Flow and Functions",
+            "Object-Oriented Thinking",
+            "Classes and Objects",
+            "Encapsulation and Data Hiding"
+          ]
+        },
+        {
+          "name": "07 Pointers.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.65,
+          "sha256": "fe9fda1e0de09ae116eb0f8382998ed741832b644a4619f21bdbffef90086d09",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 6752,
+          "proposedTopics": [
+            "C++ Programming Basics",
+            "Control Flow and Functions",
+            "Object-Oriented Thinking",
+            "Classes and Objects",
+            "Pointers and Memory"
+          ]
+        },
+        {
+          "name": "08 Inheritance.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.5,
+          "sha256": "2fff5c1f3d673835da15ff2dad57bbdfb89bbf3513240c68300e56a0e1b27dca",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 8232,
+          "proposedTopics": [
+            "C++ Programming Basics",
+            "Control Flow and Functions",
+            "Object-Oriented Thinking",
+            "Classes and Objects",
+            "Encapsulation and Data Hiding"
+          ]
+        },
+        {
+          "name": "09 Polymorphism.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.75,
+          "sha256": "e5aeebca39102df79c87cb94d670378e06d17e8617c1b17c1aa5880e311e4c7e",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 7822,
+          "proposedTopics": [
+            "C++ Programming Basics",
+            "Control Flow and Functions",
+            "Object-Oriented Thinking",
+            "Classes and Objects",
+            "Pointers and Memory"
+          ]
+        },
+        {
+          "name": "10 Operator Overloading.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.74,
+          "sha256": "1daeabacc741a45542f4b47fbf436074cb169279d5cb8b4eecbb4d1d68ad1848",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 6668,
+          "proposedTopics": [
+            "C++ Programming Basics",
+            "Control Flow and Functions",
+            "Object-Oriented Thinking",
+            "Classes and Objects",
+            "Encapsulation and Data Hiding"
+          ]
+        },
+        {
+          "name": "Screenshot 2024-08-06 112241.png",
+          "extension": ".png",
+          "sizeMB": 0.05,
+          "sha256": "a41e9a5a56046137ccb7c811b8f7e1437a406058b0785da342fa2667ccc999f4",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Screenshot 2024-08-06 112421.png",
+          "extension": ".png",
+          "sizeMB": 0.06,
+          "sha256": "5b3b2ff7d0d12d6bc0791453a200b717f35c3d19ed83aaa27217f9107a18387b",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Screenshot 2024-08-06 112516.png",
+          "extension": ".png",
+          "sizeMB": 0.07,
+          "sha256": "849ed831153662ddbd34bd5830cda7abad3e191fb61ffd919b5180aee6746e3d",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Screenshot 2024-08-06 112545.png",
+          "extension": ".png",
+          "sizeMB": 0.06,
+          "sha256": "d420729cdcc5cacbfb4b8f952f8345eee48cacffa03864c4cba686760d6d4c30",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Screenshot 2024-08-06 112619.png",
+          "extension": ".png",
+          "sizeMB": 0.06,
+          "sha256": "5ea42c88d3ee636bd05d2fdc024d4e2dd25ae912a6a8141193be50b0fcb18425",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Screenshot 2024-08-06 112650.png",
+          "extension": ".png",
+          "sizeMB": 0.05,
+          "sha256": "3bf2a5a62245dc2a0bf201ebaee59725d4224ca4c23bcb1465c0b2391d7f14c4",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Screenshot 2024-08-06 112717.png",
+          "extension": ".png",
+          "sizeMB": 0.05,
+          "sha256": "4b899e00e31dc6c4c196fa678c490c88d2090b4a9a8aac72d4515423b52c7d9b",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Screenshot 2024-08-06 112758.png",
+          "extension": ".png",
+          "sizeMB": 0.04,
+          "sha256": "c2f884d2e31153d883bd0b56df358331cd7808f8d90d1dd0e6cfffbaabb3d3e6",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Screenshot 2024-08-06 113155.png",
+          "extension": ".png",
+          "sizeMB": 0.05,
+          "sha256": "4e23b0728019b5250a9771abf51fedc14577277517d33cf04673dbe5fcea3dfd",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Screenshot 2024-08-06 113235.png",
+          "extension": ".png",
+          "sizeMB": 0.05,
+          "sha256": "169631f88d70e985e29e08083ef2cbb1b654cf8692aa2f498f77021267bb2d5b",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Screenshot 2024-08-06 113305.png",
+          "extension": ".png",
+          "sizeMB": 0.03,
+          "sha256": "257471c47111ffb06acaee510fac3ae288844550962e244807106cf828dfd2e6",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Screenshot 2024-08-06 113328.png",
+          "extension": ".png",
+          "sizeMB": 0.04,
+          "sha256": "c3ea61264fea5d4026fd624d65f239523c126cc033fa3fa7beeb910121eae2d7",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        }
+      ]
+    }
+  ],
+  "unmatchedFolders": [
+    "Circuit Theory",
+    "Digital System Design",
+    "Economics 2",
+    "Electrical Measurements and Instrumentation",
+    "Electromagnetic Fields",
+    "Multivariable Calculus",
+    "Object Oriented Programming"
+  ],
+  "duplicateGroups": [],
+  "summary": {
+    "discovered": 76,
+    "ready": 71,
+    "skipped": 5,
+    "warnings": 5,
+    "readySizeMB": 194.94
+  }
+}

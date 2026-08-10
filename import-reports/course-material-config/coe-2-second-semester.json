@@ -1,0 +1,89 @@
+{
+  "termSlug": "coe-2-second-semester",
+  "reportTitle": "Computer Engineering - Year 2, Second Semester import dry run",
+  "courseMappings": [
+    { "folderIncludes": "Circuit Theory         2", "code": "COE 288", "name": "Circuit Theory" },
+    { "folderIncludes": "Digital System Design        3", "code": "COE 272", "name": "Digital Systems Design I" },
+    { "folderIncludes": "Economics 2            2", "code": "ECON 152", "name": "Introduction to Economics II" },
+    { "folderIncludes": "Electrical Measurements and Instrumentation   3", "code": "EE 288", "name": "Electrical Measurement and Instrumentation" },
+    { "folderIncludes": "Electromagnetic Fields          2", "code": "TE 262", "name": "Electromagnetic Fields" },
+    { "folderIncludes": "Multivariable Calculus                4", "code": "MATH 252", "name": "Calculus With Several Variables" },
+    { "folderIncludes": "Object Oriented Programming       3", "code": "COE 254", "name": "Object-Oriented Programming" }
+  ],
+  "topicRules": {
+    "COE 288": [
+      ["Circuit Theory Fundamentals", ["circuit theory", "electric circuit", "network", "circuit element"]],
+      ["DC Circuit Analysis", ["dc circuit", "resistor", "kirchhoff", "kcl", "kvl", "mesh", "nodal"]],
+      ["AC Circuit Analysis", ["ac circuit", "sinusoidal", "phasor", "impedance", "admittance"]],
+      ["Network Theorems", ["thevenin", "norton", "superposition", "maximum power transfer"]],
+      ["Transient Response", ["transient", "first order", "second order", "rl circuit", "rc circuit", "rlc circuit"]],
+      ["Frequency Response and Filters", ["frequency response", "filter", "resonance", "bode"]]
+    ],
+    "COE 272": [
+      ["Digital Logic Fundamentals", ["digital logic", "binary", "logic gate", "truth table"]],
+      ["Boolean Algebra and Simplification", ["boolean algebra", "karnaugh", "k-map", "minimization", "simplification"]],
+      ["Combinational Logic Circuits", ["combinational", "decoder", "encoder", "multiplexer", "adder"]],
+      ["Sequential Logic Circuits", ["sequential", "flip flop", "latch", "counter", "register"]],
+      ["Finite State Machines", ["state machine", "fsm", "state diagram", "state table"]],
+      ["Digital System Implementation", ["verilog", "vhdl", "fpga", "implementation"]]
+    ],
+    "ECON 152": [
+      ["Macroeconomic Foundations", ["macroeconomics", "national income", "gdp", "aggregate demand", "aggregate supply"]],
+      ["Money and Banking", ["money", "banking", "central bank", "commercial bank", "money supply"]],
+      ["Inflation and Unemployment", ["inflation", "unemployment", "price level", "phillips curve"]],
+      ["Fiscal and Monetary Policy", ["fiscal policy", "monetary policy", "government spending", "interest rate"]],
+      ["International Trade and Finance", ["international trade", "exchange rate", "balance of payments", "foreign exchange"]],
+      ["Economic Development", ["economic development", "growth", "poverty", "development"]]
+    ],
+    "EE 288": [
+      ["Measurement Fundamentals", ["measurement", "instrumentation", "accuracy", "precision", "standard"]],
+      ["Measurement Errors and Uncertainty", ["error", "uncertainty", "calibration", "sensitivity"]],
+      ["Electrical Measuring Instruments", ["ammeter", "voltmeter", "wattmeter", "multimeter", "bridge"]],
+      ["Sensors and Transducers", ["sensor", "transducer", "strain gauge", "thermocouple", "ldr"]],
+      ["Data Acquisition and Signal Conditioning", ["data acquisition", "signal conditioning", "filtering", "amplifier"]],
+      ["SCADA and Industrial Instrumentation", ["scada", "industrial", "process control", "automation"]]
+    ],
+    "TE 262": [
+      ["Vector Analysis", ["vector", "gradient", "divergence", "curl", "coordinate system"]],
+      ["Electrostatics", ["electrostatic", "electric field", "gauss", "coulomb", "potential"]],
+      ["Magnetostatics", ["magnetostatic", "magnetic field", "ampere", "biot-savart"]],
+      ["Maxwell's Equations", ["maxwell", "faraday", "displacement current", "continuity equation"]],
+      ["Electromagnetic Waves", ["electromagnetic wave", "wave equation", "propagation", "plane wave"]],
+      ["Transmission Lines", ["transmission line", "reflection coefficient", "standing wave", "smith chart"]]
+    ],
+    "MATH 252": [
+      ["Vectors and Coordinate Geometry", ["vector", "coordinate", "line", "plane", "space curve"]],
+      ["Partial Derivatives", ["partial derivative", "chain rule", "directional derivative", "gradient"]],
+      ["Multiple Integrals", ["double integral", "triple integral", "multiple integral", "iterated integral"]],
+      ["Vector Calculus", ["line integral", "surface integral", "green", "stokes", "divergence theorem"]],
+      ["Parametric Surfaces", ["parametric surface", "surface", "parameterization"]],
+      ["Applications of Multivariable Calculus", ["application", "optimization", "lagrange", "jacobian"]]
+    ],
+    "COE 254": [
+      ["C++ Programming Basics", ["c++", "programming basics", "compiler", "iostream", "syntax"]],
+      ["Control Flow and Functions", ["flow of control", "if statement", "loop", "function", "parameter"]],
+      ["Object-Oriented Thinking", ["object oriented", "object-oriented", "abstraction", "class design"]],
+      ["Classes and Objects", ["class", "object", "constructor", "member function"]],
+      ["Encapsulation and Data Hiding", ["encapsulation", "data hiding", "access specifier", "private", "public"]],
+      ["Pointers and Memory", ["pointer", "memory", "dynamic", "address", "reference"]],
+      ["Inheritance and Polymorphism", ["inheritance", "polymorphism", "virtual", "base class", "derived class"]],
+      ["Operator Overloading", ["operator overloading", "overload", "operator"]]
+    ]
+  },
+  "topicOverrides": [],
+  "skipRules": [
+    { "courseCode": "ECON 152", "fileName": "econs 152_trial questions.jpg", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 254", "fileName": "Screenshot 2024-08-06 112241.png", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 254", "fileName": "Screenshot 2024-08-06 112421.png", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 254", "fileName": "Screenshot 2024-08-06 112516.png", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 254", "fileName": "Screenshot 2024-08-06 112545.png", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 254", "fileName": "Screenshot 2024-08-06 112619.png", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 254", "fileName": "Screenshot 2024-08-06 112650.png", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 254", "fileName": "Screenshot 2024-08-06 112717.png", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 254", "fileName": "Screenshot 2024-08-06 112758.png", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 254", "fileName": "Screenshot 2024-08-06 113155.png", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 254", "fileName": "Screenshot 2024-08-06 113235.png", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 254", "fileName": "Screenshot 2024-08-06 113305.png", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 254", "fileName": "Screenshot 2024-08-06 113328.png", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." }
+  ]
+}

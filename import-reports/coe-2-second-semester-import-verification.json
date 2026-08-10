@@ -1,0 +1,104 @@
+{
+  "verifiedAt": "2026-08-10T04:19:38.540Z",
+  "expectedApprovedFiles": 58,
+  "publishedFiles": 58,
+  "missingHashes": [],
+  "materialsWithoutStorage": [],
+  "materialsWithoutChunks": [],
+  "materialsWithoutTopics": [],
+  "courses": [
+    {
+      "code": "COE 254",
+      "topics": [
+        "C++ Programming Basics",
+        "Object-Oriented Thinking",
+        "Classes and Objects",
+        "Encapsulation and Data Hiding",
+        "Inheritance and Polymorphism",
+        "Control Flow and Functions",
+        "Pointers and Memory",
+        "Operator Overloading"
+      ],
+      "importedMaterials": 11,
+      "searchableChunks": 72
+    },
+    {
+      "code": "COE 272",
+      "topics": [
+        "Digital Logic Fundamentals",
+        "Boolean Algebra and Simplification",
+        "Combinational Logic Circuits",
+        "Sequential Logic Circuits",
+        "Finite State Machines",
+        "Digital System Implementation"
+      ],
+      "importedMaterials": 7,
+      "searchableChunks": 38
+    },
+    {
+      "code": "COE 288",
+      "topics": [
+        "Circuit Theory Fundamentals",
+        "DC Circuit Analysis",
+        "AC Circuit Analysis",
+        "Network Theorems",
+        "Transient Response",
+        "Frequency Response and Filters"
+      ],
+      "importedMaterials": 8,
+      "searchableChunks": 51
+    },
+    {
+      "code": "ECON 152",
+      "topics": [
+        "Macroeconomic Foundations",
+        "Money and Banking",
+        "Inflation and Unemployment",
+        "Fiscal and Monetary Policy",
+        "International Trade and Finance",
+        "Economic Development",
+        "General resources"
+      ],
+      "importedMaterials": 8,
+      "searchableChunks": 80
+    },
+    {
+      "code": "EE 288",
+      "topics": [
+        "Measurement Fundamentals",
+        "Measurement Errors and Uncertainty",
+        "Electrical Measuring Instruments",
+        "Sensors and Transducers",
+        "Data Acquisition and Signal Conditioning",
+        "SCADA and Industrial Instrumentation"
+      ],
+      "importedMaterials": 4,
+      "searchableChunks": 778
+    },
+    {
+      "code": "MATH 252",
+      "topics": [
+        "Vectors and Coordinate Geometry",
+        "Partial Derivatives",
+        "Applications of Multivariable Calculus",
+        "Vector Calculus",
+        "Parametric Surfaces",
+        "Multiple Integrals"
+      ],
+      "importedMaterials": 13,
+      "searchableChunks": 165
+    },
+    {
+      "code": "TE 262",
+      "topics": [
+        "Vector Analysis",
+        "Electrostatics",
+        "Magnetostatics",
+        "Maxwell's Equations",
+        "Electromagnetic Waves"
+      ],
+      "importedMaterials": 7,
+      "searchableChunks": 23
+    }
+  ]
+}
