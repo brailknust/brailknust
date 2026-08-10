@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { findCurriculumTemplate } from "@/data/curricula";
-import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
+import { getAppUserForAuthUser, getSupabaseUser } from "@/features/auth/queries";
 import { hasValidMaterialFileType, materialFileExtension } from "@/features/materials/extract";
 import { extractTextFromImage } from "@/features/planner/timetable-ocr";
 import { parseTimetableText } from "@/features/planner/timetable-parser";
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Sign in before extracting a timetable." }, { status: 401 });
   }
 
-  const appUser = await getAppUserByAuthId(authUser.id);
+  const appUser = await getAppUserForAuthUser(authUser);
 
   if (!appUser) {
     return NextResponse.json({ message: "Complete onboarding before extracting a timetable." }, { status: 404 });
@@ -136,6 +136,8 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Timetable OCR failed", {
       errorName: error instanceof Error ? error.name : "UnknownError",
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
     });
     return NextResponse.json(
       { message: "Could not read this timetable image. Try a clearer image or enter the rows manually.", rows: [], rawText: "" },

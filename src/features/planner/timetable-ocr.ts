@@ -1,3 +1,7 @@
+import { mkdir } from "node:fs/promises";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
+
 type TesseractRecognizeResult = {
   data?: {
     text?: string;
@@ -8,7 +12,10 @@ type TesseractModule = {
   recognize: (
     image: Buffer,
     language?: string,
-    options?: { logger?: (message: unknown) => void },
+    options?: {
+      cachePath?: string;
+      logger?: (message: unknown) => void;
+    },
   ) => Promise<TesseractRecognizeResult>;
 };
 
@@ -17,6 +24,7 @@ type TesseractImport = Partial<TesseractModule> & {
 };
 
 const ocrTimeoutMs = 45_000;
+const ocrCachePath = join(tmpdir(), "brail-tesseract-cache");
 
 function withTimeout<T>(promise: Promise<T>, timeoutMs: number) {
   return new Promise<T>((resolve, reject) => {
@@ -50,7 +58,14 @@ export async function extractTextFromImage(image: File) {
   }
 
   const bytes = Buffer.from(await image.arrayBuffer());
-  const result = await withTimeout(recognizer(bytes, "eng"), ocrTimeoutMs);
+  await mkdir(ocrCachePath, { recursive: true });
+
+  const result = await withTimeout(
+    recognizer(bytes, "eng", {
+      cachePath: ocrCachePath,
+    }),
+    ocrTimeoutMs,
+  );
   const text = result.data?.text?.trim() ?? "";
 
   if (!text) {

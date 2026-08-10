@@ -26,7 +26,7 @@ const contentSecurityPolicy = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["officeparser"],
+  serverExternalPackages: ["officeparser", "tesseract.js", "tesseract.js-core"],
   async headers() {
     return [
       {
