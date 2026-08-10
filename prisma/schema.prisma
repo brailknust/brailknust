@@ -333,6 +333,7 @@ model User {
   notifications              Notification[]
   notificationPreference     NotificationPreference?
   deviceTokens               DeviceToken[]
+  pushSubscriptions          PushSubscription[]
   resources                  Resource[]
   courseMaterials            CourseMaterial[]
   diagnosticAttempts         DiagnosticAttempt[]
@@ -1400,6 +1401,23 @@ model DeviceToken {
 
   @@index([userId])
   @@map("device_tokens")
+}
+
+// A browser's Web Push (VAPID) subscription — the browser equivalent of DeviceToken's
+// Expo tokens for the mobile app. One row per subscribed browser/device; a user can
+// have several (multiple browsers/devices).
+model PushSubscription {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId     String   @map("user_id") @db.Uuid
+  endpoint   String   @unique
+  p256dh     String
+  auth       String
+  lastSeenAt DateTime @default(now()) @map("last_seen_at")
+  createdAt  DateTime @default(now()) @map("created_at")
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("push_subscriptions")
 }
 
 model AiConversation {

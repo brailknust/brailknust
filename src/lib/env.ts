@@ -20,11 +20,15 @@ const serverEnvSchema = z.object({
   SUPABASE_SERVICE_ROLE_KEY: optionalEnvString,
   ADMIN_EMAILS: optionalEnvString,
   CRON_SECRET: optionalEnvString,
+  VAPID_PUBLIC_KEY: optionalEnvString,
+  VAPID_PRIVATE_KEY: optionalEnvString,
+  VAPID_SUBJECT: optionalEnvString,
 });
 
 const clientEnvSchema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: z.string().url().optional(),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: optionalEnvString,
+  NEXT_PUBLIC_VAPID_PUBLIC_KEY: optionalEnvString,
 });
 
 export const serverEnv = serverEnvSchema.parse({
@@ -40,9 +44,13 @@ export const serverEnv = serverEnvSchema.parse({
   SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
   ADMIN_EMAILS: process.env.ADMIN_EMAILS,
   CRON_SECRET: process.env.CRON_SECRET,
+  VAPID_PUBLIC_KEY: process.env.VAPID_PUBLIC_KEY,
+  VAPID_PRIVATE_KEY: process.env.VAPID_PRIVATE_KEY,
+  VAPID_SUBJECT: process.env.VAPID_SUBJECT,
 });
 
 export const clientEnv = clientEnvSchema.parse({
   NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  NEXT_PUBLIC_VAPID_PUBLIC_KEY: process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY,
 });

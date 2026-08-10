@@ -1,7 +1,7 @@
 import "server-only";
 
 import { syncGoalProgressSnapshots } from "@/features/goals/progress-sync";
-import { pushPendingNotificationsForUser } from "@/features/notifications/push";
+import { pushPendingNotificationsForUser, pushWebNotificationsForUser } from "@/features/notifications/push";
 import { syncNotificationsForUser } from "@/features/notifications/service";
 import { reconcileAcademicTracking } from "@/features/tracking/service";
 import { prisma } from "@/server/db";
@@ -27,9 +27,15 @@ export async function runNotificationCronBatch(cursor?: string) {
       if (user.activeSemesterId) await syncGoalProgressSnapshots(user.id, user.activeSemesterId);
       if (user.activeSemesterId) await reconcileAcademicTracking(user.id, user.activeSemesterId);
       // Best-effort: a push failure shouldn't fail the whole user's sync,
-      // since in-app notifications already succeeded above.
+      // since in-app notifications already succeeded above. Mobile (Expo) and
+      // browser (Web Push) are independent channels but share the same
+      // Notification.pushedAt gate, so whichever runs first "claims" a given
+      // row — see pushWebNotificationsForUser's doc comment.
       await pushPendingNotificationsForUser(user.id).catch((error) => {
         console.error("Push notification send failed", { userId: user.id, error });
+      });
+      await pushWebNotificationsForUser(user.id).catch((error) => {
+        console.error("Web push notification send failed", { userId: user.id, error });
       });
       synced += 1;
     } catch (error) {

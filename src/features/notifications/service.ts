@@ -2,7 +2,7 @@ import "server-only";
 
 import { prisma } from "@/server/db";
 
-const syncThrottleMs = 5 * 60 * 1000;
+const syncThrottleMs = 60 * 1000;
 
 function mondayBasedDay(value: Date) {
   return (value.getUTCDay() + 6) % 7;

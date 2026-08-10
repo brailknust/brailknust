@@ -103,14 +103,25 @@ describe("notification synchronization", () => {
     });
   });
 
-  it("uses the five-minute throttle unless synchronization is forced", async () => {
+  it("uses the one-minute throttle unless synchronization is forced", async () => {
     mocks.preferenceFind.mockResolvedValue({
       ...preference,
-      lastSyncedAt: new Date("2026-08-04T09:58:00.000Z"),
+      lastSyncedAt: new Date("2026-08-04T09:59:30.000Z"),
     });
 
     await syncNotificationsForUser("user-1");
     expect(mocks.user).not.toHaveBeenCalled();
     expect(mocks.createNotifications).not.toHaveBeenCalled();
+  });
+
+  it("re-syncs once the one-minute throttle window has passed", async () => {
+    mocks.preferenceFind.mockResolvedValue({
+      ...preference,
+      lastSyncedAt: new Date("2026-08-04T09:58:59.000Z"),
+    });
+
+    await syncNotificationsForUser("user-1");
+    expect(mocks.user).toHaveBeenCalled();
+    expect(mocks.createNotifications).toHaveBeenCalled();
   });
 });

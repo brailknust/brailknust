@@ -66,7 +66,11 @@ Supabase rejects any OAuth/magic-link redirect target that isn't on this allow-l
 | `AI_MODEL` | For AI features | e.g. `openai/gpt-oss-20b` |
 | `ADMIN_EMAILS` | For admin access | comma-separated emails |
 | `CRON_SECRET` | For background reminders | generate locally (below), Vercel Cron sends it automatically as a Bearer token once the env var exists |
+| `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | For browser push notifications | generate locally with `npx web-push generate-vapid-keys`; `VAPID_SUBJECT` is a `mailto:` contact. Use a **different** keypair per environment. |
+| `NEXT_PUBLIC_VAPID_PUBLIC_KEY` | For browser push notifications | same value as `VAPID_PUBLIC_KEY`, exposed to the client for the subscribe call |
 | `AI_DAILY_MESSAGE_LIMIT`, `AI_DAILY_TOKEN_LIMIT`, `AI_GLOBAL_DAILY_TOKEN_LIMIT` | Optional | sensible defaults apply if omitted |
+
+`CRON_SECRET` must be set separately for **Production** and **Preview** — Vercel Cron only invokes `/api/cron/notifications` on Production deployments by default, so a `CRON_SECRET` that only exists under Preview will leave background reminders silently disabled (the route 503s) on the live site. Check Project Settings → Environment Variables → the Production column specifically.
 
 Generate `CRON_SECRET` without ever putting it in chat or a committed file:
 
@@ -80,5 +84,9 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 - Visit the deployment: sign up a real test account, complete onboarding, add a course, generate a study plan.
 - Confirm the build log showed a clean `prisma migrate deploy` run against a fresh database.
-- Vercel's Hobby plan only allows cron jobs to run once per day. `vercel.json` schedules `/api/cron/notifications` at `0 6 * * *` (06:00 UTC daily) to fit that limit — background reminders are generated once a day rather than near-real-time. Upgrade the Vercel project to Pro and tighten the schedule (e.g. back to every 5 minutes) once more frequent reminder delivery matters; this only affects background notification generation, not the rest of the app.
+- Vercel's Hobby plan only allows cron jobs to run once per day. `vercel.json` schedules `/api/cron/notifications` at `0 6 * * *` (06:00 UTC daily) to fit that limit. Note that a signed-in user with the app open anywhere already gets fresh in-app reminders independent of this cron — `NotificationBell`/`NotificationPoller` regenerate "nearing" reminders themselves on a throttled ~1-minute cadence (see `syncThrottleMs` in `src/features/notifications/service.ts`). The daily cron (and push delivery, below) only matters for reaching a user who **isn't** actively browsing.
+- For push notifications (mobile Expo and browser Web Push) to arrive close to their actual time, `/api/cron/notifications` needs to run far more often than once a day. Two ways to get that without the Hobby-plan limit:
+  - **Free**: point an external scheduler — a free monitor on [UptimeRobot](https://uptimerobot.com) or [cron-job.org](https://cron-job.org), or a scheduled GitHub Actions workflow — at `GET https://<your-domain>/api/cron/notifications` with header `Authorization: Bearer <CRON_SECRET>`, every 5 minutes. Leave `vercel.json`'s daily cron in place as a harmless fallback.
+  - **Paid**: upgrade the Vercel project to Pro and tighten `vercel.json`'s `crons` schedule (e.g. `*/5 * * * *`).
+  Either way, this only affects background notification generation and push delivery timing, not the rest of the app.
 - Optionally re-run `npm run security:database` against the new project to confirm RLS and Storage lockdown survived the fresh migration replay. The script reads `.env.local` directly (not configurable), so this means temporarily pointing a local `.env.local` at the new project's credentials.
