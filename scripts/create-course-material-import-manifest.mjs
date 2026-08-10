@@ -4,21 +4,22 @@ import path from "node:path";
 const args = process.argv.slice(2);
 const reportIndex = args.indexOf("--report");
 const outputIndex = args.indexOf("--output");
+const configIndex = args.indexOf("--config");
 if (reportIndex < 0 || !args[reportIndex + 1]) throw new Error("Pass --report with the dry-run JSON path.");
 if (outputIndex < 0 || !args[outputIndex + 1]) throw new Error("Pass --output with the final manifest path.");
+if (configIndex < 0 || !args[configIndex + 1]) throw new Error("Pass --config with the term's course-material-config JSON path.");
 
 const report = JSON.parse(await readFile(path.resolve(args[reportIndex + 1]), "utf8"));
 const output = path.resolve(args[outputIndex + 1]);
+const config = JSON.parse(await readFile(path.resolve(args[configIndex + 1]), "utf8"));
 
-const topicOverrides = new Map([
-  ["COE 153|Computer Hardware Assembling.pptx", ["Computer Hardware Assembly"]],
-  ["COE 153|Electical Wiring.docx", ["Electrical Wiring"]],
-  ["COE 153|Power Cables.pptx", ["Power Cables"]],
-  ["COE 153|Web Dev.pdf", ["Web Development"]],
-  ["ME 159|Geometric Construction.pptx", ["Geometric Construction"]],
-  ["ME 159|Orthographic Projection.pdf", ["Orthographic Projection"]],
-  ["MATH 151|COMPLEX NUMBERS.pdf", ["Complex Numbers"]],
-]);
+// JSON has no Map, so per-file overrides/skips are arrays of { courseCode, fileName, ... } in the config.
+const topicOverrides = new Map(
+  (config.topicOverrides ?? []).map((entry) => [`${entry.courseCode}|${entry.fileName}`, entry.topics]),
+);
+const skipRules = new Map(
+  (config.skipRules ?? []).map((entry) => [`${entry.courseCode}|${entry.fileName}`, entry.reason]),
+);
 
 const files = report.courses.flatMap((course) => course.files.map((file) => {
   const key = `${course.code}|${file.name}`;
@@ -26,9 +27,9 @@ const files = report.courses.flatMap((course) => course.files.map((file) => {
   let reason = file.warning ?? null;
   let topics = topicOverrides.get(key) ?? file.proposedTopics ?? [];
 
-  if (key === "COE 181|Applied Electricity Textbook.pdf") {
+  if (skipRules.has(key)) {
     status = "SKIPPED";
-    reason = "Scanned 158-page textbook. Direct extraction returned 158 characters and OCR produced no usable body text on clear sample pages.";
+    reason = skipRules.get(key);
     topics = [];
   }
 
@@ -50,10 +51,9 @@ const manifest = {
   version: 1,
   createdAt: new Date().toISOString(),
   sourceRoot: report.source,
+  termSlug: config.termSlug,
   mode: "APPROVED_PLAN_NO_UPLOAD",
   rules: {
-    doNotExtractCourseDetailsFromFolderPrefixes: true,
-    appliedElectricityFolderMapsTo: "COE 181",
     maximumFileSizeMB: 50,
     skipLegacyPowerPoint: true,
     allowGeneralResourcesTopic: true,

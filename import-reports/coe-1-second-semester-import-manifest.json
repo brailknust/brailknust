@@ -1,0 +1,1010 @@
+{
+  "version": 1,
+  "createdAt": "2026-08-10T03:23:53.199Z",
+  "sourceRoot": "C:\\Users\\jpaap\\OneDrive\\Desktop\\CoE\\CoE 1\\Second Semester",
+  "termSlug": "coe-1-second-semester",
+  "mode": "APPROVED_PLAN_NO_UPLOAD",
+  "rules": {
+    "maximumFileSizeMB": 50,
+    "skipLegacyPowerPoint": true,
+    "allowGeneralResourcesTopic": true,
+    "allowMultipleTopicsPerMaterial": true,
+    "duplicateIdentity": "sha256"
+  },
+  "summary": {
+    "approved": 47,
+    "skipped": 21,
+    "approvedSizeMB": 124.99
+  },
+  "files": [
+    {
+      "sourceRelativePath": "2 Communication Skills II\\ENGL 158 (COMM SKILLS II COMBINED SLIDES) BY ABC.pdf",
+      "courseCode": "ENGL 158",
+      "courseName": "Communication Skills II",
+      "title": "ENGL 158 (COMM SKILLS II COMBINED SLIDES) BY ABC",
+      "materialType": "SLIDE",
+      "topics": [
+        "General resources",
+        "Letter Writing",
+        "CV and Job Application Writing",
+        "Meetings and Minutes",
+        "Memoranda",
+        "Organizational Communication"
+      ],
+      "sizeMB": 8.47,
+      "sha256": "6f6d86ea43a586588f8b638c0861e16e402eee63110f70cedc5f62c483e9268f",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Communication Skills II\\ENGL 158 - 4 Letter Writing.pdf",
+      "courseCode": "ENGL 158",
+      "courseName": "Communication Skills II",
+      "title": "ENGL 158 - 4 Letter Writing",
+      "materialType": "NOTE",
+      "topics": [
+        "Letter Writing"
+      ],
+      "sizeMB": 0.64,
+      "sha256": "58fc5bc7765a657755b080d7e7974c791b9587c08a8fe50a0260440878e1e56e",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Communication Skills II\\ENGL 158 - CV Writing.pptx",
+      "courseCode": "ENGL 158",
+      "courseName": "Communication Skills II",
+      "title": "ENGL 158 - CV Writing",
+      "materialType": "SLIDE",
+      "topics": [
+        "CV and Job Application Writing"
+      ],
+      "sizeMB": 0.31,
+      "sha256": "a9003f89582f0a187ee9fbdf3d49a63144e565563d2358fecdd04500aae88e26",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Communication Skills II\\ENGL 158 - Meeting and Minutes Writing.pptx",
+      "courseCode": "ENGL 158",
+      "courseName": "Communication Skills II",
+      "title": "ENGL 158 - Meeting and Minutes Writing",
+      "materialType": "SLIDE",
+      "topics": [
+        "Meetings and Minutes",
+        "The Writing Process"
+      ],
+      "sizeMB": 0.22,
+      "sha256": "5144a156f1089f8ea71dbabb964b672b2a174316d3fbe36c62b536fe31f37c62",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Communication Skills II\\ENGL 158 - Memorandum.pptx",
+      "courseCode": "ENGL 158",
+      "courseName": "Communication Skills II",
+      "title": "ENGL 158 - Memorandum",
+      "materialType": "SLIDE",
+      "topics": [
+        "Letter Writing",
+        "Memoranda"
+      ],
+      "sizeMB": 6.2,
+      "sha256": "f0567367b15eb10550eff3da8c00d61b0c7aef3ffceeafaa989af96d790236b1",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Communication Skills II\\ENGL 158 - Organizational Communication.pptx",
+      "courseCode": "ENGL 158",
+      "courseName": "Communication Skills II",
+      "title": "ENGL 158 - Organizational Communication",
+      "materialType": "SLIDE",
+      "topics": [
+        "Letter Writing",
+        "Meetings and Minutes",
+        "Memoranda",
+        "Organizational Communication"
+      ],
+      "sizeMB": 0.69,
+      "sha256": "a89386c4119e41cf1383dd1020b4e30e85cd6977865676d955d4d4fc1ab5fe1f",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Communication Skills II\\Lecture 1_Communication Skills.pptx",
+      "courseCode": "ENGL 158",
+      "courseName": "Communication Skills II",
+      "title": "Lecture 1_Communication Skills",
+      "materialType": "SLIDE",
+      "topics": [
+        "Meetings and Minutes"
+      ],
+      "sizeMB": 0.2,
+      "sha256": "3e3664d07e45eb5b461d22ce97d2a0ca4aca6c4fb6a66d4d39037859688ce1a8",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Communication Skills II\\LECTURE 3- WRITING AS A PROCESS.pptx",
+      "courseCode": "ENGL 158",
+      "courseName": "Communication Skills II",
+      "title": "LECTURE 3- WRITING AS A PROCESS",
+      "materialType": "SLIDE",
+      "topics": [
+        "Meetings and Minutes",
+        "The Writing Process"
+      ],
+      "sizeMB": 0.35,
+      "sha256": "4ac750ed4b57960cf9984e650b3f3feeb796320d58fe8d6429e5f621535a5861",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Communication Skills II\\Lectures 9-10_Report Writing.pptx",
+      "courseCode": "ENGL 158",
+      "courseName": "Communication Skills II",
+      "title": "Lectures 9-10_Report Writing",
+      "materialType": "SLIDE",
+      "topics": [
+        "Memoranda",
+        "Report Writing"
+      ],
+      "sizeMB": 0.95,
+      "sha256": "3bec820aa08f1fdc53268687cacc1a7ba70be3d53fa54fab745c790c5533ada2",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Communication Skills II\\Memo Writng.pdf",
+      "courseCode": "ENGL 158",
+      "courseName": "Communication Skills II",
+      "title": "Memo Writng",
+      "materialType": "NOTE",
+      "topics": [
+        "Letter Writing",
+        "Memoranda"
+      ],
+      "sizeMB": 0.17,
+      "sha256": "02c033971ff56fb915ca4985bd1d2d2a609acafe9c0163690fe505bee1c4f1f9",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Electrical Engineering Drawing\\Drawing Assignment.docx",
+      "courseCode": "EE 156",
+      "courseName": "Electrical Engineering Drawing",
+      "title": "Drawing Assignment",
+      "materialType": "NOTE",
+      "topics": [
+        "Engineering Drawing Fundamentals"
+      ],
+      "sizeMB": 0.01,
+      "sha256": "256c7c96be6d2ddc21ccce367d4a8fd24fcc76056f24134406f2c4fbddbcd8d9",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Electrical Engineering Drawing\\Drawing Assignment.pdf",
+      "courseCode": "EE 156",
+      "courseName": "Electrical Engineering Drawing",
+      "title": "Drawing Assignment",
+      "materialType": "NOTE",
+      "topics": [
+        "Engineering Drawing Fundamentals"
+      ],
+      "sizeMB": 0.09,
+      "sha256": "46e797dd5470355e1174cd0add0081b3765a7b2f2588e11cd9ee32e56faf63a1",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Electrical Engineering Drawing\\EE-156-22-23-CHP-1.pptx",
+      "courseCode": "EE 156",
+      "courseName": "Electrical Engineering Drawing",
+      "title": "EE-156-22-23-CHP-1",
+      "materialType": "SLIDE",
+      "topics": [
+        "Engineering Drawing Fundamentals",
+        "Electrical Circuit Diagrams",
+        "Industrial Motor Control"
+      ],
+      "sizeMB": 2.88,
+      "sha256": "2cb4a9f75073efcc09a4da7913577b20ec2003118ae36ef6ffea28de504c6040",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Electrical Engineering Drawing\\EE-156-22-23-CHP-2.pptx",
+      "courseCode": "EE 156",
+      "courseName": "Electrical Engineering Drawing",
+      "title": "EE-156-22-23-CHP-2",
+      "materialType": "SLIDE",
+      "topics": [
+        "Engineering Drawing Fundamentals",
+        "Electrical Circuit Diagrams"
+      ],
+      "sizeMB": 2.39,
+      "sha256": "51207c48c679b7d293897f23997680c782a21dc4a2b447e5adb27b43ebafa77a",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Electrical Engineering Drawing\\EE-156-22-23-CHP-3.pptx",
+      "courseCode": "EE 156",
+      "courseName": "Electrical Engineering Drawing",
+      "title": "EE-156-22-23-CHP-3",
+      "materialType": "SLIDE",
+      "topics": [
+        "Engineering Drawing Fundamentals",
+        "Electrical Circuit Diagrams",
+        "Programmable Logic Controllers"
+      ],
+      "sizeMB": 0.27,
+      "sha256": "e0d3372cba92560d204eb89ab3734408602c67a3d3c4edf61800cfa7b6cf5e10",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Electrical Engineering Drawing\\EE-156-22-23-CHP-4.pptx",
+      "courseCode": "EE 156",
+      "courseName": "Electrical Engineering Drawing",
+      "title": "EE-156-22-23-CHP-4",
+      "materialType": "SLIDE",
+      "topics": [
+        "Engineering Drawing Fundamentals",
+        "Electrical Circuit Diagrams",
+        "Industrial Motor Control"
+      ],
+      "sizeMB": 1.6,
+      "sha256": "f8855ce7d1a63c13c04604aeb5fdc37cd7627eb70d84f7ea92b6aeb5cd9f83e6",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Electrical Engineering Drawing\\EE-156-22-23-CHP-5.pptx",
+      "courseCode": "EE 156",
+      "courseName": "Electrical Engineering Drawing",
+      "title": "EE-156-22-23-CHP-5",
+      "materialType": "SLIDE",
+      "topics": [
+        "Engineering Drawing Fundamentals",
+        "Electrical Circuit Diagrams"
+      ],
+      "sizeMB": 0.28,
+      "sha256": "c6124fcd17e9dea6841deff32301503a58f533efddcfb4104576adddd953ab8e",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Electrical Engineering Drawing\\EE-156-22-23-CHP-6.pptx",
+      "courseCode": "EE 156",
+      "courseName": "Electrical Engineering Drawing",
+      "title": "EE-156-22-23-CHP-6",
+      "materialType": "SLIDE",
+      "topics": [
+        "Engineering Drawing Fundamentals",
+        "Electrical Circuit Diagrams"
+      ],
+      "sizeMB": 1.58,
+      "sha256": "0e89882a53de592493aaef754ecb6df1c5277c5caf1da8edc7de61c79467772f",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Electrical Engineering Drawing\\EE-156_Practical_PLC WIRING DRAWING -Ing John Kusi.pptx",
+      "courseCode": "EE 156",
+      "courseName": "Electrical Engineering Drawing",
+      "title": "EE-156_Practical_PLC WIRING DRAWING -Ing John Kusi",
+      "materialType": "SLIDE",
+      "topics": [
+        "Electrical Circuit Diagrams",
+        "Industrial Motor Control",
+        "Programmable Logic Controllers"
+      ],
+      "sizeMB": 1.76,
+      "sha256": "2d421f3d9c1936b77d27b7c96451f83ea560e3ce8306448e010051031794f77f",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Electrical Engineering Drawing\\Industrial Motor Control.pdf",
+      "courseCode": "EE 156",
+      "courseName": "Electrical Engineering Drawing",
+      "title": "Industrial Motor Control",
+      "materialType": "NOTE",
+      "topics": [
+        "Electrical Circuit Diagrams",
+        "Industrial Motor Control",
+        "Programmable Logic Controllers"
+      ],
+      "sizeMB": 15.51,
+      "sha256": "ecea44f5bf721abbadb460ef631a32c762f5fed1b4f370c40e05a5705efb3afc",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Electrical Engineering Drawing\\Programmable Logic Controllers (PLC).pdf",
+      "courseCode": "EE 156",
+      "courseName": "Electrical Engineering Drawing",
+      "title": "Programmable Logic Controllers (PLC)",
+      "materialType": "NOTE",
+      "topics": [
+        "Electrical Circuit Diagrams",
+        "Industrial Motor Control",
+        "Programmable Logic Controllers"
+      ],
+      "sizeMB": 47.89,
+      "sha256": "1db12e84fd085dfabb47331195f122012817e9e25cd359997ec089ff0d65e198",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Introduction to Information Technology\\ICT 1.pdf",
+      "courseCode": "COE 158",
+      "courseName": "Introduction to Information Technology",
+      "title": "ICT 1",
+      "materialType": "NOTE",
+      "topics": [
+        "Introduction to Information Technology",
+        "Computer Organization and Hardware",
+        "Operating Systems",
+        "Networks and the Internet"
+      ],
+      "sizeMB": 2.18,
+      "sha256": "69b62970af6732d3b60c653012f1215be083793fbe5113be870a9c117880a9a7",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Introduction to Information Technology\\ICT 2.pdf",
+      "courseCode": "COE 158",
+      "courseName": "Introduction to Information Technology",
+      "title": "ICT 2",
+      "materialType": "NOTE",
+      "topics": [
+        "Introduction to Information Technology",
+        "History of Computers",
+        "Computer Organization and Hardware",
+        "Operating Systems",
+        "Files and File Systems"
+      ],
+      "sizeMB": 4.84,
+      "sha256": "48bdcb91481e5ffb8d270b8c64d74fbed978dd90a467074f47bbaee8895004ce",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Introduction to Information Technology\\ICT 3.pdf",
+      "courseCode": "COE 158",
+      "courseName": "Introduction to Information Technology",
+      "title": "ICT 3",
+      "materialType": "NOTE",
+      "topics": [
+        "Introduction to Information Technology",
+        "Data Representation and Number Systems"
+      ],
+      "sizeMB": 0.7,
+      "sha256": "08539a2f99a6140232a12df657209c17bdf087797a353b8a26c9243a928e384e",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Introduction to Information Technology\\ICT 4.pdf",
+      "courseCode": "COE 158",
+      "courseName": "Introduction to Information Technology",
+      "title": "ICT 4",
+      "materialType": "NOTE",
+      "topics": [
+        "Introduction to Information Technology",
+        "Computer Organization and Hardware"
+      ],
+      "sizeMB": 0.82,
+      "sha256": "ac6c23e03e787bd733313b025362fa1b3130821847eb9fe8878e8ad7cfce60bf",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Introduction to Information Technology\\ICT 5.pdf",
+      "courseCode": "COE 158",
+      "courseName": "Introduction to Information Technology",
+      "title": "ICT 5",
+      "materialType": "NOTE",
+      "topics": [
+        "Introduction to Information Technology",
+        "Operating Systems",
+        "Files and File Systems"
+      ],
+      "sizeMB": 0.83,
+      "sha256": "b6c25b8fb1b9e8e0f349f033a8b8c6769e432815018b7b655b5ff6a34e4acecc",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Introduction to Information Technology\\ICT 6.pdf",
+      "courseCode": "COE 158",
+      "courseName": "Introduction to Information Technology",
+      "title": "ICT 6",
+      "materialType": "NOTE",
+      "topics": [
+        "Introduction to Information Technology",
+        "Operating Systems",
+        "Files and File Systems"
+      ],
+      "sizeMB": 1.24,
+      "sha256": "ad27d727eeabfdefe372acc1d2d942515d91e3b02015b80e9817f7fcce3715ca",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "2 Introduction to Information Technology\\ICT 7.pdf",
+      "courseCode": "COE 158",
+      "courseName": "Introduction to Information Technology",
+      "title": "ICT 7",
+      "materialType": "NOTE",
+      "topics": [
+        "Introduction to Information Technology",
+        "Operating Systems",
+        "Networks and the Internet"
+      ],
+      "sizeMB": 1.4,
+      "sha256": "90f8aceefc78ba77d8a9a2a94d2a75069181bd6e108fc5bb52dc7e83ceed4cc2",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "3 Basic Electronics\\Basic E Report.pdf",
+      "courseCode": "COE 152",
+      "courseName": "Basic Electronics",
+      "title": "Basic E Report",
+      "materialType": "NOTE",
+      "topics": [
+        "Basic Electronic Devices",
+        "Semiconductor Fundamentals",
+        "PN-Junction Diodes"
+      ],
+      "sizeMB": 0.68,
+      "sha256": "18db245955b0b258941d350201d6fbb012f476a60ba6058e5aa3e5a7ca280667",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "3 Basic Electronics\\Intro to Basic Electronics Lect 1 Jan 2017.pdf",
+      "courseCode": "COE 152",
+      "courseName": "Basic Electronics",
+      "title": "Intro to Basic Electronics Lect 1 Jan 2017",
+      "materialType": "NOTE",
+      "topics": [
+        "Basic Electronic Devices",
+        "Semiconductor Fundamentals",
+        "PN-Junction Diodes",
+        "Bipolar Junction Transistors"
+      ],
+      "sizeMB": 2.84,
+      "sha256": "661d211999fa17467d7dca0422958d41112779843b5f5828366951ebaf13f48d",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "3 Basic Electronics\\PN-Junction Diode Application.pdf",
+      "courseCode": "COE 152",
+      "courseName": "Basic Electronics",
+      "title": "PN-Junction Diode Application",
+      "materialType": "NOTE",
+      "topics": [
+        "Basic Electronic Devices",
+        "Semiconductor Fundamentals",
+        "PN-Junction Diodes"
+      ],
+      "sizeMB": 1.36,
+      "sha256": "befdeab488f46830f7bce01d94618de18870e5297d7e0e58f654c4e29c997575",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "3 Basic Electronics\\PN-Junction Diode.pdf",
+      "courseCode": "COE 152",
+      "courseName": "Basic Electronics",
+      "title": "PN-Junction Diode",
+      "materialType": "NOTE",
+      "topics": [
+        "Basic Electronic Devices",
+        "Semiconductor Fundamentals",
+        "PN-Junction Diodes"
+      ],
+      "sizeMB": 1.6,
+      "sha256": "3f374a8e4119639596dc4388fd20d5b5d11bb7cc937a4ff456f1b39402b260d4",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "3 Basic Electronics\\Semiconductor Basics.pdf",
+      "courseCode": "COE 152",
+      "courseName": "Basic Electronics",
+      "title": "Semiconductor Basics",
+      "materialType": "NOTE",
+      "topics": [
+        "Semiconductor Fundamentals"
+      ],
+      "sizeMB": 1.29,
+      "sha256": "212b7243fd0c7bb7f477d436245f09fed7d6b91805c53f250e7390a9dd0449ea",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "3 Basic Electronics\\Transistor Biasing.pdf",
+      "courseCode": "COE 152",
+      "courseName": "Basic Electronics",
+      "title": "Transistor Biasing",
+      "materialType": "NOTE",
+      "topics": [
+        "Basic Electronic Devices",
+        "Bipolar Junction Transistors"
+      ],
+      "sizeMB": 1.1,
+      "sha256": "7b3ce0328b97f7a31b467194625461120f4adefcb1eec2161ecf791948e2d1ba",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "3 Basic Electronics\\UNIT-1.pdf",
+      "courseCode": "COE 152",
+      "courseName": "Basic Electronics",
+      "title": "UNIT-1",
+      "materialType": "NOTE",
+      "topics": [
+        "Basic Electronic Devices"
+      ],
+      "sizeMB": 0.79,
+      "sha256": "7952f77e686df75d99f4b3500530264ccc17ecdc9fa54882a1ca85fc27db0a9f",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "3 Basic Electronics\\UNIT-2.pdf",
+      "courseCode": "COE 152",
+      "courseName": "Basic Electronics",
+      "title": "UNIT-2",
+      "materialType": "NOTE",
+      "topics": [
+        "Semiconductor Fundamentals"
+      ],
+      "sizeMB": 0.9,
+      "sha256": "99979c82aa0d664c3ba9190ed11e72531513633eb42a6bd0b5af87b8109b43e7",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "3 Basic Electronics\\UNIT-3.pdf",
+      "courseCode": "COE 152",
+      "courseName": "Basic Electronics",
+      "title": "UNIT-3",
+      "materialType": "NOTE",
+      "topics": [
+        "Basic Electronic Devices",
+        "Semiconductor Fundamentals",
+        "PN-Junction Diodes"
+      ],
+      "sizeMB": 0.69,
+      "sha256": "3c967051466030e603eeb51ee5c98bcf4caa4596461ce6c8d91e2773d8ebb6e1",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "3 Basic Electronics\\UNIT-4.pdf",
+      "courseCode": "COE 152",
+      "courseName": "Basic Electronics",
+      "title": "UNIT-4",
+      "materialType": "NOTE",
+      "topics": [
+        "Basic Electronic Devices",
+        "Semiconductor Fundamentals",
+        "PN-Junction Diodes",
+        "Bipolar Junction Transistors"
+      ],
+      "sizeMB": 0.92,
+      "sha256": "8bca9c6cefff658405d4b6cf6ea090792df7b6de2551081e113d70cff90a06f7",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\Chapter 1A.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "Chapter 1A",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.47,
+      "sha256": "558c04f43d58e16bc5ceb442b17e2fd5783fecdb95bde0c13a4fd080beddf625",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\Chapter 1B.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "Chapter 1B",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.45,
+      "sha256": "9cee67cb16149a3b903343337f5ab0d12bf33e3e13fed5a40fe48ffecbe237c8",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\Chapter 2A.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "Chapter 2A",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 1.85,
+      "sha256": "4c348cf44ac41652d8ba9f1bbc092e1fcef238c1dc10447564697b0bb66696b8",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\Chapter 2B.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "Chapter 2B",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.32,
+      "sha256": "c5323fd01f872a7e37a4612f7046e84e0d2e63911d53635b894891a3958d98ca",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\Chapter 2C.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "Chapter 2C",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.34,
+      "sha256": "1b9454f581d47f68728e4285401857eb9bf73419f197bd6967f7a07ed4249317",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\Chapter 2D.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "Chapter 2D",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.56,
+      "sha256": "08153bbc39617d5579792af3c1c228ce50dc94e2a022fc004b4f50a626b26051",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\Chapter 2E.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "Chapter 2E",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.85,
+      "sha256": "07bc3cd82ab8e328ec4de81bc75de2c45c858b2f759463e5701d2240c3432b02",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\Chapter 2F.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "Chapter 2F",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 1.65,
+      "sha256": "6a81db2d4047537e06fc2c49abeade181613c55256be6c66fde153fe674e5145",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\Chapter 2G.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "Chapter 2G",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.44,
+      "sha256": "036f03375dae74308f1c8bba8c8e5a3967a9d4fe72f833cae7cb28d5b888b1a7",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\ee172-chap-3-1-mod.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "ee172-chap-3-1-mod",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.34,
+      "sha256": "4175f0abe0d42a4cbc798954b794d473dea1b918018b0eea6864e74c32d44f7c",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\ee172-chap-3-2-mod.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "ee172-chap-3-2-mod",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 1.02,
+      "sha256": "02286ece8fd87b8dac6763b570b89bafad26c6dad82ad304e7c4d355a795b64e",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\ee172-chap-3-3-mod.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "ee172-chap-3-3-mod",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.71,
+      "sha256": "a99e5885c96e708908b3c1119085dd31f06af7bdbf628af5a217a328925c4f7b",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\ee172-chap-3-4-mod.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "ee172-chap-3-4-mod",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.56,
+      "sha256": "a49b6fbccd9c97aebb4bf721a3fa4496ba680d17b2b2962243c87db47eb48cf1",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\ee172-chap-3-5-mod.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "ee172-chap-3-5-mod",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.64,
+      "sha256": "2fc733fa49fbaf62361d65b42037013d7130a653b7a04c8781ffd4187948933b",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\ee172-chap-3-6-mod.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "ee172-chap-3-6-mod",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.62,
+      "sha256": "d0701cdd8f0fc64f6208490efd65ebb327427b8ae696c5d49159e197595439fb",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\EE172-chap-3-8-mod.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "EE172-chap-3-8-mod",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.42,
+      "sha256": "01db1c1f3f905e556b9c715f7c0566874baeec5b4d54a397954be43eb1d0c820",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\ee172-chap-4-1-mod.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "ee172-chap-4-1-mod",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.78,
+      "sha256": "a66a4e2c514291fbea6275cd442280cfe48e33cb52dafe3b716e54a68a82fcc1",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\ee172-chap-4-3-mod.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "ee172-chap-4-3-mod",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 1.78,
+      "sha256": "c20677ec31d2712725ea2186bd6be6fbfaec6b19b372b423cf0f44b915348bcc",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\ee172-chap-4-4-mod.ppt",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "ee172-chap-4-4-mod",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.42,
+      "sha256": "5025c0195708f0a435b4b96f2735d349dab4a3132716c9b4531a81bd2f1c805f",
+      "status": "SKIPPED",
+      "reason": "Legacy .ppt is intentionally skipped."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\Machines Midsem.pdf",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "Machines Midsem",
+      "materialType": "NOTE",
+      "topics": [],
+      "sizeMB": 0.17,
+      "sha256": "eaa69cc9537ea75d3a83d4f7aad7d035312ab3982dec60d20e8083c6090eb6c0",
+      "status": "SKIPPED",
+      "reason": "Scanned exam paper with negligible extractable text; skipped per review checkpoint."
+    },
+    {
+      "sourceRelativePath": "3 Electrical Machines EE 172\\pasco.zip",
+      "courseCode": "EE 172",
+      "courseName": "Electrical Machines",
+      "title": "pasco",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 14.71,
+      "sha256": "5821c4915722e1538619ae81a5260daeb42133ea429dc7d6edd0e56b92fe628b",
+      "status": "SKIPPED",
+      "reason": "Unsupported extension .zip."
+    },
+    {
+      "sourceRelativePath": "4 Calculus With Analysis\\1 Real Numbers.pdf",
+      "courseCode": "MATH 152",
+      "courseName": "Calculus With Analysis",
+      "title": "1 Real Numbers",
+      "materialType": "NOTE",
+      "topics": [
+        "Real Numbers and Point Sets"
+      ],
+      "sizeMB": 0.43,
+      "sha256": "a15fc7c2f2a7b8ead43d436856d4bd4d05a7e0c31fc84a176ee279ce4ed6b62b",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "4 Calculus With Analysis\\10 Series.pdf",
+      "courseCode": "MATH 152",
+      "courseName": "Calculus With Analysis",
+      "title": "10 Series",
+      "materialType": "NOTE",
+      "topics": [
+        "Functions",
+        "Limits and Continuity",
+        "Integration",
+        "Sequences and Series"
+      ],
+      "sizeMB": 0.53,
+      "sha256": "dafccad1af659fa5927dbcd64dc62276ed42a146b951436e8dd4304951bfc0be",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "4 Calculus With Analysis\\2 Point Set.pdf",
+      "courseCode": "MATH 152",
+      "courseName": "Calculus With Analysis",
+      "title": "2 Point Set",
+      "materialType": "NOTE",
+      "topics": [
+        "Real Numbers and Point Sets",
+        "Limits and Continuity"
+      ],
+      "sizeMB": 0.99,
+      "sha256": "e36a8197c1624c75ee9a1893345bb78fb5739f2b74b893a43b9350ba53e258e8",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "4 Calculus With Analysis\\3. Functions.pdf",
+      "courseCode": "MATH 152",
+      "courseName": "Calculus With Analysis",
+      "title": "3. Functions",
+      "materialType": "NOTE",
+      "topics": [
+        "Real Numbers and Point Sets",
+        "Functions",
+        "Sequences and Series"
+      ],
+      "sizeMB": 1.85,
+      "sha256": "0df8d4433df368101dedc3930993f48b673030776991d0ab6729682f3a1ef975",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "4 Calculus With Analysis\\4. Limits and Continuity.pdf",
+      "courseCode": "MATH 152",
+      "courseName": "Calculus With Analysis",
+      "title": "4. Limits and Continuity",
+      "materialType": "NOTE",
+      "topics": [
+        "Real Numbers and Point Sets",
+        "Functions",
+        "Limits and Continuity"
+      ],
+      "sizeMB": 2.45,
+      "sha256": "86ec661841aed338fc6a5601ea8a20b4a80011e5e9b79e24820f987f3a70fc82",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "4 Calculus With Analysis\\5 Differentiability.pdf",
+      "courseCode": "MATH 152",
+      "courseName": "Calculus With Analysis",
+      "title": "5 Differentiability",
+      "materialType": "NOTE",
+      "topics": [
+        "Functions",
+        "Limits and Continuity",
+        "Differentiability"
+      ],
+      "sizeMB": 0.51,
+      "sha256": "7856ac458fbd4ed1f5d54f2fa5f3921e5869d4285cbff8ee8117dff02a1d85e4",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "4 Calculus With Analysis\\7 Integration.pdf",
+      "courseCode": "MATH 152",
+      "courseName": "Calculus With Analysis",
+      "title": "7 Integration",
+      "materialType": "NOTE",
+      "topics": [
+        "Real Numbers and Point Sets",
+        "Functions",
+        "Limits and Continuity",
+        "Differentiability",
+        "Integration"
+      ],
+      "sizeMB": 0.53,
+      "sha256": "0c921d5d3b5028e458dc798cbeedac93ddf9eb49c78cc87a4543e7f4571ea1a5",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "4 Calculus With Analysis\\8 Application of Integration.pdf",
+      "courseCode": "MATH 152",
+      "courseName": "Calculus With Analysis",
+      "title": "8 Application of Integration",
+      "materialType": "NOTE",
+      "topics": [
+        "Functions",
+        "Limits and Continuity",
+        "Differentiability",
+        "Integration",
+        "Application of Integration"
+      ],
+      "sizeMB": 0.69,
+      "sha256": "a6005ebf94edd6eeddd88b29f3157f8576d265abc5154dfc05fa5b0397f85559",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "4 Calculus With Analysis\\9 Sequences.pdf",
+      "courseCode": "MATH 152",
+      "courseName": "Calculus With Analysis",
+      "title": "9 Sequences",
+      "materialType": "NOTE",
+      "topics": [
+        "Real Numbers and Point Sets",
+        "Functions",
+        "Limits and Continuity",
+        "Sequences and Series"
+      ],
+      "sizeMB": 0.37,
+      "sha256": "287518ebe0e4eb8ba39a493b23e52ab4417123a2cc8c0f1daae9e3154896f48c",
+      "status": "APPROVED",
+      "reason": null
+    }
+  ]
+}

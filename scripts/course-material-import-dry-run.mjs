@@ -6,66 +6,27 @@ const supportedExtensions = new Set([".pdf", ".docx", ".pptx", ".txt", ".md", ".
 const legacyExtensions = new Set([".ppt", ".pptm"]);
 const maxBytes = 50 * 1024 * 1024;
 
-const courseMappings = [
-  { folderIncludes: "Communication Skills ENGL 157", code: "ENGL 157", name: "Communication Skills" },
-  { folderIncludes: "Engineering Technology COE 153", code: "COE 153", name: "Engineering Technology" },
-  { folderIncludes: "Environmental Studies CE 155", code: "CE 155", name: "Environmental Studies" },
-  { folderIncludes: "Technical Drawing ME 159", code: "ME 159", name: "Technical Drawing" },
-  { folderIncludes: "Applied Electricity EE 151", code: "COE 181", name: "Applied Electricity", note: "Folder code EE 151 mapped to canonical COE 181." },
-  { folderIncludes: "Basic Mechanics ME 161", code: "ME 161", name: "Basic Mechanics" },
-  { folderIncludes: "Algebra Math 151", code: "MATH 151", name: "Algebra" },
-];
-
-const topicRules = {
-  "ENGL 157": [
-    ["Sentence Structure", ["sentence", "clause", "phrase", "concord"]],
-    ["Word Classes", ["word class", "noun", "pronoun", "adjective", "adverb", "verb"]],
-    ["Communication Process", ["communication process", "communicator", "feedback", "channel"]],
-    ["Academic Writing", ["academic writing", "paragraph", "essay", "citation"]],
-  ],
-  "COE 153": [
-    ["Computer Hardware Assembly", ["computer hardware", "assembling", "motherboard", "processor", "ram"]],
-    ["Electrical Wiring", ["electrical wiring", "wiring", "socket", "switch", "conduit"]],
-    ["Power Cables", ["power cable", "cable", "armour", "sheath", "insulation"]],
-    ["Web Development", ["web dev", "html", "css", "javascript", "website"]],
-  ],
-  "CE 155": [
-    ["Environmental Systems", ["ecosystem", "environmental system", "environment"]],
-    ["Pollution and Waste", ["pollution", "waste", "contamination"]],
-    ["Sustainability", ["sustainability", "sustainable development", "climate change"]],
-  ],
-  "ME 159": [
-    ["Geometric Construction", ["geometric construction", "geometry", "bisect", "polygon"]],
-    ["Orthographic Projection", ["orthographic", "projection", "first angle", "third angle"]],
-    ["Engineering Drawing", ["engineering drawing", "technical drawing", "dimensioning"]],
-  ],
-  "COE 181": [
-    ["DC Circuit Analysis", ["dc circuit", "kirchhoff", "ohm's law", "resistance"]],
-    ["AC Fundamentals", ["ac circuit", "alternating current", "impedance", "reactance"]],
-    ["Electrical Machines", ["transformer", "motor", "generator", "electrical machine"]],
-    ["Electrical Measurements", ["measurement", "multimeter", "ammeter", "voltmeter"]],
-  ],
-  "ME 161": [
-    ["Forces and Equilibrium", ["force", "equilibrium", "free body", "moment"]],
-    ["Motion and Kinematics", ["motion", "kinematic", "velocity", "acceleration"]],
-    ["Work, Energy and Power", ["work energy", "kinetic energy", "potential energy", "power"]],
-  ],
-  "MATH 151": [
-    ["Complex Numbers", ["complex number", "argand", "imaginary", "de moivre"]],
-    ["Functions and Graphs", ["function", "graph", "domain", "range"]],
-    ["Equations and Inequalities", ["equation", "inequality", "polynomial"]],
-  ],
-};
-
 function parseArguments() {
   const args = process.argv.slice(2);
   const sourceIndex = args.indexOf("--source");
   const outputIndex = args.indexOf("--output");
+  const configIndex = args.indexOf("--config");
   if (sourceIndex < 0 || !args[sourceIndex + 1]) throw new Error("Pass --source with the semester folder path.");
+  if (configIndex < 0 || !args[configIndex + 1]) throw new Error("Pass --config with the term's course-material-config JSON path.");
   return {
     source: path.resolve(args[sourceIndex + 1]),
     output: path.resolve(outputIndex >= 0 && args[outputIndex + 1] ? args[outputIndex + 1] : "import-reports"),
+    config: path.resolve(args[configIndex + 1]),
   };
+}
+
+async function loadConfig(configPath) {
+  const config = JSON.parse(await readFile(configPath, "utf8"));
+  if (!config.termSlug) throw new Error(`Config ${configPath} is missing "termSlug".`);
+  if (!Array.isArray(config.courseMappings)) throw new Error(`Config ${configPath} is missing "courseMappings".`);
+  config.topicRules ??= {};
+  config.reportTitle ??= `Computer Engineering — ${config.termSlug} import dry run`;
+  return config;
 }
 
 function materialType(fileName) {
@@ -95,7 +56,7 @@ async function extractText(filePath, extension) {
   return ast.toText();
 }
 
-function proposedTopics(courseCode, fileName, text) {
+function proposedTopics(topicRules, courseCode, fileName, text) {
   const searchable = `${fileName}\n${text.slice(0, 250000)}`.toLowerCase();
   const matches = (topicRules[courseCode] ?? [])
     .filter(([, keywords]) => keywords.some((keyword) => searchable.includes(keyword)))
@@ -109,7 +70,7 @@ function proposedTopics(courseCode, fileName, text) {
 
 function markdownReport(report) {
   const lines = [
-    "# Computer Engineering First Semester import dry run",
+    `# ${report.reportTitle}`,
     "",
     `Generated: ${report.generatedAt}`,
     "",
@@ -134,23 +95,30 @@ function markdownReport(report) {
     lines.push("");
   }
   if (report.unmatchedFolders.length) {
-    lines.push("## Unmatched folders", "", ...report.unmatchedFolders.map((folder) => `- ${folder}`), "");
+    lines.push("## Unmatched folders", "", "These folders did not match any course in the config's `courseMappings` and were not scanned.", "", ...report.unmatchedFolders.map((folder) => `- ${folder}`), "");
+  }
+  if (report.duplicateGroups.length) {
+    lines.push("## Duplicate files (identical sha256)", "");
+    for (const group of report.duplicateGroups) lines.push(`- ${group.files.join(" == ")}`);
+    lines.push("");
   }
   return lines.join("\n");
 }
 
 async function main() {
-  const { source, output } = parseArguments();
+  const { source, output, config: configPath } = parseArguments();
+  const config = await loadConfig(configPath);
   const entries = await readdir(source, { withFileTypes: true });
   const folderEntries = entries.filter((entry) => entry.isDirectory());
   const report = {
     generatedAt: new Date().toISOString(),
     source,
     mode: "DRY_RUN",
+    termSlug: config.termSlug,
+    reportTitle: config.reportTitle,
     rules: {
       maxFileSizeMB: 50,
       skippedExtensions: [...legacyExtensions],
-      appliedElectricityMapping: "EE 151 -> COE 181",
       folderPrefixesIgnored: true,
       supportsGeneralAndMultipleTopics: true,
     },
@@ -162,7 +130,7 @@ async function main() {
   const hashes = new Map();
 
   for (const folder of folderEntries) {
-    const mapping = courseMappings.find((item) => folder.name.includes(item.folderIncludes));
+    const mapping = config.courseMappings.find((item) => folder.name.includes(item.folderIncludes));
     if (!mapping) {
       report.unmatchedFolders.push(folder.name);
       continue;
@@ -200,7 +168,7 @@ async function main() {
         } catch (error) {
           item.warning = `Text preview failed: ${error instanceof Error ? error.message : String(error)}`;
         }
-        item.proposedTopics = proposedTopics(mapping.code, entry.name, text);
+        item.proposedTopics = proposedTopics(config.topicRules, mapping.code, entry.name, text);
       }
       if (item.status === "READY") {
         report.summary.ready += 1;
@@ -220,11 +188,17 @@ async function main() {
 
   await mkdir(output, { recursive: true });
   const stamp = new Date().toISOString().replaceAll(":", "-").replace(/\.\d{3}Z$/, "Z");
-  const jsonPath = path.join(output, `coe-first-semester-dry-run-${stamp}.json`);
-  const markdownPath = path.join(output, `coe-first-semester-dry-run-${stamp}.md`);
+  const jsonPath = path.join(output, `${config.termSlug}-dry-run-${stamp}.json`);
+  const markdownPath = path.join(output, `${config.termSlug}-dry-run-${stamp}.md`);
   await writeFile(jsonPath, JSON.stringify(report, null, 2), "utf8");
   await writeFile(markdownPath, markdownReport(report), "utf8");
-  console.log(JSON.stringify({ jsonPath, markdownPath, summary: report.summary, duplicateGroups: report.duplicateGroups.length }, null, 2));
+  console.log(JSON.stringify({
+    jsonPath,
+    markdownPath,
+    summary: report.summary,
+    unmatchedFolders: report.unmatchedFolders,
+    duplicateGroups: report.duplicateGroups.length,
+  }, null, 2));
 }
 
 await main();

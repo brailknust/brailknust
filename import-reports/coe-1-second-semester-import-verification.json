@@ -1,0 +1,76 @@
+{
+  "verifiedAt": "2026-08-10T03:28:57.408Z",
+  "expectedApprovedFiles": 47,
+  "publishedFiles": 47,
+  "missingHashes": [],
+  "materialsWithoutStorage": [],
+  "materialsWithoutChunks": [],
+  "materialsWithoutTopics": [],
+  "courses": [
+    {
+      "code": "COE 152",
+      "topics": [
+        "Basic Electronic Devices",
+        "Semiconductor Fundamentals",
+        "PN-Junction Diodes",
+        "Bipolar Junction Transistors"
+      ],
+      "importedMaterials": 10,
+      "searchableChunks": 135
+    },
+    {
+      "code": "COE 158",
+      "topics": [
+        "Introduction to Information Technology",
+        "Computer Organization and Hardware",
+        "Operating Systems",
+        "Networks and the Internet",
+        "History of Computers",
+        "Files and File Systems",
+        "Data Representation and Number Systems"
+      ],
+      "importedMaterials": 7,
+      "searchableChunks": 74
+    },
+    {
+      "code": "EE 156",
+      "topics": [
+        "Engineering Drawing Fundamentals",
+        "Electrical Circuit Diagrams",
+        "Industrial Motor Control",
+        "Programmable Logic Controllers"
+      ],
+      "importedMaterials": 11,
+      "searchableChunks": 1517
+    },
+    {
+      "code": "ENGL 158",
+      "topics": [
+        "General resources",
+        "Letter Writing",
+        "CV and Job Application Writing",
+        "Meetings and Minutes",
+        "Memoranda",
+        "Organizational Communication",
+        "The Writing Process",
+        "Report Writing"
+      ],
+      "importedMaterials": 10,
+      "searchableChunks": 138
+    },
+    {
+      "code": "MATH 152",
+      "topics": [
+        "Real Numbers and Point Sets",
+        "Functions",
+        "Limits and Continuity",
+        "Integration",
+        "Sequences and Series",
+        "Differentiability",
+        "Application of Integration"
+      ],
+      "importedMaterials": 9,
+      "searchableChunks": 276
+    }
+  ]
+}

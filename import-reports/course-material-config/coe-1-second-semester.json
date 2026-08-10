@@ -1,0 +1,60 @@
+{
+  "termSlug": "coe-1-second-semester",
+  "reportTitle": "Computer Engineering — Year 1, Second Semester import dry run",
+  "courseMappings": [
+    { "folderIncludes": "Communication Skills II", "code": "ENGL 158", "name": "Communication Skills II" },
+    { "folderIncludes": "Electrical Engineering Drawing", "code": "EE 156", "name": "Electrical Engineering Drawing" },
+    { "folderIncludes": "Introduction to Information Technology", "code": "COE 158", "name": "Introduction to Information Technology" },
+    { "folderIncludes": "Basic Electronics", "code": "COE 152", "name": "Basic Electronics" },
+    { "folderIncludes": "Electrical Machines EE 172", "code": "EE 172", "name": "Electrical Machines", "note": "Most files in this folder are legacy .ppt and are intentionally skipped by the pipeline; see the review notes for this term." },
+    { "folderIncludes": "Calculus With Analysis", "code": "MATH 152", "name": "Calculus With Analysis" }
+  ],
+  "topicRules": {
+    "ENGL 158": [
+      ["Letter Writing", ["letter writing", "business letter", "correspondence"]],
+      ["CV and Job Application Writing", ["cv writing", "curriculum vitae", "job application", "resume"]],
+      ["Meetings and Minutes", ["minutes", "meeting procedure", "agenda"]],
+      ["Memoranda", ["memorandum", "memo writing", "memo "]],
+      ["Organizational Communication", ["organizational communication", "organisation communication", "workplace communication"]],
+      ["Report Writing", ["report writing"]],
+      ["The Writing Process", ["writing process", "drafting", "revising", "brainstorming"]]
+    ],
+    "EE 156": [
+      ["Engineering Drawing Fundamentals", ["engineering drawing", "drawing assignment", "orthographic", "projection"]],
+      ["Electrical Circuit Diagrams", ["circuit diagram", "wiring diagram", "schematic"]],
+      ["Industrial Motor Control", ["motor control", "industrial motor", "contactor"]],
+      ["Programmable Logic Controllers", ["programmable logic controller", "plc", "ladder logic"]]
+    ],
+    "COE 158": [
+      ["Introduction to Information Technology", ["what is information technology", "it infrastructure", "it roles", "introduction to it"]],
+      ["History of Computers", ["history of computers", "evolution of computer", "generation of computer"]],
+      ["Data Representation and Number Systems", ["binary number", "numbering system", "binary numbering", "character representation"]],
+      ["Computer Organization and Hardware", ["computer organization", "computer hardware", "motherboard", "computer assembly"]],
+      ["Operating Systems", ["operating system", "booting", "process management"]],
+      ["Files and File Systems", ["file system", "files and directories", "windows file system", "linux file system"]],
+      ["Networks and the Internet", ["network protocol", "network software", "the internet", "computer network"]]
+    ],
+    "COE 152": [
+      ["Basic Electronic Devices", ["basic electronic device", "resistor", "passive device"]],
+      ["Semiconductor Fundamentals", ["semiconductor", "atomic structure"]],
+      ["PN-Junction Diodes", ["pn-junction", "pn junction", "diode"]],
+      ["Bipolar Junction Transistors", ["bipolar junction transistor", "transistor biasing", "transistor"]]
+    ],
+    "EE 172": [
+      ["Electrical Machines Fundamentals", ["electrical machine", "motor", "generator", "transformer"]]
+    ],
+    "MATH 152": [
+      ["Real Numbers and Point Sets", ["real number", "point set", "supremum", "infimum"]],
+      ["Functions", ["function", "domain", "range", "composite function"]],
+      ["Limits and Continuity", ["limit", "continuity", "continuous function"]],
+      ["Differentiability", ["differentiab", "derivative", "mean value theorem"]],
+      ["Integration", ["integration", "integral", "antiderivative"]],
+      ["Application of Integration", ["application of integration", "area under", "volume of revolution"]],
+      ["Sequences and Series", ["sequence", "series", "convergence", "divergence"]]
+    ]
+  },
+  "topicOverrides": [],
+  "skipRules": [
+    { "courseCode": "EE 172", "fileName": "Machines Midsem.pdf", "reason": "Scanned exam paper with negligible extractable text; skipped per review checkpoint." }
+  ]
+}
