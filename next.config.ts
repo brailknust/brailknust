@@ -27,6 +27,12 @@ const contentSecurityPolicy = [
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["officeparser", "tesseract.js", "tesseract.js-core"],
+  outputFileTracingIncludes: {
+    "/api/timetable/extract": [
+      "./node_modules/tesseract.js/**/*",
+      "./node_modules/tesseract.js-core/**/*",
+    ],
+  },
   async headers() {
     return [
       {
