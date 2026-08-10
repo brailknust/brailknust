@@ -108,6 +108,23 @@ export function hasTimetableConflicts(rows: TimetableRow[]) {
   ));
 }
 
+export function dedupeTimetableRows(rows: TimetableRow[]) {
+  const seen = new Set<string>();
+
+  return rows.filter((row) => {
+    const key = [
+      row.dayOfWeek,
+      row.startTime,
+      row.endTime,
+      normalizeCourseCode(row.courseCode),
+    ].join("|");
+
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 export function sessionsForCourse(
   creditHours: number,
   intensity: PlannerPreferences["intensity"],

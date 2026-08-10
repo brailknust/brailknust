@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 
 import { accraWeekBounds } from "@/features/academics/time";
-import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
+import { getAppUserForAuthUser, getSupabaseUser } from "@/features/auth/queries";
 import {
+  dedupeTimetableRows,
   generateStudySessions,
   hasTimetableConflicts,
   isValidTimetableRow,
@@ -330,7 +331,7 @@ export async function GET() {
     return NextResponse.json({ message: "Sign in before loading a study plan." }, { status: 401 });
   }
 
-  const appUser = await getAppUserByAuthId(authUser.id);
+  const appUser = await getAppUserForAuthUser(authUser);
 
   if (!appUser) {
     return NextResponse.json({ message: "Complete onboarding before loading a study plan." }, { status: 404 });
@@ -362,7 +363,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Sign in before generating a study plan." }, { status: 401 });
   }
 
-  const appUser = await getAppUserByAuthId(authUser.id);
+  const appUser = await getAppUserForAuthUser(authUser);
 
   if (!appUser) {
     return NextResponse.json({ message: "Complete onboarding before generating a study plan." }, { status: 404 });
@@ -391,10 +392,10 @@ export async function POST(request: Request) {
   if (submittedRows.some((row) => !isValidTimetableRow(row))) {
     return NextResponse.json({ message: "Correct the timetable rows before generating a study plan." }, { status: 400 });
   }
-  if (hasTimetableConflicts(submittedRows)) {
+  const rows = dedupeTimetableRows(submittedRows);
+  if (hasTimetableConflicts(rows)) {
     return NextResponse.json({ message: "Timetable rows overlap. Resolve the class conflict before generating a study plan." }, { status: 409 });
   }
-  const rows = submittedRows;
 
   let plannerContext: Awaited<ReturnType<typeof loadPlannerContext>>;
   try {

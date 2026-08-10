@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  dedupeTimetableRows,
   generateStudySessions,
   hasTimetableConflicts,
   isUsablePreferenceWindow,
@@ -190,6 +191,12 @@ describe("study-plan generation", () => {
       validRow,
       { ...validRow, id: "row-2", courseCode: "COE 202", startTime: "09:30", endTime: "10:30" },
     ])).toBe(true);
+    const dedupedRows = dedupeTimetableRows([
+      validRow,
+      { ...validRow, id: "row-2", courseCode: "coe-201", courseName: "Data Structures duplicate" },
+    ]);
+    expect(dedupedRows).toHaveLength(1);
+    expect(hasTimetableConflicts(dedupedRows)).toBe(false);
     expect(hasTimetableConflicts([
       validRow,
       { ...validRow, id: "row-2", courseCode: "COE 202", dayOfWeek: "Tuesday" },
