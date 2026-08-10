@@ -4,7 +4,7 @@ import { redirect, unstable_rethrow } from "next/navigation";
 
 import { AppShell } from "@/components/app-shell";
 import { getActiveSemesterSummary } from "@/features/academics/queries";
-import { getAppUserByAuthId, getSupabaseUser } from "@/features/auth/queries";
+import { getAppUserForAuthUser, getSupabaseUser } from "@/features/auth/queries";
 import { getDashboardNotifications } from "@/features/notifications/queries";
 import { getDashboardTasks } from "@/features/tasks/queries";
 
@@ -44,9 +44,9 @@ export default async function DashboardPage() {
 
   if (!authUser) redirect("/login");
 
-  let appUser: Awaited<ReturnType<typeof getAppUserByAuthId>>;
+  let appUser: Awaited<ReturnType<typeof getAppUserForAuthUser>>;
   try {
-    appUser = await getAppUserByAuthId(authUser.id);
+    appUser = await getAppUserForAuthUser(authUser);
   } catch (error) {
     unstable_rethrow(error);
     console.error("Dashboard user load failed", error);

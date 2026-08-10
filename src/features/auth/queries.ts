@@ -64,9 +64,45 @@ export async function getAppUserByAuthId(authUserId: string) {
   });
 }
 
+async function promoteConfiguredAdmin(appUser: NonNullable<Awaited<ReturnType<typeof getAppUserByAuthId>>>) {
+  if (appUser.role === "ADMIN") return appUser;
+
+  return prisma.$transaction(async (tx) => {
+    const promoted = await tx.user.update({
+      where: { id: appUser.id },
+      data: { role: "ADMIN" },
+    });
+    await tx.adminRoleAudit.create({
+      data: { targetUserId: appUser.id, action: "BOOTSTRAPPED" },
+    });
+    return promoted;
+  });
+}
+
+export async function getAppUserForAuthUser(authUser: SupabaseAuthUser) {
+  const appUser = await getAppUserByAuthId(authUser.id);
+
+  if (appUser) {
+    return isConfiguredAdminEmail(authUser.email) ? promoteConfiguredAdmin(appUser) : appUser;
+  }
+
+  if (!isConfiguredAdminEmail(authUser.email) || !authUser.email) {
+    return null;
+  }
+
+  const configuredAdmin = await prisma.user.findFirst({
+    where: {
+      email: { equals: authUser.email, mode: "insensitive" },
+      deletedAt: null,
+    },
+  });
+
+  return configuredAdmin ? promoteConfiguredAdmin(configuredAdmin) : null;
+}
+
 export async function requireAppUser() {
   const authUser = await requireSupabaseUser();
-  const appUser = await getAppUserByAuthId(authUser.id);
+  const appUser = await getAppUserForAuthUser(authUser);
 
   if (!appUser) {
     redirect("/onboarding");
@@ -85,16 +121,7 @@ export async function requireAdmin() {
   if (appUser.role === "ADMIN") return { authUser, appUser };
 
   if (isConfiguredAdmin) {
-    const promoted = await prisma.$transaction(async (tx) => {
-      const user = await tx.user.update({
-        where: { id: appUser.id },
-        data: { role: "ADMIN" },
-      });
-      await tx.adminRoleAudit.create({
-        data: { targetUserId: appUser.id, action: "BOOTSTRAPPED" },
-      });
-      return user;
-    });
+    const promoted = await promoteConfiguredAdmin(appUser);
     return { authUser, appUser: promoted };
   }
 

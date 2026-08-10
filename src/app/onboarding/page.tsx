@@ -5,13 +5,13 @@ import { redirect } from "next/navigation";
 import { knustAcademicHierarchy } from "@/data/knust-academic-hierarchy";
 import { isConfiguredAdminEmail } from "@/features/auth/admin";
 import { completeProfileForm } from "@/features/profile/actions";
-import { getAppUserByAuthId, requireSupabaseUser } from "@/features/auth/queries";
+import { getAppUserForAuthUser, requireSupabaseUser } from "@/features/auth/queries";
 import { OnboardingForm } from "@/app/onboarding/onboarding-form";
 import { prisma } from "@/server/db";
 
 export default async function OnboardingPage() {
   const authUser = await requireSupabaseUser();
-  const appUser = await getAppUserByAuthId(authUser.id);
+  const appUser = await getAppUserForAuthUser(authUser);
   const isConfiguredAdmin = isConfiguredAdminEmail(authUser.email);
 
   if (appUser) {
