@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { formatElapsed } from "@/app/notifications/study-session-panel";
+import { formatElapsed } from "@/lib/utils";
 
 describe("formatElapsed", () => {
   it("formats sub-hour durations as mm:ss", () => {

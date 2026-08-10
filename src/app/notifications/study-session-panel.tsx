@@ -5,6 +5,7 @@ import { Play, Square, Timer } from "lucide-react";
 
 import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { startStudyTimer, stopStudyTimer } from "@/features/tracking/actions";
+import { formatElapsed } from "@/lib/utils";
 
 type ActiveSession = {
   id: string;
@@ -20,15 +21,6 @@ type UpcomingItem = {
   durationMinutes: number | null;
   course: { name: string } | null;
 };
-
-export function formatElapsed(ms: number) {
-  const totalSeconds = Math.max(0, Math.floor(ms / 1000));
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-  const pad = (value: number) => String(value).padStart(2, "0");
-  return hours > 0 ? `${hours}:${pad(minutes)}:${pad(seconds)}` : `${pad(minutes)}:${pad(seconds)}`;
-}
 
 function timeLabel(value: Date) {
   return new Intl.DateTimeFormat("en-GH", { timeStyle: "short" }).format(value);

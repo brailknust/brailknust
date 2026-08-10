@@ -1,22 +1,13 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, CalendarDays, ListChecks, Plus } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarDays, ListChecks } from "lucide-react";
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
 import { PendingSubmitButton } from "@/components/pending-submit-button";
-import { createSemester, deleteSemester } from "@/features/academics/actions";
+import { deleteSemester } from "@/features/academics/actions";
 import { getSemesterCards } from "@/features/academics/queries";
 import { requireAppUser } from "@/features/auth/queries";
 import { provisionExistingUserCurriculum } from "@/features/profile/actions";
-
-const semesterOptions = ["First Semester", "Second Semester"] as const;
-const levelOptions = ["LEVEL_100", "LEVEL_200", "LEVEL_300", "LEVEL_400", "LEVEL_500", "LEVEL_600"] as const;
-const defaultAcademicYear = "2025/2026";
-const currentYear = new Date().getFullYear();
-const academicYearOptions = Array.from({ length: 7 }, (_, index) => {
-  const startYear = currentYear - 2 + index;
-  return `${startYear}/${startYear + 1}`;
-});
 
 function formatCwa(value: unknown) {
   return value ? `${value.toString()}%` : "Not set";
@@ -32,8 +23,6 @@ export default async function AcademicsPage() {
   const hasProvisionedCurriculum = semesters.some((semester) => !semester.isCustom && semester.curriculumId);
   const curriculumSemesters = semesters.filter((semester) => !semester.isCustom && semester.curriculumId);
   const customSemesters = semesters.filter((semester) => semester.isCustom || !semester.curriculumId);
-  const customSlots = new Set(semesters.filter((semester) => semester.isCustom).map((semester) => `${semester.level}|${semester.name}`));
-  const availableSlots = levelOptions.flatMap((level) => semesterOptions.map((name) => ({ level, name }))).filter((slot) => !customSlots.has(`${slot.level}|${slot.name}`));
 
   return (
     <AppShell title="Academic semesters" eyebrow="Academics">
@@ -81,66 +70,7 @@ export default async function AcademicsPage() {
 
       {!hasProvisionedCurriculum ? <section className="mt-6 rounded-2xl border border-accent/30 bg-surface p-5"><h2 className="text-lg font-semibold">Set up your curriculum</h2><p className="mt-2 text-sm text-muted">Your account predates automatic curriculum setup. Provision the published programme path without changing your active semester or existing records.</p><form action={provisionExistingUserCurriculum} className="mt-4"><PendingSubmitButton pendingLabel="Provisioning curriculum..." className="h-10 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Provision my curriculum</PendingSubmitButton></form></section> : null}
 
-      <section className="mt-6 grid gap-6 xl:grid-cols-[0.7fr_1.3fr]">
-        <form action={createSemester} className="rounded-2xl border border-border bg-white p-5">
-          <div className="flex items-center gap-3">
-            <Plus className="h-5 w-5 text-accent" />
-            <h2 className="text-lg font-semibold">Add custom semester</h2>
-          </div>
-          <div className="mt-5 grid gap-4">
-            {availableSlots.length ? (
-              <select name="slot" aria-label="Semester slot" required defaultValue={availableSlots[0] ? `${availableSlots[0].level}|${availableSlots[0].name}` : ""} className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
-                {availableSlots.map((slot) => (
-                  <option key={`${slot.level}|${slot.name}`} value={`${slot.level}|${slot.name}`}>
-                    {formatLevel(slot.level)} - {slot.name}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              <p className="rounded-xl border border-border bg-surface p-4 text-sm text-muted">All available semester slots have been created.</p>
-            )}
-            <p className="text-xs leading-5 text-muted">This is an exception record and is not part of your provisioned curriculum.</p>
-            <select
-              name="academicYear"
-              aria-label="Academic year"
-              required
-              defaultValue={defaultAcademicYear}
-              className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
-            >
-              {academicYearOptions.map((academicYear) => (
-                <option key={academicYear} value={academicYear}>
-                  {academicYear}
-                </option>
-              ))}
-            </select>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="grid gap-2 text-sm font-semibold">
-                Start date
-                <input
-                  name="startDate"
-                  type="date"
-                  className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal"
-                />
-              </label>
-              <label className="grid gap-2 text-sm font-semibold">
-                End date
-                <input
-                  name="endDate"
-                  type="date"
-                  className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal"
-                />
-              </label>
-            </div>
-            <label className="flex items-center gap-2 text-sm font-semibold text-muted">
-              <input name="isActive" type="checkbox" className="h-4 w-4" />
-              Set as active semester
-            </label>
-            <PendingSubmitButton disabled={!availableSlots.length} pendingLabel="Saving semester..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50">
-              Save custom semester
-            </PendingSubmitButton>
-          </div>
-        </form>
-
+      <section className="mt-6">
         <div className="grid gap-4 md:grid-cols-2">
           {curriculumSemesters.length ? (
             curriculumSemesters.map((semester) => (

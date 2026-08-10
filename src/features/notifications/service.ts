@@ -28,6 +28,18 @@ function nextWeeklyOccurrence(template: Date, now: Date) {
   return occurrence;
 }
 
+// Shared with reconcileAcademicTracking callers (see features/tracking/service.ts):
+// that reconciliation has no throttle of its own and does real writes (attendance
+// upserts, goal-progress recompute), so callers gate it on this same window instead
+// of re-running it on every request — e.g. every /notifications tab switch.
+export async function isNotificationSyncStale(userId: string) {
+  const preference = await prisma.notificationPreference.findUnique({
+    where: { userId },
+    select: { lastSyncedAt: true },
+  });
+  return !preference?.lastSyncedAt || Date.now() - preference.lastSyncedAt.getTime() >= syncThrottleMs;
+}
+
 export async function syncNotificationsForUser(userId: string, force = false) {
   const now = new Date();
   // A delivered reminder is active only until its expiry. It remains in history afterwards.

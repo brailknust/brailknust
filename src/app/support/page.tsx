@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import { AppShell } from "@/components/app-shell";
 import { PendingSubmitButton } from "@/components/pending-submit-button";
@@ -7,7 +8,12 @@ import { submitSupportRequest } from "@/features/support/actions";
 
 type SupportPageProps = { searchParams: Promise<{ submitted?: string }> };
 
+// Withheld from the deployed nav for now — flip this back on to bring the
+// page back (see src/components/app-shell.tsx for the matching nav entry).
+const PAGE_ENABLED = false;
+
 export default async function SupportPage({ searchParams }: SupportPageProps) {
+  if (!PAGE_ENABLED) notFound();
   const { submitted } = await searchParams;
 
   return (

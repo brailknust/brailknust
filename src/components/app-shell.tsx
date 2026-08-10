@@ -15,7 +15,7 @@ type AppShellProps = {
   fullBleed?: boolean;
 };
 
-export async function AppShell({ children, eyebrow, fullBleed = false }: AppShellProps) {
+export async function AppShell({ children, title, fullBleed = false }: AppShellProps) {
   const { appUser } = await requireAppUser();
   const primaryItems = [
     { label: "Dashboard", href: "/dashboard" },
@@ -38,11 +38,11 @@ export async function AppShell({ children, eyebrow, fullBleed = false }: AppShel
     { label: "Notifications", href: "/notifications" },
     { label: "Tasks", href: "/tasks" },
     { label: "Performance", href: "/performance" },
-    { label: "Goals", href: "/goals" },
     { label: "Profile", href: "/profile" },
-    { label: "Support", href: "/support" },
-    { label: "Feedback", href: "/feedback" },
-  ];
+    // Goals, Support, and Feedback are intentionally withheld from the
+    // deployed nav for now (see /goals, /support, /feedback route guards).
+    // The pages and their actions/queries stay in place to bring back later.
+  ].sort((a, b) => a.label.localeCompare(b.label));
 
   return (
     <main className={fullBleed
@@ -60,7 +60,7 @@ export async function AppShell({ children, eyebrow, fullBleed = false }: AppShel
               <span className="min-w-0">
                 <span className="block truncate text-sm font-semibold tracking-[-0.02em]">BRAIL KNUST</span>
                 <span className="block truncate text-[10px] font-semibold uppercase tracking-[0.16em] text-muted">
-                  {eyebrow ?? "Student workspace"}
+                  {title}
                 </span>
               </span>
             </PrefetchLink>

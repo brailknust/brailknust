@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import {
   Archive,
   ArrowRight,
@@ -184,7 +185,12 @@ function GoalCard({ goal, courses }: { goal: GoalView; courses: CourseOption[] }
   );
 }
 
+// Withheld from the deployed nav for now — flip this back on to bring the
+// page back (see src/components/app-shell.tsx for the matching nav entry).
+const PAGE_ENABLED = false;
+
 export default async function GoalsPage() {
+  if (!PAGE_ENABLED) notFound();
   const { appUser } = await requireAppUser();
   const data = await getGoalsPageData(appUser.id);
 

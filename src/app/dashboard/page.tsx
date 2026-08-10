@@ -3,6 +3,7 @@ import { Bell, BookOpen, GraduationCap, ListChecks } from "lucide-react";
 import { redirect, unstable_rethrow } from "next/navigation";
 
 import { AppShell } from "@/components/app-shell";
+import { DashboardNotificationsPanel } from "@/app/dashboard/notifications-panel";
 import { getActiveSemesterSummary } from "@/features/academics/queries";
 import { getAppUserForAuthUser, getSupabaseUser } from "@/features/auth/queries";
 import { getDashboardNotifications } from "@/features/notifications/queries";
@@ -112,19 +113,16 @@ export default async function DashboardPage() {
         </div>
       </section>
 
-      <section className="rounded-2xl border border-border bg-white p-5 shadow-[0_10px_30px_rgba(4,92,46,0.03)]">
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3"><Bell className="h-5 w-5 text-accent" /><div><h2 className="text-lg font-semibold">Notifications</h2><p className="mt-1 text-sm text-muted">{notificationData.unreadCount} unread reminders</p></div></div>
-          <Link href="/notifications" className="rounded-xl border border-border px-3 py-2 text-sm font-semibold text-muted transition hover:border-foreground hover:text-foreground">View all</Link>
-        </div>
-        <div className="mt-5 grid gap-3 md:grid-cols-2">
-          {notificationData.items.length ? notificationData.items.map((notification) => (
-            <Link key={notification.id} href={`/notifications/${notification.id}/open`} className={"rounded-xl border p-4 transition hover:border-foreground " + (notification.isRead ? "border-border bg-surface" : "border-accent/50 bg-white")}>
-              <p className="font-semibold">{notification.title}</p><p className="mt-1 text-sm text-muted">{notification.message}</p><p className="mt-3 text-xs text-muted">{formatDateTime(notification.createdAt)}</p>
-            </Link>
-          )) : <p className="text-sm text-muted">No notifications yet.</p>}
-        </div>
-      </section>
+      <DashboardNotificationsPanel
+        initialItems={notificationData.items.map((notification) => ({
+          id: notification.id,
+          title: notification.title,
+          message: notification.message,
+          createdAt: notification.createdAt.toISOString(),
+          isRead: notification.isRead,
+        }))}
+        initialUnreadCount={notificationData.unreadCount}
+      />
       </div>
 
     </AppShell>

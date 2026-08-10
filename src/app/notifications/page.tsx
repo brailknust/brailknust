@@ -26,7 +26,7 @@ import {
   updateNotificationReadState,
 } from "@/features/notifications/actions";
 import { getNotificationCenterData, getStudySessionPanelData } from "@/features/notifications/queries";
-import { syncNotificationsForUser } from "@/features/notifications/service";
+import { isNotificationSyncStale, syncNotificationsForUser } from "@/features/notifications/service";
 import { respondToAttendance } from "@/features/tracking/actions";
 import { reconcileAcademicTracking } from "@/features/tracking/service";
 
@@ -141,14 +141,14 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
   const params = await searchParams;
   const view = ["active", "unread", "history", "missed"].includes(params.view ?? "") ? params.view! : "active";
 
-  if (appUser.activeSemesterId) {
+  // reconcileAcademicTracking has no throttle of its own (it writes attendance
+  // records and recomputes goal progress), so it's gated on the same window
+  // syncNotificationsForUser uses internally. Without this, switching between
+  // the Active/Unread/Missed/History tabs — each a fresh request — re-ran the
+  // full reconciliation every time, which is what made tab switching slow.
+  if (appUser.activeSemesterId && (await isNotificationSyncStale(appUser.id))) {
     await reconcileAcademicTracking(appUser.id, appUser.activeSemesterId);
   }
-  // Not forced: this is throttled to once per 5 minutes internally, so it's
-  // safe to call on every page load. This is what actually surfaces "starting
-  // soon" reminders (deadlines, study sessions, goals, groups) close to their
-  // time — nothing else refreshes them between the sparse action-triggered
-  // syncs and the once-daily cron.
   await syncNotificationsForUser(appUser.id);
 
   const [data, studySessionData] = await Promise.all([
@@ -225,18 +225,22 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
             <h2 className="text-lg font-semibold">Reminder preferences</h2>
           </div>
           <form action={updateNotificationPreferences} className="mt-5 grid gap-4">
+            {/* Study groups, goal deadlines, and Q&A answers are withheld
+                from the deployed nav, so their reminder toggles are hidden
+                here too. The fields still save through with their existing
+                values so nothing breaks if those pages come back. */}
             {[
               ["taskDeadlines", "Task deadlines", preferences?.taskDeadlines ?? true],
               ["studySessions", "Study sessions", preferences?.studySessions ?? true],
-              ["groupUpdates", "Study groups", preferences?.groupUpdates ?? true],
-              ["goalDeadlines", "Goal deadlines", preferences?.goalDeadlines ?? true],
-              ["qaAnswers", "Q&A answers", preferences?.qaAnswers ?? true],
             ].map(([name, label, checked]) => (
               <label key={String(name)} className="flex items-center justify-between gap-4 rounded-xl border border-border bg-surface px-4 py-3 text-sm font-medium">
                 {label}
                 <input name={String(name)} type="checkbox" defaultChecked={Boolean(checked)} className="h-4 w-4 accent-[var(--accent)]" />
               </label>
             ))}
+            <input type="hidden" name="groupUpdates" value={(preferences?.groupUpdates ?? true) ? "on" : "off"} />
+            <input type="hidden" name="goalDeadlines" value={(preferences?.goalDeadlines ?? true) ? "on" : "off"} />
+            <input type="hidden" name="qaAnswers" value={(preferences?.qaAnswers ?? true) ? "on" : "off"} />
             <label className="grid gap-2 text-sm font-medium">
               Study session alert
               <select name="studySessionReminderMinutes" defaultValue={preferences?.studySessionReminderMinutes ?? 15} className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
@@ -247,9 +251,8 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
                 <option value="60">1 hour before</option>
               </select>
             </label>
-            <BrowserAlertSettings />
             <label className="grid gap-2 text-sm font-medium">
-              Deadline reminder window
+              Task deadline reminders
               <select name="reminderHours" defaultValue={preferences?.reminderHours ?? 24} className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
                 <option value="1">1 hour before</option>
                 <option value="6">6 hours before</option>
@@ -260,6 +263,7 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
                 <option value="168">1 week before</option>
               </select>
             </label>
+            <BrowserAlertSettings />
             <PendingSubmitButton pendingLabel="Saving preferences..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">Save preferences</PendingSubmitButton>
           </form>
         </section>

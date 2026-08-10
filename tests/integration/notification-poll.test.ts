@@ -5,10 +5,12 @@ const mocks = vi.hoisted(() => ({
   getAppUserByAuthId: vi.fn(),
   checkRateLimit: vi.fn(),
   syncNotificationsForUser: vi.fn(),
+  isNotificationSyncStale: vi.fn(),
   reconcileAcademicTracking: vi.fn(),
+  getActiveStudySession: vi.fn(),
   prisma: {
     notificationPreference: { findUnique: vi.fn() },
-    notification: { findMany: vi.fn() },
+    notification: { findMany: vi.fn(), count: vi.fn() },
   },
 }));
 
@@ -18,9 +20,11 @@ vi.mock("@/features/auth/queries", () => ({
 }));
 vi.mock("@/features/notifications/service", () => ({
   syncNotificationsForUser: mocks.syncNotificationsForUser,
+  isNotificationSyncStale: mocks.isNotificationSyncStale,
 }));
 vi.mock("@/features/tracking/service", () => ({
   reconcileAcademicTracking: mocks.reconcileAcademicTracking,
+  getActiveStudySession: mocks.getActiveStudySession,
 }));
 vi.mock("@/server/db", () => ({ prisma: mocks.prisma }));
 vi.mock("@/server/rate-limit", () => ({
@@ -41,14 +45,14 @@ describe("GET /api/notifications/poll", () => {
     mocks.getAppUserByAuthId.mockResolvedValue(appUser);
     mocks.checkRateLimit.mockResolvedValue({ allowed: true });
     mocks.prisma.notification.findMany.mockResolvedValue([]);
+    mocks.prisma.notification.count.mockResolvedValue(0);
+    mocks.getActiveStudySession.mockResolvedValue(null);
   });
 
   afterEach(() => vi.useRealTimers());
 
   it("regenerates reminders when the last sync is stale", async () => {
-    mocks.prisma.notificationPreference.findUnique.mockResolvedValue({
-      lastSyncedAt: new Date("2026-08-10T09:58:00.000Z"), // 2 minutes ago, past the 1-minute window
-    });
+    mocks.isNotificationSyncStale.mockResolvedValue(true);
 
     await GET();
 
@@ -57,7 +61,7 @@ describe("GET /api/notifications/poll", () => {
   });
 
   it("regenerates reminders when no preference row exists yet", async () => {
-    mocks.prisma.notificationPreference.findUnique.mockResolvedValue(null);
+    mocks.isNotificationSyncStale.mockResolvedValue(true);
 
     await GET();
 
@@ -66,9 +70,7 @@ describe("GET /api/notifications/poll", () => {
   });
 
   it("skips regeneration when the last sync is within the throttle window", async () => {
-    mocks.prisma.notificationPreference.findUnique.mockResolvedValue({
-      lastSyncedAt: new Date("2026-08-10T09:59:30.000Z"), // 30 seconds ago
-    });
+    mocks.isNotificationSyncStale.mockResolvedValue(false);
 
     await GET();
 
@@ -79,7 +81,7 @@ describe("GET /api/notifications/poll", () => {
 
   it("does not reconcile attendance for a user with no active semester", async () => {
     mocks.getAppUserByAuthId.mockResolvedValue({ id: "user-2", activeSemesterId: null });
-    mocks.prisma.notificationPreference.findUnique.mockResolvedValue(null);
+    mocks.isNotificationSyncStale.mockResolvedValue(true);
 
     await GET();
 
