@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
-import { Bot, FileText, LockKeyhole, Send, Square, User } from "lucide-react";
+import { Bot, Check, Copy, FileText, LockKeyhole, RefreshCw, Send, Square, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { MarkdownMessage } from "@/features/ai/markdown-message";
@@ -29,6 +29,13 @@ export function formatFileSize(bytes: number | null) {
   if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
+
+const suggestedPrompts = [
+  "Summarize this week's key topics",
+  "Explain a concept I'm stuck on",
+  "Quiz me on recent material",
+  "Help me plan my next study session",
+];
 
 type AiChatClientProps = {
   conversationId: string | null;
@@ -61,6 +68,7 @@ export function AiChatClient({
   const [error, setError] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [abortController, setAbortController] = useState<AbortController | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
 
 
@@ -68,29 +76,12 @@ export function AiChatClient({
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  async function sendMessage(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const content = message.trim();
-    if (
-      !content
-      || isSending
-      || !isConfigured
-      || remaining <= 0
-      || (!currentConversationId && !enrollmentId)
-    ) return;
-
-    const userId = crypto.randomUUID();
-    const assistantId = crypto.randomUUID();
-    const now = new Date().toISOString();
-    setMessage("");
-    setError("");
+  // Shared by both a fresh send and a regenerate: streams the reply into the
+  // given (already-inserted, empty) assistant message. Callers own inserting/
+  // removing the user + assistant placeholder messages around this call, since
+  // that differs between the two flows.
+  async function streamReply(content: string, assistantId: string) {
     setIsSending(true);
-    setMessages((current) => [
-      ...current,
-      { id: userId, role: "USER", content, createdAt: now },
-      { id: assistantId, role: "ASSISTANT", content: "", createdAt: now },
-    ]);
-
     const controller = new AbortController();
     setAbortController(controller);
 
@@ -144,8 +135,36 @@ export function AiChatClient({
         router.replace(`/ai-chat?conversation=${returnedConversationId}`);
       }
       router.refresh();
+    } finally {
+      setAbortController(null);
+      setIsSending(false);
+    }
+  }
+
+  async function submitMessage(content: string) {
+    if (
+      !content
+      || isSending
+      || !isConfigured
+      || remaining <= 0
+      || (!currentConversationId && !enrollmentId)
+    ) return;
+
+    const userId = crypto.randomUUID();
+    const assistantId = crypto.randomUUID();
+    const now = new Date().toISOString();
+    setMessage("");
+    setError("");
+    setMessages((current) => [
+      ...current,
+      { id: userId, role: "USER", content, createdAt: now },
+      { id: assistantId, role: "ASSISTANT", content: "", createdAt: now },
+    ]);
+
+    try {
+      await streamReply(content, assistantId);
     } catch (caught) {
-      if (controller.signal.aborted) {
+      if (caught instanceof DOMException && caught.name === "AbortError") {
         setMessages((current) => current.filter((item) => item.id !== assistantId));
         setError("Response stopped.");
       } else {
@@ -155,9 +174,47 @@ export function AiChatClient({
         setMessage(content);
         setError(caught instanceof Error ? caught.message : "AI Chat request failed.");
       }
-    } finally {
-      setAbortController(null);
-      setIsSending(false);
+    }
+  }
+
+  async function sendMessage(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    await submitMessage(message.trim());
+  }
+
+  async function regenerate(assistantMessageId: string) {
+    if (isSending) return;
+    const index = messages.findIndex((item) => item.id === assistantMessageId);
+    if (index === -1) return;
+    const precedingUser = [...messages.slice(0, index)].reverse().find((item) => item.role === "USER" && !item.attachment);
+    if (!precedingUser) return;
+
+    const newAssistantId = crypto.randomUUID();
+    setError("");
+    setMessages((current) => [
+      ...current.filter((item) => item.id !== assistantMessageId),
+      { id: newAssistantId, role: "ASSISTANT", content: "", createdAt: new Date().toISOString() },
+    ]);
+
+    try {
+      await streamReply(precedingUser.content, newAssistantId);
+    } catch (caught) {
+      setMessages((current) => current.filter((item) => item.id !== newAssistantId));
+      setError(
+        caught instanceof DOMException && caught.name === "AbortError"
+          ? "Response stopped."
+          : caught instanceof Error ? caught.message : "AI Chat request failed.",
+      );
+    }
+  }
+
+  async function copyMessage(id: string, content: string) {
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId((current) => (current === id ? null : current)), 2000);
+    } catch {
+      // Clipboard access can fail (permissions, insecure context); not worth surfacing an error for.
     }
   }
 
@@ -167,6 +224,8 @@ export function AiChatClient({
       event.currentTarget.form?.requestSubmit();
     }
   }
+
+  const lastAssistantId = [...messages].reverse().find((item) => item.role === "ASSISTANT")?.id;
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -183,8 +242,9 @@ export function AiChatClient({
                     <Bot className="h-4 w-4" />
                   </div>
                 ) : null}
+                <div className={`flex max-w-[88%] flex-col gap-1 sm:max-w-[80%] ${item.role === "USER" ? "items-end" : "items-start"}`}>
                 <div
-                  className={`max-w-[88%] overflow-hidden rounded-2xl px-4 py-3 text-sm leading-6 sm:max-w-[80%] ${
+                  className={`overflow-hidden rounded-2xl px-4 py-3 text-sm leading-6 ${
                     item.role === "USER"
                       ? "rounded-br-md bg-accent text-white"
                       : "rounded-bl-md border border-border bg-surface text-foreground"
@@ -228,6 +288,28 @@ export function AiChatClient({
                     </div>
                   ) : null}
                 </div>
+                {item.role === "ASSISTANT" && item.content ? (
+                  <div className="flex items-center gap-1 px-1">
+                    <button
+                      type="button"
+                      onClick={() => copyMessage(item.id, item.content)}
+                      className="inline-flex h-7 items-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-muted transition-colors hover:bg-surface hover:text-foreground"
+                    >
+                      {copiedId === item.id ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                      {copiedId === item.id ? "Copied" : "Copy"}
+                    </button>
+                    {item.id === lastAssistantId && !isSending ? (
+                      <button
+                        type="button"
+                        onClick={() => regenerate(item.id)}
+                        className="inline-flex h-7 items-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-muted transition-colors hover:bg-surface hover:text-foreground"
+                      >
+                        <RefreshCw className="h-3 w-3" /> Regenerate
+                      </button>
+                    ) : null}
+                  </div>
+                ) : null}
+                </div>
                 {item.role === "USER" ? (
                   <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border bg-background">
                     <User className="h-4 w-4" />
@@ -249,6 +331,21 @@ export function AiChatClient({
               <p className="mt-2 max-w-md text-sm leading-6 text-muted">
                 Only this course&apos;s performance, assessments, tasks, study sessions, and weak areas are used as context.
               </p>
+              {courseLabel && (currentConversationId || enrollmentId) ? (
+                <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+                  {suggestedPrompts.map((prompt) => (
+                    <button
+                      key={prompt}
+                      type="button"
+                      onClick={() => submitMessage(prompt)}
+                      disabled={!isConfigured || remaining <= 0 || isSending}
+                      className="rounded-full border border-border bg-white px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {prompt}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
             </div>
           </div>
         )}
