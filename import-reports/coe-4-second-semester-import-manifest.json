@@ -1,0 +1,873 @@
+{
+  "version": 1,
+  "createdAt": "2026-08-10T04:59:40.530Z",
+  "sourceRoot": "C:\\Users\\jpaap\\OneDrive\\Desktop\\CoE\\CoE 4\\2. Second Semester",
+  "termSlug": "coe-4-second-semester",
+  "mode": "APPROVED_PLAN_NO_UPLOAD",
+  "rules": {
+    "maximumFileSizeMB": 50,
+    "skipLegacyPowerPoint": true,
+    "allowGeneralResourcesTopic": true,
+    "allowMultipleTopicsPerMaterial": true,
+    "duplicateIdentity": "sha256"
+  },
+  "summary": {
+    "approved": 49,
+    "skipped": 4,
+    "approvedSizeMB": 93.5
+  },
+  "files": [
+    {
+      "sourceRelativePath": "Digital Signal Processing\\bach_fugue.mat",
+      "courseCode": "COE 472",
+      "courseName": "Digital Signal Processing",
+      "title": "bach_fugue",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0,
+      "sha256": "6336c89626b8a67f8b8cf609071d454c0e6cb2b118eeae265d7f32d77f54f6a2",
+      "status": "SKIPPED",
+      "reason": "Unsupported extension .mat."
+    },
+    {
+      "sourceRelativePath": "Digital Signal Processing\\Digital_Filters_Fundamentals.pptx",
+      "courseCode": "COE 472",
+      "courseName": "Digital Signal Processing",
+      "title": "Digital_Filters_Fundamentals",
+      "materialType": "SLIDE",
+      "topics": [
+        "DSP Fundamentals",
+        "Digital Filters",
+        "Fourier and Z-Transform Methods",
+        "DSP Projects"
+      ],
+      "sizeMB": 0.7,
+      "sha256": "aefe2617a53e187380c7e6e2054e0c5f6a5e1a1a9c243be42f44b2f09cd18173",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Digital Signal Processing\\lab3_1817522.docx",
+      "courseCode": "COE 472",
+      "courseName": "Digital Signal Processing",
+      "title": "lab3_1817522",
+      "materialType": "NOTE",
+      "topics": [
+        "Digital Filters",
+        "DSP Laboratories",
+        "DSP Projects"
+      ],
+      "sizeMB": 0.19,
+      "sha256": "c639cbd6edde04ce9c5335e52e5a03e0eddb1f596c7a4688bf4baf857dd7d08d",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\1 1 1 ENTREPRENEURSHIP 1 [Autosaved].pdf",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "1 1 1 ENTREPRENEURSHIP 1 [Autosaved]",
+      "materialType": "NOTE",
+      "topics": [
+        "Entrepreneurship Fundamentals",
+        "Creativity and Innovation",
+        "Feasibility Planning",
+        "Business Ownership and Organization",
+        "Financing New Ventures"
+      ],
+      "sizeMB": 0.53,
+      "sha256": "545c0e88bb2e794d03dacfee54855a22ba1c7f20541e30a386f7bf9e60bb469e",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\1 ME 492 INTRODUCTION 2022.pptx",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "1 ME 492 INTRODUCTION 2022",
+      "materialType": "SLIDE",
+      "topics": [
+        "Entrepreneurship Fundamentals",
+        "Creativity and Innovation",
+        "Feasibility Planning",
+        "Financing New Ventures",
+        "Marketing and Market Research"
+      ],
+      "sizeMB": 2.23,
+      "sha256": "4ff9de1456f93fe3bf2b614e64b446bd88e27790c6f6411abad988be3b4559f0",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\1 Organising & Financing New Ventures.pdf",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "1 Organising & Financing New Ventures",
+      "materialType": "NOTE",
+      "topics": [
+        "Entrepreneurship Fundamentals",
+        "Creativity and Innovation",
+        "Feasibility Planning",
+        "Business Ownership and Organization",
+        "Financing New Ventures"
+      ],
+      "sizeMB": 0.68,
+      "sha256": "bc7316bc17e1747ffb7597422cea7ffadadd5c4175a0310aef9c635cc618196f",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\10 FINANCING NEW VENTURES 2025.pptx",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "10 FINANCING NEW VENTURES 2025",
+      "materialType": "SLIDE",
+      "topics": [
+        "Entrepreneurship Fundamentals",
+        "Feasibility Planning",
+        "Financing New Ventures",
+        "Marketing and Market Research",
+        "Business Plans"
+      ],
+      "sizeMB": 8.21,
+      "sha256": "bf8d89552b387fc18e27ec81324654df7bf553d6b5b12f6392bbc68578702325",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\2 CREATIVITY & INNOVATION.pptx",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "2 CREATIVITY & INNOVATION",
+      "materialType": "SLIDE",
+      "topics": [
+        "Entrepreneurship Fundamentals",
+        "Creativity and Innovation",
+        "Feasibility Planning",
+        "Business Ownership and Organization",
+        "Financing New Ventures"
+      ],
+      "sizeMB": 0.52,
+      "sha256": "c2c5a7d04f67136b7a0a71b0eb2356850e21da9ec68eff3751f8d02c279b631a",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\2. Developing creativity and understanding innovation v2.pdf",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "2. Developing creativity and understanding innovation v2",
+      "materialType": "NOTE",
+      "topics": [
+        "Entrepreneurship Fundamentals",
+        "Creativity and Innovation",
+        "Feasibility Planning",
+        "Business Ownership and Organization",
+        "Financing New Ventures"
+      ],
+      "sizeMB": 0.3,
+      "sha256": "13870cfd383b7c0b9e31b0583d8e901f524625e788aca0db1b52e03b261c7dda",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\3 Feasibility Planning.pdf",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "3 Feasibility Planning",
+      "materialType": "NOTE",
+      "topics": [
+        "Entrepreneurship Fundamentals",
+        "Feasibility Planning",
+        "Financing New Ventures",
+        "Marketing and Market Research",
+        "Business Plans"
+      ],
+      "sizeMB": 0.25,
+      "sha256": "2af86ca6eb006668998870e71c6d6910cc50c05a9ddac24adf102619c8e141e3",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\3 MODEL FOR NEW VENTURES FEASIBILITY PLANNING.pptx",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "3 MODEL FOR NEW VENTURES FEASIBILITY PLANNING",
+      "materialType": "SLIDE",
+      "topics": [
+        "Entrepreneurship Fundamentals",
+        "Feasibility Planning",
+        "Financing New Ventures",
+        "Marketing and Market Research",
+        "Business Plans"
+      ],
+      "sizeMB": 0.37,
+      "sha256": "46082738aa0702e640bf88f58d12b28a828087d71358f61ce02166355182f1f6",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\8 ORGANISING AND FINANCING NEW VENTURES 2025.pptx",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "8 ORGANISING AND FINANCING NEW VENTURES 2025",
+      "materialType": "SLIDE",
+      "topics": [
+        "Entrepreneurship Fundamentals",
+        "Business Ownership and Organization",
+        "Financing New Ventures"
+      ],
+      "sizeMB": 8.1,
+      "sha256": "8cf48ba6a57ab6c02aaf34fe7bd7da86394906654a587ffa27997eee3d045000",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\9 FORMS OF BUSINESS OWNERSHIP 2025.pptx",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "9 FORMS OF BUSINESS OWNERSHIP 2025",
+      "materialType": "SLIDE",
+      "topics": [
+        "Entrepreneurship Fundamentals",
+        "Creativity and Innovation",
+        "Business Ownership and Organization",
+        "Financing New Ventures",
+        "Marketing and Market Research"
+      ],
+      "sizeMB": 8.2,
+      "sha256": "5918ea378f56c72a6fa90d28fa348f53265ec295cb0e2eee44aea2ffa4c5ef74",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\Assignment Business Idea.docx",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "Assignment Business Idea",
+      "materialType": "NOTE",
+      "topics": [
+        "Marketing and Market Research",
+        "Business Plans"
+      ],
+      "sizeMB": 0.01,
+      "sha256": "4b63abd5877ca53e505483dda0cd53bfc0f0b40eedda2cafec8095183c3d18de",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\DEVELOPING A MARKETING PLAN.pdf",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "DEVELOPING A MARKETING PLAN",
+      "materialType": "NOTE",
+      "topics": [
+        "Marketing and Market Research"
+      ],
+      "sizeMB": 3.8,
+      "sha256": "70842eec5d66ff375526416319da41afdb6e9ff203dfda16ce89ffca27296cb5",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\Market Research.pdf",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "Market Research",
+      "materialType": "NOTE",
+      "topics": [
+        "Entrepreneurship Fundamentals",
+        "Feasibility Planning",
+        "Marketing and Market Research",
+        "Business Plans"
+      ],
+      "sizeMB": 0.78,
+      "sha256": "3f15f94d597ea70bddef60165814689e023e29321e9c849e6def4ed5d0db5595",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\ME 492 2025 NOTES.pdf",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "ME 492 2025 NOTES",
+      "materialType": "NOTE",
+      "topics": [
+        "Entrepreneurship Fundamentals",
+        "Creativity and Innovation",
+        "Feasibility Planning",
+        "Business Ownership and Organization",
+        "Financing New Ventures"
+      ],
+      "sizeMB": 0.26,
+      "sha256": "ceb11713a8d1aebaaf7255131ed0b98ef4b4a2b749e1ce25207b60146f604903",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\ME 492 COURSE OUTLINE 2025.pptx",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "ME 492 COURSE OUTLINE 2025",
+      "materialType": "SLIDE",
+      "topics": [
+        "Entrepreneurship Fundamentals",
+        "Creativity and Innovation",
+        "Feasibility Planning",
+        "Business Ownership and Organization",
+        "Financing New Ventures"
+      ],
+      "sizeMB": 8.41,
+      "sha256": "a0a7837ac0dbebad9878f4cf56a9f00ed778b9f390fab1099da1d72f59394efd",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Enterpreneurship\\ME 492 Group Business Idea.docx",
+      "courseCode": "ME 492",
+      "courseName": "Management and Entrepreneurship Development",
+      "title": "ME 492 Group Business Idea",
+      "materialType": "NOTE",
+      "topics": [
+        "Entrepreneurship Fundamentals",
+        "Creativity and Innovation",
+        "Marketing and Market Research",
+        "Business Plans"
+      ],
+      "sizeMB": 0.01,
+      "sha256": "88b0fd1264eafe8c28e7201eb1fb318110d3322c3875502b425a11dab4c807f8",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "FYP 2\\2nd Sem Defense PPT.pptx",
+      "courseCode": "COE 498",
+      "courseName": "Project II",
+      "title": "2nd Sem Defense PPT",
+      "materialType": "SLIDE",
+      "topics": [
+        "Project II Documentation",
+        "Database and Implementation Artifacts",
+        "Project Presentation and Defense"
+      ],
+      "sizeMB": 29.19,
+      "sha256": "9e0791db9e12a16e21218a7f87a12c94e8af77ab48cd0f68dfca2c6710a12361",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "FYP 2\\Brail Research.docx",
+      "courseCode": "COE 498",
+      "courseName": "Project II",
+      "title": "Brail Research",
+      "materialType": "NOTE",
+      "topics": [
+        "Research and Publication",
+        "Project Presentation and Defense"
+      ],
+      "sizeMB": 0.01,
+      "sha256": "527fa90c86d85483f455b702ed176ab642d65260524623c8550442646955c4e8",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "FYP 2\\brail_db.sql",
+      "courseCode": "COE 498",
+      "courseName": "Project II",
+      "title": "brail_db",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0.02,
+      "sha256": "e7136b20664e5ed99a2d3e3c41894e576da0f8e525fd98cd368082c5a953f972",
+      "status": "SKIPPED",
+      "reason": "Unsupported extension .sql."
+    },
+    {
+      "sourceRelativePath": "FYP 2\\KNUST SDG4 template_0 (2).pptx",
+      "courseCode": "COE 498",
+      "courseName": "Project II",
+      "title": "KNUST SDG4 template_0 (2)",
+      "materialType": "SLIDE",
+      "topics": [],
+      "sizeMB": 8.05,
+      "sha256": "eab53176f58c3be64b138084836fc97f94dee56fd0c34288132dd2633a3663ba",
+      "status": "SKIPPED",
+      "reason": "Very little text was extracted; skipped because the importer cannot produce searchable chunks."
+    },
+    {
+      "sourceRelativePath": "FYP 2\\study planner.docx",
+      "courseCode": "COE 498",
+      "courseName": "Project II",
+      "title": "study planner",
+      "materialType": "NOTE",
+      "topics": [
+        "Project II Documentation",
+        "Project Presentation and Defense"
+      ],
+      "sizeMB": 0.01,
+      "sha256": "f4bd454ed410cccb46582052ebcbfc9c3688c73c85165e90241eacba0919e420",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "FYP 2\\Technical.docx",
+      "courseCode": "COE 498",
+      "courseName": "Project II",
+      "title": "Technical",
+      "materialType": "NOTE",
+      "topics": [
+        "Project II Documentation",
+        "Research and Publication",
+        "Database and Implementation Artifacts",
+        "Project Presentation and Defense"
+      ],
+      "sizeMB": 0.02,
+      "sha256": "b46d4bb6657e73ac8427081d4de50a2f4ff2c85cdb4a6e9fc37c644cc2d31f40",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "FYP 2\\testing.docx",
+      "courseCode": "COE 498",
+      "courseName": "Project II",
+      "title": "testing",
+      "materialType": "NOTE",
+      "topics": [
+        "Project II Documentation",
+        "Database and Implementation Artifacts",
+        "Testing and Validation",
+        "Project Presentation and Defense"
+      ],
+      "sizeMB": 0.06,
+      "sha256": "92ad4152dc137fe166969fcbb184960a5f70b63fc13ad2ac7f6ff2f6ffdd5833",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "FYP 2\\things to add.docx",
+      "courseCode": "COE 498",
+      "courseName": "Project II",
+      "title": "things to add",
+      "materialType": "NOTE",
+      "topics": [
+        "Project II Documentation",
+        "Project Presentation and Defense"
+      ],
+      "sizeMB": 0.01,
+      "sha256": "b5479155ad1396096504dc234b286ea9b5466d95d9be7261c3247c186ee408c4",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Secure Network Systems\\COE456_Lecture2_Chapter1_100_MCQ_Exam.pdf",
+      "courseCode": "COE 456",
+      "courseName": "Secure Network Systems",
+      "title": "COE456_Lecture2_Chapter1_100_MCQ_Exam",
+      "materialType": "SLIDE",
+      "topics": [
+        "Secure Network Systems Fundamentals",
+        "Cryptography",
+        "Network Attacks and Defenses",
+        "Security Laboratories",
+        "Security Assessment"
+      ],
+      "sizeMB": 0.24,
+      "sha256": "7dc021cd3f142abacc6b183d1b66670c52687c4266b28d9bfecdaffdf4682fc4",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Secure Network Systems\\Computer Security Lab Report.docx",
+      "courseCode": "COE 456",
+      "courseName": "Secure Network Systems",
+      "title": "Computer Security Lab Report",
+      "materialType": "NOTE",
+      "topics": [
+        "Secure Network Systems Fundamentals",
+        "Cryptography",
+        "Network Attacks and Defenses",
+        "Security Laboratories",
+        "Security Assessment"
+      ],
+      "sizeMB": 0.02,
+      "sha256": "81c8abb4e3aea01cafcb88870b9996a172231ff723308f7d623c938b44a9daa2",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Secure Network Systems\\Cryptography and Network Security Principles and Practice, Global Edition, 8th (William Stallings) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "courseCode": "COE 456",
+      "courseName": "Secure Network Systems",
+      "title": "Cryptography and Network Security Principles and Practice, Global Edition, 8th (William Stallings) (z-library.sk, 1lib.sk, z-lib.sk)",
+      "materialType": "NOTE",
+      "topics": [
+        "Secure Network Systems Fundamentals",
+        "Cryptography",
+        "Network Attacks and Defenses",
+        "Security Laboratories",
+        "Security Assessment"
+      ],
+      "sizeMB": 19.03,
+      "sha256": "121426546a6e6f0308de71de1f0205567217a9db03ed8b57f0bf0a533e7fbfd5",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Secure Network Systems\\Lab - TCP Attacks.pdf",
+      "courseCode": "COE 456",
+      "courseName": "Secure Network Systems",
+      "title": "Lab - TCP Attacks",
+      "materialType": "NOTE",
+      "topics": [
+        "Secure Network Systems Fundamentals",
+        "Network Attacks and Defenses",
+        "Security Laboratories",
+        "Security Assessment"
+      ],
+      "sizeMB": 0.32,
+      "sha256": "cba7193855a0e76006544f27befdfb843a01b06f3cfb58151e8589871297fc3a",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Secure Network Systems\\Labsetup.zip",
+      "courseCode": "COE 456",
+      "courseName": "Secure Network Systems",
+      "title": "Labsetup",
+      "materialType": null,
+      "topics": [],
+      "sizeMB": 0,
+      "sha256": "c455fe38c8886c7211a24ff67c69dafddb7c594bfa4e930a956cf182d915ad20",
+      "status": "SKIPPED",
+      "reason": "Unsupported extension .zip."
+    },
+    {
+      "sourceRelativePath": "Secure Network Systems\\Lecture 2.pptx",
+      "courseCode": "COE 456",
+      "courseName": "Secure Network Systems",
+      "title": "Lecture 2",
+      "materialType": "SLIDE",
+      "topics": [
+        "Secure Network Systems Fundamentals",
+        "Cryptography",
+        "Network Attacks and Defenses",
+        "Security Laboratories",
+        "Security Assessment"
+      ],
+      "sizeMB": 0.19,
+      "sha256": "a80f4fc540343efb06c2f757e519fa23e5f47493ee80870a61d8a8f0b36ba50c",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Secure Network Systems\\We  ran this.docx",
+      "courseCode": "COE 456",
+      "courseName": "Secure Network Systems",
+      "title": "We  ran this",
+      "materialType": "NOTE",
+      "topics": [
+        "General resources"
+      ],
+      "sizeMB": 0.01,
+      "sha256": "fbd350c7b0bdc7fe1fccf144ef8438f06e9e1bc40d1708acdd1dd78ea31e78bb",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\checklist.docx",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "checklist",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Practice",
+        "Requirements Discovery",
+        "Stakeholder Meetings and Notes",
+        "Software Project Documentation"
+      ],
+      "sizeMB": 0.01,
+      "sha256": "1cba8b8d0c580f653daccb3e98aa378694d4bca5bf70885c077c4ada6067264c",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\checklist.pdf",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "checklist",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Practice",
+        "Requirements Discovery",
+        "Stakeholder Meetings and Notes",
+        "Software Project Documentation"
+      ],
+      "sizeMB": 0.04,
+      "sha256": "60bf3defd5269446330ab107c9bebc10e9e70b0b32313bf2e492ea106e37e6ed",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\client_questions.docx",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "client_questions",
+      "materialType": "NOTE",
+      "topics": [
+        "Requirements Discovery",
+        "Software Project Documentation"
+      ],
+      "sizeMB": 0.02,
+      "sha256": "3765b6ecc3edd8c464e0dd5da24ada4b0e5e0846bf00f8e6b8feab0ff6d6161a",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\client_questions.pdf",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "client_questions",
+      "materialType": "NOTE",
+      "topics": [
+        "Requirements Discovery",
+        "Software Project Documentation"
+      ],
+      "sizeMB": 0.06,
+      "sha256": "fc00d2452d6343e43b3ac8186345fdf49f0d86aa407b20c7ab26aebbc6a4cac6",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\henry answers.docx",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "henry answers",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Project Documentation",
+        "Testing and Quality"
+      ],
+      "sizeMB": 0.01,
+      "sha256": "d546ae10b77387a102cf01b506655291fe5d71df9d66201b50e8ab5ae2782228",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\henry questions.docx",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "henry questions",
+      "materialType": "NOTE",
+      "topics": [
+        "Requirements Discovery",
+        "Software Project Documentation"
+      ],
+      "sizeMB": 0.02,
+      "sha256": "acc86994829b403fcb64e1366b2e40a4ef87464173f68471ed9d239097a72548",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\meeting_notes_before_today_meeting.docx",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "meeting_notes_before_today_meeting",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Practice",
+        "Requirements Discovery",
+        "Stakeholder Meetings and Notes",
+        "Software Project Documentation"
+      ],
+      "sizeMB": 0.02,
+      "sha256": "19832a8680cde4f7ea60c31274f5a9c21087cb9061a7bdb2e15430d92c6b1a9f",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\memorandum_of_understanding.docx",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "memorandum_of_understanding",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Practice",
+        "Requirements Discovery",
+        "Software Project Documentation"
+      ],
+      "sizeMB": 0.01,
+      "sha256": "1f43e012e13abd3e84a673da33a3ad0165f4527e75ecfff69bc373a804c898af",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\memorandum_of_understanding.pdf",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "memorandum_of_understanding",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Practice",
+        "Requirements Discovery",
+        "Software Project Documentation"
+      ],
+      "sizeMB": 0.06,
+      "sha256": "039367b20586b98e945d4fb3b9898d917bb3e9b270b06400f3149ff773ab61ee",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\problem_discovery_note.docx",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "problem_discovery_note",
+      "materialType": "NOTE",
+      "topics": [
+        "Requirements Discovery"
+      ],
+      "sizeMB": 0.01,
+      "sha256": "ebe7f2bb5223634ba163433e71013ad381fd283ce6be5bfd8fd880a85f91c89b",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\problem_discovery_note.pdf",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "problem_discovery_note",
+      "materialType": "NOTE",
+      "topics": [
+        "Requirements Discovery"
+      ],
+      "sizeMB": 0.03,
+      "sha256": "3b5effd75cfc1b087a402e9c1f27c1945a1f18a4663d77362c418827b171bce9",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\requirements_documents.docx",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "requirements_documents",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Practice",
+        "Requirements Discovery",
+        "Stakeholder Meetings and Notes",
+        "Software Project Documentation",
+        "Testing and Quality"
+      ],
+      "sizeMB": 0.02,
+      "sha256": "91d75e84afa7dc420ca7568fb8a7915934ba3904cafd60f8d0a75d0db439f5c8",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\site_visit_log_1.docx",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "site_visit_log_1",
+      "materialType": "NOTE",
+      "topics": [
+        "Stakeholder Meetings and Notes"
+      ],
+      "sizeMB": 0.02,
+      "sha256": "1839ce34cecd324abf30407860f780d49bc0d91962e3195044b79a332722c7dc",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\site_visit_log_2.docx",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "site_visit_log_2",
+      "materialType": "NOTE",
+      "topics": [
+        "Stakeholder Meetings and Notes"
+      ],
+      "sizeMB": 0.01,
+      "sha256": "0d8b102676b46620c86652dee66fc0604bbc89629e25ca2f3022c968fc9d95a1",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\site_visit_log_2.pdf",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "site_visit_log_2",
+      "materialType": "NOTE",
+      "topics": [
+        "Stakeholder Meetings and Notes"
+      ],
+      "sizeMB": 0.05,
+      "sha256": "c72138a0ff6d19719a35bcf45f0f9cf6eb27ce3923d33574494429644fb1e132",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\software_engineering_assignment.docx",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "software_engineering_assignment",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Practice",
+        "Requirements Discovery",
+        "Software Project Documentation",
+        "Testing and Quality"
+      ],
+      "sizeMB": 0.27,
+      "sha256": "2211e97f3fd66eefa06d016d7399efc7a5873244be1977db1c5a2943bf17ec49",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\the_mainframe_team_charter.docx",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "the_mainframe_team_charter",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Practice",
+        "Requirements Discovery",
+        "Software Project Documentation",
+        "Testing and Quality"
+      ],
+      "sizeMB": 0.1,
+      "sha256": "b1e2179b0ac901cb66f7e25278830d8529f8b7f3ec6fc3aa3bab5f48af9e753b",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\the_mainframe_team_charter.pdf",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "the_mainframe_team_charter",
+      "materialType": "NOTE",
+      "topics": [
+        "Software Engineering Practice",
+        "Requirements Discovery",
+        "Software Project Documentation",
+        "Testing and Quality"
+      ],
+      "sizeMB": 0.07,
+      "sha256": "28d69d9d47a2ef9ef937ead46d6fd01c55c76b86cecbbb6d7f987b0da9de26cd",
+      "status": "APPROVED",
+      "reason": null
+    },
+    {
+      "sourceRelativePath": "Software Engineering 2\\visit_1_notes.docx",
+      "courseCode": "COE 454",
+      "courseName": "Software Engineering",
+      "title": "visit_1_notes",
+      "materialType": "NOTE",
+      "topics": [
+        "General resources"
+      ],
+      "sizeMB": 0.01,
+      "sha256": "f5ee47d71553dc47dc788503fb156086769ea07ecb9897ef91858b26922c767d",
+      "status": "APPROVED",
+      "reason": null
+    }
+  ]
+}

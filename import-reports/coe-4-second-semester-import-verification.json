@@ -1,0 +1,75 @@
+{
+  "verifiedAt": "2026-08-10T05:02:56.942Z",
+  "expectedApprovedFiles": 49,
+  "publishedFiles": 49,
+  "missingHashes": [],
+  "materialsWithoutStorage": [],
+  "materialsWithoutChunks": [],
+  "materialsWithoutTopics": [],
+  "courses": [
+    {
+      "code": "COE 454",
+      "topics": [
+        "Software Engineering Practice",
+        "Requirements Discovery",
+        "Stakeholder Meetings and Notes",
+        "Software Project Documentation",
+        "Testing and Quality",
+        "General resources"
+      ],
+      "importedMaterials": 19,
+      "searchableChunks": 51
+    },
+    {
+      "code": "COE 456",
+      "topics": [
+        "Secure Network Systems Fundamentals",
+        "Cryptography",
+        "Network Attacks and Defenses",
+        "Security Laboratories",
+        "Security Assessment",
+        "General resources"
+      ],
+      "importedMaterials": 6,
+      "searchableChunks": 1374
+    },
+    {
+      "code": "COE 472",
+      "topics": [
+        "DSP Fundamentals",
+        "Digital Filters",
+        "Fourier and Z-Transform Methods",
+        "DSP Projects",
+        "DSP Laboratories"
+      ],
+      "importedMaterials": 2,
+      "searchableChunks": 15
+    },
+    {
+      "code": "COE 498",
+      "topics": [
+        "Project II Documentation",
+        "Database and Implementation Artifacts",
+        "Project Presentation and Defense",
+        "Research and Publication",
+        "Testing and Validation"
+      ],
+      "importedMaterials": 6,
+      "searchableChunks": 40
+    },
+    {
+      "code": "ME 492",
+      "topics": [
+        "Entrepreneurship Fundamentals",
+        "Creativity and Innovation",
+        "Feasibility Planning",
+        "Business Ownership and Organization",
+        "Financing New Ventures",
+        "Marketing and Market Research",
+        "Business Plans"
+      ],
+      "importedMaterials": 16,
+      "searchableChunks": 187
+    }
+  ]
+}

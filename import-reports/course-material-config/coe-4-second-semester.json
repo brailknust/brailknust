@@ -1,0 +1,54 @@
+{
+  "termSlug": "coe-4-second-semester",
+  "reportTitle": "Computer Engineering - Year 4, Second Semester import dry run",
+  "courseMappings": [
+    { "folderIncludes": "Digital Signal Processing", "code": "COE 472", "name": "Digital Signal Processing" },
+    { "folderIncludes": "Enterpreneurship", "code": "ME 492", "name": "Management and Entrepreneurship Development" },
+    { "folderIncludes": "FYP 2", "code": "COE 498", "name": "Project II" },
+    { "folderIncludes": "Secure Network Systems", "code": "COE 456", "name": "Secure Network Systems" },
+    { "folderIncludes": "Software Engineering 2", "code": "COE 454", "name": "Software Engineering" }
+  ],
+  "topicRules": {
+    "COE 472": [
+      ["DSP Fundamentals", ["digital signal processing", "dsp", "signal processing", "discrete-time"]],
+      ["Digital Filters", ["digital filter", "fir", "iir", "filter design", "frequency response"]],
+      ["Fourier and Z-Transform Methods", ["fourier", "z-transform", "dtft", "dft", "fft"]],
+      ["DSP Laboratories", ["lab", "matlab", "experiment", "bach_fugue"]],
+      ["DSP Projects", ["project", "implementation", "design"]]
+    ],
+    "ME 492": [
+      ["Entrepreneurship Fundamentals", ["entrepreneurship", "entrepreneur", "new venture", "startup"]],
+      ["Creativity and Innovation", ["creativity", "innovation", "idea generation", "creative"]],
+      ["Feasibility Planning", ["feasibility", "business feasibility", "venture feasibility", "planning"]],
+      ["Business Ownership and Organization", ["business ownership", "forms of business", "organising", "organizing"]],
+      ["Financing New Ventures", ["financing", "finance", "funding", "capital", "new venture"]],
+      ["Marketing and Market Research", ["marketing plan", "market research", "customer", "market"]],
+      ["Business Plans", ["business plan", "business idea", "group business"]]
+    ],
+    "COE 498": [
+      ["Project II Documentation", ["technical", "documentation", "things to add", "study planner"]],
+      ["Research and Publication", ["research", "sdg", "template", "paper", "journal"]],
+      ["Database and Implementation Artifacts", ["database", "sql", "brail_db", "implementation"]],
+      ["Testing and Validation", ["testing", "validation", "test"]],
+      ["Project Presentation and Defense", ["defense", "presentation", "ppt", "timetable"]]
+    ],
+    "COE 456": [
+      ["Secure Network Systems Fundamentals", ["secure network", "network security", "computer security", "security"]],
+      ["Cryptography", ["cryptography", "encryption", "cipher", "public key", "symmetric"]],
+      ["Network Attacks and Defenses", ["tcp attacks", "attack", "threat", "vulnerability", "defense"]],
+      ["Security Laboratories", ["lab", "labsetup", "lab report", "experiment"]],
+      ["Security Assessment", ["mcq", "exam", "assessment", "question"]]
+    ],
+    "COE 454": [
+      ["Software Engineering Practice", ["software engineering", "assignment", "project", "team charter"]],
+      ["Requirements Discovery", ["requirements", "client questions", "problem discovery", "questions"]],
+      ["Stakeholder Meetings and Notes", ["meeting", "site visit", "visit notes", "meeting notes"]],
+      ["Software Project Documentation", ["checklist", "memorandum", "mou", "document"]],
+      ["Testing and Quality", ["test", "testing", "quality", "validation"]]
+    ]
+  },
+  "topicOverrides": [],
+  "skipRules": [
+    { "courseCode": "COE 498", "fileName": "KNUST SDG4 template_0 (2).pptx", "reason": "Very little text was extracted; skipped because the importer cannot produce searchable chunks." }
+  ]
+}
