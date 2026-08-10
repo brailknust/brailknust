@@ -1,10 +1,23 @@
 import Link from "next/link";
-import { Bell, CheckCheck, Clock3, ExternalLink, Trash2 } from "lucide-react";
+import {
+  AlarmClock,
+  Bell,
+  BookOpen,
+  CheckCheck,
+  Clock3,
+  ClipboardCheck,
+  ExternalLink,
+  MessageSquare,
+  Settings2,
+  Trash2,
+  Users,
+} from "lucide-react";
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
 import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { BrowserAlertSettings } from "@/app/notifications/browser-alert-settings";
+import { StudySessionPanel } from "@/app/notifications/study-session-panel";
 import { requireAppUser } from "@/features/auth/queries";
 import {
   deleteNotification,
@@ -12,11 +25,31 @@ import {
   updateNotificationPreferences,
   updateNotificationReadState,
 } from "@/features/notifications/actions";
-import { getNotificationCenterData } from "@/features/notifications/queries";
+import { getNotificationCenterData, getStudySessionPanelData } from "@/features/notifications/queries";
+import { respondToAttendance } from "@/features/tracking/actions";
+import { reconcileAcademicTracking } from "@/features/tracking/service";
 
 type NotificationsPageProps = {
   searchParams: Promise<{ view?: string }>;
 };
+
+type CenterNotification = Awaited<ReturnType<typeof getNotificationCenterData>>["notifications"][number];
+
+const sectionMeta = {
+  ATTENDANCE: { label: "Attendance", icon: ClipboardCheck },
+  STUDY_PLAN: { label: "Study & sessions", icon: BookOpen },
+  DEADLINE: { label: "Deadlines", icon: AlarmClock },
+  GROUP: { label: "Study groups", icon: Users },
+  SYSTEM: { label: "System", icon: Settings2 },
+} as const;
+const sectionOrder = ["ATTENDANCE", "STUDY_PLAN", "DEADLINE", "GROUP", "SYSTEM"] as const;
+
+const attendanceOptions = [
+  { status: "ATTENDED", label: "Attended" },
+  { status: "MISSED", label: "Missed" },
+  { status: "CANCELLED", label: "Cancelled" },
+  { status: "EXCUSED", label: "Excused" },
+] as const;
 
 function dateLabel(value: Date) {
   return new Intl.DateTimeFormat("en-GH", {
@@ -25,12 +58,105 @@ function dateLabel(value: Date) {
   }).format(value);
 }
 
+function NotificationCard({ notification }: { notification: CenterNotification }) {
+  const isAttendance = notification.type === "ATTENDANCE";
+  const attendanceResolved = isAttendance && notification.attendanceStatus && notification.attendanceStatus !== "UNCONFIRMED";
+
+  return (
+    <article className={`rounded-2xl border p-4 ${notification.isRead ? "border-border bg-white" : "border-accent/50 bg-surface"}`}>
+      <div className="flex items-start gap-3">
+        <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${notification.isRead ? "bg-surface text-muted" : "bg-accent text-white"}`}>
+          <Bell className="h-4 w-4" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h3 className="font-semibold">{notification.title}</h3>
+              <p className="mt-1 text-sm leading-6 text-muted">{notification.message}</p>
+            </div>
+            <span className="shrink-0 text-xs text-muted">{dateLabel(notification.createdAt)}</span>
+          </div>
+
+          {isAttendance && notification.attendanceRecordId ? (
+            <div className="mt-4 grid gap-2">
+              {attendanceResolved ? (
+                <p className="flex items-center gap-1.5 text-xs font-semibold text-accent">
+                  <CheckCheck className="h-3.5 w-3.5" /> Marked {notification.attendanceStatus?.toLowerCase()}
+                </p>
+              ) : (
+                <div className="flex flex-wrap items-center gap-2">
+                  {attendanceOptions.map((option) => (
+                    <form key={option.status} action={respondToAttendance}>
+                      <input type="hidden" name="attendanceId" value={notification.attendanceRecordId!} />
+                      <input type="hidden" name="status" value={option.status} />
+                      <PendingSubmitButton pendingLabel="Saving..." className="h-9 rounded-xl border border-border px-3 text-sm font-semibold text-muted hover:border-accent hover:text-accent">
+                        {option.label}
+                      </PendingSubmitButton>
+                    </form>
+                  ))}
+                </div>
+              )}
+              {notification.actionUrl ? (
+                <Link href={notification.actionUrl} className="inline-flex w-fit items-center gap-2 text-xs font-semibold text-accent hover:underline">
+                  <MessageSquare className="h-3.5 w-3.5" /> Share what you learnt in this course&apos;s AI chat
+                </Link>
+              ) : null}
+            </div>
+          ) : null}
+
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            {!isAttendance && notification.actionUrl ? (
+              <Link href={"/notifications/" + notification.id + "/open"} className="inline-flex h-9 items-center gap-2 rounded-xl bg-[var(--accent-strong)] px-3 text-sm font-semibold text-white">
+                Open <ExternalLink className="h-3.5 w-3.5" />
+              </Link>
+            ) : null}
+            <form action={updateNotificationReadState}>
+              <input type="hidden" name="id" value={notification.id} />
+              <input type="hidden" name="isRead" value={notification.isRead ? "false" : "true"} />
+              <PendingSubmitButton pendingLabel="Updating..." className="h-9 rounded-xl border border-border px-3 text-sm font-semibold text-muted hover:text-foreground">
+                Mark {notification.isRead ? "unread" : "read"}
+              </PendingSubmitButton>
+            </form>
+            <form action={deleteNotification} className="ml-auto">
+              <input type="hidden" name="id" value={notification.id} />
+              <ConfirmSubmitButton
+                message="Dismiss this notification? It will remain in your history."
+                className="grid h-9 w-9 place-items-center rounded-xl border border-red-300 text-red-600"
+                aria-label="Dismiss notification"
+                title="Dismiss notification"
+              >
+                <Trash2 className="h-4 w-4" />
+              </ConfirmSubmitButton>
+            </form>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export default async function NotificationsPage({ searchParams }: NotificationsPageProps) {
   const { appUser } = await requireAppUser();
   const params = await searchParams;
   const view = ["active", "unread", "history", "missed"].includes(params.view ?? "") ? params.view! : "active";
-  const data = await getNotificationCenterData(appUser.id, view);
+
+  if (appUser.activeSemesterId) {
+    await reconcileAcademicTracking(appUser.id, appUser.activeSemesterId);
+  }
+
+  const [data, studySessionData] = await Promise.all([
+    getNotificationCenterData(appUser.id, view),
+    getStudySessionPanelData(appUser.id, appUser.activeSemesterId),
+  ]);
   const preferences = data.preferences;
+
+  const sections = sectionOrder
+    .map((type) => ({
+      type,
+      meta: sectionMeta[type],
+      items: data.notifications.filter((notification) => notification.type === type),
+    }))
+    .filter((section) => section.items.length > 0);
 
   return (
     <AppShell title="Notifications" eyebrow="Reminders">
@@ -39,7 +165,7 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
           <div>
             <p className="text-sm text-white/65">Notification center</p>
             <h2 className="mt-2 text-2xl font-semibold">{data.unreadCount} unread</h2>
-            <p className="mt-2 text-sm text-white/70">Deadlines, study sessions, groups, goals, and peer answers</p>
+            <p className="mt-2 text-sm text-white/70">Deadlines, study sessions, attendance, groups, and goals</p>
           </div>
           {data.unreadCount ? (
             <form action={markAllNotificationsRead}>
@@ -51,6 +177,13 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
         </div>
       </section>
 
+      <div className="mt-6">
+        <StudySessionPanel
+          active={studySessionData.active}
+          upcoming={studySessionData.upcoming}
+        />
+      </div>
+
       <div className="mt-6 grid gap-6 xl:grid-cols-[1.25fr_0.75fr]">
         <section>
           <nav className="flex gap-2 border-b border-border">
@@ -60,49 +193,16 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
             <Link href="/notifications?view=history" className={`border-b-2 px-4 py-3 text-sm font-semibold ${view === "history" ? "border-accent text-accent" : "border-transparent text-muted"}`}>History</Link>
           </nav>
 
-          <div className="mt-5 grid gap-3">
-            {data.notifications.length ? data.notifications.map((notification) => (
-              <article key={notification.id} className={`rounded-2xl border p-4 ${notification.isRead ? "border-border bg-white" : "border-accent/50 bg-surface"}`}>
-                <div className="flex items-start gap-3">
-                  <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${notification.isRead ? "bg-surface text-muted" : "bg-accent text-white"}`}>
-                    <Bell className="h-4 w-4" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                      <div>
-                        <h3 className="font-semibold">{notification.title}</h3>
-                        <p className="mt-1 text-sm leading-6 text-muted">{notification.message}</p>
-                      </div>
-                      <span className="shrink-0 text-xs text-muted">{dateLabel(notification.createdAt)}</span>
-                    </div>
-                    <div className="mt-4 flex flex-wrap items-center gap-2">
-                      {notification.actionUrl ? (
-                        <Link href={"/notifications/" + notification.id + "/open"} className="inline-flex h-9 items-center gap-2 rounded-xl bg-[var(--accent-strong)] px-3 text-sm font-semibold text-white">
-                          Open <ExternalLink className="h-3.5 w-3.5" />
-                        </Link>
-                      ) : null}
-                      <form action={updateNotificationReadState}>
-                        <input type="hidden" name="id" value={notification.id} />
-                        <input type="hidden" name="isRead" value={notification.isRead ? "false" : "true"} />
-                        <PendingSubmitButton pendingLabel="Updating..." className="h-9 rounded-xl border border-border px-3 text-sm font-semibold text-muted hover:text-foreground">
-                          Mark {notification.isRead ? "unread" : "read"}
-                        </PendingSubmitButton>
-                      </form>
-                      <form action={deleteNotification} className="ml-auto">
-                        <input type="hidden" name="id" value={notification.id} />
-                        <ConfirmSubmitButton
-                          message="Dismiss this notification? It will remain in your history."
-                          className="grid h-9 w-9 place-items-center rounded-xl border border-red-300 text-red-600"
-                          aria-label="Dismiss notification"
-                          title="Dismiss notification"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </ConfirmSubmitButton>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </article>
+          <div className="mt-5 grid gap-6">
+            {sections.length ? sections.map((section) => (
+              <div key={section.type} className="grid gap-3">
+                <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted">
+                  <section.meta.icon className="h-3.5 w-3.5" /> {section.meta.label}
+                </h3>
+                {section.items.map((notification) => (
+                  <NotificationCard key={notification.id} notification={notification} />
+                ))}
+              </div>
             )) : (
               <div className="rounded-2xl border border-dashed border-border p-8 text-center">
                 <CheckCheck className="mx-auto h-6 w-6 text-accent" />

@@ -89,6 +89,7 @@ enum NotificationType {
   STUDY_PLAN
   GROUP
   SYSTEM
+  ATTENDANCE
 }
 
 enum NotificationStatus {
