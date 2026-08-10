@@ -87,14 +87,12 @@ test.describe.serial("critical student journeys", () => {
 
     await expect(page.getByRole("heading", { name: `Ask BRAIL about ${fixture.courseName}` })).toBeVisible();
     await page.getByRole("button", { name: "Attach material" }).click();
-    await page.getByPlaceholder("Material title").fill(`Phase 2 upload ${fixture.runId}`);
-    await page.getByPlaceholder("Topic (optional, e.g. Power cables)").fill("Queue fundamentals");
     await page.getByLabel("Choose file").setInputFiles({
       name: "phase-two-notes.txt",
       mimeType: "text/plain",
       buffer: Buffer.from("Queue operations include enqueue and dequeue. A queue uses first-in first-out ordering for every stored item."),
     });
-    await page.getByRole("button", { name: "Upload for this chat" }).click();
+    await page.getByRole("button", { name: "Upload", exact: true }).click();
 
     await expect(page.getByText("File processed. BRAIL can now use it in this course chat.")).toBeVisible();
   });

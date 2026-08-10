@@ -12,7 +12,7 @@ type ChatMaterialUploadProps = {
   topics: Array<{ id: string; title: string }>;
 };
 
-function titleFromFileName(fileName: string) {
+export function titleFromFileName(fileName: string) {
   const withoutExtension = fileName.replace(/\.[^./\\]+$/, "");
   const cleaned = withoutExtension.replace(/[_-]+/g, " ").trim();
   return (cleaned || "Untitled material").slice(0, 160);
@@ -94,6 +94,7 @@ export function ChatMaterialUpload({
             name="file"
             type="file"
             required
+            aria-label="Choose file"
             onChange={handleFileChange}
             accept=".pdf,.docx,.pptx,.txt,.md,.png,.jpg,.jpeg,.webp"
             className="min-w-0 flex-1 rounded-md border border-dashed border-border bg-surface px-2 py-1.5 text-xs file:mr-2 file:rounded-md file:border-0 file:bg-foreground file:px-2.5 file:py-1 file:text-xs file:font-semibold file:text-background"
