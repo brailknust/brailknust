@@ -34,6 +34,10 @@ function levelLabel(level: string) {
   return level.replace("LEVEL_", "Level ");
 }
 
+function programmeCatalogKey(template: (typeof knustCurricula)[number]) {
+  return `${template.college}|${template.department}|${template.program}|${template.version}`;
+}
+
 type AdminProgrammeCatalogPageProps = {
   searchParams: Promise<{
     import?: string;
@@ -107,6 +111,23 @@ export default async function AdminProgrammeCatalogPage({ searchParams }: AdminP
   const materialVerification = verifyMaterialImportReport(materialManifest, materialReport, configuredCodes);
   const storedTermCount = storedBundledCurricula.reduce((sum, curriculum) => sum + curriculum.terms.length, 0);
   const storedCourseCount = storedBundledCurricula.reduce((sum, curriculum) => sum + curriculum.terms.reduce((termSum, term) => termSum + term.courses.length, 0), 0);
+  const programmeCatalogGroups = [...knustCurricula.reduce((groups, template) => {
+    const key = programmeCatalogKey(template);
+    const existing = groups.get(key);
+    if (existing) {
+      existing.templates.push(template);
+    } else {
+      groups.set(key, {
+        college: template.college,
+        department: template.department,
+        programme: template.program,
+        version: template.version,
+        templates: [template],
+      });
+    }
+    return groups;
+  }, new Map<string, { college: string; department: string; programme: string; version: string; templates: typeof knustCurricula }>()).values()]
+    .sort((a, b) => `${a.college} ${a.programme} ${a.version}`.localeCompare(`${b.college} ${b.programme} ${b.version}`));
   function pageHref(page: number) {
     const params = new URLSearchParams();
     if (filters.query) params.set("q", filters.query);
@@ -252,59 +273,78 @@ export default async function AdminProgrammeCatalogPage({ searchParams }: AdminP
             </div>
           </section>
         ) : null}
-        {knustCurricula.map((template) => (
-          <section key={`${template.program}-${template.level}-${template.semester}`} className="rounded-2xl border border-border bg-white p-5">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-accent">{template.college}</p>
-              <h2 className="mt-1 text-lg font-semibold">{template.program}</h2>
-              <p className="mt-1 text-sm text-muted">{levelLabel(template.level)} · {template.semester} · {template.department}</p>
-            </div>
-            <div className="mt-4 grid gap-2">
-              {template.courses.map((course) => {
-                const key = `${template.program}|${template.level}|${template.semester}|${course.code}`;
-                const removal = excluded.get(key);
-                const fields = (
-                  <>
-                    <input type="hidden" name="college" value={template.college} />
-                    <input type="hidden" name="programme" value={template.program} />
-                    <input type="hidden" name="department" value={template.department} />
-                    <input type="hidden" name="level" value={template.level} />
-                    <input type="hidden" name="semester" value={template.semester} />
-                    <input type="hidden" name="courseCode" value={course.code} />
-                  </>
-                );
-                return (
-                  <div key={course.code} className={`flex items-center justify-between gap-4 rounded-xl border border-border p-3 ${removal ? "bg-surface opacity-70" : "bg-white"}`}>
-                    <div>
-                      <p className="text-sm font-semibold">{course.code} - {course.name}</p>
-                      <p className="mt-1 text-xs text-muted">
-                        {course.creditHours} credits
-                        {removal ? ` · removed by ${removal.removedBy.fullName} on ${removal.createdAt.toLocaleDateString("en-GH")}` : ""}
-                      </p>
+        {programmeCatalogGroups.map((group, groupIndex) => (
+          <details key={`${group.programme}-${group.version}`} open={groupIndex === 0} className="rounded-2xl border border-border bg-white p-5">
+            <summary className="cursor-pointer list-none">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-accent">{group.college}</p>
+                  <h2 className="mt-1 text-lg font-semibold">{group.programme}</h2>
+                  <p className="mt-1 text-sm text-muted">{group.department} · {group.version}</p>
+                </div>
+                <span className="rounded-full border border-border bg-surface px-3 py-1 text-xs font-semibold text-muted">
+                  {group.templates.reduce((sum, template) => sum + template.courses.length, 0)} courses
+                </span>
+              </div>
+            </summary>
+            <div className="mt-5 grid gap-4">
+              {group.templates
+                .sort((a, b) => `${a.level} ${a.semester}`.localeCompare(`${b.level} ${b.semester}`))
+                .map((template) => (
+                  <div key={`${template.level}-${template.semester}`} className="rounded-xl border border-border bg-surface p-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <h3 className="text-sm font-semibold">{levelLabel(template.level)} · {template.semester}</h3>
+                      <span className="text-xs text-muted">{template.courses.length} courses</span>
                     </div>
-                    {removal ? (
-                      <form action={restoreProgrammeCourse}>
-                        {fields}
-                        <PendingSubmitButton pendingLabel="Restoring..." className="inline-flex h-9 items-center gap-2 rounded-xl border border-border px-3 text-xs font-semibold">
-                          <RotateCcw className="h-3.5 w-3.5" /> Restore
-                        </PendingSubmitButton>
-                      </form>
-                    ) : (
-                      <form action={removeProgrammeCourse}>
-                        {fields}
-                        <ConfirmSubmitButton
-                          message={`Remove ${course.code} from the ${template.program} catalog? Existing student records will remain.`}
-                          className="h-9 rounded-xl border border-red-200 px-3 text-xs font-semibold text-red-600 hover:bg-red-50"
-                        >
-                          Remove
-                        </ConfirmSubmitButton>
-                      </form>
-                    )}
+                    <div className="mt-3 grid gap-2">
+                      {template.courses.map((course) => {
+                        const key = `${template.program}|${template.level}|${template.semester}|${course.code}`;
+                        const removal = excluded.get(key);
+                        const fields = (
+                          <>
+                            <input type="hidden" name="college" value={template.college} />
+                            <input type="hidden" name="programme" value={template.program} />
+                            <input type="hidden" name="department" value={template.department} />
+                            <input type="hidden" name="level" value={template.level} />
+                            <input type="hidden" name="semester" value={template.semester} />
+                            <input type="hidden" name="courseCode" value={course.code} />
+                          </>
+                        );
+                        return (
+                          <div key={course.code} className={`flex items-center justify-between gap-4 rounded-xl border border-border p-3 ${removal ? "bg-white/70 opacity-70" : "bg-white"}`}>
+                            <div>
+                              <p className="text-sm font-semibold">{course.code} - {course.name}</p>
+                              <p className="mt-1 text-xs text-muted">
+                                {course.creditHours} credits
+                                {removal ? ` · removed by ${removal.removedBy.fullName} on ${removal.createdAt.toLocaleDateString("en-GH")}` : ""}
+                              </p>
+                            </div>
+                            {removal ? (
+                              <form action={restoreProgrammeCourse}>
+                                {fields}
+                                <PendingSubmitButton pendingLabel="Restoring..." className="inline-flex h-9 items-center gap-2 rounded-xl border border-border px-3 text-xs font-semibold">
+                                  <RotateCcw className="h-3.5 w-3.5" /> Restore
+                                </PendingSubmitButton>
+                              </form>
+                            ) : (
+                              <form action={removeProgrammeCourse}>
+                                {fields}
+                                <ConfirmSubmitButton
+                                  message={`Remove ${course.code} from the ${template.program} catalog? Existing student records will remain.`}
+                                  className="h-9 rounded-xl border border-red-200 px-3 text-xs font-semibold text-red-600 hover:bg-red-50"
+                                >
+                                  Remove
+                                </ConfirmSubmitButton>
+                              </form>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
-                );
-              })}
+                ))}
             </div>
-          </section>
+          </details>
         ))}
         {!knustCurricula.length ? <p className="rounded-2xl border border-border p-5 text-sm text-muted">No programme curriculum templates are configured.</p> : null}
       </div>
