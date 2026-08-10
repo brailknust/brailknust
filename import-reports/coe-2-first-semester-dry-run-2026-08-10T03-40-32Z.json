@@ -1,0 +1,1231 @@
+{
+  "generatedAt": "2026-08-10T03:39:08.322Z",
+  "source": "C:\\Users\\jpaap\\OneDrive\\Desktop\\CoE\\CoE 2\\First Semester",
+  "mode": "DRY_RUN",
+  "termSlug": "coe-2-first-semester",
+  "reportTitle": "Computer Engineering - Year 2, First Semester import dry run",
+  "rules": {
+    "maxFileSizeMB": 50,
+    "skippedExtensions": [
+      ".ppt",
+      ".pptm"
+    ],
+    "folderPrefixesIgnored": true,
+    "supportsGeneralAndMultipleTopics": true
+  },
+  "courses": [
+    {
+      "code": "COE 261",
+      "name": "Communication Systems",
+      "sourceFolder": "Communication Systems",
+      "files": [
+        {
+          "name": "Assign_One_Solutions.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.16,
+          "sha256": "f551f4b3e557546dcf7455b45aa0fd30cec14a2e09acd43d4b2506e72b153048",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 5881,
+          "proposedTopics": [
+            "Communication Systems Fundamentals",
+            "Signals and Spectra",
+            "Digital Communication",
+            "Noise in Communication Systems"
+          ]
+        },
+        {
+          "name": "Lecture 2_Final.pptx",
+          "extension": ".pptx",
+          "sizeMB": 1.17,
+          "sha256": "490eb1c1f43a9904615ec4f97d460cf0e4ec96e1aaa1dca74a754f3b05c237f9",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 5632,
+          "proposedTopics": [
+            "Communication Systems Fundamentals",
+            "Signals and Spectra",
+            "Angle Modulation",
+            "Sampling and Pulse Modulation",
+            "Noise in Communication Systems"
+          ]
+        },
+        {
+          "name": "Lecture-1.pptx",
+          "extension": ".pptx",
+          "sizeMB": 0.52,
+          "sha256": "c542374d7fd75d4c466e9db8c82538d99719d7a2ce451561515ab3b1328fb486",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 13500,
+          "proposedTopics": [
+            "Communication Systems Fundamentals",
+            "Signals and Spectra",
+            "Amplitude Modulation",
+            "Angle Modulation",
+            "Sampling and Pulse Modulation"
+          ]
+        },
+        {
+          "name": "Lecture-7_2.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.44,
+          "sha256": "5e9371afa5974aee6258ec1eed9a9e3d7ecb56a045bc24cce84afe0bb36d5116",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 619,
+          "proposedTopics": [
+            "Communication Systems Fundamentals",
+            "Signals and Spectra",
+            "Amplitude Modulation",
+            "Angle Modulation"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 291",
+      "name": "Computer Engineering Lab",
+      "sourceFolder": "Computer Engineering Lab",
+      "files": [
+        {
+          "name": "Amenuveve's Electronics Lab Report.docx",
+          "extension": ".docx",
+          "sizeMB": 2.46,
+          "sha256": "9d19eeb5654d7ab9ca807cb5353108df6f264d7c2a676f2c6a763197fde22559",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 5633,
+          "proposedTopics": [
+            "Laboratory Safety and Procedures",
+            "Lab Report Writing",
+            "Circuit Measurements",
+            "Transistor Experiments"
+          ]
+        },
+        {
+          "name": "Bekor_Elektronis Report.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.93,
+          "sha256": "eeb3408e43931338855add8696dfd813da987e3e38e989fc2d2a745002b769d7",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 8022,
+          "proposedTopics": [
+            "Laboratory Safety and Procedures",
+            "Lab Report Writing",
+            "Circuit Measurements",
+            "Transistor Experiments"
+          ]
+        },
+        {
+          "name": "Computer Engineering Lab 1.zip",
+          "extension": ".zip",
+          "sizeMB": 11.16,
+          "sha256": "036b956c947360ab2f1ff1633950b1e09ae6ba991fc715b5b6f8250443f186df",
+          "status": "SKIPPED",
+          "warning": "Unsupported extension .zip."
+        },
+        {
+          "name": "Computer Engineering Lab Report.docx",
+          "extension": ".docx",
+          "sizeMB": 4.65,
+          "sha256": "679a9397afd5f732d10caf64a84ef35f61133f0b8f827e0df5f0aad4c41e1965",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 3361,
+          "proposedTopics": [
+            "Lab Report Writing",
+            "Circuit Measurements",
+            "Transistor Experiments"
+          ]
+        },
+        {
+          "name": "electronic lap report.docx",
+          "extension": ".docx",
+          "sizeMB": 0.93,
+          "sha256": "7f886251d8d16dcdbbf97771ad8cc9653e244891fe1b7d625595ab33e7687ec9",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 2308,
+          "proposedTopics": [
+            "Lab Report Writing",
+            "Circuit Measurements",
+            "Transistor Experiments"
+          ]
+        },
+        {
+          "name": "Electronics Lab Report 1.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.66,
+          "sha256": "7cf0275bc56ce0c536b7e0517b405e17b8eb12efb26c4514a599ebf5ffe59c67",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 10086,
+          "proposedTopics": [
+            "Laboratory Safety and Procedures",
+            "Lab Report Writing",
+            "Circuit Measurements",
+            "Transistor Experiments"
+          ]
+        },
+        {
+          "name": "SAM  LAB REPORT-1.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.86,
+          "sha256": "4014f05fc605aef5e33d1c8e098dd7896eb139e72cc9fcdcd5d7a2c9df65363b",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 7247,
+          "proposedTopics": [
+            "Laboratory Safety and Procedures",
+            "Lab Report Writing",
+            "Circuit Measurements",
+            "Transistor Experiments"
+          ]
+        },
+        {
+          "name": "TEMI KEMOKO ARA.docx",
+          "extension": ".docx",
+          "sizeMB": 2.11,
+          "sha256": "1f25dd5bc7fcb6f1d0a79b8aa96a9739885708c0ff2efdcb725d11fed7a71f8a",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 7843,
+          "proposedTopics": [
+            "Laboratory Safety and Procedures",
+            "Lab Report Writing",
+            "Circuit Measurements",
+            "Transistor Experiments"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "MATH 251",
+      "name": "Differential Equations",
+      "sourceFolder": "Differential Equations",
+      "files": [
+        {
+          "name": "Assignment_2.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.08,
+          "sha256": "03b105eeef5b5b62f3a4ebbc69bd3971fe5a50bad8732c845c5c63cfdc4bec9e",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 472,
+          "proposedTopics": [
+            "Second-Order Differential Equations"
+          ]
+        },
+        {
+          "name": "differential equation - distance students.pdf",
+          "extension": ".pdf",
+          "sizeMB": 3.63,
+          "sha256": "aa2e4d444070c93cd97a6cedf0df4a80990a6a98fd02ea4182703e0e2dcc364e",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 285098,
+          "proposedTopics": [
+            "First-Order Differential Equations",
+            "Second-Order Differential Equations",
+            "Laplace Transforms",
+            "Series Solutions",
+            "Systems of Differential Equations"
+          ]
+        },
+        {
+          "name": "differential equation.pdf",
+          "extension": ".pdf",
+          "sizeMB": 3.63,
+          "sha256": "aa2e4d444070c93cd97a6cedf0df4a80990a6a98fd02ea4182703e0e2dcc364e",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 285098,
+          "proposedTopics": [
+            "First-Order Differential Equations",
+            "Second-Order Differential Equations",
+            "Laplace Transforms",
+            "Series Solutions",
+            "Systems of Differential Equations"
+          ]
+        },
+        {
+          "name": "Differential Equations .pdf",
+          "extension": ".pdf",
+          "sizeMB": 3.42,
+          "sha256": "a0bb776106c5a1bff7991f5f1e63621251bcb68c98f36d5ab3c1d61dc39fdff6",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 961814,
+          "proposedTopics": [
+            "First-Order Differential Equations",
+            "Second-Order Differential Equations",
+            "Laplace Transforms",
+            "Series Solutions",
+            "Systems of Differential Equations"
+          ]
+        },
+        {
+          "name": "Laplace_transform_L13 (2).pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.44,
+          "sha256": "70ee6851481d9d8b34fd0b07426c080b8b4f09969417d2a6e610f8ca33513945",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 26805,
+          "proposedTopics": [
+            "First-Order Differential Equations",
+            "Second-Order Differential Equations",
+            "Laplace Transforms",
+            "Applications of Differential Equations"
+          ]
+        },
+        {
+          "name": "Laplace_Transform_L13.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.44,
+          "sha256": "73afd0c4c2cc594a9c88fb7f33506bbfc45772292394aab6f646e7b26d3ccc3f",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 26722,
+          "proposedTopics": [
+            "First-Order Differential Equations",
+            "Second-Order Differential Equations",
+            "Laplace Transforms",
+            "Applications of Differential Equations"
+          ]
+        },
+        {
+          "name": "Lecture_1.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.23,
+          "sha256": "6906d75a34f1b2a573dfe40426c1d3b1d133bc51ad0b0d48c6d81354ff55405f",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 13301,
+          "proposedTopics": [
+            "First-Order Differential Equations",
+            "Second-Order Differential Equations",
+            "Applications of Differential Equations"
+          ]
+        },
+        {
+          "name": "Lecture_10.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.32,
+          "sha256": "97aa91ed1a13f8cd7d38a80895ac4091883f41bb30e5e8ba781ce2ceb481d6ef",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 21959,
+          "proposedTopics": [
+            "Second-Order Differential Equations",
+            "Laplace Transforms"
+          ]
+        },
+        {
+          "name": "Lecture_11.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.42,
+          "sha256": "102886d5bcf257c6700c63b5c37e81c2b5f0bf834816437433f5dd41b9e70150",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 23732,
+          "proposedTopics": [
+            "First-Order Differential Equations",
+            "Second-Order Differential Equations",
+            "Applications of Differential Equations"
+          ]
+        },
+        {
+          "name": "Lecture_15.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.26,
+          "sha256": "8aba60330a51cf11c712574984fff17642f6aab95f849c7aaf4c98f3be7e1369",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 11093,
+          "proposedTopics": [
+            "First-Order Differential Equations",
+            "Laplace Transforms",
+            "Applications of Differential Equations"
+          ]
+        },
+        {
+          "name": "Lecture_2.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.27,
+          "sha256": "da8940ed0edc53033e38e398621552a5345bca077c1107783d4c8a51c37cb778",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 16050,
+          "proposedTopics": [
+            "Applications of Differential Equations"
+          ]
+        },
+        {
+          "name": "Lecture_3.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.39,
+          "sha256": "f326d29a7fb663fbd2995db873a7ecc7784ec825b32ca230387db5e3029b37bb",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 22754,
+          "proposedTopics": [
+            "First-Order Differential Equations",
+            "Laplace Transforms",
+            "Applications of Differential Equations"
+          ]
+        },
+        {
+          "name": "Lecture_4.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.26,
+          "sha256": "24ffcd17eea55a54adb5fe3d84625912bb5f4ac55f5fa9fa2cad5545ee7bb795",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 11764,
+          "proposedTopics": [
+            "First-Order Differential Equations",
+            "Second-Order Differential Equations",
+            "Laplace Transforms"
+          ]
+        },
+        {
+          "name": "Lecture_5.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.19,
+          "sha256": "7cf83a4278fef257381336025583369634b99874d9e776ee2d44f7b1176b45ed",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 7322,
+          "proposedTopics": [
+            "First-Order Differential Equations",
+            "Second-Order Differential Equations",
+            "Laplace Transforms"
+          ]
+        },
+        {
+          "name": "Lecture_6.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.26,
+          "sha256": "c407ac97a0e3a080f05f35c0fba7d211c3cfef5c1d23cb91aad0bca2ed20929b",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 13934,
+          "proposedTopics": [
+            "First-Order Differential Equations"
+          ]
+        },
+        {
+          "name": "Lecture_9.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.27,
+          "sha256": "a9d02be740ce8717f1732215f1bf9731ce165628008aa5cf04886d858544ce89",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 16789,
+          "proposedTopics": [
+            "First-Order Differential Equations",
+            "Second-Order Differential Equations"
+          ]
+        },
+        {
+          "name": "Lecture__5.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.19,
+          "sha256": "7cf83a4278fef257381336025583369634b99874d9e776ee2d44f7b1176b45ed",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 7322,
+          "proposedTopics": [
+            "First-Order Differential Equations",
+            "Second-Order Differential Equations",
+            "Laplace Transforms"
+          ]
+        },
+        {
+          "name": "Paul Dawkins - Differential Equations.pdf",
+          "extension": ".pdf",
+          "sizeMB": 3.42,
+          "sha256": "a0bb776106c5a1bff7991f5f1e63621251bcb68c98f36d5ab3c1d61dc39fdff6",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 961814,
+          "proposedTopics": [
+            "First-Order Differential Equations",
+            "Second-Order Differential Equations",
+            "Laplace Transforms",
+            "Series Solutions",
+            "Systems of Differential Equations"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 253",
+      "name": "Discrete Structures",
+      "sourceFolder": "Discrete Structures",
+      "files": [
+        {
+          "name": "2.0.Set_Theory_123222.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.6,
+          "sha256": "c5f8d250c33cc4d90bf8e9e9c15c492eedd5c945981c324fe778573780cf0e11",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 53744,
+          "proposedTopics": [
+            "Logic and Proofs",
+            "Set Theory",
+            "Relations and Functions",
+            "Graph Theory"
+          ]
+        },
+        {
+          "name": "LOGIC AND SET THEORY.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.87,
+          "sha256": "bcc17acd221cdee7066590e327bf92239fd9371f10d6825fef75c3b3ccf279c8",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 105337,
+          "proposedTopics": [
+            "Logic and Proofs",
+            "Set Theory",
+            "Relations and Functions",
+            "Counting and Combinatorics",
+            "Graph Theory"
+          ]
+        },
+        {
+          "name": "Rosen,_Kenneth_H_Discrete_mathematics_and_its_applications_McGraw.pdf",
+          "extension": ".pdf",
+          "sizeMB": 8.32,
+          "sha256": "f32402f6aba79927074dc461f3f90ddb92fbbe1dd2cff88e29ddd5542ef4847a",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 3827670,
+          "proposedTopics": [
+            "Logic and Proofs",
+            "Set Theory",
+            "Relations and Functions",
+            "Counting and Combinatorics",
+            "Graph Theory"
+          ]
+        },
+        {
+          "name": "Schaum's Outline of Discrete Mathematics, Third Edition (Schaum's  ( PDFDrive ).pdf",
+          "extension": ".pdf",
+          "sizeMB": 3.98,
+          "sha256": "7f2f26178b447b87b7fb169eff9f74f7a300307373555d8ba0005166489b9d0a",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 1065338,
+          "proposedTopics": [
+            "Logic and Proofs",
+            "Set Theory",
+            "Relations and Functions",
+            "Counting and Combinatorics",
+            "Graph Theory"
+          ]
+        },
+        {
+          "name": "Set Theory.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.6,
+          "sha256": "c5f8d250c33cc4d90bf8e9e9c15c492eedd5c945981c324fe778573780cf0e11",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 53744,
+          "proposedTopics": [
+            "Logic and Proofs",
+            "Set Theory",
+            "Relations and Functions",
+            "Graph Theory"
+          ]
+        },
+        {
+          "name": "WhatsApp Image 2024-01-28 at 21.14.16_11b2a845.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.04,
+          "sha256": "1f7bfd7d8483782501e14cc6bcade58b019da0247fcd64ed5eb34427e7d2c859",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "ECON 151",
+      "name": "Economics",
+      "sourceFolder": "Economics",
+      "files": [
+        {
+          "name": "ECON 151 Lecture 1.pptx",
+          "extension": ".pptx",
+          "sizeMB": 0.69,
+          "sha256": "d9d6eb0cf31c3d739b8bba4c01c0ae4c969e1255cdea640535105d5796e18bbd",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 23937,
+          "proposedTopics": [
+            "Introduction to Economics",
+            "Demand and Supply",
+            "Consumer Behaviour",
+            "Production and Costs",
+            "Macroeconomic Concepts"
+          ]
+        },
+        {
+          "name": "Econ 151 Lecture 2A.ppt",
+          "extension": ".ppt",
+          "sizeMB": 0.81,
+          "sha256": "60db4ee6f4a9902e728ffde3b5db8a617b24792df104c7dce3b741ea7ffccb3c",
+          "status": "SKIPPED",
+          "warning": "Legacy .ppt is intentionally skipped."
+        },
+        {
+          "name": "Econ 151 Lecture 2B.pptx",
+          "extension": ".pptx",
+          "sizeMB": 0.79,
+          "sha256": "4d88a836933ba839df503ad7e0713071939e905e86b66dcf8055357875405c93",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 12365,
+          "proposedTopics": [
+            "Demand and Supply",
+            "Consumer Behaviour",
+            "Production and Costs",
+            "Macroeconomic Concepts"
+          ]
+        },
+        {
+          "name": "ECON 151 Lecture 3.pptx",
+          "extension": ".pptx",
+          "sizeMB": 0.79,
+          "sha256": "b5dbc69243b5570bd85b90521204be82628e3e6b1df5432b49f463cc9a9f9550",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 9351,
+          "proposedTopics": [
+            "Demand and Supply",
+            "Elasticity",
+            "Consumer Behaviour",
+            "Production and Costs"
+          ]
+        },
+        {
+          "name": "Econ 151 Lecture 4A.pptx",
+          "extension": ".pptx",
+          "sizeMB": 0.62,
+          "sha256": "64d17a0a8e567f4d0b0f32cb0eabc4d0f4e4c4d855e9ec979f89ef7f8a5c4bd2",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 12908,
+          "proposedTopics": [
+            "Demand and Supply",
+            "Consumer Behaviour",
+            "Production and Costs",
+            "Macroeconomic Concepts"
+          ]
+        },
+        {
+          "name": "Econ 151 Lecture 4B.pptx",
+          "extension": ".pptx",
+          "sizeMB": 0.51,
+          "sha256": "c590a1aab3a0c266b923ba2760c5db50c66279665ecd6548480b779c04a6503f",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 6561,
+          "proposedTopics": [
+            "Introduction to Economics",
+            "Demand and Supply",
+            "Consumer Behaviour"
+          ]
+        },
+        {
+          "name": "Econ 151 Lecture 5.ppt",
+          "extension": ".ppt",
+          "sizeMB": 0.86,
+          "sha256": "d1a369804ced4f8eac900d28c950cf0ddb60821939c4e363726706a091612d1f",
+          "status": "SKIPPED",
+          "warning": "Legacy .ppt is intentionally skipped."
+        },
+        {
+          "name": "Econ 151 Tutorial 3.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.2,
+          "sha256": "856e20a5d4ae88ce75e68015bddc716bf3c9aef1852830b825a1101f95b30ea2",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 12753,
+          "proposedTopics": [
+            "Introduction to Economics",
+            "Demand and Supply",
+            "Elasticity",
+            "Consumer Behaviour",
+            "Production and Costs"
+          ]
+        },
+        {
+          "name": "Tutorial 2.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.02,
+          "sha256": "e7d9da64e0c9befad743e030d58f78a5b7c49263e2ce1afddedfcee6af037c0a",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Tutorial 3.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.04,
+          "sha256": "47a3e53535ee17f14e69a7101d7c69aeb47c21597b26da8f101d1f253af133f6",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Tutorial Two. sem 1.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.23,
+          "sha256": "f402ca6c40ae86bb4507c5e5d5919ede73f922a718feb2ebf224bb72632edf17",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 18827,
+          "proposedTopics": [
+            "Introduction to Economics",
+            "Demand and Supply",
+            "Elasticity",
+            "Consumer Behaviour",
+            "Production and Costs"
+          ]
+        },
+        {
+          "name": "Tutorial.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.56,
+          "sha256": "47663d134dd39bbc23db4d21f3e84a15eb5674f9e9497370c2d83b64eccb3c56",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 19018,
+          "proposedTopics": [
+            "Introduction to Economics",
+            "Demand and Supply",
+            "Consumer Behaviour",
+            "Production and Costs",
+            "Macroeconomic Concepts"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "CENG 291",
+      "name": "Engineering in Society",
+      "sourceFolder": "Engineering in Society",
+      "files": [
+        {
+          "name": "1817522.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.87,
+          "sha256": "c80eef7ef20c6639af058bec93e1133cfb513dbafd733bb674ced1993b68b378",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 22592,
+          "proposedTopics": [
+            "Engineering in Society",
+            "Engineering Ethics and Professionalism",
+            "Engineering Projects and Design",
+            "Technical Communication"
+          ]
+        },
+        {
+          "name": "CENG Project Presentation.pptx",
+          "extension": ".pptx",
+          "sizeMB": 9.25,
+          "sha256": "91c3f6644b046f6c83307b0d24fb059e785c80987600ac16cfbe4769c90ca70e",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 3002,
+          "proposedTopics": [
+            "Engineering in Society",
+            "Engineering Projects and Design",
+            "Technical Communication"
+          ]
+        },
+        {
+          "name": "CENG Report.docx",
+          "extension": ".docx",
+          "sizeMB": 1.64,
+          "sha256": "d766105dccc62fb2830e8c2d23334ea5fa09926c4fb256bbc036188bf4c3b322",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 25112,
+          "proposedTopics": [
+            "Engineering in Society",
+            "Engineering Ethics and Professionalism",
+            "Sustainable Development",
+            "Engineering Projects and Design",
+            "Technical Communication"
+          ]
+        },
+        {
+          "name": "CENG slide UNIT I&II.pptx",
+          "extension": ".pptx",
+          "sizeMB": 1.43,
+          "sha256": "3af3b9949c7a132eb20375d9eaf058787e155e3022126746acc65a9ac855b605",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 16070,
+          "proposedTopics": [
+            "Engineering in Society",
+            "Engineering Ethics and Professionalism",
+            "Sustainable Development",
+            "Engineering Projects and Design",
+            "Technical Communication"
+          ]
+        },
+        {
+          "name": "CENG slides_053718.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.96,
+          "sha256": "1d20ad89d9d263097219e51929a3b3136f50d19ec94e793b8ff9ef91e265542c",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 31252,
+          "proposedTopics": [
+            "General resources",
+            "Engineering in Society",
+            "Engineering Ethics and Professionalism",
+            "Sustainable Development",
+            "Engineering Projects and Design",
+            "Technical Communication"
+          ]
+        },
+        {
+          "name": "CENG TOPICS BY PESA ACADEMIC BOARD.pdf",
+          "extension": ".pdf",
+          "sizeMB": 3.37,
+          "sha256": "1b4ab1bb9d717fdff773cc4fc74ea1be451c02f38b94ede8cdec2b93ae93674b",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 413667,
+          "proposedTopics": [
+            "Engineering in Society",
+            "Sustainable Development",
+            "Engineering Projects and Design",
+            "Technical Communication",
+            "Academic Board Topics"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 281",
+      "name": "Programming and Problem Solving",
+      "sourceFolder": "Programming and Problem Solving",
+      "files": [
+        {
+          "name": "1 Introduction.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.35,
+          "sha256": "5a596ab21b8a2e082067d02bd6a8e93aa85dc01a27ee8a8d475867a22b8546bf",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 6944,
+          "proposedTopics": [
+            "Programming Fundamentals",
+            "C Programming Basics",
+            "Flow of Control",
+            "Functions",
+            "Python Programming"
+          ]
+        },
+        {
+          "name": "2 Fundamentals of C.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.37,
+          "sha256": "ee5e5ee2d980049d88c49b3f1a4ce785794499cc1cf3cff41951a6b9bb058a43",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 11001,
+          "proposedTopics": [
+            "Programming Fundamentals",
+            "C Programming Basics",
+            "Flow of Control",
+            "Functions"
+          ]
+        },
+        {
+          "name": "3 Data Input and Output.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.43,
+          "sha256": "9e846ed2ad90d1f22264d1d25301d5ae5b7adde43e94cebe1c7e2cb0c8a89bbc",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 11582,
+          "proposedTopics": [
+            "Programming Fundamentals",
+            "C Programming Basics",
+            "Data Input and Output",
+            "Flow of Control",
+            "Functions"
+          ]
+        },
+        {
+          "name": "4 Flow of Control.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.34,
+          "sha256": "c4b93cef57d337515b3efdc7d4046e573b67055dac9085406581c852b1d7a8fa",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 16247,
+          "proposedTopics": [
+            "Programming Fundamentals",
+            "Data Input and Output",
+            "Flow of Control",
+            "Functions"
+          ]
+        },
+        {
+          "name": "5 Functions.pptx",
+          "extension": ".pptx",
+          "sizeMB": 1.41,
+          "sha256": "edaa0e7e61a61b86be634f64ce347da0b20d3e7bc391694b36b89294707abb56",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 9920,
+          "proposedTopics": [
+            "C Programming Basics",
+            "Data Input and Output",
+            "Flow of Control",
+            "Functions"
+          ]
+        },
+        {
+          "name": "index.py",
+          "extension": ".py",
+          "sizeMB": 0,
+          "sha256": "84e69ce65bbfcf8f2180ee8237441734ea3d48a0692efec6bf9d391ba3c8edb0",
+          "status": "SKIPPED",
+          "warning": "Unsupported extension .py."
+        },
+        {
+          "name": "No.Starch.Python.Oct_.2015.ISBN_.1593276036.pdf",
+          "extension": ".pdf",
+          "sizeMB": 5.38,
+          "sha256": "efd7804f24d2bf1ecf4c0189c88c2fa93d0f2f06849059fd461715b6b4c10f1b",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 982110,
+          "proposedTopics": [
+            "Programming Fundamentals",
+            "C Programming Basics",
+            "Flow of Control",
+            "Functions",
+            "Python Programming"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COE 271",
+      "name": "Semiconductor Devices",
+      "sourceFolder": "Semiconductor Devices",
+      "files": [
+        {
+          "name": "bk-coe271.pdf",
+          "extension": ".pdf",
+          "sizeMB": 7.07,
+          "sha256": "f32cccb4687058943060322b6af1a21b2c48c9b4a9b4ae39b2aaf4071b8860eb",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 145635,
+          "proposedTopics": [
+            "Semiconductor Fundamentals",
+            "Carrier Transport",
+            "PN Junctions and Diodes",
+            "Bipolar Junction Transistors",
+            "Field-Effect Devices"
+          ]
+        },
+        {
+          "name": "Cheatsheet 5.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.72,
+          "sha256": "33d617eb95515a3501c603d22fa00d0578c55930dc2d61090ff01c51090dafe4",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 2,
+          "warning": "Very little text was extracted; review before import.",
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Cheatsheet.pptx",
+          "extension": ".pptx",
+          "sizeMB": 4.97,
+          "sha256": "959c3bffadf50225a3b071b0d88c7210efb95bac4ccefe120a817deaa3235505",
+          "status": "READY",
+          "materialType": "SLIDE",
+          "extractedCharacters": 0,
+          "warning": "Very little text was extracted; review before import.",
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "cheming hu solution manual-1.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.59,
+          "sha256": "7d0c129d7c51d9f2e0dd86a919252db199a9a44154be354df3cebef35d8edaa9",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 186509,
+          "proposedTopics": [
+            "Semiconductor Fundamentals",
+            "Carrier Transport",
+            "PN Junctions and Diodes",
+            "Bipolar Junction Transistors",
+            "Field-Effect Devices"
+          ]
+        },
+        {
+          "name": "Chenming Hu - Modern Semiconductor Devices.pdf",
+          "extension": ".pdf",
+          "sizeMB": 14.33,
+          "sha256": "892d5f49efc4ced61d6a4e5b52c0cb6c552749b196648bd2ffdde06f2080e2b2",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 641881,
+          "proposedTopics": [
+            "Semiconductor Fundamentals",
+            "Carrier Transport",
+            "PN Junctions and Diodes",
+            "Bipolar Junction Transistors",
+            "Field-Effect Devices"
+          ]
+        },
+        {
+          "name": "Kommey Semiconductors.pdf",
+          "extension": ".pdf",
+          "sizeMB": 7.07,
+          "sha256": "f32cccb4687058943060322b6af1a21b2c48c9b4a9b4ae39b2aaf4071b8860eb",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 145635,
+          "proposedTopics": [
+            "Semiconductor Fundamentals",
+            "Carrier Transport",
+            "PN Junctions and Diodes",
+            "Bipolar Junction Transistors",
+            "Field-Effect Devices"
+          ]
+        },
+        {
+          "name": "Modern Semiconductor Devices - Chenming C Hu.pdf",
+          "extension": ".pdf",
+          "sizeMB": 14.33,
+          "sha256": "892d5f49efc4ced61d6a4e5b52c0cb6c552749b196648bd2ffdde06f2080e2b2",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 641881,
+          "proposedTopics": [
+            "Semiconductor Fundamentals",
+            "Carrier Transport",
+            "PN Junctions and Diodes",
+            "Bipolar Junction Transistors",
+            "Field-Effect Devices"
+          ]
+        },
+        {
+          "name": "Screenshot 2.png",
+          "extension": ".png",
+          "sizeMB": 0.74,
+          "sha256": "10ad1d30213d2916845177864073f52dd110796e289ac4c3c2a6dd2bd7e1f758",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Screenshot 2024-03-01 021748.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.1,
+          "sha256": "701b93cbc53686c6a5738e6280535cdfb070e68df80d0b21de40247ae6beba40",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "Semiconductors 1.pdf",
+          "extension": ".pdf",
+          "sizeMB": 0.26,
+          "sha256": "47c948d440f0ab8d9b405162a21010d3a81bc508b6b38d8ea11a52e673a6f8fc",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "warning": "Very little text was extracted; review before import.",
+          "proposedTopics": [
+            "Semiconductor Fundamentals"
+          ]
+        },
+        {
+          "name": "Semiconductors past questions 23..pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.66,
+          "sha256": "9cef05e1f43cf911c58fe3db1922fd603cd0353af608922231b984459d8d54fc",
+          "status": "READY",
+          "materialType": "PAST_QUESTION",
+          "extractedCharacters": 4,
+          "warning": "Very little text was extracted; review before import.",
+          "proposedTopics": [
+            "Past Questions",
+            "Semiconductor Fundamentals"
+          ]
+        },
+        {
+          "name": "Semiconductors Past Questions.pdf",
+          "extension": ".pdf",
+          "sizeMB": 1.66,
+          "sha256": "9cef05e1f43cf911c58fe3db1922fd603cd0353af608922231b984459d8d54fc",
+          "status": "READY",
+          "materialType": "PAST_QUESTION",
+          "extractedCharacters": 4,
+          "warning": "Very little text was extracted; review before import.",
+          "proposedTopics": [
+            "Past Questions",
+            "Semiconductor Fundamentals"
+          ]
+        },
+        {
+          "name": "Stolen_Semiconductors.pdf",
+          "extension": ".pdf",
+          "sizeMB": 2.22,
+          "sha256": "2f70114eb90a7288e0902f8c15b7d3825b018599838ca7c4712a317fc71936c8",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 25064,
+          "proposedTopics": [
+            "Semiconductor Fundamentals",
+            "Carrier Transport",
+            "PN Junctions and Diodes",
+            "Bipolar Junction Transistors",
+            "Field-Effect Devices"
+          ]
+        },
+        {
+          "name": "WhatsApp Image 2024-03-01 at 02.02.30_f4b10f30.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.11,
+          "sha256": "68f7657850deb6398a211f25c378a0d040f097f50266d8d7ffc936972ac8bc5a",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "WhatsApp Image 2024-03-01 at 02.02.31_50fb8665.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.16,
+          "sha256": "c9c82f97a40c68be2f97b986064a0519495e9dfda1d90f0c125d3f33f33b892e",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        },
+        {
+          "name": "WhatsApp Image 2024-03-01 at 02.02.31_88c5e8d5.jpg",
+          "extension": ".jpg",
+          "sizeMB": 0.18,
+          "sha256": "d16f5cd41fe0ec39ed4c6ec85c3720c6ca9203309166084bd9810500625779bd",
+          "status": "READY",
+          "materialType": "NOTE",
+          "extractedCharacters": 0,
+          "proposedTopics": [
+            "General resources"
+          ]
+        }
+      ]
+    }
+  ],
+  "unmatchedFolders": [],
+  "duplicateGroups": [
+    {
+      "sha256": "aa2e4d444070c93cd97a6cedf0df4a80990a6a98fd02ea4182703e0e2dcc364e",
+      "files": [
+        "Differential Equations\\differential equation - distance students.pdf",
+        "Differential Equations\\differential equation.pdf"
+      ]
+    },
+    {
+      "sha256": "a0bb776106c5a1bff7991f5f1e63621251bcb68c98f36d5ab3c1d61dc39fdff6",
+      "files": [
+        "Differential Equations\\Differential Equations .pdf",
+        "Differential Equations\\Paul Dawkins - Differential Equations.pdf"
+      ]
+    },
+    {
+      "sha256": "7cf83a4278fef257381336025583369634b99874d9e776ee2d44f7b1176b45ed",
+      "files": [
+        "Differential Equations\\Lecture_5.pdf",
+        "Differential Equations\\Lecture__5.pdf"
+      ]
+    },
+    {
+      "sha256": "c5f8d250c33cc4d90bf8e9e9c15c492eedd5c945981c324fe778573780cf0e11",
+      "files": [
+        "Discrete Structures\\2.0.Set_Theory_123222.pdf",
+        "Discrete Structures\\Set Theory.pdf"
+      ]
+    },
+    {
+      "sha256": "f32cccb4687058943060322b6af1a21b2c48c9b4a9b4ae39b2aaf4071b8860eb",
+      "files": [
+        "Semiconductor Devices\\bk-coe271.pdf",
+        "Semiconductor Devices\\Kommey Semiconductors.pdf"
+      ]
+    },
+    {
+      "sha256": "892d5f49efc4ced61d6a4e5b52c0cb6c552749b196648bd2ffdde06f2080e2b2",
+      "files": [
+        "Semiconductor Devices\\Chenming Hu - Modern Semiconductor Devices.pdf",
+        "Semiconductor Devices\\Modern Semiconductor Devices - Chenming C Hu.pdf"
+      ]
+    },
+    {
+      "sha256": "9cef05e1f43cf911c58fe3db1922fd603cd0353af608922231b984459d8d54fc",
+      "files": [
+        "Semiconductor Devices\\Semiconductors past questions 23..pdf",
+        "Semiconductor Devices\\Semiconductors Past Questions.pdf"
+      ]
+    }
+  ],
+  "summary": {
+    "discovered": 77,
+    "ready": 73,
+    "skipped": 4,
+    "warnings": 9,
+    "readySizeMB": 138.84
+  }
+}

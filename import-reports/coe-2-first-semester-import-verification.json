@@ -1,0 +1,113 @@
+{
+  "verifiedAt": "2026-08-10T04:01:48.723Z",
+  "expectedApprovedFiles": 54,
+  "publishedFiles": 54,
+  "missingHashes": [],
+  "materialsWithoutStorage": [],
+  "materialsWithoutChunks": [],
+  "materialsWithoutTopics": [],
+  "courses": [
+    {
+      "code": "CENG 291",
+      "topics": [
+        "Engineering in Society",
+        "Engineering Ethics and Professionalism",
+        "Engineering Projects and Design",
+        "Technical Communication",
+        "Sustainable Development",
+        "General resources",
+        "Academic Board Topics"
+      ],
+      "importedMaterials": 6,
+      "searchableChunks": 362
+    },
+    {
+      "code": "COE 253",
+      "topics": [
+        "Logic and Proofs",
+        "Set Theory",
+        "Relations and Functions",
+        "Counting and Combinatorics",
+        "Graph Theory"
+      ],
+      "importedMaterials": 4,
+      "searchableChunks": 3563
+    },
+    {
+      "code": "COE 261",
+      "topics": [
+        "Communication Systems Fundamentals",
+        "Signals and Spectra",
+        "Digital Communication",
+        "Noise in Communication Systems",
+        "Angle Modulation",
+        "Sampling and Pulse Modulation",
+        "Amplitude Modulation"
+      ],
+      "importedMaterials": 4,
+      "searchableChunks": 20
+    },
+    {
+      "code": "COE 271",
+      "topics": [
+        "Semiconductor Fundamentals",
+        "Carrier Transport",
+        "PN Junctions and Diodes",
+        "Bipolar Junction Transistors",
+        "Field-Effect Devices"
+      ],
+      "importedMaterials": 4,
+      "searchableChunks": 706
+    },
+    {
+      "code": "COE 281",
+      "topics": [
+        "Programming Fundamentals",
+        "C Programming Basics",
+        "Flow of Control",
+        "Functions",
+        "Python Programming",
+        "Data Input and Output"
+      ],
+      "importedMaterials": 6,
+      "searchableChunks": 734
+    },
+    {
+      "code": "COE 291",
+      "topics": [
+        "Laboratory Safety and Procedures",
+        "Lab Report Writing",
+        "Circuit Measurements",
+        "Transistor Experiments"
+      ],
+      "importedMaterials": 7,
+      "searchableChunks": 33
+    },
+    {
+      "code": "ECON 151",
+      "topics": [
+        "Introduction to Economics",
+        "Demand and Supply",
+        "Consumer Behaviour",
+        "Production and Costs",
+        "Macroeconomic Concepts",
+        "Elasticity"
+      ],
+      "importedMaterials": 8,
+      "searchableChunks": 84
+    },
+    {
+      "code": "MATH 251",
+      "topics": [
+        "Second-Order Differential Equations",
+        "First-Order Differential Equations",
+        "Laplace Transforms",
+        "Series Solutions",
+        "Systems of Differential Equations",
+        "Applications of Differential Equations"
+      ],
+      "importedMaterials": 15,
+      "searchableChunks": 1033
+    }
+  ]
+}

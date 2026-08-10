@@ -1,0 +1,104 @@
+{
+  "termSlug": "coe-2-first-semester",
+  "reportTitle": "Computer Engineering - Year 2, First Semester import dry run",
+  "courseMappings": [
+    { "folderIncludes": "Communication Systems", "code": "COE 261", "name": "Communication Systems" },
+    { "folderIncludes": "Computer Engineering Lab", "code": "COE 291", "name": "Computer Engineering Lab" },
+    { "folderIncludes": "Differential Equations", "code": "MATH 251", "name": "Differential Equations" },
+    { "folderIncludes": "Discrete Structures", "code": "COE 253", "name": "Discrete Structures" },
+    { "folderIncludes": "Economics", "code": "ECON 151", "name": "Economics" },
+    { "folderIncludes": "Engineering in Society", "code": "CENG 291", "name": "Engineering in Society" },
+    { "folderIncludes": "Programming and Problem Solving", "code": "COE 281", "name": "Programming and Problem Solving" },
+    { "folderIncludes": "Semiconductor Devices", "code": "COE 271", "name": "Semiconductor Devices" }
+  ],
+  "topicRules": {
+    "COE 261": [
+      ["Communication Systems Fundamentals", ["communication system", "transmitter", "receiver", "channel", "signal transmission"]],
+      ["Signals and Spectra", ["signal", "spectrum", "fourier", "bandwidth", "frequency domain"]],
+      ["Amplitude Modulation", ["amplitude modulation", "am modulation", "dsb", "ssb", "carrier"]],
+      ["Angle Modulation", ["frequency modulation", "phase modulation", "fm", "pm", "angle modulation"]],
+      ["Sampling and Pulse Modulation", ["sampling", "pulse modulation", "pam", "pcm", "quantization"]],
+      ["Digital Communication", ["digital communication", "baseband", "line coding", "bit rate", "data transmission"]],
+      ["Noise in Communication Systems", ["noise", "snr", "signal-to-noise", "thermal noise"]]
+    ],
+    "COE 291": [
+      ["Laboratory Safety and Procedures", ["laboratory safety", "lab safety", "procedure", "precaution"]],
+      ["Lab Report Writing", ["lab report", "report format", "discussion", "conclusion"]],
+      ["Circuit Measurements", ["measurement", "multimeter", "oscilloscope", "voltage", "current"]],
+      ["Diode Experiments", ["diode", "rectifier", "pn junction", "zener"]],
+      ["Transistor Experiments", ["transistor", "bjt", "biasing", "amplifier"]],
+      ["Digital Electronics Experiments", ["logic gate", "truth table", "flip flop", "digital circuit"]]
+    ],
+    "MATH 251": [
+      ["First-Order Differential Equations", ["first order", "separable", "linear differential", "exact equation"]],
+      ["Second-Order Differential Equations", ["second order", "higher order", "homogeneous", "complementary function"]],
+      ["Laplace Transforms", ["laplace", "inverse laplace", "partial fraction", "transform"]],
+      ["Series Solutions", ["series solution", "power series", "frobenius"]],
+      ["Systems of Differential Equations", ["system of differential equations", "systems of differential", "matrix method"]],
+      ["Applications of Differential Equations", ["application", "model", "distance", "growth", "decay"]]
+    ],
+    "COE 253": [
+      ["Logic and Proofs", ["proposition", "predicate", "truth table", "proof", "logic"]],
+      ["Set Theory", ["set theory", "sets", "union", "intersection", "power set"]],
+      ["Relations and Functions", ["relation", "function", "domain", "range", "equivalence relation"]],
+      ["Counting and Combinatorics", ["permutation", "combination", "counting", "pigeonhole", "binomial"]],
+      ["Graph Theory", ["graph", "tree", "path", "cycle", "vertex"]],
+      ["Discrete Mathematics Reference", ["discrete mathematics", "schaum", "rosen"]]
+    ],
+    "ECON 151": [
+      ["Introduction to Economics", ["introduction to economics", "economics", "scarcity", "choice", "opportunity cost"]],
+      ["Demand and Supply", ["demand", "supply", "equilibrium", "market price"]],
+      ["Elasticity", ["elasticity", "price elasticity", "income elasticity"]],
+      ["Consumer Behaviour", ["consumer", "utility", "indifference curve", "budget line"]],
+      ["Production and Costs", ["production", "cost", "isoquant", "marginal product"]],
+      ["Market Structures", ["perfect competition", "monopoly", "oligopoly", "market structure"]],
+      ["Macroeconomic Concepts", ["national income", "inflation", "unemployment", "fiscal", "monetary"]]
+    ],
+    "CENG 291": [
+      ["Engineering in Society", ["engineering in society", "engineer in society", "society", "community"]],
+      ["Engineering Ethics and Professionalism", ["ethics", "professional", "responsibility", "code of conduct"]],
+      ["Sustainable Development", ["sustainable", "sustainability", "environment", "development"]],
+      ["Engineering Projects and Design", ["project", "design", "problem statement", "solution"]],
+      ["Technical Communication", ["report", "presentation", "communication", "slide"]],
+      ["Academic Board Topics", ["pesa academic board", "academic board", "ceng topics"]]
+    ],
+    "COE 281": [
+      ["Programming Fundamentals", ["programming", "algorithm", "flowchart", "pseudocode", "problem solving"]],
+      ["C Programming Basics", ["fundamentals of c", "c programming", "variables", "operators", "data type"]],
+      ["Data Input and Output", ["data input", "data output", "scanf", "printf", "input and output"]],
+      ["Flow of Control", ["flow of control", "if statement", "switch", "loop", "while", "for loop"]],
+      ["Functions", ["function", "parameter", "return value", "recursion"]],
+      ["Python Programming", ["python", "python crash course", "no starch"]]
+    ],
+    "COE 271": [
+      ["Semiconductor Fundamentals", ["semiconductor", "energy band", "bandgap", "intrinsic", "extrinsic"]],
+      ["Carrier Transport", ["carrier", "electron", "hole", "mobility", "drift", "diffusion"]],
+      ["PN Junctions and Diodes", ["pn junction", "p-n junction", "diode", "rectifier", "depletion"]],
+      ["Bipolar Junction Transistors", ["bjt", "bipolar", "transistor", "emitter", "collector"]],
+      ["Field-Effect Devices", ["mos", "mosfet", "field effect", "threshold voltage", "gate oxide"]],
+      ["Device Models and Equations", ["device equation", "small signal", "current-voltage", "iv characteristics"]]
+    ]
+  },
+  "topicOverrides": [],
+  "skipRules": [
+    { "courseCode": "MATH 251", "fileName": "differential equation.pdf", "reason": "Exact duplicate of differential equation - distance students.pdf; skipped to avoid same-course content-hash collision." },
+    { "courseCode": "MATH 251", "fileName": "Differential Equations .pdf", "reason": "Exact duplicate of Paul Dawkins - Differential Equations.pdf; skipped to avoid same-course content-hash collision." },
+    { "courseCode": "MATH 251", "fileName": "Lecture__5.pdf", "reason": "Exact duplicate of Lecture_5.pdf; skipped to avoid same-course content-hash collision." },
+    { "courseCode": "COE 253", "fileName": "2.0.Set_Theory_123222.pdf", "reason": "Exact duplicate of Set Theory.pdf; skipped to avoid same-course content-hash collision." },
+    { "courseCode": "COE 253", "fileName": "WhatsApp Image 2024-01-28 at 21.14.16_11b2a845.jpg", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "ECON 151", "fileName": "Tutorial 2.jpg", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "ECON 151", "fileName": "Tutorial 3.jpg", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 271", "fileName": "bk-coe271.pdf", "reason": "Exact duplicate of Kommey Semiconductors.pdf; skipped to avoid same-course content-hash collision." },
+    { "courseCode": "COE 271", "fileName": "Modern Semiconductor Devices - Chenming C Hu.pdf", "reason": "Exact duplicate of Chenming Hu - Modern Semiconductor Devices.pdf; skipped to avoid same-course content-hash collision." },
+    { "courseCode": "COE 271", "fileName": "Cheatsheet 5.pdf", "reason": "Very little text was extracted; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 271", "fileName": "Cheatsheet.pptx", "reason": "No extractable text was found; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 271", "fileName": "Screenshot 2.png", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 271", "fileName": "Screenshot 2024-03-01 021748.jpg", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 271", "fileName": "Semiconductors 1.pdf", "reason": "No extractable text was found; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 271", "fileName": "Semiconductors past questions 23..pdf", "reason": "Exact duplicate of Semiconductors Past Questions.pdf and too little extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 271", "fileName": "Semiconductors Past Questions.pdf", "reason": "Very little text was extracted; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 271", "fileName": "WhatsApp Image 2024-03-01 at 02.02.30_f4b10f30.jpg", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 271", "fileName": "WhatsApp Image 2024-03-01 at 02.02.31_50fb8665.jpg", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." },
+    { "courseCode": "COE 271", "fileName": "WhatsApp Image 2024-03-01 at 02.02.31_88c5e8d5.jpg", "reason": "Image-only file with no extractable text; skipped because the importer cannot produce searchable chunks." }
+  ]
+}
