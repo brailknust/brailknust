@@ -45,8 +45,11 @@ export async function AppShell({ children, eyebrow, fullBleed = false }: AppShel
   ];
 
   return (
-    <main className="flex min-h-screen flex-col bg-background text-foreground">
-      <header className="sticky top-0 z-40 border-b border-border bg-white">
+    <main className={fullBleed
+      ? "flex h-dvh flex-col bg-background text-foreground"
+      : "flex min-h-screen flex-col bg-background text-foreground"}
+    >
+      <header className="sticky top-0 z-40 shrink-0 border-b border-border bg-white">
         <div className="mx-auto flex h-[4.875rem] w-full max-w-[90rem] items-center justify-between gap-5 px-5 sm:px-8 lg:px-10">
           <div className="flex min-w-0 items-center gap-3">
             <NavDrawer items={secondaryItems} />
@@ -86,7 +89,7 @@ export async function AppShell({ children, eyebrow, fullBleed = false }: AppShel
       </header>
 
       <section className={fullBleed
-        ? "flex min-h-0 flex-1 flex-col lg:h-[calc(100dvh-4.875rem)]"
+        ? "flex min-h-0 flex-1 flex-col overflow-hidden"
         : "mx-auto w-full max-w-[90rem] px-5 py-8 sm:px-8 lg:px-10 lg:py-10"}
       >
         {children}

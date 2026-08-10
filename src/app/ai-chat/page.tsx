@@ -60,11 +60,9 @@ export default async function AiChatPage({ searchParams }: AiChatPageProps) {
   const selectedId = data.selectedConversation?.id ?? null;
   const initialMessages = attachGroundingSources(data.selectedConversation?.messages ?? []);
 
-  return (
-    <AppShell title="AI Chat" eyebrow="AI Support" fullBleed>
-      <div className="grid min-h-0 flex-1 overflow-hidden bg-white lg:grid-cols-[320px_minmax(0,1fr)]">
-        <aside className="flex min-h-0 flex-col border-b border-border bg-surface lg:border-b-0 lg:border-r">
-          <div className="border-b border-border p-4">
+  const conversationsPanel = (
+    <>
+      <div className="border-b border-border p-4">
             <div className="mb-3 flex items-center justify-between gap-3">
               <div>
                 <p className="text-sm font-semibold">Conversations</p>
@@ -114,7 +112,7 @@ export default async function AiChatPage({ searchParams }: AiChatPageProps) {
           )}
           </div>
 
-          <div className="grid max-h-[300px] gap-2 overflow-y-auto p-3 lg:max-h-none lg:flex-1">
+          <div className="grid min-h-0 flex-1 gap-2 overflow-y-auto p-3">
             {data.conversations.length ? data.conversations.map((conversation) => (
               <div
                 key={conversation.id}
@@ -186,7 +184,30 @@ export default async function AiChatPage({ searchParams }: AiChatPageProps) {
               <p className="px-2 py-4 text-sm text-muted">No saved conversations.</p>
             )}
           </div>
+    </>
+  );
+
+  return (
+    <AppShell title="AI Chat" eyebrow="AI Support" fullBleed>
+      <div className="grid min-h-0 flex-1 grid-rows-[auto_minmax(0,1fr)] overflow-hidden bg-white lg:grid-rows-none lg:grid-cols-[320px_minmax(0,1fr)]">
+        <aside className="hidden min-h-0 flex-col border-border bg-surface lg:flex lg:border-r">
+          {conversationsPanel}
         </aside>
+
+        <details className="group relative border-b border-border bg-surface lg:hidden">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4">
+            <span className="flex items-center gap-2 text-sm font-semibold">
+              Conversations
+              <span className="rounded-full border border-border bg-white px-2 py-0.5 text-xs font-medium text-muted">
+                {data.conversations.length}
+              </span>
+            </span>
+            <ChevronDown className="h-4 w-4 shrink-0 text-muted transition-transform group-open:rotate-180" />
+          </summary>
+          <div className="absolute inset-x-0 top-full z-20 flex max-h-[70dvh] flex-col overflow-y-auto border-b border-border bg-surface shadow-lg">
+            {conversationsPanel}
+          </div>
+        </details>
 
         <section className="flex min-h-0 min-w-0 flex-col">
           <div className="flex items-center gap-3 border-b border-border bg-white/95 px-4 py-3 sm:px-5">
