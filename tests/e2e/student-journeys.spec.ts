@@ -95,6 +95,12 @@ test.describe.serial("critical student journeys", () => {
     await page.getByRole("button", { name: "Upload", exact: true }).click();
 
     await expect(page.getByText("File processed. BRAIL can now use it in this course chat.")).toBeVisible();
+    // The upload should immediately show up as an attachment chip in the
+    // thread, and still be there (persisted, not just an optimistic client
+    // insert) after a full reload.
+    await expect(page.getByText("phase-two-notes.txt")).toBeVisible();
+    await page.reload();
+    await expect(page.getByText("phase-two-notes.txt")).toBeVisible();
   });
 
   test("a material-grounded diagnostic can be completed", async ({ page }) => {

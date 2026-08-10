@@ -1163,6 +1163,7 @@ model CourseMaterial {
   supersedes        CourseMaterial?            @relation("CourseMaterialVersions", fields: [supersedesId], references: [id], onDelete: SetNull)
   replacements      CourseMaterial[]           @relation("CourseMaterialVersions")
   ingestionAttempts MaterialIngestionAttempt[]
+  aiMessages        AiMessage[]
 
   @@unique([enrollmentId, contentHash])
   @@index([enrollmentId, status, updatedAt])
@@ -1422,17 +1423,20 @@ model AiConversation {
 }
 
 model AiMessage {
-  id             String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  conversationId String         @map("conversation_id") @db.Uuid
-  role           AiMessageRole
-  content        String
-  contextUsed    Json?          @map("context_used")
-  model          String?
-  createdAt      DateTime       @default(now()) @map("created_at")
-  conversation   AiConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  id                 String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  conversationId     String          @map("conversation_id") @db.Uuid
+  role               AiMessageRole
+  content            String
+  contextUsed        Json?           @map("context_used")
+  model              String?
+  attachedMaterialId String?         @map("attached_material_id") @db.Uuid
+  createdAt          DateTime        @default(now()) @map("created_at")
+  attachedMaterial   CourseMaterial? @relation(fields: [attachedMaterialId], references: [id], onDelete: SetNull)
+  conversation       AiConversation  @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 
   @@index([conversationId, createdAt])
   @@index([role, createdAt])
+  @@index([attachedMaterialId])
   @@map("ai_messages")
 }
 

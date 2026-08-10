@@ -1,12 +1,18 @@
 "use client";
 
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
-import { Bot, LockKeyhole, Send, Square, User } from "lucide-react";
+import { Bot, FileText, LockKeyhole, Send, Square, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { MarkdownMessage } from "@/features/ai/markdown-message";
 import type { GroundingSource } from "@/features/ai/grounding";
 import { ChatMaterialUpload } from "@/features/materials/chat-material-upload";
+
+type ChatAttachment = {
+  title: string;
+  fileName: string | null;
+  fileSize: number | null;
+};
 
 type ChatMessage = {
   id: string;
@@ -14,7 +20,15 @@ type ChatMessage = {
   content: string;
   createdAt: string;
   sources?: GroundingSource[];
+  attachment?: ChatAttachment;
 };
+
+export function formatFileSize(bytes: number | null) {
+  if (!bytes) return null;
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
 
 type AiChatClientProps = {
   conversationId: string | null;
@@ -176,7 +190,20 @@ export function AiChatClient({
                       : "rounded-bl-md border border-border bg-surface text-foreground"
                   }`}
                 >
-                  {item.content ? (
+                  {item.attachment ? (
+                    <div className="flex items-center gap-2.5">
+                      <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-white/15">
+                        <FileText className="h-4 w-4" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="truncate font-semibold">{item.attachment.title}</p>
+                        <p className="truncate text-xs opacity-80">
+                          {item.attachment.fileName}
+                          {formatFileSize(item.attachment.fileSize) ? ` · ${formatFileSize(item.attachment.fileSize)}` : ""}
+                        </p>
+                      </div>
+                    </div>
+                  ) : item.content ? (
                     item.role === "ASSISTANT"
                       ? <MarkdownMessage content={item.content} />
                       : <p className="whitespace-pre-wrap break-words">{item.content}</p>
@@ -243,6 +270,19 @@ export function AiChatClient({
               courseId={materialUpload.courseId}
               courseLabel={courseLabel}
               topics={materialUpload.topics}
+              conversationId={currentConversationId}
+              onUploaded={(attachment) => {
+                setMessages((current) => [
+                  ...current,
+                  {
+                    id: attachment.id,
+                    role: "USER",
+                    content: "",
+                    createdAt: new Date().toISOString(),
+                    attachment: { title: attachment.title, fileName: attachment.fileName, fileSize: attachment.fileSize },
+                  },
+                ]);
+              }}
             />
           ) : <span />}
           {courseLabel ? (

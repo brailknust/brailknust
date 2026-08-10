@@ -12,6 +12,7 @@ type StoredMessage = {
   content: string;
   createdAt: Date;
   contextUsed?: unknown;
+  attachedMaterial?: { title: string; originalFileName: string | null; fileSize: number | null } | null;
 };
 
 const materialQuestionPattern = /\b(?:define|derive|describe|explain|calculate|compare|contrast|solve|what is|what are|why does|how does|concept|theorem|formula|principle|mechanism|example of)\b/i;

@@ -28,6 +28,7 @@ const uploadFieldsSchema = z.object({
   title: z.string().trim().min(2).max(160),
   type: z.enum(["NOTE", "SLIDE", "PAST_QUESTION", "OTHER"]),
   topic: z.string().trim().max(120).optional(),
+  conversationId: z.string().uuid().optional(),
 });
 
 function safeFileName(fileName: string) {
@@ -70,6 +71,7 @@ export async function POST(request: Request) {
     title: formData.get("title"),
     type: formData.get("type"),
     topic: formData.get("topic") || undefined,
+    conversationId: formData.get("conversationId") || undefined,
   });
   if (!parsed.success) {
     return NextResponse.json({ message: "Check the material title, type, and topic." }, { status: 400 });
@@ -220,10 +222,31 @@ export async function POST(request: Request) {
       });
     });
 
+    let attachmentMessageId: string | null = null;
+    if (parsed.data.conversationId) {
+      const conversation = await prisma.aiConversation.findFirst({
+        where: { id: parsed.data.conversationId, userId: appUser.id, enrollmentId: enrollment.id },
+        select: { id: true },
+      });
+      if (conversation) {
+        const attachmentMessage = await prisma.aiMessage.create({
+          data: {
+            conversationId: conversation.id,
+            role: "USER",
+            content: `Uploaded: ${parsed.data.title}`,
+            attachedMaterialId: material.id,
+          },
+          select: { id: true },
+        });
+        attachmentMessageId = attachmentMessage.id;
+      }
+    }
+
     return NextResponse.json({
       message: `Material processed into ${chunks.length} searchable chunks.`,
       materialId: material.id,
       chunkCount: chunks.length,
+      attachmentMessageId,
     });
   } catch (error) {
     console.error("Course material processing failed", error);

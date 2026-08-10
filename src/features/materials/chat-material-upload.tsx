@@ -10,6 +10,8 @@ type ChatMaterialUploadProps = {
   courseId: string;
   courseLabel: string;
   topics: Array<{ id: string; title: string }>;
+  conversationId?: string | null;
+  onUploaded?: (attachment: { id: string; title: string; fileName: string; fileSize: number }) => void;
 };
 
 export function titleFromFileName(fileName: string) {
@@ -23,6 +25,8 @@ export function ChatMaterialUpload({
   semesterId,
   courseId,
   courseLabel,
+  conversationId,
+  onUploaded,
 }: ChatMaterialUploadProps) {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
@@ -46,20 +50,27 @@ export function ChatMaterialUpload({
     setMessage("");
     setIsError(false);
 
+    const form = new FormData(event.currentTarget);
+    const file = form.get("file");
+    const title = titleInputRef.current?.value || "Untitled material";
+
     try {
       const response = await fetch("/api/materials/upload", {
         method: "POST",
-        body: new FormData(event.currentTarget),
+        body: form,
       });
       const text = await response.text();
-      let result: { message?: string } = {};
+      let result: { message?: string; attachmentMessageId?: string | null } = {};
       try {
-        result = text ? JSON.parse(text) as { message?: string } : {};
+        result = text ? JSON.parse(text) as { message?: string; attachmentMessageId?: string | null } : {};
       } catch {
         result.message = response.ok ? "Material uploaded." : `Upload failed (${response.status}).`;
       }
       if (!response.ok) throw new Error(result.message ?? "Could not upload this file.");
       setMessage("File processed. BRAIL can now use it in this course chat.");
+      if (result.attachmentMessageId && file instanceof File) {
+        onUploaded?.({ id: result.attachmentMessageId, title, fileName: file.name, fileSize: file.size });
+      }
       formRef.current?.reset();
       router.refresh();
     } catch (error) {
@@ -85,6 +96,7 @@ export function ChatMaterialUpload({
           <input type="hidden" name="enrollmentId" value={enrollmentId} />
           <input type="hidden" name="semesterId" value={semesterId} />
           <input type="hidden" name="courseId" value={courseId} />
+          {conversationId ? <input type="hidden" name="conversationId" value={conversationId} /> : null}
           <input ref={titleInputRef} type="hidden" name="title" />
           <input type="hidden" name="type" value="OTHER" />
           <span className="hidden items-center gap-1.5 text-xs text-muted sm:flex" title={`Private to you, scoped to ${courseLabel}`}>

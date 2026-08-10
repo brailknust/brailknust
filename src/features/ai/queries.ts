@@ -122,7 +122,14 @@ export async function getAiChatPageData(
               },
             },
           },
-          messages: { orderBy: { createdAt: "asc" } },
+          messages: {
+            orderBy: { createdAt: "asc" },
+            include: {
+              attachedMaterial: {
+                select: { title: true, originalFileName: true, fileSize: true },
+              },
+            },
+          },
         },
       })
     : null;

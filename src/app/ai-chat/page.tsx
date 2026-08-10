@@ -239,6 +239,11 @@ export default async function AiChatPage({ searchParams }: AiChatPageProps) {
               content: message.content,
               createdAt: message.createdAt.toISOString(),
               sources: message.sources,
+              attachment: message.attachedMaterial ? {
+                title: message.attachedMaterial.title,
+                fileName: message.attachedMaterial.originalFileName,
+                fileSize: message.attachedMaterial.fileSize,
+              } : undefined,
             }))}
             isConfigured={data.isConfigured}
             remainingMessages={Math.max(data.dailyLimit - data.usedToday, 0)}
