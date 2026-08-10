@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BadgeCheck, BookX, FileUp, RotateCcw, Search } from "lucide-react";
+import { ArrowRight, BadgeCheck, BookX, FileUp, RotateCcw, Search } from "lucide-react";
 
 import materialManifest from "../../../../import-reports/coe-first-semester-import-manifest.json";
 import materialReport from "../../../../import-reports/coe-first-semester-import-verification.json";
@@ -46,6 +46,7 @@ type AdminProgrammeCatalogPageProps = {
     assignment?: string;
     level?: string;
     page?: string;
+    programme?: string;
   }>;
 };
 
@@ -118,6 +119,7 @@ export default async function AdminProgrammeCatalogPage({ searchParams }: AdminP
       existing.templates.push(template);
     } else {
       groups.set(key, {
+        key,
         college: template.college,
         department: template.department,
         programme: template.program,
@@ -126,8 +128,9 @@ export default async function AdminProgrammeCatalogPage({ searchParams }: AdminP
       });
     }
     return groups;
-  }, new Map<string, { college: string; department: string; programme: string; version: string; templates: typeof knustCurricula }>()).values()]
+  }, new Map<string, { key: string; college: string; department: string; programme: string; version: string; templates: typeof knustCurricula }>()).values()]
     .sort((a, b) => `${a.college} ${a.programme} ${a.version}`.localeCompare(`${b.college} ${b.programme} ${b.version}`));
+  const selectedProgrammeGroup = programmeCatalogGroups.find((group) => group.key === rawSearchParams.programme);
   function pageHref(page: number) {
     const params = new URLSearchParams();
     if (filters.query) params.set("q", filters.query);
@@ -273,22 +276,21 @@ export default async function AdminProgrammeCatalogPage({ searchParams }: AdminP
             </div>
           </section>
         ) : null}
-        {programmeCatalogGroups.map((group, groupIndex) => (
-          <details key={`${group.programme}-${group.version}`} open={groupIndex === 0} className="rounded-2xl border border-border bg-white p-5">
-            <summary className="cursor-pointer list-none">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-accent">{group.college}</p>
-                  <h2 className="mt-1 text-lg font-semibold">{group.programme}</h2>
-                  <p className="mt-1 text-sm text-muted">{group.department} · {group.version}</p>
-                </div>
-                <span className="rounded-full border border-border bg-surface px-3 py-1 text-xs font-semibold text-muted">
-                  {group.templates.reduce((sum, template) => sum + template.courses.length, 0)} courses
-                </span>
+        {selectedProgrammeGroup ? (
+          <section className="rounded-2xl border border-border bg-white p-5">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <Link href="/admin/catalog" className="text-xs font-semibold text-accent hover:underline">← Back to programme catalog</Link>
+                <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-accent">{selectedProgrammeGroup.college}</p>
+                <h2 className="mt-1 text-xl font-semibold">{selectedProgrammeGroup.programme}</h2>
+                <p className="mt-1 text-sm text-muted">{selectedProgrammeGroup.department} · {selectedProgrammeGroup.version}</p>
               </div>
-            </summary>
+              <span className="rounded-full border border-border bg-surface px-3 py-1 text-xs font-semibold text-muted">
+                {selectedProgrammeGroup.templates.reduce((sum, template) => sum + template.courses.length, 0)} courses
+              </span>
+            </div>
             <div className="mt-5 grid gap-4">
-              {group.templates
+              {selectedProgrammeGroup.templates
                 .sort((a, b) => `${a.level} ${a.semester}`.localeCompare(`${b.level} ${b.semester}`))
                 .map((template) => (
                   <div key={`${template.level}-${template.semester}`} className="rounded-xl border border-border bg-surface p-4">
@@ -344,8 +346,39 @@ export default async function AdminProgrammeCatalogPage({ searchParams }: AdminP
                   </div>
                 ))}
             </div>
-          </details>
-        ))}
+          </section>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2">
+            {programmeCatalogGroups.map((group) => (
+              <article key={group.key} className="rounded-2xl border border-border bg-white p-5 transition hover:border-foreground">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-accent">{group.college}</p>
+                  <h2 className="mt-2 text-lg font-semibold">{group.programme}</h2>
+                  <p className="mt-1 text-sm text-muted">{group.department}</p>
+                  <p className="mt-1 text-xs text-muted">{group.version}</p>
+                </div>
+                <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                  <div className="rounded-xl border border-border bg-surface p-3">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-muted">Levels</p>
+                    <p className="mt-2 font-semibold">{new Set(group.templates.map((template) => template.level)).size}</p>
+                  </div>
+                  <div className="rounded-xl border border-border bg-surface p-3">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-muted">Terms</p>
+                    <p className="mt-2 font-semibold">{group.templates.length}</p>
+                  </div>
+                  <div className="rounded-xl border border-border bg-surface p-3">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-muted">Courses</p>
+                    <p className="mt-2 font-semibold">{group.templates.reduce((sum, template) => sum + template.courses.length, 0)}</p>
+                  </div>
+                </div>
+                <Link href={`/admin/catalog?programme=${encodeURIComponent(group.key)}`} className="mt-5 inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
+                  Open programme
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </article>
+            ))}
+          </div>
+        )}
         {!knustCurricula.length ? <p className="rounded-2xl border border-border p-5 text-sm text-muted">No programme curriculum templates are configured.</p> : null}
       </div>
 
