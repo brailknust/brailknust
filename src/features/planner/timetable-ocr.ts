@@ -43,12 +43,13 @@ export async function extractTextFromImage(image: File) {
   let tesseractModule: TesseractImport;
 
   try {
-    const dynamicImport = new Function("specifier", "return import(specifier)") as (
-      specifier: string,
-    ) => Promise<TesseractImport>;
-    tesseractModule = await dynamicImport("tesseract.js");
-  } catch {
-    throw new Error("Tesseract OCR is not installed. Run npm install tesseract.js, then try again.");
+    tesseractModule = (await import("tesseract.js")) as TesseractImport;
+  } catch (error) {
+    throw new Error(
+      `Tesseract OCR could not be loaded in this environment: ${
+        error instanceof Error ? error.message : String(error)
+      }`,
+    );
   }
 
   const recognizer = tesseractModule.recognize ?? tesseractModule.default?.recognize;
