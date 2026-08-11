@@ -55,6 +55,27 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Cache busting for static assets to ensure fresh CSS/JS
+      {
+        source: "/(_next/static|_next/image)/(.*)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      // HTML pages: no cache to always get fresh content
+      {
+        source: "/:path((?!_next|api).*\\.html)$",
+        headers: [
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+        ],
+      },
+      // Dynamic routes: short cache
+      {
+        source: "/:path((?!_next|api).*)?",
+        headers: [
+          { key: "Cache-Control", value: "public, s-maxage=60, stale-while-revalidate=120" },
+        ],
+      },
     ];
   },
   experimental: {
