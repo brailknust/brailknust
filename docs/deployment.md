@@ -90,3 +90,22 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
   - **Paid**: upgrade the Vercel project to Pro and tighten `vercel.json`'s `crons` schedule (e.g. `*/5 * * * *`).
   Either way, this only affects background notification generation and push delivery timing, not the rest of the app.
 - Optionally re-run `npm run security:database` against the new project to confirm RLS and Storage lockdown survived the fresh migration replay. The script reads `.env.local` directly (not configurable), so this means temporarily pointing a local `.env.local` at the new project's credentials.
+
+## 4. Deploying updates from a working directory
+
+**Pushing a branch to GitHub does not deploy it to Production by itself.** Vercel only auto-deploys the branch configured as the **Production Branch** (Project Settings → Git, currently `readyapp`) when it receives a push; any other branch — including feature branches worked on in a chat session — only gets a Preview deployment from GitHub's side, if that. To ship a feature branch straight to the live Production URL without first merging it, deploy it directly with the Vercel CLI:
+
+```bash
+npx vercel --prod --yes --archive=tgz
+```
+
+Run this from the repo root, on whichever branch/working tree has the changes you want live — it uploads and deploys the *local working directory* as-is (uncommitted changes included), independent of what's pushed to GitHub.
+
+Two things about this command that aren't obvious from `vercel --help`:
+
+- **`--archive=tgz` is required.** Without it, `vercel deploy`/`vercel --prod` fails outright with `missing_archive` / `` `files` should NOT have more than 15000 items `` — this repo's working tree (with `node_modules` etc.) comfortably exceeds Vercel's raw per-file upload cap. The tgz archive path has no such limit.
+- **The project is already linked** in this repo via `.vercel/project.json` (gitignored, machine-specific — read `.vercel/project.json`'s `projectId`/`orgId` if you need to relink from a fresh checkout with `vercel link`). `npx vercel whoami` confirms which account is authenticated before deploying; if it errors, `npx vercel login` first.
+
+Before running a production deploy, check `npx vercel ls` for anything already mid-deploy (age under a couple minutes with no `Ready`/`Error` status yet) — this project sometimes has other automated sessions deploying directly via this same CLI path, and two concurrent production deploys can race. The command can take a few minutes (upload + `prisma migrate deploy` + `next build`); it's safe to background it and poll `vercel ls` or re-check its own output rather than blocking on it.
+
+A successful run ends with `▲ Aliased  https://brailknust.vercel.app` — that confirms the new deployment took over the production alias, not just that a deployment was created. A quick sanity check afterward: `curl -s -o /dev/null -w "%{http_code}\n" https://brailknust.vercel.app/api/cron/notifications` should return `401` (auth required) — a `503` means `CRON_SECRET` isn't actually set on Production despite the table above.
