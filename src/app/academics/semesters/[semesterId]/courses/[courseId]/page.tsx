@@ -1,18 +1,16 @@
 import Link from "next/link";
-import { ArrowLeft, BarChart3, BookOpen, CalendarDays, ListChecks } from "lucide-react";
+import { ArrowLeft, BarChart3, CalendarDays, ListChecks } from "lucide-react";
 import { notFound, redirect } from "next/navigation";
 
 import { AppShell } from "@/components/app-shell";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
 import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { calculateAssessmentAverage } from "@/features/academics/calculations";
-import { deleteWeakArea, saveWeakArea, updateEnrollmentPerformance } from "@/features/academics/actions";
+import { deleteWeakArea, saveWeakArea } from "@/features/academics/actions";
 import { deleteAssessment, saveAssessment } from "@/features/assessments/actions";
 import { getCourseAnalytics } from "@/features/academics/queries";
 import { requireAppUser } from "@/features/auth/queries";
 import { submitContentCorrection } from "@/features/corrections/actions";
-import { deleteCourseMaterial, retryCourseMaterialProcessing, saveCourseMaterial } from "@/features/materials/actions";
-import { MaterialUpload } from "@/features/materials/material-upload";
 import { createTask } from "@/features/tasks/actions";
 
 type CourseAnalyticsPageProps = {
@@ -181,88 +179,6 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
 
       <section className="mt-6 grid gap-6 xl:grid-cols-[0.72fr_1.28fr]">
         <div className="grid gap-6">
-          <form action={updateEnrollmentPerformance} className="rounded-2xl border border-border bg-white p-5">
-            <h2 className="text-lg font-semibold">Course performance</h2>
-            <input type="hidden" name="enrollmentId" value={enrollment.id} />
-            <input type="hidden" name="semesterId" value={semesterId} />
-            <input type="hidden" name="courseId" value={courseId} />
-            <fieldset disabled={isArchived} className="mt-4 grid gap-4 disabled:opacity-60">
-              <input
-                name="lecturer"
-                defaultValue={enrollment.lecturer ?? ""}
-                placeholder="Lecturer"
-                className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
-              />
-              <input
-                name="currentGrade"
-                defaultValue={enrollment.currentGrade ?? ""}
-                placeholder="Current grade"
-                className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
-              />
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="grid gap-2 text-sm font-semibold">
-                  Attendance %
-                  <input
-                    name="attendance"
-                    type="number"
-                    min="0"
-                    max="100"
-                    step="0.01"
-                    defaultValue={enrollment.attendance?.toString() ?? ""}
-                    className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal"
-                  />
-                </label>
-                <label className="grid gap-2 text-sm font-semibold">
-                  Confidence %
-                  <input
-                    name="confidenceScore"
-                    type="number"
-                    min="0"
-                    max="100"
-                    step="0.01"
-                    defaultValue={enrollment.confidenceScore?.toString() ?? ""}
-                    className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal"
-                  />
-                </label>
-              </div>
-              <PendingSubmitButton pendingLabel="Saving performance..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
-                Save performance
-              </PendingSubmitButton>
-            </fieldset>
-          </form>
-
-          <div className="rounded-2xl border border-border bg-surface p-5">
-            <h2 className="text-lg font-semibold">Performance indicators</h2>
-            <div className="mt-5 grid gap-5">
-              {[
-                [
-                  "Attendance",
-                  analytics.confirmedAttendance ? analytics.confirmedAttendance.percentage : enrollment.attendance,
-                  analytics.confirmedAttendance
-                    ? `${analytics.confirmedAttendance.attended}/${analytics.confirmedAttendance.total} confirmed classes`
-                    : null,
-                ] as const,
-                ["Confidence", enrollment.confidenceScore, null] as const,
-              ].map(([label, value, note]) => (
-                <div key={label}>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-semibold">{label}</span>
-                    <span className="text-muted">{formatPercent(value)}</span>
-                  </div>
-                  <div className="mt-2 h-3 overflow-hidden rounded-full bg-white">
-                    <div
-                      className="h-full rounded-full bg-accent"
-                      style={{ width: `${percentageBar(value)}%` }}
-                    />
-                  </div>
-                  {note ? <p className="mt-1 text-xs text-muted">{note}</p> : null}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="grid gap-6">
           <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div className="rounded-2xl border border-border bg-white p-5">
               <p className="text-sm font-semibold uppercase tracking-[0.14em] text-muted">
@@ -322,157 +238,6 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
             </div>
           </section>
 
-          <section className="rounded-2xl border border-border bg-white p-5">
-            <div className="flex items-start gap-3">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[var(--accent-strong)] text-white">
-                <BookOpen className="h-5 w-5" />
-              </div>
-              <div>
-                <h2 className="text-lg font-semibold">Course knowledge</h2>
-                <p className="mt-1 text-sm text-muted">
-                  Add trusted notes, slide text, and past questions for course-grounded AI answers.
-                </p>
-              </div>
-            </div>
-
-            {!isArchived ? <MaterialUpload
-              enrollmentId={enrollment.id}
-              semesterId={semesterId}
-              courseId={courseId}
-              topics={analytics.topics.map((topic) => ({ id: topic.id, title: topic.title }))}
-            /> : null}
-
-            <details className="mt-4 rounded-xl border border-border bg-surface p-4">
-              <summary className="cursor-pointer text-sm font-semibold">
-                Or paste text manually
-              </summary>
-            <form action={saveCourseMaterial} className="mt-5 rounded-xl border border-border bg-surface p-4">
-              <input type="hidden" name="enrollmentId" value={enrollment.id} />
-              <input type="hidden" name="semesterId" value={semesterId} />
-              <input type="hidden" name="courseId" value={courseId} />
-              <fieldset disabled={isArchived} className="grid gap-3 disabled:opacity-60">
-              <div className="grid gap-3 sm:grid-cols-2">
-                <input
-                  name="title"
-                  required
-                  maxLength={160}
-                  placeholder="Material title"
-                  className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
-                />
-                <select
-                  name="type"
-                  defaultValue="NOTE"
-                  className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
-                >
-                  <option value="NOTE">Lecture note</option>
-                  <option value="SLIDE">Slide text</option>
-                  <option value="PAST_QUESTION">Past question</option>
-                  <option value="LINK">Web resource</option>
-                  <option value="OTHER">Other</option>
-                </select>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <input
-                  name="topic"
-                  maxLength={120}
-                  list="course-topic-options"
-                  placeholder="Topic, e.g. Binary trees"
-                  className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
-                />
-                <datalist id="course-topic-options">
-                  {analytics.topics.map((topic) => <option key={topic.id} value={topic.title} />)}
-                </datalist>
-                <input
-                  name="sourceUrl"
-                  type="url"
-                  placeholder="Source link (optional)"
-                  className="h-11 rounded-xl border border-border bg-white px-3 text-sm"
-                />
-              </div>
-              <textarea
-                name="content"
-                required
-                minLength={40}
-                maxLength={100000}
-                placeholder="Paste the relevant text from the notes, slides, course outline, or past questions..."
-                className="min-h-44 rounded-xl border border-border bg-white px-3 py-3 text-sm leading-6"
-              />
-              <p className="text-xs leading-5 text-muted">
-                Only material saved under this enrollment is retrieved in this course&apos;s conversations.
-                Confirm that you have permission to add copyrighted material.
-              </p>
-              <PendingSubmitButton pendingLabel="Adding material..." className="h-11 rounded-xl bg-[var(--accent-strong)] px-4 text-sm font-semibold text-white">
-                Add to course knowledge
-              </PendingSubmitButton>
-              </fieldset>
-            </form>
-            </details>
-
-            <div className="mt-4 grid gap-3 md:grid-cols-2">
-              {analytics.materials.length ? analytics.materials.map((material) => (
-                <article key={material.id} className="rounded-xl border border-border bg-surface p-4">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="font-semibold">{material.title}</p>
-                      <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-muted">
-                        v{material.version} · {material.type.replace("_", " ")} · {material.status.toLowerCase()} · {material._count.chunks} searchable chunks
-                      </p>
-                      {material.chunks[0]?.topic ? (
-                        <p className="mt-2 text-sm text-muted">Topic: {material.chunks[0].topic.title}</p>
-                      ) : null}
-                    </div>
-                    {!isArchived ? <form action={deleteCourseMaterial}>
-                      <input type="hidden" name="materialId" value={material.id} />
-                      <input type="hidden" name="semesterId" value={semesterId} />
-                      <input type="hidden" name="courseId" value={courseId} />
-                      <ConfirmSubmitButton
-                        message={`Delete "${material.title}" from the course knowledge base?`}
-                        className="rounded-xl border border-border px-3 py-2 text-xs font-semibold text-muted"
-                      >
-                        Delete
-                      </ConfirmSubmitButton>
-                    </form> : null}
-                  </div>
-                  {material.sourceUrl ? (
-                    <a
-                      href={material.sourceUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="mt-3 inline-flex text-sm font-semibold text-accent"
-                    >
-                      Open source
-                    </a>
-                  ) : null}
-                  {material.storagePath ? (
-                    <a
-                      href={`/api/materials/${material.id}/download`}
-                      className="mt-3 ml-4 inline-flex text-sm font-semibold text-accent"
-                    >
-                      Download original
-                    </a>
-                  ) : null}
-                  {material.errorMessage ? (
-                    <p className="mt-3 text-sm text-red-600">{material.errorMessage}</p>
-                  ) : null}
-                  {material.ingestionAttempts[0] ? (
-                    <p className="mt-2 text-xs text-muted">Processing attempt {material.ingestionAttempts[0].attempt}: {material.ingestionAttempts[0].status.toLowerCase()}</p>
-                  ) : null}
-                  {!isArchived && material.status === "FAILED" && material.storagePath ? (
-                    <form action={retryCourseMaterialProcessing} className="mt-3">
-                      <input type="hidden" name="materialId" value={material.id} />
-                      <input type="hidden" name="semesterId" value={semesterId} />
-                      <input type="hidden" name="courseId" value={courseId} />
-                      <PendingSubmitButton pendingLabel="Retrying..." className="h-9 rounded-xl border border-border bg-white px-3 text-xs font-semibold">
-                        Retry processing
-                      </PendingSubmitButton>
-                    </form>
-                  ) : null}
-                </article>
-              )) : (
-                <p className="text-sm text-muted">No course material has been added yet.</p>
-              )}
-            </div>
-          </section>
 
           <section className="grid gap-6 lg:grid-cols-2">
             <div className="rounded-2xl border border-border bg-white p-5">
@@ -583,7 +348,7 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
               </div>
             </div>
 
-                        <div className="rounded-2xl border border-border bg-white p-5">
+            <div className="rounded-2xl border border-border bg-white p-5">
               <h2 className="text-lg font-semibold">Weak areas</h2>
               <p className="mt-1 text-sm text-muted">Record topics needing more attention.</p>
               <form action={saveWeakArea} className="mt-4 rounded-xl border border-border bg-surface p-4">

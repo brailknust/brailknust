@@ -72,8 +72,8 @@ export default async function PeersPage({ searchParams }: PeersPageProps) {
       <section className="mt-6">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <h2 className="text-lg font-semibold">Students in your courses</h2>
-            <p className="mt-1 text-sm text-muted">{data.courses.length} active-semester courses compared</p>
+            <h2 className="text-lg font-semibold">Peers stronger in your weak areas</h2>
+            <p className="mt-1 text-sm text-muted">Students who can help you improve in topics where you need support</p>
           </div>
           <Users className="h-5 w-5 text-accent" />
         </div>
@@ -84,29 +84,37 @@ export default async function PeersPage({ searchParams }: PeersPageProps) {
                 <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[var(--accent-strong)] text-sm font-semibold text-white">
                   {initials(peer.fullName)}
                 </div>
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <h3 className="font-semibold">{peer.fullName}</h3>
                   <p className="mt-1 text-sm text-muted">
                     {levelLabel(peer.level)}{peer.programme ? ` / ${peer.programme}` : ""}
                   </p>
                 </div>
+                {peer.strengthScore !== undefined && (
+                  <div className="text-right">
+                    <p className="text-2xl font-semibold text-accent">{Math.round(peer.strengthScore)}%</p>
+                    <p className="text-xs text-muted">Match strength</p>
+                  </div>
+                )}
               </div>
-              <div className="mt-5">
-                <p className="text-xs font-semibold uppercase text-muted">Shared courses</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {peer.sharedCourses.map((course) => (
-                    <span key={course.id} className="rounded-xl border border-border bg-white px-2.5 py-1.5 text-xs font-semibold">
-                      {course.name}
-                    </span>
-                  ))}
+              {peer.matchedTopics && peer.matchedTopics.length > 0 && (
+                <div className="mt-5">
+                  <p className="text-xs font-semibold uppercase text-muted">Expertise in</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {peer.matchedTopics.map((topic, index) => (
+                      <span key={index} className="rounded-xl border border-border bg-white px-2.5 py-1.5 text-xs font-semibold">
+                        {topic}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </article>
           )) : (
             <div className="rounded-2xl border border-dashed border-border p-8 text-center md:col-span-2">
               <Users className="mx-auto h-6 w-6 text-accent" />
-              <p className="mt-3 font-semibold">No shared-course peers yet</p>
-              <p className="mt-1 text-sm text-muted">Matches appear when another student uses the same semester and courses.</p>
+              <p className="mt-3 font-semibold">No peer matches yet</p>
+              <p className="mt-1 text-sm text-muted">Practice topics in the app to identify your weak areas, and peer matches will appear based on who can help you most.</p>
             </div>
           )}
         </div>
