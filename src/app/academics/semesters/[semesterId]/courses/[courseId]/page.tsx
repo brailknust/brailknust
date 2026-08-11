@@ -177,7 +177,7 @@ export default async function CourseAnalyticsPage({ params }: CourseAnalyticsPag
         </div>
       </section>
 
-      <section className="mt-6 grid gap-6 xl:grid-cols-[0.72fr_1.28fr]">
+      <section className="mt-6">
         <div className="grid gap-6">
           <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div className="rounded-2xl border border-border bg-white p-5">
