@@ -8,6 +8,10 @@ type PeerFilters = {
   courseId?: string;
 };
 
+function normalizeTopicKey(value: string) {
+  return value.trim().toLowerCase();
+}
+
 export async function getPeersPageData(userId: string, filters: PeerFilters = {}) {
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -122,6 +126,8 @@ export async function getPeersPageData(userId: string, filters: PeerFilters = {}
       courseId: true,
     },
   });
+  const weakTopicKeys = new Set(userWeakAreas.map((weakArea) => normalizeTopicKey(weakArea.topic)));
+  const weakCourseIds = [...new Set(userWeakAreas.map((weakArea) => weakArea.courseId))];
 
   // If user has weak areas, find peers who are strong in those areas
   const peerMatches = userWeakAreas.length
@@ -145,9 +151,18 @@ export async function getPeersPageData(userId: string, filters: PeerFilters = {}
               enrollment: {
                 semesterId: { in: peerMatchSemesterIds },
               },
-              topic: {
-                title: { in: userWeakAreas.map(w => w.topic) },
-              },
+              OR: [
+                {
+                  topic: {
+                    title: { in: userWeakAreas.map((w) => w.topic) },
+                  },
+                },
+                {
+                  enrollment: {
+                    courseId: { in: weakCourseIds },
+                  },
+                },
+              ],
             },
           },
         },
@@ -159,9 +174,18 @@ export async function getPeersPageData(userId: string, filters: PeerFilters = {}
           activeSemester: { select: { level: true } },
           topicMasteries: {
             where: {
-              topic: {
-                title: { in: userWeakAreas.map(w => w.topic) },
-              },
+              OR: [
+                {
+                  topic: {
+                    title: { in: userWeakAreas.map((w) => w.topic) },
+                  },
+                },
+                {
+                  enrollment: {
+                    courseId: { in: weakCourseIds },
+                  },
+                },
+              ],
               enrollment: {
                 semesterId: { in: peerMatchSemesterIds },
               },
@@ -195,7 +219,12 @@ export async function getPeersPageData(userId: string, filters: PeerFilters = {}
     level: p.activeSemester?.level ?? null,
     sharedCourses: [], // Weak area matched peers may not share courses
     strengthScore: p.strengthScore,
-    matchedTopics: [...new Set(p.topicMasteries.map(tm => tm.topic?.title).filter(Boolean))],
+    matchedTopics: [...new Set(
+      p.topicMasteries
+        .map((tm) => tm.topic?.title)
+        .filter((title): title is string => Boolean(title))
+        .filter((title) => weakTopicKeys.has(normalizeTopicKey(title))),
+    )],
   }));
 
   const questions = await prisma.peerQuestion.findMany({
