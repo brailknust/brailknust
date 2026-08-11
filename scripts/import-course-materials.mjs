@@ -205,10 +205,19 @@ try {
         select: { id: true, status: true, title: true },
       });
       const storagePath = `platform/${course.id}/${material.id}/${safeName(path.basename(sourcePath))}`;
-      const upload = await supabase.storage.from(bucket).upload(storagePath, bytes, {
+      await supabase.storage.from(bucket).remove([storagePath]);
+      let upload = await supabase.storage.from(bucket).upload(storagePath, bytes, {
         contentType: mimeType(extension),
         upsert: true,
       });
+      if (upload.error?.statusCode === "409" || upload.error?.status === 409 || upload.error?.message === "The resource already exists") {
+        const removal = await supabase.storage.from(bucket).remove([storagePath]);
+        if (removal.error) throw removal.error;
+        upload = await supabase.storage.from(bucket).upload(storagePath, bytes, {
+          contentType: mimeType(extension),
+          upsert: true,
+        });
+      }
       if (upload.error) throw upload.error;
 
       await prisma.$transaction([

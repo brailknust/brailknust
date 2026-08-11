@@ -1,0 +1,3732 @@
+[
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "ENGL 157",
+        "title":  "COMM SKILLS PASSCO",
+        "sha256":  "ddfbf8758f979b8c9e6e56b4572f5a98753e266c7a80d8cef956bed9270c3275",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "044b39e0-3132-4812-bcdc-9b8d1c166802"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "ENGL 157",
+        "title":  "ENGL 157 ( COMMUNICATION SKILLS COMBINED)  BÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â ABC",
+        "sha256":  "03ebf192cbe6edbebe58cb50db069a58fe6968314286a2f596c0b57ace4137e3",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "2c5540a0-e487-41c7-9362-cc219a95e3f6"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "ENGL 157",
+        "title":  "Lecture 2 Communication Skills",
+        "sha256":  "a74a04c85c312e5d9968d85afad717d93faa51d133aff162e47f36acbaf388bd",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "d06a2e39-283f-42f9-a039-57dbb06b759c"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "ENGL 157",
+        "title":  "Lecture 3 Communication Skills",
+        "sha256":  "68c3e34c75a156718b76f6f0c233e763a327f87ef21c7ce2442ba20fdf763d29",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "cf8cd5ef-2d90-4420-8e5f-bce20fe5346d"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "ENGL 157",
+        "title":  "Lecture 5 Communication Skills",
+        "sha256":  "75752e4b091f906b1ef117344391ae6b11a13453d792332163594c39296f214b",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "94ec9d4d-452f-42c1-9260-347594711c3f"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "ENGL 157",
+        "title":  "Lecture 6 Communication Skills",
+        "sha256":  "10da2dec4dd3be86aa31469b3726968b0aa9fc5afe5e85ce986e8d2be20194d5",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "03ee555b-eca4-4864-9a24-25faa695a3cc"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "ENGL 157",
+        "title":  "Word Classes",
+        "sha256":  "f80931a72bdb11e3caf5e04971b7202c19ee8cf362409ccb9c2a24db0a08623a",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "dd3b65a5-16c0-4c60-99ba-7ea2360bdd28"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "COE 153",
+        "title":  "Computer Hardware Assembling",
+        "sha256":  "9574ddd74b3e09b76ee95922026387cdc9b7277aafeb360fbbae91211a967f88",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "d6656e21-d584-4f6c-a2e5-33f57c97c6db"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "COE 153",
+        "title":  "Electical Wiring",
+        "sha256":  "8949ccd30c60051d884ae0ca686a2ec9acd2ed4f3c8784cad9b8df20b3d7f671",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "989863ab-3291-4d00-b3cf-454e83866305"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "COE 153",
+        "title":  "Power Cables",
+        "sha256":  "d57a476ad1fba3e3555b1797b3b00be62531aa02acb7ec43b1b4676e0603fdf0",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "77225d11-211e-473a-a463-a32261beac0f"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "COE 153",
+        "title":  "Web Dev",
+        "sha256":  "b6b9c984dcf66e64f82b91db7a7e5ed10fb7c86066000c902102d0db2f354b8d",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "ce25594b-b2cb-49e3-a392-e7d73f1d486f"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "CE 155",
+        "title":  "Environmental Studies Passco",
+        "sha256":  "9f8b83b2c7d0465b08cc0c99dc3d4ea18e7ffcad488c2aa95bb209e93500f9e4",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "1971d5bc-59a7-4aaf-88b6-51909ab634d8"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "CE 155",
+        "title":  "Environmental Studies Slides",
+        "sha256":  "fb7f5765322ffa5be9f8840bcbe9ee96455a6d5f36cc0766e337ce4e6f1d1a99",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "3c2f7027-6a31-4ebd-871e-86c35a79f387"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "CE 155",
+        "title":  "Exam Practice",
+        "sha256":  "f857290a33a414b4e3946f764bfafd8104091d651db44424fdfde0b288e2f612",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "9df25388-2652-4d17-a548-299889338680"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "ME 159",
+        "title":  "Geometric Construction",
+        "sha256":  "b06cd6c87c9d1e2361a6e3bd6e5897999dcad3cb8530aab93bd763c374545a7e",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f945a7f7-1dd7-414f-85c8-1289dc6433d0"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "ME 159",
+        "title":  "Orthographic Projection",
+        "sha256":  "aa2a49b3d746a8d1b3fd4cbdab6b9cb14b86da5670bb3992550798b4dce1546d",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "c68acb2f-1357-4249-88b8-0eb68e57d731"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "ME 159",
+        "title":  "TD PASSCO",
+        "sha256":  "00df022aa7efb45b4ac5ee4560c171f9f04da72d5730b9eb669138e674c68484",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "51d146e8-0036-415d-a583-6cccdc277b2f"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "COE 181",
+        "title":  "Applied Passco",
+        "sha256":  "c7bb921c45e05a0faf3fbd120f56d1a7d9fb204cf14203de97a646c14cdbf582",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "5fcc5aa4-11ad-412e-b1a8-5ae89b8d078e"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "COE 181",
+        "title":  "Applied Slides",
+        "sha256":  "eb4239436dab6099f1e6a91d9d939dba4bb329f85634657a86f7d1d66fb4c366",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "c5a39b3a-cef9-48fb-ab4e-7b9d3259862d"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "ME 161",
+        "title":  "Basic Mech Passco",
+        "sha256":  "ddcebde1409becb7e6b85eef51de5e4bb965fc537c0d9cfd60420d0255a10ad8",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "5ab7089d-297d-4793-8085-9846449ffdbb"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "ME 161",
+        "title":  "Basic Mech Slides",
+        "sha256":  "946b171a6147d996f040f31b3547d82edd61c35a28122fadaa83617cdda31971",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "94f16ecd-e0eb-4754-a2c5-34005fc93042"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "MATH 151",
+        "title":  "Algebra Passco",
+        "sha256":  "2d8767bcc93fc885a61d455edffa42e94019dbd2c73bbfd233c0a144c3231d67",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f159b01a-df0e-462f-accd-860a84f5b3c6"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "MATH 151",
+        "title":  "Algebra Textbook",
+        "sha256":  "7847fe138c87432f0ff31795c7434f6e032023d29b6f37bbc300f3f151fd543d",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f9b1a1cf-3f15-477d-bf31-1689c00c3383"
+    },
+    {
+        "term":  "coe-1-first-semester",
+        "courseCode":  "MATH 151",
+        "title":  "COMPLEX NUMBERS",
+        "sha256":  "6ee198256fea8d2d6d341238bf6c8a3aa3ee69f30a86757dcc3b838b81084061",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "57eb7161-4292-4802-9fba-08f0ca236fda"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "ENGL 158",
+        "title":  "ENGL 158 (COMM SKILLS II COMBINED SLIDES) BY ABC",
+        "sha256":  "6f6d86ea43a586588f8b638c0861e16e402eee63110f70cedc5f62c483e9268f",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "2cd40e6c-2ef1-4d15-a8fb-1524d1253c7b"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "ENGL 158",
+        "title":  "ENGL 158 - 4 Letter Writing",
+        "sha256":  "58fc5bc7765a657755b080d7e7974c791b9587c08a8fe50a0260440878e1e56e",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "9e9d143e-7ddb-44b2-ad5b-b48cc4bb6151"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "ENGL 158",
+        "title":  "ENGL 158 - CV Writing",
+        "sha256":  "a9003f89582f0a187ee9fbdf3d49a63144e565563d2358fecdd04500aae88e26",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a8be41bf-85e9-42ee-9a7c-3c027bc1ee0a"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "ENGL 158",
+        "title":  "ENGL 158 - Meeting and Minutes Writing",
+        "sha256":  "5144a156f1089f8ea71dbabb964b672b2a174316d3fbe36c62b536fe31f37c62",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "9791bfe4-dad2-4167-94de-65ee5e3a2add"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "ENGL 158",
+        "title":  "ENGL 158 - Memorandum",
+        "sha256":  "f0567367b15eb10550eff3da8c00d61b0c7aef3ffceeafaa989af96d790236b1",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "01961bd1-6904-4ad0-b664-2b359085bceb"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "ENGL 158",
+        "title":  "ENGL 158 - Organizational Communication",
+        "sha256":  "a89386c4119e41cf1383dd1020b4e30e85cd6977865676d955d4d4fc1ab5fe1f",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "d90e61cf-251a-4622-af77-b8f545d0db56"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "ENGL 158",
+        "title":  "Lecture 1_Communication Skills",
+        "sha256":  "3e3664d07e45eb5b461d22ce97d2a0ca4aca6c4fb6a66d4d39037859688ce1a8",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "f417d9f3-453f-4853-a1f0-b683cfa2f88e"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "ENGL 158",
+        "title":  "LECTURE 3- WRITING AS A PROCESS",
+        "sha256":  "4ac750ed4b57960cf9984e650b3f3feeb796320d58fe8d6429e5f621535a5861",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f8bf4eaa-ee9d-450f-ac6e-0acd55db9ec9"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "ENGL 158",
+        "title":  "Lectures 9-10_Report Writing",
+        "sha256":  "3bec820aa08f1fdc53268687cacc1a7ba70be3d53fa54fab745c790c5533ada2",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "5cf940bd-3fff-487f-bac2-24229707be60"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "ENGL 158",
+        "title":  "Memo Writng",
+        "sha256":  "02c033971ff56fb915ca4985bd1d2d2a609acafe9c0163690fe505bee1c4f1f9",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "65b90bfc-6195-400c-977e-20eba71cb309"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "EE 156",
+        "title":  "Drawing Assignment",
+        "sha256":  "256c7c96be6d2ddc21ccce367d4a8fd24fcc76056f24134406f2c4fbddbcd8d9",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "8997fcd6-719b-4063-8ee4-a653d54ae83b"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "EE 156",
+        "title":  "Drawing Assignment",
+        "sha256":  "46e797dd5470355e1174cd0add0081b3765a7b2f2588e11cd9ee32e56faf63a1",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "3463f97e-cb98-49d3-81f8-b69fb658b2d7"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "EE 156",
+        "title":  "EE-156-22-23-CHP-1",
+        "sha256":  "2cb4a9f75073efcc09a4da7913577b20ec2003118ae36ef6ffea28de504c6040",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "81cd9d1f-cf41-4f88-b1cf-939c5d6cbd37"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "EE 156",
+        "title":  "EE-156-22-23-CHP-2",
+        "sha256":  "51207c48c679b7d293897f23997680c782a21dc4a2b447e5adb27b43ebafa77a",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "8108205a-0d4c-47e3-a1ce-0b4a90b88c4d"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "EE 156",
+        "title":  "EE-156-22-23-CHP-3",
+        "sha256":  "e0d3372cba92560d204eb89ab3734408602c67a3d3c4edf61800cfa7b6cf5e10",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a2021fb8-4ef5-4f51-a1c9-89be4b7ef7e4"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "EE 156",
+        "title":  "EE-156-22-23-CHP-4",
+        "sha256":  "f8855ce7d1a63c13c04604aeb5fdc37cd7627eb70d84f7ea92b6aeb5cd9f83e6",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "e836e2e6-dcfe-4fb9-a375-3b50b05fb574"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "EE 156",
+        "title":  "EE-156-22-23-CHP-5",
+        "sha256":  "c6124fcd17e9dea6841deff32301503a58f533efddcfb4104576adddd953ab8e",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f35b48cd-3cfe-4447-9457-eec0fbd2c4db"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "EE 156",
+        "title":  "EE-156-22-23-CHP-6",
+        "sha256":  "0e89882a53de592493aaef754ecb6df1c5277c5caf1da8edc7de61c79467772f",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "96448fff-951b-4583-9c9e-603dae4412dd"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "EE 156",
+        "title":  "EE-156_Practical_PLC WIRING DRAWING -Ing John Kusi",
+        "sha256":  "2d421f3d9c1936b77d27b7c96451f83ea560e3ce8306448e010051031794f77f",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "4d6f9bb6-cd88-4f4b-829a-a66f2279f1e1"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "EE 156",
+        "title":  "Industrial Motor Control",
+        "sha256":  "ecea44f5bf721abbadb460ef631a32c762f5fed1b4f370c40e05a5705efb3afc",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a0616254-4e4f-4b0c-a00a-a85376a8d7ab"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 158",
+        "title":  "ICT 1",
+        "sha256":  "69b62970af6732d3b60c653012f1215be083793fbe5113be870a9c117880a9a7",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "f25fbe93-f4d1-4b86-9b3f-451117689e29"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "EE 156",
+        "title":  "Programmable Logic Controllers (PLC)",
+        "sha256":  "1db12e84fd085dfabb47331195f122012817e9e25cd359997ec089ff0d65e198",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f160f885-6f1d-4e37-9990-bc0846d57725"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 158",
+        "title":  "ICT 2",
+        "sha256":  "48bdcb91481e5ffb8d270b8c64d74fbed978dd90a467074f47bbaee8895004ce",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "5ff3acad-bb92-48d3-904b-d14ac9b5465d"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 158",
+        "title":  "ICT 3",
+        "sha256":  "08539a2f99a6140232a12df657209c17bdf087797a353b8a26c9243a928e384e",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "9161b8bf-7ea6-4dcf-939f-f370ca538156"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 158",
+        "title":  "ICT 4",
+        "sha256":  "ac6c23e03e787bd733313b025362fa1b3130821847eb9fe8878e8ad7cfce60bf",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "15a79366-0c11-4b0c-bd05-bdea66dc1efc"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 158",
+        "title":  "ICT 5",
+        "sha256":  "b6c25b8fb1b9e8e0f349f033a8b8c6769e432815018b7b655b5ff6a34e4acecc",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "7a26382e-6d52-449b-9a84-80e75c76b1b3"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 158",
+        "title":  "ICT 6",
+        "sha256":  "ad27d727eeabfdefe372acc1d2d942515d91e3b02015b80e9817f7fcce3715ca",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "e3f755af-58cd-47bf-8af4-c2532c97aa54"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 158",
+        "title":  "ICT 7",
+        "sha256":  "90f8aceefc78ba77d8a9a2a94d2a75069181bd6e108fc5bb52dc7e83ceed4cc2",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "c1a9df9b-bf67-46ac-980b-3d80c2590bf8"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 152",
+        "title":  "Basic E Report",
+        "sha256":  "18db245955b0b258941d350201d6fbb012f476a60ba6058e5aa3e5a7ca280667",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "52311e18-7c52-49dd-9200-f087e3425761"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 152",
+        "title":  "Intro to Basic Electronics Lect 1 Jan 2017",
+        "sha256":  "661d211999fa17467d7dca0422958d41112779843b5f5828366951ebaf13f48d",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "af7adfa2-0b4f-4588-9cd9-7c3fe9271083"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 152",
+        "title":  "PN-Junction Diode Application",
+        "sha256":  "befdeab488f46830f7bce01d94618de18870e5297d7e0e58f654c4e29c997575",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "78f808d1-65a9-4dc4-874f-396042ccab0c"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 152",
+        "title":  "PN-Junction Diode",
+        "sha256":  "3f374a8e4119639596dc4388fd20d5b5d11bb7cc937a4ff456f1b39402b260d4",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "7efbbc3d-127d-49d9-83d8-ea9319919b0e"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 152",
+        "title":  "Semiconductor Basics",
+        "sha256":  "212b7243fd0c7bb7f477d436245f09fed7d6b91805c53f250e7390a9dd0449ea",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "fd16e34b-2524-4a43-8faa-1930579c09f0"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 152",
+        "title":  "Transistor Biasing",
+        "sha256":  "7b3ce0328b97f7a31b467194625461120f4adefcb1eec2161ecf791948e2d1ba",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "50026613-ccc8-41ff-bc9e-d625f2d0b29c"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 152",
+        "title":  "UNIT-1",
+        "sha256":  "7952f77e686df75d99f4b3500530264ccc17ecdc9fa54882a1ca85fc27db0a9f",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "27e34579-44a8-4844-b0cd-50ed7fefe491"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 152",
+        "title":  "UNIT-2",
+        "sha256":  "99979c82aa0d664c3ba9190ed11e72531513633eb42a6bd0b5af87b8109b43e7",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "776cda3d-d354-4e4f-9b8c-bd177a9c42f9"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 152",
+        "title":  "UNIT-3",
+        "sha256":  "3c967051466030e603eeb51ee5c98bcf4caa4596461ce6c8d91e2773d8ebb6e1",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "8a8a053d-82a8-44f5-9392-d637c912ce1c"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "COE 152",
+        "title":  "UNIT-4",
+        "sha256":  "8bca9c6cefff658405d4b6cf6ea090792df7b6de2551081e113d70cff90a06f7",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "1275a39a-896a-43e1-a550-7959646b54d2"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "MATH 152",
+        "title":  "1 Real Numbers",
+        "sha256":  "a15fc7c2f2a7b8ead43d436856d4bd4d05a7e0c31fc84a176ee279ce4ed6b62b",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "d1d8c4ca-28dd-4314-bf96-9a8533c84adb"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "MATH 152",
+        "title":  "10 Series",
+        "sha256":  "dafccad1af659fa5927dbcd64dc62276ed42a146b951436e8dd4304951bfc0be",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "168af503-71cc-43b6-9445-e1067040f0bf"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "MATH 152",
+        "title":  "2 Point Set",
+        "sha256":  "e36a8197c1624c75ee9a1893345bb78fb5739f2b74b893a43b9350ba53e258e8",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "893e2ac6-6d77-4bf3-bdb0-4381f0f2a5a1"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "MATH 152",
+        "title":  "3. Functions",
+        "sha256":  "0df8d4433df368101dedc3930993f48b673030776991d0ab6729682f3a1ef975",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "7a454ba7-9be1-4299-8204-930d584e8f57"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "MATH 152",
+        "title":  "4. Limits and Continuity",
+        "sha256":  "86ec661841aed338fc6a5601ea8a20b4a80011e5e9b79e24820f987f3a70fc82",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b00daa06-3ec0-4bd2-ae3a-13209eb3995c"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "MATH 152",
+        "title":  "5 Differentiability",
+        "sha256":  "7856ac458fbd4ed1f5d54f2fa5f3921e5869d4285cbff8ee8117dff02a1d85e4",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "dd341c8b-2059-4b50-89f3-c3246b82e876"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "MATH 152",
+        "title":  "7 Integration",
+        "sha256":  "0c921d5d3b5028e458dc798cbeedac93ddf9eb49c78cc87a4543e7f4571ea1a5",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "f4fff2f1-9f12-4477-9796-12d746ba525e"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "MATH 152",
+        "title":  "8 Application of Integration",
+        "sha256":  "a6005ebf94edd6eeddd88b29f3157f8576d265abc5154dfc05fa5b0397f85559",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "648f4b0a-91d0-4839-b059-a076a676330f"
+    },
+    {
+        "term":  "coe-1-second-semester",
+        "courseCode":  "MATH 152",
+        "title":  "9 Sequences",
+        "sha256":  "287518ebe0e4eb8ba39a493b23e52ab4417123a2cc8c0f1daae9e3154896f48c",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "92f84567-4b1a-4d61-b12b-2ff28f510387"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 261",
+        "title":  "Assign_One_Solutions",
+        "sha256":  "f551f4b3e557546dcf7455b45aa0fd30cec14a2e09acd43d4b2506e72b153048",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "bc82620d-dad7-4534-a9cd-589e6fc97cc2"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 261",
+        "title":  "Lecture 2_Final",
+        "sha256":  "490eb1c1f43a9904615ec4f97d460cf0e4ec96e1aaa1dca74a754f3b05c237f9",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "41bc3f51-ed73-4d1b-8b93-3994007f6e5a"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 261",
+        "title":  "Lecture-1",
+        "sha256":  "c542374d7fd75d4c466e9db8c82538d99719d7a2ce451561515ab3b1328fb486",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "61e3cb81-635a-4f3d-8709-40a890d73094"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 261",
+        "title":  "Lecture-7_2",
+        "sha256":  "5e9371afa5974aee6258ec1eed9a9e3d7ecb56a045bc24cce84afe0bb36d5116",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "af6a935a-4ecb-46f4-bb62-060eb972c030"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 291",
+        "title":  "Amenuveve\u0027s Electronics Lab Report",
+        "sha256":  "9d19eeb5654d7ab9ca807cb5353108df6f264d7c2a676f2c6a763197fde22559",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "559be6b1-c924-4147-8719-8a3c3debb248"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 291",
+        "title":  "Bekor_Elektronis Report",
+        "sha256":  "eeb3408e43931338855add8696dfd813da987e3e38e989fc2d2a745002b769d7",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "32254317-b9c3-4b3a-86e3-6cfd11f1f97a"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 291",
+        "title":  "Computer Engineering Lab Report",
+        "sha256":  "679a9397afd5f732d10caf64a84ef35f61133f0b8f827e0df5f0aad4c41e1965",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "3232e58a-59e4-46c8-b276-f18a0bce884a"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 291",
+        "title":  "electronic lap report",
+        "sha256":  "7f886251d8d16dcdbbf97771ad8cc9653e244891fe1b7d625595ab33e7687ec9",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "44fb9091-4152-4901-93c9-fb6956f40225"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 291",
+        "title":  "Electronics Lab Report 1",
+        "sha256":  "7cf0275bc56ce0c536b7e0517b405e17b8eb12efb26c4514a599ebf5ffe59c67",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "68efcae7-a2c2-4bd3-b24e-6b4174a0e1f4"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 291",
+        "title":  "SAM  LAB REPORT-1",
+        "sha256":  "4014f05fc605aef5e33d1c8e098dd7896eb139e72cc9fcdcd5d7a2c9df65363b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b2085d4c-32b0-47e0-ba15-121ce235211b"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 291",
+        "title":  "TEMI KEMOKO ARA",
+        "sha256":  "1f25dd5bc7fcb6f1d0a79b8aa96a9739885708c0ff2efdcb725d11fed7a71f8a",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "9b6293d7-ec16-435d-854d-f9626b45ee7b"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "MATH 251",
+        "title":  "Assignment_2",
+        "sha256":  "03b105eeef5b5b62f3a4ebbc69bd3971fe5a50bad8732c845c5c63cfdc4bec9e",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b1aa7c63-0d38-471c-b2f2-07b27cc7d21e"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "MATH 251",
+        "title":  "differential equation - distance students",
+        "sha256":  "aa2e4d444070c93cd97a6cedf0df4a80990a6a98fd02ea4182703e0e2dcc364e",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b75575e8-5eae-4475-b654-da2ed097b380"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "MATH 251",
+        "title":  "Laplace_transform_L13 (2)",
+        "sha256":  "70ee6851481d9d8b34fd0b07426c080b8b4f09969417d2a6e610f8ca33513945",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "3d510281-efd6-499f-a6e9-24592d41bac4"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "MATH 251",
+        "title":  "Laplace_Transform_L13",
+        "sha256":  "73afd0c4c2cc594a9c88fb7f33506bbfc45772292394aab6f646e7b26d3ccc3f",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "c4ddadf6-8da1-435c-ab4a-aeb094057387"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "MATH 251",
+        "title":  "Lecture_1",
+        "sha256":  "6906d75a34f1b2a573dfe40426c1d3b1d133bc51ad0b0d48c6d81354ff55405f",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "45568049-6327-4ca8-b4ec-fe85ddf23833"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "MATH 251",
+        "title":  "Lecture_10",
+        "sha256":  "97aa91ed1a13f8cd7d38a80895ac4091883f41bb30e5e8ba781ce2ceb481d6ef",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "182d04aa-1994-4c83-b14b-14b221f9b086"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "MATH 251",
+        "title":  "Lecture_11",
+        "sha256":  "102886d5bcf257c6700c63b5c37e81c2b5f0bf834816437433f5dd41b9e70150",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a5e91c68-bf56-4294-958b-9e6ee6a713d1"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "MATH 251",
+        "title":  "Lecture_15",
+        "sha256":  "8aba60330a51cf11c712574984fff17642f6aab95f849c7aaf4c98f3be7e1369",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "1433177c-ff19-4f31-a40d-cbb9021f42ba"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "MATH 251",
+        "title":  "Lecture_2",
+        "sha256":  "da8940ed0edc53033e38e398621552a5345bca077c1107783d4c8a51c37cb778",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a9229e7f-322f-40bb-bea2-5ebe64c4dfec"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "MATH 251",
+        "title":  "Lecture_3",
+        "sha256":  "f326d29a7fb663fbd2995db873a7ecc7784ec825b32ca230387db5e3029b37bb",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b1656d0c-27d5-478a-8727-7149cfa54986"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "MATH 251",
+        "title":  "Lecture_4",
+        "sha256":  "24ffcd17eea55a54adb5fe3d84625912bb5f4ac55f5fa9fa2cad5545ee7bb795",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "0479d859-4b81-4516-9d3c-cbbd0367717d"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "MATH 251",
+        "title":  "Lecture_5",
+        "sha256":  "7cf83a4278fef257381336025583369634b99874d9e776ee2d44f7b1176b45ed",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "e11eeb33-5ff9-44dd-9b68-77c60ba1e48b"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "MATH 251",
+        "title":  "Lecture_6",
+        "sha256":  "c407ac97a0e3a080f05f35c0fba7d211c3cfef5c1d23cb91aad0bca2ed20929b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "e11b9c70-b36c-42af-b3d5-e84564af608d"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "MATH 251",
+        "title":  "Lecture_9",
+        "sha256":  "a9d02be740ce8717f1732215f1bf9731ce165628008aa5cf04886d858544ce89",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "cd4e4448-32c7-483f-bcbe-9f4459d89404"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "MATH 251",
+        "title":  "Paul Dawkins - Differential Equations",
+        "sha256":  "a0bb776106c5a1bff7991f5f1e63621251bcb68c98f36d5ab3c1d61dc39fdff6",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a57277a3-eb63-471f-b8c8-9edbc7d33cfb"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 253",
+        "title":  "LOGIC AND SET THEORY",
+        "sha256":  "bcc17acd221cdee7066590e327bf92239fd9371f10d6825fef75c3b3ccf279c8",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "28d72a31-11b6-45cc-ba54-a71ba684614a"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 253",
+        "title":  "Rosen,_Kenneth_H_Discrete_mathematics_and_its_applications_McGraw",
+        "sha256":  "f32402f6aba79927074dc461f3f90ddb92fbbe1dd2cff88e29ddd5542ef4847a",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "e6ea4341-56f7-4b67-8995-c35df7eef353"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 253",
+        "title":  "Schaum\u0027s Outline of Discrete Mathematics, Third Edition (Schaum\u0027s  ( PDFDrive )",
+        "sha256":  "7f2f26178b447b87b7fb169eff9f74f7a300307373555d8ba0005166489b9d0a",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "92a93425-4553-4a98-adf7-707d9999bede"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 253",
+        "title":  "Set Theory",
+        "sha256":  "c5f8d250c33cc4d90bf8e9e9c15c492eedd5c945981c324fe778573780cf0e11",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "9399f9cd-bb48-426f-9024-f4a7e61cf40a"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "ECON 151",
+        "title":  "ECON 151 Lecture 1",
+        "sha256":  "d9d6eb0cf31c3d739b8bba4c01c0ae4c969e1255cdea640535105d5796e18bbd",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "107a90e9-6aba-4e32-aa6c-2a80052f38bd"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "ECON 151",
+        "title":  "Econ 151 Lecture 2B",
+        "sha256":  "4d88a836933ba839df503ad7e0713071939e905e86b66dcf8055357875405c93",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "6c0c875b-1573-4b83-9796-3efa28e9fdeb"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "ECON 151",
+        "title":  "ECON 151 Lecture 3",
+        "sha256":  "b5dbc69243b5570bd85b90521204be82628e3e6b1df5432b49f463cc9a9f9550",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "42376300-d159-4959-b985-2c1fe8bce50d"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "ECON 151",
+        "title":  "Econ 151 Lecture 4A",
+        "sha256":  "64d17a0a8e567f4d0b0f32cb0eabc4d0f4e4c4d855e9ec979f89ef7f8a5c4bd2",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "1b5eeb83-c7de-493c-b1d7-66f82866adb7"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "ECON 151",
+        "title":  "Econ 151 Lecture 4B",
+        "sha256":  "c590a1aab3a0c266b923ba2760c5db50c66279665ecd6548480b779c04a6503f",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b37a2a7d-edb1-43bc-8a07-8597468711d6"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "ECON 151",
+        "title":  "Econ 151 Tutorial 3",
+        "sha256":  "856e20a5d4ae88ce75e68015bddc716bf3c9aef1852830b825a1101f95b30ea2",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f1d6d478-558d-45a8-8ab9-cd0e5e1b4420"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "ECON 151",
+        "title":  "Tutorial Two. sem 1",
+        "sha256":  "f402ca6c40ae86bb4507c5e5d5919ede73f922a718feb2ebf224bb72632edf17",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "86ea2b87-63eb-4278-84d8-c3bffdc92825"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "ECON 151",
+        "title":  "Tutorial",
+        "sha256":  "47663d134dd39bbc23db4d21f3e84a15eb5674f9e9497370c2d83b64eccb3c56",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "fe19664a-1dd3-4efa-b53b-21b6d083c037"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "CENG 291",
+        "title":  "1817522",
+        "sha256":  "c80eef7ef20c6639af058bec93e1133cfb513dbafd733bb674ced1993b68b378",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "ddb97bcc-962a-4a5e-aa58-5a49f1b42b07"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "CENG 291",
+        "title":  "CENG Project Presentation",
+        "sha256":  "91c3f6644b046f6c83307b0d24fb059e785c80987600ac16cfbe4769c90ca70e",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "11dcff1a-ad8c-4a4c-8f9a-1e0782b15ba8"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "CENG 291",
+        "title":  "CENG Report",
+        "sha256":  "d766105dccc62fb2830e8c2d23334ea5fa09926c4fb256bbc036188bf4c3b322",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "897b0b62-a127-4495-92c3-316c6fa4ecf8"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "CENG 291",
+        "title":  "CENG slide UNIT I\u0026II",
+        "sha256":  "3af3b9949c7a132eb20375d9eaf058787e155e3022126746acc65a9ac855b605",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "0e17387b-eed7-4255-a110-c0c0cd63214b"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "CENG 291",
+        "title":  "CENG slides_053718",
+        "sha256":  "1d20ad89d9d263097219e51929a3b3136f50d19ec94e793b8ff9ef91e265542c",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "cea2e65d-1f7f-47c5-a7ec-f131eb562b78"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "CENG 291",
+        "title":  "CENG TOPICS BY PESA ACADEMIC BOARD",
+        "sha256":  "1b4ab1bb9d717fdff773cc4fc74ea1be451c02f38b94ede8cdec2b93ae93674b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "869261cd-191b-4948-a756-4e4d7f03fa86"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 281",
+        "title":  "1 Introduction",
+        "sha256":  "5a596ab21b8a2e082067d02bd6a8e93aa85dc01a27ee8a8d475867a22b8546bf",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "24cb0a85-e7c4-4fce-ab16-5cca47041444"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 281",
+        "title":  "2 Fundamentals of C",
+        "sha256":  "ee5e5ee2d980049d88c49b3f1a4ce785794499cc1cf3cff41951a6b9bb058a43",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a9796cc1-895d-409e-88f7-c18f67c1ecdd"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 281",
+        "title":  "3 Data Input and Output",
+        "sha256":  "9e846ed2ad90d1f22264d1d25301d5ae5b7adde43e94cebe1c7e2cb0c8a89bbc",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "5fe66914-4445-4379-8777-2940165f72e9"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 281",
+        "title":  "4 Flow of Control",
+        "sha256":  "c4b93cef57d337515b3efdc7d4046e573b67055dac9085406581c852b1d7a8fa",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "61a1d074-4b91-4c32-b796-d4d04ba87bc9"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 281",
+        "title":  "5 Functions",
+        "sha256":  "edaa0e7e61a61b86be634f64ce347da0b20d3e7bc391694b36b89294707abb56",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "2cc55a24-1183-4aa3-9de3-3cb0f3e3444e"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 281",
+        "title":  "No.Starch.Python.Oct_.2015.ISBN_.1593276036",
+        "sha256":  "efd7804f24d2bf1ecf4c0189c88c2fa93d0f2f06849059fd461715b6b4c10f1b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a5e3d19e-1f31-4b15-aa71-1386f0cbe1ab"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 271",
+        "title":  "cheming hu solution manual-1",
+        "sha256":  "7d0c129d7c51d9f2e0dd86a919252db199a9a44154be354df3cebef35d8edaa9",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "4a49bf17-d186-454f-8b88-5613568dc264"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 271",
+        "title":  "Chenming Hu - Modern Semiconductor Devices",
+        "sha256":  "892d5f49efc4ced61d6a4e5b52c0cb6c552749b196648bd2ffdde06f2080e2b2",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "735778cd-7a5a-4331-9f23-570bf501ff08"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 271",
+        "title":  "Kommey Semiconductors",
+        "sha256":  "f32cccb4687058943060322b6af1a21b2c48c9b4a9b4ae39b2aaf4071b8860eb",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "df3d269c-5d35-4220-887b-e38002a7eb16"
+    },
+    {
+        "term":  "coe-2-first-semester",
+        "courseCode":  "COE 271",
+        "title":  "Stolen_Semiconductors",
+        "sha256":  "2f70114eb90a7288e0902f8c15b7d3825b018599838ca7c4712a317fc71936c8",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "14c52993-b3e0-4abd-978a-6c7d1b3229b4"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 288",
+        "title":  "Lect 1",
+        "sha256":  "7769a5722baadd0a47d3c2862a40f579f38b08bf1b9c8d77cdac6f463bfd487b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "62fc566b-c3bc-4905-a86d-8b833da281d8"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 288",
+        "title":  "Lect 2",
+        "sha256":  "71f4992bacc0f1fe8cb25dce42db994ee6945c5aa14d11a45e4849c349d3bf66",
+        "outcome":  "IMPORTED",
+        "attempts":  3,
+        "error":  "",
+        "materialId":  "8aa7d1d0-d9e4-4c02-9b7a-8d7948b6ac68"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 288",
+        "title":  "Lect 3",
+        "sha256":  "4ca5b8f17babc6574d9459ad35d7b5d88ba24b689e117dbc978c42c25a7dfa19",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "033fed73-ab49-4c50-a342-8ac98759fb96"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 288",
+        "title":  "Lect 4",
+        "sha256":  "d0d90fb9f2c175a89ca87efe9ed8462b4ca16eda7a6c43c876591508c854f162",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f6bcd598-c807-4262-a274-ec935d5aafe6"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 288",
+        "title":  "Lect 5",
+        "sha256":  "121397711f84e492db758f99f2b568430cd68ce1802ab73b54c92f461653d4cf",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "28a67013-81e1-4af8-8fb0-0049aad69ad5"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 288",
+        "title":  "Lect 6",
+        "sha256":  "1f8b798e40e443f0bfd2700985911d5f29eea0431f73531fffd50d0807f6b4b9",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "3088e156-13f7-49fd-8652-436f9fb07bad"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 288",
+        "title":  "Lecture6",
+        "sha256":  "d7b5ebf838b205c14fcaf39f78be80e3722e9a61afb478c3c91d965138a50e25",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "34d43586-b906-4129-87b5-bc6c8d55e662"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 288",
+        "title":  "Lecture7",
+        "sha256":  "b82d10d49bd23eb1bcaeb48c118468b53b6e9c1699c08f3ad1759d0ef55ce88e",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f9d256f0-b322-41de-b216-e73ef6810085"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 272",
+        "title":  "Lect01",
+        "sha256":  "397c43b1da357947b30799f33fc34ee0138c4c8a6d2e4c9d39f616a8303b46d9",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "bd6fc3c8-5973-45de-aded-7b6529281e30"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 272",
+        "title":  "Lect02",
+        "sha256":  "ba9bfc9a7713be04bf1ee0432d426ffc02a09d9e0911852953c7a5ff13a08f77",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b0ff0516-94df-46c2-8326-f132c1bc8a77"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 272",
+        "title":  "Lect03",
+        "sha256":  "2e0508d224aef18a8492468ffffdf704001445e753eb04912edc46d682d7aa7f",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "de4120b9-a383-4960-b044-e3098e34329b"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 272",
+        "title":  "Lect04",
+        "sha256":  "0898365af5fa4575a58de51581a42a9ca931dac938b7ce52364b244f8565c38f",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a399bd95-90d6-4d3f-990e-9645d1e40238"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 272",
+        "title":  "Lect05",
+        "sha256":  "24d6ad931a8c89367339bfa96d792d489539663dce01ecaba40886e75d10f3d3",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b9734530-6276-441b-ba44-0497c124e0ef"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 272",
+        "title":  "Lect06",
+        "sha256":  "38cc446e566e42c449cfc2a8f7cc4f1cfbce2d61aae05832d3b3c5df6e099a82",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "11870091-0fb3-4a87-8a79-eaf212a542dc"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 272",
+        "title":  "Lect07",
+        "sha256":  "714e17f6ce91e7f5951f1b0181aa1b83994fac26649799e5ed2bcd9e54f06156",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "ca5b80a4-3191-4e27-8d51-14eb521c1640"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "ECON 152",
+        "title":  "ECON 152 LECTURE2B",
+        "sha256":  "aed17d8a6ad8679882f1567e601b810633a5ea644688ebfbe664efcaa6aa767b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "7409b2a3-095d-444d-b546-0182d9baef06"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "ECON 152",
+        "title":  "ECON 152 LECTURE4",
+        "sha256":  "53da5f7da7ebe90534d2bdaadc4a819e52163653cab4c68d76692745007f09d2",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "2ae5e8b4-7bf4-4ceb-ad6a-0175de043ac7"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "ECON 152",
+        "title":  "ECON 152 SAMPLE QUESTIONS",
+        "sha256":  "fb01e64d4c853ebf020ed0ca67298a1a2b6bda2df10f6579fc4ab5c3ec1d6cae",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "e8e8a634-2d8d-4486-b627-4fddfc6c0db4"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "ECON 152",
+        "title":  "ECON 152 TRIAL QUESTION",
+        "sha256":  "bfc678d375c4753eb82d59cf1d6ffb6e57e4ae2b41b1a49ccdc184703e9d95d1",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "333f90b9-514e-4b80-9bff-e417e137979a"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "ECON 152",
+        "title":  "ECON 152 _Trial Questions",
+        "sha256":  "b479388953f29d14de84b5cb1e1772f3b5eecfadf8dbc7b25701649e38727005",
+        "outcome":  "IMPORTED",
+        "attempts":  4,
+        "error":  "",
+        "materialId":  "5f4a79f4-1021-49b0-9009-3a2afd6fc481"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "ECON 152",
+        "title":  "ECON_152__Trial_Questions[1]",
+        "sha256":  "27432a3063a2eb5d150aa86fcd976ec4c7e626a1a9bdb600e8f5574300532189",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "6f50d306-fcc1-421b-97ef-e0d23370c77d"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "ECON 152",
+        "title":  "Tutorial 2- ECON 152",
+        "sha256":  "96b960b427fe3e7a8c7c117b2c416e2ee5479fb95a833d1e23e638f6bbdfc406",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "2e02ab2e-4623-4efd-9abb-464dc57c7d29"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "ECON 152",
+        "title":  "𝐄𝐂𝐎𝐍𝐎𝐌𝐈𝐂𝐒 𝐏À𝐒𝐓 𝐐𝐔𝐄𝐒𝐓𝐈𝐎𝐍𝐒 2",
+        "sha256":  "894f2632b28d9573263f58cf567dfbe045368678d59fad4b726f47e8a353431c",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "28f18e26-8fbf-4103-8d87-55461ccdc07b"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "EE 288",
+        "title":  "Lecture01_intro",
+        "sha256":  "6109dfcb84309759197431a1dc8fb0ece1ba2351ed33a11857c9a817ba724420",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "95143fdf-1b3a-49d6-a1ae-d23a1416d3b6"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "EE 288",
+        "title":  "Lecture02 measurement error",
+        "sha256":  "45011fdabf743f14d0e541594fc94944fb796d220f7b39d397dd461643584c71",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "21336f7b-eaf7-420a-a19c-8832be93ad63"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "EE 288",
+        "title":  "Prithwiraj Purkait - Electrical and Electronics Measurements and Instrumentation (2013)",
+        "sha256":  "a3989452a584638d9ff13c76ec4bcd74060797dba7948446f17a04eb352dd934",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a8c63a7b-3f1b-488c-a8c4-19cfad91a2ba"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "EE 288",
+        "title":  "SCADA",
+        "sha256":  "4e4f47a20b0862ac11dc218fda4a76257e3168972fe828cc695f873ad4f0a849",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "dcb5ace4-8e93-40a0-9f98-94b9dbb2064e"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "TE 262",
+        "title":  "Lecture1",
+        "sha256":  "0d3d62ab1d65a140484cd2b4e18cddaea4fd331b35f4389d7fbfb19369a4c5bb",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "189ff9bf-3fb6-425c-b7cd-a5b8a4b8c024"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "TE 262",
+        "title":  "Lecture2",
+        "sha256":  "5404ccf72484ac79e5a5108077d473b68725188892d1e0437efd43df4904833a",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "e91a3ba5-b783-4e42-be51-e12318a655bd"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "TE 262",
+        "title":  "Lecture3",
+        "sha256":  "1d5bfc6b9040dfd8eb492c7ba2d2d9a868d2d10936c868d63252ee153a49a352",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "e0533146-8c15-408a-bf61-1623a9d84b37"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "TE 262",
+        "title":  "Lecture4",
+        "sha256":  "d7a3a4dc8cba4632a718073f7407ba519a8ec2a768a43d52d71ed48980075e76",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "20f01a5a-03b0-4edd-8012-4b6efbd32a45"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "TE 262",
+        "title":  "Lecture5 (1)",
+        "sha256":  "521893b5c688f2af5c521f5f2fc148685721bcf8f772895dedcf9619d8cc0d08",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "7d5f0a25-f39e-4811-bcb9-53303902396c"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "TE 262",
+        "title":  "Lecture6",
+        "sha256":  "077097c8927b0488dffe7fc1553cc628801397c640176a02f16c9030adda7629",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "ed27c50a-6886-45cb-b08b-c4392f3dac8e"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "TE 262",
+        "title":  "Lecture7",
+        "sha256":  "b6be7c43d5a6d7b98239599626830b370b7af0d98eb8c71425c37f81bc7ea31b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "189cf746-bd52-44d3-81af-e972a30bc097"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "MATH 252",
+        "title":  "Lecture 1",
+        "sha256":  "b2af8b19c8b905c1480f9afdaf3eb7ad9e4355af2026b09b093a13203da6a16b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "d550ba91-64ad-4243-9756-674ff36e5acf"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "MATH 252",
+        "title":  "Lecture 10",
+        "sha256":  "7feabbe82c6a573008e7e96a1083acc9d86d540656e5968a5af46aedab336199",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "d4eca6fa-ec82-47f2-a74e-2914edac5673"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "MATH 252",
+        "title":  "Lecture 11",
+        "sha256":  "620e2528bcb46020e809a7204734c442c3174380bcb1b9e7ce272959e4c25234",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "4ca5bc68-e8b2-47e9-980d-fd24de7bdfbe"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "MATH 252",
+        "title":  "Lecture 12",
+        "sha256":  "3887cb5deff6f44602f78edcbe7612fb80ced5133ccce5a5612bb0f178c42aa9",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "adee49fb-2ce3-4d31-af81-27e419c23508"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "MATH 252",
+        "title":  "Lecture 2",
+        "sha256":  "7cbe10a69fb412469fa04ed5f143737947ce71fd024bf1f842d5c920e30829b3",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "ce4076bc-ac62-439c-8896-5b86b3efde6a"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "MATH 252",
+        "title":  "Lecture 3",
+        "sha256":  "b8fb8a5ba623872dd3b529a0297c5b7c144c5ae991ea41465d405d35ee7811a9",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "bd2aa1bc-290e-47d3-a8cd-fd7090204a8b"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "MATH 252",
+        "title":  "Lecture 4",
+        "sha256":  "a63c1692be7261a7bb5b205cbd0ebbb30f8e57baeec41ef989d356b63b3af956",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a6eb5db8-f04e-46f5-a0f2-415deb3207d4"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "MATH 252",
+        "title":  "Lecture 5",
+        "sha256":  "5176b2888fdc1098bfd107a67c2a13ec792a1b545b9073aa8116bc3286d3814d",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "839febdc-4fb2-4e54-b454-5b50eca1618c"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "MATH 252",
+        "title":  "Lecture 6",
+        "sha256":  "f108db800fd537babda579829c403955a91ae46dc30f2ab59a21ae33e9e3f563",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "16c52848-f0c8-414b-a920-08d5a03051db"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "MATH 252",
+        "title":  "Lecture 7",
+        "sha256":  "ed63448bc22437c8cbf5f3354b62e512b3366c32a6989d82378a58efb60f04dd",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "8ebdf0b2-4fc5-445a-861b-2d0d546d6f8c"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "MATH 252",
+        "title":  "Lecture 8",
+        "sha256":  "62b53d4d1c9d5a1a44822b8eb11a57303591cabf84f35bbcf30a0bcf549f1d4b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "3719a34b-bfe5-480b-a56c-83c09d66fb6e"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "MATH 252",
+        "title":  "Lecture 9",
+        "sha256":  "a1ccc5e60104bac6ef53b79bf8451e5aa28de0e6eeef2a77a9df26d427bd80a3",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "74266fe0-fee9-4d99-816e-8481db93f991"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "MATH 252",
+        "title":  "Parametric Surfaces( Multivariable Calculus_Group 3_Computer Engineering_Year 2_2024)",
+        "sha256":  "c5a3a13a48cb554319000c4bff9e781a002521e3b1eab727f4a25081d8f4f507",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "4526e657-eeae-4de8-93be-4a83cce1838d"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 254",
+        "title":  "00 Introduction",
+        "sha256":  "06efd79ae3c9421dc22db351721e535bbd4107f466982e28e83beebf5544ddff",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "1b8bb651-c469-4a09-b56b-fd92c0ffd22c"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 254",
+        "title":  "01 C++ Programming Basics",
+        "sha256":  "134929a6f8bc2fe49ca5de0867fe77012f705470b67518d7515c2ef7fcca9932",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "c934366d-ef82-4a05-b737-cd7a0a9c9f1c"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 254",
+        "title":  "02 Flow of Control",
+        "sha256":  "490cd05c33db17d59770778411cda88c7e5d51ce97a53e83f8f74cfb6187d760",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "da570cbe-3a00-4489-981c-0510fd628c4f"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 254",
+        "title":  "03 Functions",
+        "sha256":  "237b7a322844b023dd6dc46d2a8c6f378b5a4a23f320ad929a2033c2d618c1cf",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "7f0d388a-c219-44d4-ac02-05d446596a22"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 254",
+        "title":  "04 OO Thinking",
+        "sha256":  "0e0fad02cca9e0deb322d3d8a8effc92aa48017f095a9e90b3797f81078155ca",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "0174b829-1a20-4dd3-9461-443d77ff8c64"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 254",
+        "title":  "05 Classes and Objects",
+        "sha256":  "a157d128ba576081245cacb263b67f5599fa0596d5f37c5fa2d4ca7024e9d748",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "4cd1ae33-3182-4594-8340-b8906ea8d7d1"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 254",
+        "title":  "06 Encapsulation and Data Hiding",
+        "sha256":  "a1277e727d50ebfe1159c76270d847a14bed55cd146b42fc5786bc1752bc121a",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "4b704272-f914-49f2-be41-6091132c284e"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 254",
+        "title":  "07 Pointers",
+        "sha256":  "fe9fda1e0de09ae116eb0f8382998ed741832b644a4619f21bdbffef90086d09",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "40bebf39-3f2f-4a3e-949e-816a46db00b6"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 254",
+        "title":  "08 Inheritance",
+        "sha256":  "2fff5c1f3d673835da15ff2dad57bbdfb89bbf3513240c68300e56a0e1b27dca",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "35e7010b-e7d2-43be-8ceb-4f66b6c3adaf"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 254",
+        "title":  "09 Polymorphism",
+        "sha256":  "e5aeebca39102df79c87cb94d670378e06d17e8617c1b17c1aa5880e311e4c7e",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "222faef5-b12a-4dbf-92d3-28172ea7ffed"
+    },
+    {
+        "term":  "coe-2-second-semester",
+        "courseCode":  "COE 254",
+        "title":  "10 Operator Overloading",
+        "sha256":  "1daeabacc741a45542f4b47fbf436074cb169279d5cb8b4eecbb4d1d68ad1848",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b543ab4c-438a-4c7c-9867-027139abceaf"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 387",
+        "title":  "Charles Alexander, Matthew Sadiku - Fundamentals of Electric Circuits (2020, McGraw Hill) - libgen.li",
+        "sha256":  "63598a0d93727bf22b9e8996d4bcb688cd436a26de2b01ae5a3a5812cbb7f056",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "0bbb2e35-0c9a-4c56-ba12-d27be4d0b28f"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 387",
+        "title":  "Control Systems Engineering by NISE 6th edn solultion manual_proper - Copy",
+        "sha256":  "7d8433336f9b1e4a0d16b51a9815e3b36c73d6d2ae7a8e95fc68c31b4f6376de",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a78bcfb9-3059-465d-9772-d2c673959401"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 387",
+        "title":  "Lect-7-Steady-State-Error",
+        "sha256":  "8d4f426835c36299112bf12979e346e9284c8287daf6f762b961dd122bbf32d8",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b60a82ed-1b9e-48c7-9bc4-30c4b65eb409"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 387",
+        "title":  "Lecture 01-Intro. cont.",
+        "sha256":  "fdb0f42a3e906de514632259b5f655f11bbd11a92c67da31654759d3b4a142ba",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "3dbf556f-28c1-4486-82f4-3cca2784680c"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 387",
+        "title":  "Lecture 03-Block Diagrams",
+        "sha256":  "a202177b54e8714e799990c7a663d0651dea2c0a682213da40e985960acdd8fb",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "7c43cc6d-f5dd-458f-9132-31c0a0503033"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 387",
+        "title":  "Lecture 04-1st and 2nd Order systems",
+        "sha256":  "20b240e0b82888e78ae45057db449ec9931f6cbb6e46d7ff37ff6f3fc32e6a60",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "0f56a01f-5edf-45be-8b2e-5c93809cca44"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 387",
+        "title":  "Lecture 04-Stability",
+        "sha256":  "61302c3aba5890da2232a2bb132bfb23f5dead5d8b077f77650c66bf71be42b1",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b9355cb0-aa74-4e0d-9aea-a21337b70284"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 387",
+        "title":  "Lecture 04-Time Response",
+        "sha256":  "5b4eea59cd35f0d561e4922f089f25fd922f0a6e9657794d1c0253e268236b9a",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "5a5dd29c-fd90-4459-84b9-aaccd262b8b5"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 387",
+        "title":  "Richard C. Dorf, Robert H. Bishop - Modern Control Systems, 13th Ed.-Pearson (2017)",
+        "sha256":  "37a1d3cc15ced1532bc41f6cd44d5d5d4b53a77b6625ed48389183d4f0eb1c7c",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "2de8da2a-4dfc-4f87-991f-753df252b40b"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 387",
+        "title":  "Time_Domain_Analysis_of_2nd_order_systems",
+        "sha256":  "07dc5480d247922c77acfa7724b3f68d33c4a22b2cb926543ee03fcbddcda6d7",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f311146a-86d2-49e4-931d-11800785bd53"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 387",
+        "title":  "Unit 00-Introduction",
+        "sha256":  "de45404c9ae3ca76f571fcf4cef8a3bd76b32bc2c7a6c538e571b539b4bd2cdc",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "0f6a85f0-383a-466f-bc40-5104646d1a79"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 363",
+        "title":  "01 Introduction",
+        "sha256":  "a14df2d74e14ad48ad54869a42caf3f0289fdccb62b153ca70b695b8ba08f916",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "80c8762d-106a-4cdf-a444-97f832234faa"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 363",
+        "title":  "02 Algorithm Analysis",
+        "sha256":  "0c6c64f1d4e56549552c5863179a0187ed7215c04909cb20f5642228774ae1ee",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f0dbedce-9fe0-43f5-b438-6ba66ffae62b"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 363",
+        "title":  "03 Linear Data Structures I",
+        "sha256":  "a6128309eec18c1b879435770d563564afdd372102d2386b226262a58323da36",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "0d02b740-ea06-43c5-801a-94d69f3b31c8"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 363",
+        "title":  "04 Linear Data Structures II",
+        "sha256":  "c189e434af2d5de800c2b04d35c0a91101efb01c8f4801d0b4bb63e5fd0c527e",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "0e3b35c0-dd76-4fe5-a2f4-5891309c7f51"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 363",
+        "title":  "05 Non-Linear Data Structures I",
+        "sha256":  "67efed566db97d98059730b58af8e39b694b867f0c5ef4592482f4660b077679",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "af68db6e-0d7b-4fc9-a4cb-17599d14e2ba"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 363",
+        "title":  "06 Non-Linear Data Structures II",
+        "sha256":  "9ec560a10b0c60ae78cb34b3082292eb6ffe2c9a6483514bda16cdefa811291b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b3b20827-5660-47a8-a657-05cc000f5d6d"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 363",
+        "title":  "07 Searching Algorithms",
+        "sha256":  "d119391f378b6cee53abab869ec98849e8843013178a096f8c588e72d791adc3",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "7d3d0040-afb2-42e8-bc57-777d2732b820"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 363",
+        "title":  "08 String Algorithms",
+        "sha256":  "ee2bfb9ab8121acae70afae5b04a6f288908b728ed67e100ddb1a218e8bd8a2a",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "56f9f19e-a0a0-4dc8-8629-6fe4c10933ec"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 363",
+        "title":  "09 Sorting Algorithms",
+        "sha256":  "ff3f02d2261df5d65301968293bb06898aa995b37c8912594808bac4c4dc7cfa",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "68d003ff-8ef7-4c52-b888-87e1f6440118"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 363",
+        "title":  "Introduction",
+        "sha256":  "1bed96e985cf09254ef267dafa462df7ecc2eb97a7e969c78b5209489facd64e",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "b8cf786f-65c1-4d7f-a521-9243dd7894c9"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 381",
+        "title":  "Assignment 1 Comparative Analysis of Microprocessors",
+        "sha256":  "6c16c899629d4ae6aea28d7cf0b7e317148cf878e312c79f1b31973b46a2a258",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b9f311a3-2ac9-46d0-940c-a4045065d783"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 381",
+        "title":  "LAB 03_ DETERMINING THE LAYERS OF A PCB (2)",
+        "sha256":  "31e9708c609a83fb8def9c2294dc67339c112b6d69c96476cbaba6ba36236a9d",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "2d07f084-1bf3-4e6e-bac4-7f114320ee66"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 381",
+        "title":  "MicroP (2)",
+        "sha256":  "94c184e0937ea83c9a280090fcaf9f26593cb83c34f1093755f5dadfd31572b4",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "39bf65c9-4d0e-45b9-a663-4dc06b31cf94"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 381",
+        "title":  "New -  Lecture 1",
+        "sha256":  "cb76d428d9751b3cf8db81887efcb56252f1dee5427b3bd82c4d135115b76935",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "4a9f6e22-1015-4c48-afb2-4f0bf3e79b36"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 381",
+        "title":  "New -  Lecture 2",
+        "sha256":  "b112a2d38889bc8fd355c040461b90c29a1e5ee4ed298b202e4ccecf07b24a43",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "7d9c274d-c6c5-4f23-96ba-c502ae30d316"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 381",
+        "title":  "New -  Lecture 3",
+        "sha256":  "70a24da1a76aa31d69d1cedf91b4f7d2af7f066be5c0fd8269411ed274c9b219",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "d555fa86-c758-4329-96d6-5f57aaace91a"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 381",
+        "title":  "New -  Lecture 4",
+        "sha256":  "7846f6711fc5e175d2c6b83f0ade7263ab93cf0c56b8cb5480d3b4fbb3fb5390",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "7a9c9165-4c26-4a16-a4fa-45bf0a6dea3e"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 381",
+        "title":  "New -  Lecture 5",
+        "sha256":  "245ef9e218e78534d8c59c65c0d0edd05129fe7beec210561a5fa0a8c792b369",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "779d04f0-2af0-4ad2-97b5-39c36d889aca"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 381",
+        "title":  "New -  Lecture 6",
+        "sha256":  "5805b5264394b66dfb96f09ef985cc3e2be4adace48904bcae6a5cbd88a6166b",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "94afbba6-2431-4dc1-9c57-aa50f72cfcd3"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "COE 381",
+        "title":  "New -  Lecture 8",
+        "sha256":  "fd39ab3158c6fcd5fe43bad657d05bdf0ed0da32fba3bedac068acbed6de1ff7",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "ef98098d-3184-41b1-9b06-cfaf9ec2b2bb"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "MATH 351",
+        "title":  "1.1.Naive_gaussian_elimination",
+        "sha256":  "690f75c54703fafecd13f148988590d1a688e0e7f9fe971753231c321c724a84",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "36ccebf2-157c-40b2-81b4-8a678b81bfcf"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "MATH 351",
+        "title":  "1.2.gaussian_elimination_with_pivoting",
+        "sha256":  "0315ba624ae79fefa8b291d1afead3eb1429428e99b6c010a491a39c99a5d373",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "24952087-b62d-43af-951c-73116b28f42e"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "MATH 351",
+        "title":  "1.3.lu_decomposition",
+        "sha256":  "c0b05eb31f33d59b019b7dd871e9af9768b99d5451220acc7bcdc68808403b9f",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "5115061e-38e5-4b1a-821a-837e1c4a0d40"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "MATH 351",
+        "title":  "1.4.special_systems",
+        "sha256":  "a5a4e9c3559b27d909bc462f89939730d413fa89d4ec1257ff55b15f85eb9132",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "398bfc3b-06a3-44b8-9385-d3b208d07cce"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "MATH 351",
+        "title":  "2.1.linear_iterative_methods",
+        "sha256":  "136a223832505b1434e072433029d0939c05bad0b822cc235482d7ee2cc90d66",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "ef6c848e-c155-4ad6-a20f-e2260fc6d94d"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "MATH 351",
+        "title":  "2.2.non_linear_iterative_methods",
+        "sha256":  "a7dc15e74b5f6a0807c8f9b01d1df15d50764291fbc572d97547de612e33cb79",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "bca9577f-b0c4-438e-a228-ec45e6ff4f03"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "MATH 351",
+        "title":  "3.1.interpolation_by_direct_method",
+        "sha256":  "339a09d0a6fdfb0d47ed9566d118c0e4fccf63db7348ee7627e6b758efa9a2a8",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "cb6bc8ef-f2ff-4b88-88de-a687a69e3426"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "MATH 351",
+        "title":  "3.2.interpolation_lagrange",
+        "sha256":  "2caf0ceb8a4ce3f9a80d657323f2066421a3b3a3b585ebe756fb2bdfcd138a21",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "973f4c77-b23e-4d66-a515-d7ad53240a81"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "MATH 351",
+        "title":  "3.3.interpolation_by_newtons_divided_method",
+        "sha256":  "b9b381977d6deda3628a949a899a6be650407e5fb7581f494c682f84a359be1e",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "db268d12-ba21-4139-bead-6b3b927b911a"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "MATH 351",
+        "title":  "4.1.numerical_integration_trapezium_rule",
+        "sha256":  "b33e1451e4904d584492bfdd7a2cc285c6ff07ed7bd54b66edf3d1ce47ceac82",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "1945029d-7fdf-4e1c-8672-5efb736cb61f"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "MATH 351",
+        "title":  "4.2.numerical_integration_simpson1by3",
+        "sha256":  "6d621eb57eabb2ab4c6026d65b33fa1e11c95760a00156f6d331cea4c9bb5610",
+        "outcome":  "IMPORTED",
+        "attempts":  4,
+        "error":  "",
+        "materialId":  "57b8c202-72a0-4310-bad2-17af18e5a4b1"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "MATH 351",
+        "title":  "4.3.numerical_integration_simpson3by8",
+        "sha256":  "f281767fb42bf233b2575e93d0e9e6154c83e8128e6272640aa96af1e94214fd",
+        "outcome":  "SKIPPED_EXISTING",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "541eba6f-e679-4df6-b171-f728c02187e2"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "MATH 351",
+        "title":  "Numerical Analysis",
+        "sha256":  "b3482c5b2269d93c9d007cad8b97046387032c5cd0f6146ee33bff1dc633ea72",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "aff5fbea-c9a2-48c2-af61-83a6017113db"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "MATH 351",
+        "title":  "numerical_analysis_9th",
+        "sha256":  "c5af17c41cc4049f9b3f028ad513182d316d6d1c7a1d683250fb18bda2e48d6d",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "0b65b4c1-ab15-402e-b301-069606050f03"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "STAT 253",
+        "title":  "stat questions",
+        "sha256":  "201552bbd40d9126f73460e03a11dd7033ac764170f054ec9ec7f7849d05c66c",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "30608522-442b-4e9a-9081-5ed037219d3b"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "STAT 253",
+        "title":  "STATISTICS AND PROBABILITY_ STAT 253",
+        "sha256":  "8f89a1a0e8c0c52c39b6118ea16c8d219222a0fb0d4eef7e02a698983bc3db52",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "bf63bafd-07c4-4963-bbb2-8db534cfef17"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "STAT 253",
+        "title":  "STAT_253_PART_A_ (1)",
+        "sha256":  "e350a4372d4362f38ad466efbb57dec3346ce1cf81a2c13e53dfca6ccf06335f",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "c2e8a365-1cf5-4e65-ae99-963385140fdb"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "STAT 253",
+        "title":  "STAT_253___PART_1",
+        "sha256":  "0c4cf0c7ab3538aeb9a51d5f0cb640ee3bc13c92c4411bdb9c8b27ad3681cc46",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b406782f-849a-4bd4-84f2-14eeeef4f7cb"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "STAT 253",
+        "title":  "Unit 3",
+        "sha256":  "325b30a5e403facc6844591cc1cf9743ce29ff473f51c6d641f795eafee59502",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "19d7ee3c-07fb-484c-a877-aaae150002cb"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "TE 385",
+        "title":  "Lecture1",
+        "sha256":  "82e77765a516604fcc61d575dff975b01de51c824e2b7857853a499af3a0b4b7",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "1544de5b-94fb-4618-9c11-8f0a26890a87"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "TE 385",
+        "title":  "Lecture2",
+        "sha256":  "7ffef444d6e7817d845ecbb881ad169671a10d5582fc9331866c2271d24d88aa",
+        "outcome":  "IMPORTED",
+        "attempts":  2,
+        "error":  "",
+        "materialId":  "55e80313-efdc-49d8-9146-0e13fa888801"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "TE 385",
+        "title":  "Lecture3",
+        "sha256":  "53d62a14576d7e9004c01379fcaad31432edde293c0e1b3bf4794e3572eef7ff",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b07c8dad-8ce1-44d4-bd6a-39429d8364ff"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "TE 385",
+        "title":  "Lecture4",
+        "sha256":  "31c6493b2fecc6a1d0e26ac97e81e15039838adccaeaa3e1b4c74bf59eea5a1a",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "1015bd60-3917-4966-93d8-13f997dc5d03"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "TE 385",
+        "title":  "Lecture5",
+        "sha256":  "6d030459ace7229d79e7edae15b07fb4c6786c8c0698d73269681a66eed6d9a4",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "cb3de35a-9f7d-4cdf-b786-9a2eed1c57fb"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "TE 385",
+        "title":  "Lecture5c",
+        "sha256":  "d230410a17b043df025b14104cd0e999f97475467fbf2a4f654020c90433b572",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f97872ea-6b37-4aed-ac18-8092796c4181"
+    },
+    {
+        "term":  "coe-3-first-semester",
+        "courseCode":  "TE 385",
+        "title":  "Lecture6",
+        "sha256":  "ef5e5c25b5661ba66091b0c1f9745152a7a971cdc406aa64789b06070ecfa874",
+        "outcome":  "IMPORTED",
+        "attempts":  4,
+        "error":  "",
+        "materialId":  "988b989a-f854-49ef-b68e-ab81875ae39b"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 392",
+        "title":  "Automotive diagnostic systems",
+        "sha256":  "7c76a2aa5222124019d0bc21c996189316f495cd0b2f82e98fcec96cc0fdada1",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "4bf26a76-d2ac-433a-8b33-681f2753651f"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 392",
+        "title":  "AUTOMOTIVE SENSORS",
+        "sha256":  "8356dd9cbf2660d04d18f706000c7b3701983c6351bdc5e981627b9c2324a911",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "30537da6-0462-44d4-bb41-86384c65a9cb"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 392",
+        "title":  "SCAN TOOL AND ENGINE PERFORMANCE DIAGNOSIS-1",
+        "sha256":  "862595d2d015011bfd82dc6aa605d159b586da25055ae69bd66d48e977ed0635",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "95cf4dac-ec2c-4954-aea4-ab573b113f3d"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 392",
+        "title":  "slide 1",
+        "sha256":  "6daa1f56d62623e4c43e30558a6de1e68f9db47191bfdea3c501a8abff662edc",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "5fbde725-c6c7-478c-906c-87de547985ff"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 392",
+        "title":  "slide 2",
+        "sha256":  "581be32a5b41f041254e6dc12dd82160a9e4b87467cf07f544a069efb97918df",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "bd7a380a-4043-47c1-846b-0896b1785d46"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 392",
+        "title":  "slide 3",
+        "sha256":  "d964b651a23092a5aa639751865fdd81a5daa73b09f715cf8d6920410528e49b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "54ab36ee-46bb-418f-8ce0-87203fa339c8"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 368",
+        "title":  "Lecture  3",
+        "sha256":  "a058e8196534b28f7d786468f0775ecabd2500f235525956e6291289c09a9aad",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "71942b5f-3296-460e-a2cb-135294631e7c"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 368",
+        "title":  "Lecture 06",
+        "sha256":  "41cca7420d4d28ce454200e74de3fbe25d96d15ca041618b7c1798812f163efb",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "3501c2ac-e6f5-413d-89c4-26d06094c646"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 368",
+        "title":  "Lecture 1",
+        "sha256":  "bf7fb19212f74811559da83e860a693135cd99d9ecd12008e20994f3768d685e",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "c80a7b6f-df96-4879-8aac-2af7793801fd"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 368",
+        "title":  "Lecture 2",
+        "sha256":  "62b1053df77b9875a2eb6a9249698bf4da6f9b6842e70a371271adb3765cfdff",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "da1eb2b4-1e15-4905-abc5-d25098193e5b"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 368",
+        "title":  "Lecture 4",
+        "sha256":  "2cab0d51bebf481830ed1369a08e5bbe283cf05df736264ce931aab684239067",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "9c02a51b-f18f-478f-a8e1-2cff1d761f91"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 368",
+        "title":  "Lecture 5",
+        "sha256":  "4d3d8c94e394cd496db8a48c0be298d08a4ced052ba70693d619ef490eb08488",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "dc35dd6a-2b2c-419f-bd88-b18e0ed4c8e6"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 368",
+        "title":  "Lecture 6 5",
+        "sha256":  "d94c0d90b0361a229b4fa949977b76ded88989673849083cc48520eb09fc6fbf",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "94aef210-8a59-4455-9d00-e3b1f28341cf"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 368",
+        "title":  "Lecture 7",
+        "sha256":  "c5813a05abc09087875fccb4d2078feb95a0655fdcefe55ecbf8d5d1eaf586f9",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "27743343-2072-4f84-ac9f-04cfa1768edc"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 372",
+        "title":  "Digital Systems Design Projects",
+        "sha256":  "00131aafd806c3c340be28f87df751fd528a1fa16e8b25c08e037c7ad1bbb631",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "da64ba04-6201-4e52-8591-133d5b1ba9ee"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 372",
+        "title":  "Digital Systems Design Projects",
+        "sha256":  "02a3f27c91df760062543c5837340a022c8cb97995c29589f8e875faf941769c",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "aa16d9d0-43e2-4c60-8ed6-da1eec56dac7"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 372",
+        "title":  "Free_Range_VHDL",
+        "sha256":  "27302a09a630be51bafde2dd81cce34d4f37d9b922039a7b440802ec664865d6",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "365b4862-f10d-42c6-8d54-66c36bb16e67"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 372",
+        "title":  "preparing for COE 372 Exam25",
+        "sha256":  "48ce4a870a620752baa714ba5f50dde6a75d15701f1d57c00a548aace6962f16",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "552a6a78-b863-46eb-92f5-8a0eddc5c5e8"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 372",
+        "title":  "UART",
+        "sha256":  "505a5c86d1c51b78c31f7e7e76872ac646c4cc48612c22a7892da7e8f020e676",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "bd9e54f8-6206-44c2-b51c-ef6b95a7b0aa"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 354",
+        "title":  "os-coe354-slides",
+        "sha256":  "996f2d2d50ce7be0ecc51cd06c8ee663189e48798f62672eec51fcc48e017b0c",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "7df330a4-ed3c-42dd-8dfb-d949f03cd276"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 358",
+        "title":  "Embedded slide",
+        "sha256":  "ef35e2aba0378147fb8c6f39cf20ac8c34eeda3e699d50652517caa44b28854c",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "cfa9badc-1427-4bfc-9e34-972fad4742f1"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 358",
+        "title":  "Microcontroller Projects in C for the 8051 ( PDFDrive.com )",
+        "sha256":  "51156f32d46dc3c1593ce79dd3fb2dde8079fc03799df6767f17c6aa911ee7f6",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "6ccbe145-28b0-4ccb-8db2-7bc2fe7989a3"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 356",
+        "title":  "01 Software  Software Eng",
+        "sha256":  "09dfc9e787f0e55622dc2a815e4693908d6d1e5e65c6241af8a5d8b14f5fff6e",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "5372822e-bafb-48df-b925-7e2c12f29633"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 356",
+        "title":  "02 Software Process Models",
+        "sha256":  "f72f84fa1bad8fbf5625e99e97bfacec9ca2a3e98fe235f58e9b874cde5d7cce",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "d4409656-f404-4fb0-8f79-54eba8020ff2"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 356",
+        "title":  "03 Agile Development",
+        "sha256":  "55a19e2725b6e057c3281888b896b2962d68a6e8d7f55d8ab3edba2b93d7221f",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "01c50f22-8d15-4ea5-b599-0d28f7349ce3"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 356",
+        "title":  "04 Principles that Guide Practice",
+        "sha256":  "a04340d27453b72fdf8c7e261cecbc16b5beac98853eac1c6ae32f392253482b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "1cf35dd0-f9b0-41f7-bdc4-770c041190b9"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 356",
+        "title":  "05 Software Requirements",
+        "sha256":  "e7479813631a1743a844a281166d7e18ecc33440d4d261c3ba0326ce95598e73",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "cbe96b33-4455-457b-a9d1-e1954a70042e"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 356",
+        "title":  "06 Software Design",
+        "sha256":  "049089bd46a963f5eb3e6e13d32673a67d721e45735322a76c948520484d53ee",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "fa725ca9-a3ef-4fe1-9f7d-10fe186f59d6"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 356",
+        "title":  "07 Software Project Management",
+        "sha256":  "108ac88637609d821bef3c8a845efc4b3857368b396d7141bf18a0f858d71695",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "cc58800c-e26d-420d-b959-4c76dfb39e70"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 356",
+        "title":  "08 Software Testing and Validation",
+        "sha256":  "b348599f9c981851ece456fc10b15fb3c0917777925b25828cf598b3afaf7637",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "ba8b7bf4-c6f4-46ea-9eb7-6938a7c924f6"
+    },
+    {
+        "term":  "coe-3-second-semester",
+        "courseCode":  "COE 356",
+        "title":  "Book",
+        "sha256":  "321ef1ad587d80d3a55934a8d6f7bb3d4f1b4687681c78ce4303ba5d2bac5706",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "0b5e3a84-67c1-4627-985c-faa5714bf6a5"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 485",
+        "title":  "MIDSEM",
+        "sha256":  "575fb96b3006e29baabc015d601c3cb3244ae502a7f8fc47973ee34a262e7620",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "7f8a99f1-928d-4bad-a83d-4fc93c939cd5"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 485",
+        "title":  "MK.Computer.Architecture.5th.Edition.www.EBooksWorld.ir",
+        "sha256":  "212a46939eaa5da621405d5097f3465270d55bf39a6bbf307d12f7c79194167b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "aee31167-38da-4f93-a2b9-089bd9416b62"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 475",
+        "title":  "Andrew S. Tanenbaum - Computer Networks",
+        "sha256":  "5b4b3d33bc501106a1530e08c784eead8ed1ed151ad93fb63822b77ece33ca5f",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "dcb39bff-82f4-4a13-a4ca-532ec1e4d5f6"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 475",
+        "title":  "lecture 1",
+        "sha256":  "88415e6690bd8cf3f34ab1872231005f6c0f18f5c5a31427c1d3872e6beba1cd",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "e5a07c73-871b-45d5-a1f0-f0873435595c"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 475",
+        "title":  "Lecture 2",
+        "sha256":  "691a9794aa6452e2a85ecb860fa3235eb871e44c9e18db9677d3f3bf0c62ed81",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "e95f16e6-9f63-4fbf-8818-2d071e01df38"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 475",
+        "title":  "Lecture 3",
+        "sha256":  "ca1a66273d266e41c97ad0000a45c54d4a083d852c8fc348fd418afd2eea2af1",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "c2a712dd-0ba0-40c6-ba9a-46e96ed80180"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 475",
+        "title":  "Lecture 4",
+        "sha256":  "5e4a8f298d3f31079c505efceef8c5b43d57131174400bcccb419f065b624543",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "785d66d8-a424-44f3-a7de-85c0aa045b0f"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 475",
+        "title":  "Lecture 5",
+        "sha256":  "812a679663ea62334e10073e0a8f91db619cb04c2f32881e2a2e20a593970185",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "3ba72a6b-ad88-444b-8435-b98b1c70b805"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 475",
+        "title":  "Lecture 6",
+        "sha256":  "ff218a47ac5263d62c01a3e244471f609e58d238901da03bc8b4515e31fe6d60",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "2f9ad614-0322-43c8-ae9b-8a7e71ab28cc"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 453",
+        "title":  "2026 - Introduction to COE 453 Distributed Computing Course Requirements and Grading Structure ",
+        "sha256":  "15d995d98d2e4ae8d37931d4badb45b16ea8505aa46ef8c77aaf83561837c2ca",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "424dab82-dfef-4256-b1ba-30ca3ae5e582"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 453",
+        "title":  "Mock Exam 1",
+        "sha256":  "037f7081dcfbcbffa05c707f172eaaaec51f969edd6361e5e0d409f3f9f58fca",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "632d1a9c-7da1-4a13-979a-bb7a170d45a5"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "1 Principles of Management",
+        "sha256":  "b9d7baf295601eefac07f65772f77a9868425a284a686adcecc029c5e4278e0e",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "943e04c0-3870-421e-8771-ebcca9426a32"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "10 Project Management (2)",
+        "sha256":  "c084883bc8af2bdbb0c49a3cb33df93b4ac51cd53db70b13e8c522d9bd16bda9",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "e2a50710-396d-4645-867f-1f3fa448783f"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "11 ME 491_ENGINEERING ECONOMY, 2",
+        "sha256":  "10be9ddd82dce3a31b8ed53e602c228e2432609f8a2acc6fd114b786354d9bf1",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "50cafec2-725b-4c72-a336-8b6ee1efa267"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "12 8.2 Nominal and effective interest rates",
+        "sha256":  "b6caf13f2f091da4d7bb5a380b96864873ad22707f08688ce4d76c0d82d58727",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "07dd9944-a394-4b50-9810-0b0cff60e0ea"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "13 ME 491_Factors and their use",
+        "sha256":  "3f6734f542230433e41db121eb640a236b4f81cca8decbd1376c2181b9b7e0f8",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a25a6d59-2a87-4da7-b4f9-8a1b8a631977"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "2 PLANNING",
+        "sha256":  "16188974e9ee7e71810692e79ace9e4edbcf46ee67e54d8763fb5330c15d523c",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "25fffe30-7fcc-4397-b2f6-ed24a70cd00c"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "2025 BUSINESS RATIOS",
+        "sha256":  "8941e4e393e85c86983f2aefafdf989c6290edd2686cd53b0b27e43475f44dec",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "22870366-e811-4b80-b49c-c19a2dfd1624"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "3 Decision Making",
+        "sha256":  "cd5f804de92e7b9cfd9fc4b71f2381908fc0af0487d294228cb3d74ad4c7f58b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "65841253-9e24-4db4-92ea-026da0228f1d"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "4 ORGANIZING",
+        "sha256":  "fb416a21f5e87e219e466e21f1b1c4e14134500a8a7d8fd55c611fe767522575",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f49c684f-5d3c-490f-a364-a32c30760b71"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "5 Leading",
+        "sha256":  "8a802e9f77b4fb243e63b0fa8b4c52c276624d477b8d1fa03aea5a26fab32ab8",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f1ec8489-f98e-4d30-8872-e862b7bd0a97"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "6 Controlling",
+        "sha256":  "37a653cdfecfe5c72f5f6843b80de4d7a1f0468de794633c0f7d74a2d6868521",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "3563f597-c1b5-4d91-8e7e-cf8e39e67674"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "7 ME 491 6 ACCOUNTING1",
+        "sha256":  "d0165882445acf3463460f0ce1f4d8b99575902b8e4ca898c7c58429c578fbc1",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "9031b4da-3eea-4f0c-a374-b41e7536cb5c"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "8 ME 491 6 ACCOUNTING2",
+        "sha256":  "01f062b98d8a38fd03fd160a6e88fd7d45d38e40ed3232cfabf2dcf1f1ba9e8f",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "aba0ed52-70d7-4d93-a538-3e7ac3a4a014"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "9 PROJECT MANAGEMENT SLIDES (1)",
+        "sha256":  "d2ce471cf22fe3d9dd97eba56029dd7864122a52a246fe0826b5f6212608b6e1",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "107a17ca-36c1-44c5-996f-a8021155556b"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "ACCOUNTING",
+        "sha256":  "4a1885e5144db32ba51ddafe0be5246de24201e9d7dead3855f4dfeb80ed97a2",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "01114748-f359-4548-940c-aa4d36597cbd"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "ENG ECONOMY LECTURE 1 (1)",
+        "sha256":  "635b9d3656cb99b5fe07aaf5439f32ed23900fcd598cf6c86598b837276281b9",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "d8d3bff0-ebce-482a-92e8-c66b722c7e32"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "ME 491 6 ACCOUNTING1",
+        "sha256":  "f1e67d30278950b1e652c829a2ed0e1e452f8e543ddf237fa82dce5bf436a734",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "30c9d54b-0121-4db7-8716-239d0edb2ef4"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "ME 491",
+        "title":  "ME 491 6 ACCOUNTING2",
+        "sha256":  "098bb9ccc590cb809531371c270f3a5d90c9f03b04b0e78ef1e2ca6adbd5226d",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "d7827028-fa9a-48fd-a76d-48072cec9a4a"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 497",
+        "title":  "Abstract",
+        "sha256":  "7605ec20a1f92bb5f1f7a0558d4d534ecc7ff81c3e2f87d5f9a774e70f693db7",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "bed7e37c-70c2-4041-acfe-1cd98af8a76a"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 497",
+        "title":  "AI ASSISTED ACADEMIC PLANNER 1",
+        "sha256":  "619fc6e1a5c0ce02ea4cf9bb63a89475905956861de5eb129621636880422cac",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "50ce32d4-1f1b-4019-8885-e95baa672684"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 497",
+        "title":  "AI ASSISTED ACADEMIC PLANNER",
+        "sha256":  "c58ac6d543183513cb208efeb496f47cf01dbf4c7ea3c3d2de6e98bd79fd9e15",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "5c69589d-6679-4c85-b08b-1822af51ad36"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 497",
+        "title":  "AI_Assisted_Academic_Planner_Presentation",
+        "sha256":  "f03cb61be82ce884c2f27f28c0c65607bec2e8de303f73e5cb2c47439cd4febe",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "36092ff7-dc56-4360-9d49-f4a577f2e63c"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 497",
+        "title":  "AI_Assisted_Academic_Planner_Presentation",
+        "sha256":  "11ed87bc6f89b4cf2b4e3d637afc717543226e1d035d79d2a77efe7d4706a7e3",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b85896ba-4912-4f90-a8d9-1148b3188c59"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 497",
+        "title":  "BRAIL",
+        "sha256":  "a858f21646e7b5f0d826391fe04ff8fc4cc61b84667e5d86982be18a381a83cc",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "2d7bdb82-70d3-47cd-bbad-c281cdbd239c"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 497",
+        "title":  "Coming from SHS",
+        "sha256":  "2ef639894f46067ecaf8e1e6ca4b7ac463d87b0bd6de265b9d8c4d6a6b3a5a46",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "8015f3a0-b947-482b-af11-5c80f9884822"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 497",
+        "title":  "Features",
+        "sha256":  "2f275836060229889f777abae8b2dddfd18bec0b011f9bd91ebf854014853f1b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "41259029-35ff-47f9-9ccc-d84a35a18151"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 497",
+        "title":  "KNUST_Disabled_Shuttle_Problem_Solution_Impact (1)",
+        "sha256":  "8e5771ba4d2bbaf0c613fc1a654d5bc673d217c4224aab316c87e15996021fc3",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "dee8310d-bb8e-4098-a57f-47bef7ac0c5b"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 497",
+        "title":  "Predicting_the_Student_Performance_via_Machine_Leaning_Techniques",
+        "sha256":  "be15e3daa4c57e92ab64b8b2c0e4927361c40128420c751215193f1f002ddc64",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "216df54c-c8a0-4c9d-a137-1c986d25a735"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 497",
+        "title":  "report1",
+        "sha256":  "e88bac526f93fd0d17cd64c6d4f5c22f81d28952a7a44f9081055d369ae93a8d",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "1a8d3a61-649b-451e-8f1f-6d7fb2dda749"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 497",
+        "title":  "synopsis 2",
+        "sha256":  "6a7efe6c7e1534267223db75a737bd36e2345a7ea5d74f359682b4021cd5d59e",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a56469a2-b57e-41dd-a151-95434f1dc736"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 497",
+        "title":  "Synopsis",
+        "sha256":  "251dbb7705304b5a905ca6d0621d0efb4286b6dd396f7a8e08ac4dc4e1e6b31b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "93fd226d-8bbe-4664-919c-e02b976aa9a5"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 499",
+        "title":  "Appraisal form for Vacation Training 2025",
+        "sha256":  "4a82f0ce05f3d621df4e07d119fdbdbce44bd55f56229284acc1616d3e4d52d3",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "542f0a5a-7cbb-4a6b-ae96-43352393f353"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 499",
+        "title":  "Guidlines_internship",
+        "sha256":  "c68b6d171c8100f0bf4bd0d8a5d6cde084ded996133e6374498c0a0951f2f922",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "4081ee63-818e-4ecd-8a91-628948cf7491"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 499",
+        "title":  "IT_Internship_Essay_Report",
+        "sha256":  "c93a90cbcf3ab21507755987f61435742414b039b05762acd54f937553fd7f50",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "85e06438-61b1-4d95-b410-7d66b2539825"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 499",
+        "title":  "IT_Internship_Report",
+        "sha256":  "06455f72252bb1c20a4449d039b7814c66afb2a5de5bc18d67a0aa95df736ad9",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "5b5c1c0a-9f30-4f40-b049-cfe5a5718ab3"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 499",
+        "title":  "KWAME NKRUMAH UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+        "sha256":  "6a8ecaeea333b886c2121a03f92de3e1ffb125d7a14fc45bc8304fe997b173c6",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b96de4fc-4ebe-4442-b316-ee844d2c6f14"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 499",
+        "title":  "Lab report (2)",
+        "sha256":  "bddb2e42654bab286486cd33bb34b1d029df498e941aadd74aae19e2bc906cc1",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "7f17d985-1efa-4d38-b06f-2e9a16f1ea2f"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 499",
+        "title":  "Lab report (2)",
+        "sha256":  "e53433539667bdc36902737a1bf280da077a1d25f4fea3f38812e084466d23e9",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "3e590c12-d406-4e68-b680-a1d16d323421"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 499",
+        "title":  "log sheet for vacation training 2025",
+        "sha256":  "20547f76944eb05be69952eabcfcaa13788af59384da662fb2e61b82c290cc82",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "207a2af9-f8b1-4aed-b728-621e8865efdd"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 499",
+        "title":  "my intern report",
+        "sha256":  "0e58024edc3e04175302add00fbbc02f74051afdc97f1a0c709ebe2030d0a53d",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "6a904a77-0a85-49be-a9eb-5dc653ecd3b3"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 499",
+        "title":  "UEB0913819_INTERNSHIP REPORT",
+        "sha256":  "903a1f2374a782b07106c623442f994be6f7f6c31e0190952a5b054455c818ae",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "56bcfccb-1b0b-4f80-9fac-44f35f4d4900"
+    },
+    {
+        "term":  "coe-4-first-semester",
+        "courseCode":  "COE 499",
+        "title":  "UEB0913819_INTERNSHIP REPORT",
+        "sha256":  "8aa7a8f974cc2e360506eb72c818f446682ed569c696046cb985c034cd84afd7",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "c094137d-17a7-45e1-b781-88be31d72071"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 472",
+        "title":  "Digital_Filters_Fundamentals",
+        "sha256":  "aefe2617a53e187380c7e6e2054e0c5f6a5e1a1a9c243be42f44b2f09cd18173",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "99a7ca7b-b3f0-4359-9278-90a55bca8dd1"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 472",
+        "title":  "lab3_1817522",
+        "sha256":  "c639cbd6edde04ce9c5335e52e5a03e0eddb1f596c7a4688bf4baf857dd7d08d",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "db6347ee-9356-4727-8d92-7e7542a594e0"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "1 1 1 ENTREPRENEURSHIP 1 [Autosaved]",
+        "sha256":  "545c0e88bb2e794d03dacfee54855a22ba1c7f20541e30a386f7bf9e60bb469e",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a2765b6a-d8a8-4a4b-aad2-1159ec11b7fd"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "1 ME 492 INTRODUCTION 2022",
+        "sha256":  "4ff9de1456f93fe3bf2b614e64b446bd88e27790c6f6411abad988be3b4559f0",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "ed4bb675-de58-4b02-ad6d-6c0850deb6e8"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "1 Organising \u0026 Financing New Ventures",
+        "sha256":  "bc7316bc17e1747ffb7597422cea7ffadadd5c4175a0310aef9c635cc618196f",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "ee50aaa4-7cc3-4090-8fe6-4b7f5aee8253"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "10 FINANCING NEW VENTURES 2025",
+        "sha256":  "bf8d89552b387fc18e27ec81324654df7bf553d6b5b12f6392bbc68578702325",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "82feb46b-d5ad-4b60-bc48-f64c12f016a1"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "2 CREATIVITY \u0026 INNOVATION",
+        "sha256":  "c2c5a7d04f67136b7a0a71b0eb2356850e21da9ec68eff3751f8d02c279b631a",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "84e25abe-f598-46ce-8c42-389c832a1492"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "2. Developing creativity and understanding innovation v2",
+        "sha256":  "13870cfd383b7c0b9e31b0583d8e901f524625e788aca0db1b52e03b261c7dda",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "ea8b60f8-8651-4683-9db2-330c45626a38"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "3 Feasibility Planning",
+        "sha256":  "2af86ca6eb006668998870e71c6d6910cc50c05a9ddac24adf102619c8e141e3",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "50160b3d-30b6-427c-9e8b-de5a02f6e417"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "3 MODEL FOR NEW VENTURES FEASIBILITY PLANNING",
+        "sha256":  "46082738aa0702e640bf88f58d12b28a828087d71358f61ce02166355182f1f6",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "00ecd1d0-b2b0-4707-857d-7ef87712bc5f"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "8 ORGANISING AND FINANCING NEW VENTURES 2025",
+        "sha256":  "8cf48ba6a57ab6c02aaf34fe7bd7da86394906654a587ffa27997eee3d045000",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "caf40440-c28e-4c18-806e-880fb9b540c2"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "9 FORMS OF BUSINESS OWNERSHIP 2025",
+        "sha256":  "5918ea378f56c72a6fa90d28fa348f53265ec295cb0e2eee44aea2ffa4c5ef74",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "c0d7992d-23eb-4bdb-9e0d-a6c1b138351f"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "Assignment Business Idea",
+        "sha256":  "4b63abd5877ca53e505483dda0cd53bfc0f0b40eedda2cafec8095183c3d18de",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a5f80c31-f903-4684-a1c1-6ff6370203a5"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "DEVELOPING A MARKETING PLAN",
+        "sha256":  "70842eec5d66ff375526416319da41afdb6e9ff203dfda16ce89ffca27296cb5",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "af2ca2f9-b383-49e8-b4fd-1646cbc80f8a"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "Market Research",
+        "sha256":  "3f15f94d597ea70bddef60165814689e023e29321e9c849e6def4ed5d0db5595",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "36b76d01-ff45-4653-a529-2b2e809e171c"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "ME 492 2025 NOTES",
+        "sha256":  "ceb11713a8d1aebaaf7255131ed0b98ef4b4a2b749e1ce25207b60146f604903",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "02119966-b400-4641-8296-bacc8b686a50"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "ME 492 COURSE OUTLINE 2025",
+        "sha256":  "a0a7837ac0dbebad9878f4cf56a9f00ed778b9f390fab1099da1d72f59394efd",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "2da8931b-6607-4eba-867a-ea4dd3efed9c"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "ME 492",
+        "title":  "ME 492 Group Business Idea",
+        "sha256":  "88b0fd1264eafe8c28e7201eb1fb318110d3322c3875502b425a11dab4c807f8",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "42182a1f-4ea8-482c-8fb3-c3d9633413c9"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 498",
+        "title":  "2nd Sem Defense PPT",
+        "sha256":  "9e0791db9e12a16e21218a7f87a12c94e8af77ab48cd0f68dfca2c6710a12361",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "3ddf0393-3f31-484c-8189-b3e975ebd46a"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 498",
+        "title":  "Brail Research",
+        "sha256":  "527fa90c86d85483f455b702ed176ab642d65260524623c8550442646955c4e8",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "ec48de38-b260-4742-a7bc-692d8e2dac67"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 498",
+        "title":  "study planner",
+        "sha256":  "f4bd454ed410cccb46582052ebcbfc9c3688c73c85165e90241eacba0919e420",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "1d6ff132-dd83-4f45-9732-f70cab45f1e6"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 498",
+        "title":  "Technical",
+        "sha256":  "b46d4bb6657e73ac8427081d4de50a2f4ff2c85cdb4a6e9fc37c644cc2d31f40",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "5fc6febb-78f9-4aa6-9963-6310eb277224"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 498",
+        "title":  "testing",
+        "sha256":  "92ad4152dc137fe166969fcbb184960a5f70b63fc13ad2ac7f6ff2f6ffdd5833",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "8ef3c43c-6178-4708-8f65-6ed89fc59073"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 498",
+        "title":  "things to add",
+        "sha256":  "b5479155ad1396096504dc234b286ea9b5466d95d9be7261c3247c186ee408c4",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "ed592dc5-88d4-4400-b05f-2fb97f02f929"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 456",
+        "title":  "COE456_Lecture2_Chapter1_100_MCQ_Exam",
+        "sha256":  "7dc021cd3f142abacc6b183d1b66670c52687c4266b28d9bfecdaffdf4682fc4",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "8c3e611f-1541-4cc2-9d27-5b181334e340"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 456",
+        "title":  "Computer Security Lab Report",
+        "sha256":  "81c8abb4e3aea01cafcb88870b9996a172231ff723308f7d623c938b44a9daa2",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "c4184895-76d1-49d6-aeb7-25bc9cb4fe5e"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 456",
+        "title":  "Cryptography and Network Security Principles and Practice, Global Edition, 8th (William Stallings) (z-library.sk, 1lib.sk, z-lib.sk)",
+        "sha256":  "121426546a6e6f0308de71de1f0205567217a9db03ed8b57f0bf0a533e7fbfd5",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "daec1731-43e6-46a7-9570-7305dee32b0f"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 456",
+        "title":  "Lab - TCP Attacks",
+        "sha256":  "cba7193855a0e76006544f27befdfb843a01b06f3cfb58151e8589871297fc3a",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "898c1596-969d-43eb-b41d-6cc9cbb1f707"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 456",
+        "title":  "Lecture 2",
+        "sha256":  "a80f4fc540343efb06c2f757e519fa23e5f47493ee80870a61d8a8f0b36ba50c",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "465fe1a8-6410-480d-bc67-f29c188727aa"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 456",
+        "title":  "We  ran this",
+        "sha256":  "fbd350c7b0bdc7fe1fccf144ef8438f06e9e1bc40d1708acdd1dd78ea31e78bb",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a94e3566-7b4e-486c-8e29-6fbc6530d2b7"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "checklist",
+        "sha256":  "1cba8b8d0c580f653daccb3e98aa378694d4bca5bf70885c077c4ada6067264c",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "a6b733e1-cfd2-4b84-ac78-80f10026982e"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "checklist",
+        "sha256":  "60bf3defd5269446330ab107c9bebc10e9e70b0b32313bf2e492ea106e37e6ed",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "e86e12b4-d329-47b7-9e07-ecb217ee481d"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "client_questions",
+        "sha256":  "3765b6ecc3edd8c464e0dd5da24ada4b0e5e0846bf00f8e6b8feab0ff6d6161a",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "b59a79fc-26b7-44fb-ad9a-f042853d35e1"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "client_questions",
+        "sha256":  "fc00d2452d6343e43b3ac8186345fdf49f0d86aa407b20c7ab26aebbc6a4cac6",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "9dfa37e1-1c4b-43c3-8198-b4905e8c53c2"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "henry answers",
+        "sha256":  "d546ae10b77387a102cf01b506655291fe5d71df9d66201b50e8ab5ae2782228",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f1a674d6-716c-4b15-bcde-452c4a09c320"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "henry questions",
+        "sha256":  "acc86994829b403fcb64e1366b2e40a4ef87464173f68471ed9d239097a72548",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f6c07da2-a21d-4fef-8417-d8d5483cfc41"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "meeting_notes_before_today_meeting",
+        "sha256":  "19832a8680cde4f7ea60c31274f5a9c21087cb9061a7bdb2e15430d92c6b1a9f",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "466b94c1-64fb-4879-be4b-690d46a7a72e"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "memorandum_of_understanding",
+        "sha256":  "1f43e012e13abd3e84a673da33a3ad0165f4527e75ecfff69bc373a804c898af",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "d80aeee3-088f-4d9c-9cb0-454be035250f"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "memorandum_of_understanding",
+        "sha256":  "039367b20586b98e945d4fb3b9898d917bb3e9b270b06400f3149ff773ab61ee",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "15020530-44ed-4e91-ba43-9259335896bd"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "problem_discovery_note",
+        "sha256":  "ebe7f2bb5223634ba163433e71013ad381fd283ce6be5bfd8fd880a85f91c89b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "dcfadfec-eedd-410c-96ca-0a26e46976a9"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "problem_discovery_note",
+        "sha256":  "3b5effd75cfc1b087a402e9c1f27c1945a1f18a4663d77362c418827b171bce9",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "9957e5f6-a291-451b-815f-b81b65c05d9d"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "requirements_documents",
+        "sha256":  "91d75e84afa7dc420ca7568fb8a7915934ba3904cafd60f8d0a75d0db439f5c8",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "f6eca309-3c4b-44c4-818c-c71f4a917f8e"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "site_visit_log_1",
+        "sha256":  "1839ce34cecd324abf30407860f780d49bc0d91962e3195044b79a332722c7dc",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "fec1a215-25ef-4d88-9e83-e529f21a8288"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "site_visit_log_2",
+        "sha256":  "0d8b102676b46620c86652dee66fc0604bbc89629e25ca2f3022c968fc9d95a1",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "41d5e3f2-6135-4edf-9567-1c35cd916fa2"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "site_visit_log_2",
+        "sha256":  "c72138a0ff6d19719a35bcf45f0f9cf6eb27ce3923d33574494429644fb1e132",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "9bfdec0d-630c-4981-8d8f-80313ec53a78"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "software_engineering_assignment",
+        "sha256":  "2211e97f3fd66eefa06d016d7399efc7a5873244be1977db1c5a2943bf17ec49",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "64dec15e-2cbd-45cb-b5e8-ad822ae93f68"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "the_mainframe_team_charter",
+        "sha256":  "b1e2179b0ac901cb66f7e25278830d8529f8b7f3ec6fc3aa3bab5f48af9e753b",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "0a106ce2-7a68-4ea0-b91b-9e387cefbd96"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "the_mainframe_team_charter",
+        "sha256":  "28d69d9d47a2ef9ef937ead46d6fd01c55c76b86cecbbb6d7f987b0da9de26cd",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "1cf52bde-218d-4a8f-bef3-f77c86581fd9"
+    },
+    {
+        "term":  "coe-4-second-semester",
+        "courseCode":  "COE 454",
+        "title":  "visit_1_notes",
+        "sha256":  "f5ee47d71553dc47dc788503fb156086769ea07ecb9897ef91858b26922c767d",
+        "outcome":  "IMPORTED",
+        "attempts":  1,
+        "error":  "",
+        "materialId":  "40a81207-2b09-4d16-92ab-13bf731a701e"
+    }
+]

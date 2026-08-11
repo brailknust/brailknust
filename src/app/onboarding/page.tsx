@@ -31,23 +31,23 @@ export default async function OnboardingPage() {
           <span className="font-semibold">BRAIL KNUST</span>
         </Link>
         <div className="rounded-2xl border border-border bg-white p-5 shadow-[0_24px_70px_rgba(4,92,46,0.07)] sm:p-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-          Profile setup
-        </p>
-        <h1 className="mt-3 text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">
-          Tell BRAIL about your semester
-        </h1>
-        <p className="mt-3 max-w-2xl text-sm leading-6 text-muted">
-          This creates your app profile and gives the planner the first academic context it needs.
-        </p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+            Step 1 of 3
+          </p>
+          <h1 className="mt-3 text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">
+            Set up your BRAIL profile
+          </h1>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-muted">
+            We only need a few details to load the right curriculum and personalize your planner.
+          </p>
 
-        <OnboardingForm
-          action={completeProfileForm}
-          hierarchy={knustAcademicHierarchy}
-          defaultFullName={authUser.user_metadata.full_name ?? authUser.email ?? ""}
-          importedCurricula={importedCurricula}
-          isConfiguredAdmin={isConfiguredAdmin}
-        />
+          <OnboardingForm
+            action={completeProfileForm}
+            hierarchy={knustAcademicHierarchy}
+            defaultFullName={authUser.user_metadata.full_name ?? authUser.email ?? ""}
+            importedCurricula={importedCurricula}
+            isConfiguredAdmin={isConfiguredAdmin}
+          />
         </div>
       </section>
     </main>

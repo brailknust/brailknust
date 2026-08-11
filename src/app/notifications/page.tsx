@@ -177,7 +177,7 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
           {data.unreadCount ? (
             <form action={markAllNotificationsRead}>
               <PendingSubmitButton className="inline-flex h-10 items-center gap-2 rounded-xl bg-white px-4 text-sm font-semibold text-foreground" pendingLabel="Marking...">
-                <CheckCheck className="h-4 w-4" /> Mark all read
+                <CheckCheck className="h-4 w-4" /> Mark all as read
               </PendingSubmitButton>
             </form>
           ) : null}
@@ -242,7 +242,7 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
             <input type="hidden" name="goalDeadlines" value={(preferences?.goalDeadlines ?? true) ? "on" : "off"} />
             <input type="hidden" name="qaAnswers" value={(preferences?.qaAnswers ?? true) ? "on" : "off"} />
             <label className="grid gap-2 text-sm font-medium">
-              Study session alert
+              Study session reminders
               <select name="studySessionReminderMinutes" defaultValue={preferences?.studySessionReminderMinutes ?? 15} className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
                 <option value="5">5 minutes before</option>
                 <option value="10">10 minutes before</option>
@@ -252,7 +252,7 @@ export default async function NotificationsPage({ searchParams }: NotificationsP
               </select>
             </label>
             <label className="grid gap-2 text-sm font-medium">
-              Task deadline reminders
+              Deadline reminders
               <select name="reminderHours" defaultValue={preferences?.reminderHours ?? 24} className="h-11 rounded-xl border border-border bg-white px-3 text-sm">
                 <option value="1">1 hour before</option>
                 <option value="6">6 hours before</option>

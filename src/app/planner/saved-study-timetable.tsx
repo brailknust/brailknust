@@ -60,7 +60,7 @@ export function SavedStudyTimetable({ studyPlanId, sessions, courseOptions, init
 
       <section id="study-timetable" className="mt-6 rounded-2xl border border-border bg-white p-5">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="text-lg font-semibold">{weekDays[selectedDayIndex]}&apos;s Study Sessions</h3>
+          <h3 className="text-lg font-semibold">{weekDays[selectedDayIndex]}&apos;s study sessions</h3>
           {!readOnly ? <a href="#manual-study-session" className="inline-flex items-center gap-2 text-sm font-semibold text-accent">
             <Plus className="h-4 w-4" /> Add Study Session
           </a> : null}
@@ -95,8 +95,8 @@ export function SavedStudyTimetable({ studyPlanId, sessions, courseOptions, init
                 <form action={updateStudyPlanItem} className="mt-4 grid gap-3 sm:grid-cols-2">
                   <input type="hidden" name="id" value={session.id} />
                   <input type="hidden" name="studyPlanId" value={studyPlanId} />
-                  <label className="grid gap-2 text-sm font-semibold sm:col-span-2">
-                    Description
+            <label className="grid gap-2 text-sm font-semibold sm:col-span-2">
+                    Session title
                     <input name="title" required defaultValue={session.title} className="h-11 rounded-xl border border-border bg-white px-3 text-sm font-normal" />
                   </label>
                   <label className="grid gap-2 text-sm font-semibold sm:col-span-2">

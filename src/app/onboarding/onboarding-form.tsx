@@ -149,7 +149,7 @@ export function OnboardingForm({ action, hierarchy, defaultFullName, importedCur
       <div className="rounded-xl border border-border bg-white p-5">
         <h2 className="text-base font-semibold">Active semester</h2>
         <p className="mt-1 text-sm leading-6 text-muted">
-          BRAIL will provision your full curriculum. Choose the semester you are studying now; it will not change automatically later.
+          BRAIL will provision your full curriculum. Choose the semester you are studying now; you can update it later if needed.
         </p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <label className={labelClassName}>
@@ -218,7 +218,7 @@ export function OnboardingForm({ action, hierarchy, defaultFullName, importedCur
         className="mt-2 inline-flex h-12 items-center justify-center rounded-xl bg-accent px-5 text-sm font-semibold text-white shadow-sm hover:bg-[var(--accent-strong)]"
         pendingLabel="Creating profile..."
       >
-        Create profile
+        Continue
       </PendingSubmitButton>
 
       {formState.message ? (

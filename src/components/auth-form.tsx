@@ -18,7 +18,7 @@ function authErrorMessage(error: unknown) {
   if (error instanceof DOMException && ["AbortError", "TimeoutError"].includes(error.name)) {
     return "Authentication timed out. Check your connection and try again.";
   }
-  return error instanceof Error ? error.message : "Could not reach the authentication service.";
+  return "We could not sign you in right now. Please try again in a moment.";
 }
 
 export function AuthForm({ mode }: AuthFormProps) {
@@ -99,7 +99,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         }
 
         if (!data.session) {
-          setMessage("Account created. Log in to continue, then BRAIL will take you to onboarding.");
+          setMessage("Account created. Continue to onboarding to finish setting up your profile.");
           setIsPending(false);
           return;
         }
@@ -128,15 +128,15 @@ export function AuthForm({ mode }: AuthFormProps) {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={handleGoogleSignIn}
-        disabled={!isHydrated || isPending}
+        <button
+          type="button"
+          onClick={handleGoogleSignIn}
+          disabled={!isHydrated || isPending}
         className="mt-8 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-border bg-white px-5 text-sm font-semibold text-foreground hover:border-accent hover:bg-[var(--accent-soft)] disabled:cursor-not-allowed disabled:opacity-70"
       >
-        {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleIcon />}
-        Continue with Google
-      </button>
+          {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleIcon />}
+          Continue with Google
+        </button>
 
       <div className="my-6 flex items-center gap-3">
         <div className="h-px flex-1 bg-border" />
@@ -184,7 +184,7 @@ export function AuthForm({ mode }: AuthFormProps) {
               onClick={() => setShowPassword((current) => !current)}
               className="border-l border-border px-3 text-xs font-semibold text-muted transition hover:text-foreground"
             >
-              {showPassword ? "Hide" : "View"}
+              {showPassword ? "Hide password" : "Show password"}
             </button>
           </div>
         </label>
@@ -206,7 +206,7 @@ export function AuthForm({ mode }: AuthFormProps) {
                 onClick={() => setShowConfirmPassword((current) => !current)}
                 className="border-l border-border px-3 text-xs font-semibold text-muted transition hover:text-foreground"
               >
-                {showConfirmPassword ? "Hide" : "View"}
+                {showConfirmPassword ? "Hide password" : "Show password"}
               </button>
             </div>
           </label>
@@ -217,7 +217,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           className="mt-2 inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-accent px-5 text-sm font-semibold text-white shadow-sm hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-70"
         >
           {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
-          {isSignup ? "Create account" : "Login"}
+          {isSignup ? "Create account" : "Log in"}
         </button>
       </form>
 
@@ -236,7 +236,7 @@ export function AuthForm({ mode }: AuthFormProps) {
       <p className="mt-6 text-center text-sm text-muted">
         {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
         <Link href={isSignup ? "/login" : "/signup"} className="font-semibold text-accent hover:underline">
-          {isSignup ? "Login" : "Sign up"}
+          {isSignup ? "Log in" : "Sign up"}
         </Link>
       </p>
     </>

@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 const mocks = vi.hoisted(() => ({
   getSupabaseUser: vi.fn(),
   getAppUserByAuthId: vi.fn(),
+  getAppUserForAuthUser: vi.fn(),
   hasValidMaterialFileType: vi.fn(),
   extractTextFromImage: vi.fn(),
   checkRateLimit: vi.fn(),
@@ -11,6 +12,7 @@ const mocks = vi.hoisted(() => ({
 vi.mock("@/features/auth/queries", () => ({
   getSupabaseUser: mocks.getSupabaseUser,
   getAppUserByAuthId: mocks.getAppUserByAuthId,
+  getAppUserForAuthUser: mocks.getAppUserForAuthUser,
 }));
 vi.mock("@/features/materials/extract", () => ({
   materialFileExtension: () => "png",
@@ -32,6 +34,7 @@ describe("timetable OCR errors", () => {
     vi.clearAllMocks();
     mocks.getSupabaseUser.mockResolvedValue({ id: "auth-user" });
     mocks.getAppUserByAuthId.mockResolvedValue({ id: "app-user", activeSemesterId: null });
+    mocks.getAppUserForAuthUser.mockResolvedValue({ id: "app-user", activeSemesterId: null });
     mocks.checkRateLimit.mockResolvedValue({ allowed: true, retryAfter: 1 });
     mocks.hasValidMaterialFileType.mockResolvedValue(true);
   });

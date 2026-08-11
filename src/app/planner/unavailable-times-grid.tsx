@@ -81,6 +81,7 @@ export function UnavailableTimesGrid({ blocks, readOnly = false }: { blocks: Una
                       type="submit"
                       disabled={disabled}
                       aria-pressed={isUnavailable}
+                      aria-label={classBlock?.courseName ? `${classBlock.courseName}, saved class block` : `${weekDays[dayOfWeek]} ${slot.label} ${isUnavailable ? "busy" : "available"}`}
                       title={classBlock?.courseName ?? (isUnavailable ? "Make available" : "Mark unavailable")}
                       className={
                         "min-h-14 w-full px-2 py-3 text-left text-xs font-semibold transition " +
